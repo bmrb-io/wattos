@@ -1,0 +1,68 @@
+<html >
+<head>
+<title>The AMBER converter</title>
+</head>
+<body>
+<div>
+<br/>Parser for Amber formatted restraint files.
+<br/><b >Content</b>:
+<p> 
+Content
+<p>       
+General
+<p>       
+Examples distances
+<p>       
+Examples dihedrals
+<p>       
+Examples dipolar coupling
+<p>       
+To-do
+<br/><b >General</b>
+<br/>The only source files here that were created by humans are the java
+sourcefiles: StarOut.java and Utils.java and the JavaCC grammar file
+AmberParser.jj.All other files are (re-)generated using JavaCC Parser
+Generator. 
+<br/><b >Examples of input are for (ambi) distances: </b>
+<pre> </pre><pre># PDB entry: <b >1dgq</b> </pre><pre>#  162 PHE  HD        161 GLU  HB2           3.50    (#   6040:20   Manualy assigned)</pre><pre> &amp;rst</pre><pre>  ixpk= 6040, iat=  -1,2552, r1= 0.00, r2= 1.80, r3= 3.93, r4= 4.68,</pre><pre> </pre><pre>      rk2=20.0, rk3=20.0, ir6=1,</pre><pre> igr1=2571,2579,</pre><pre> &amp;end</pre><pre>     </pre><pre># PDB entry: <b
+>1bau</b></pre><pre># distance constraint number   1</pre><pre> &amp;rst  iat =  1,  1, iresid = 1, atnam(1)='H2''1',atnam(2)='H8',</pre><pre>       r1 = 1.000, r2 = 2.000, r3 = 4.000, r4 = 5.000,</pre><pre>       rk2 =30.001, rk3 =30.001, &amp;end# PDB entry: xxxx       </pre><pre> </pre><pre># PDB entry: <b
+>1ozo</b>       </pre><pre>#   31 GLY  HN           32 GLU  HN          6.00    (#     10:10  Preassigned    2.66, 2.75 A)</pre><pre> &amp;rst</pre><pre>  ixpk= 10, nxpk= 10, iat= 449, 456, r1= 1.30, r2= 1.80, r3= 6.00, r4= 6.50, </pre><pre>      rk2=40.0, rk3=40.0, ir6=1, ialtd=0,</pre><pre> &amp;end</pre><pre>       </pre><pre># PDB entry: <b
+>1tf3</b>       </pre><pre>#    1 MET   HA      1 MET   QB    3.00  (# noech.upl:3.00)</pre><pre> &amp;rst iat=   4,  -1, r1= 1.30, r2= 1.80, r3= 3.33, r4= 3.83,</pre><pre> </pre><pre>      rk2=20.0, rk3=20.0, ir6=1,</pre><pre> igr1=   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,</pre><pre> igr2=   6,   7,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   &amp;end</pre><pre>#<br
+>
+<br >
+</pre><pre># PDB entry: <b >1buf (Note the extra -1 elements in iat; they're ignored)</b>       </pre><pre># H-bond distance C1-G12, rk2, rk3 = 50% of kdist (10) = 5</pre><pre> &amp;rst iat=17,365,-1,-1,iresid=0,r1=0,r2=2.81,r3=3.01,r4=3.31,</pre><pre>                                rk2=5,rk3=5,&amp;end</pre><pre> </pre><pre># PDB entry: <b
+>2hou (Note the restraint termination token changed.)</b>       </pre><pre>&amp;rst</pre><pre>  ixpk= 0, nxpk= 0, iat=  19, 796, r1= 1.30, r2= 1.80, r3= 2.00, r4= 2.50, </pre><pre>      rk2=0.0, rk3=50.0, ir6=1, ialtd=0,</pre><pre> /</pre><pre> </pre><pre>Ignoring the r1, r2, and ir6 values throughout these examples. </pre>
+<p ><b
+> </b>
+<p ><b
+>Examples of input are for dihedrals: </b>
+<pre> </pre><pre># PDB entry: <b >1dgq</b></pre><pre> </pre><pre># 3039 atoms read from pdb file ../102398/lfa1.apdb.</pre><pre># 157 LYS PSI:  (157 LYS N)-(157 LYS CA)-(157 LYS C)-(158 PRO N)  80.0 200.0</pre><pre> &amp;rst     iat =  2490,  2492,  2510,  2512,</pre><pre>          r1 =  70.0, r2 =  80.0, r3 = 200.0, r4 = 210.0,</pre><pre>          rk2 =  50.0, rk3 =  50.0,                             &amp;end</pre><pre> </pre><pre># PDB entry: <b
+>1bau</b></pre><pre># torsion angle constraint number   1</pre><pre> &amp;rst  iat =  1,  1,  1,  1, iresid = 1,</pre>
+<pre>       atnam(1)='C4'' ',atnam(2)='C3'' ',atnam(3)='C2'' ',atnam(4)='C1'' ',</pre>
+<pre>       r1 =  24.0, r2 = 34.0, r3 =</pre>
+<pre>       rk2 =30.001, rk3 =30.001, &amp;end 40.0, r4 = 50.0,</pre>
+<p ><b
+>Examples of all input known on
+11/05/2004for RDCs: </b>
+<pre> </pre><pre># PDB entry: <b >1kr8</b></pre><pre># 2 C C1'  2 C H1'</pre><pre>id(1)=42,  jd(1)=43,  dobs(1)=0.5,</pre><pre> </pre><pre># PDB entry: <b
+>1pqt</b></pre><pre># lower, upper and error JFD assumes in:</pre><pre># note that the comma is missing after the value of dobsu!</pre><pre>id(1)=42,  jd(1)=43,  dobsl(1)=-0.3, dobsu(1)=1.3  dij(1)=1.09508,</pre>
+<p > 
+<p ><b >To-do</b><b
+>:</b>
+<ul>
+<li>Ignored r1, r2, and ir6
+values for distances. </li>
+<li>Ignored the tags grnam1(1)
+etc. because they don't occur (as of 11/4/2004) in MR files. </li>
+<li>Some values seem to have to
+be remembered going from 1 restraint to the next. E.g. entry 1dgq only has
+a force constant (20) defined within the first restraint. </li>
+<li>Ignored tags r1 and r4 which
+are switching distances for dihedral angle restraints important for the
+shape of the restraint potential. </li>
+<li>For RDCs the dij tag (for the
+internuclear vector size) is ignored. </li>
+</ul>
+</div>
+</body>
+</html>

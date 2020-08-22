@@ -1,0 +1,5 @@
+;DNA Ring-to-Ring restraints                                                        ;
+  2  1  DGU   C6        3 13  DCY   C4          2.0     2.0    4.04    4.24  HBOND  ;
+error introduced for error checking
+  2  1  DGU   C6        3 13  DCY   N3          2.0     2.0    3.60    3.80  HBOND  ;
+  2  1  DGU   C6        3 13  DCY   C2          2.0     2.0    4.71    4.91  HBOND  ;

@@ -1,0 +1,483 @@
+$ Aqua Version 3.2 DATA: completeness NOEs
+$ FILE: 1brv_DOCR_comp_str.comp CREATED: Fri Feb 10 14:52:27 2006
+
+$ Restraints were taken from: 1brv_DOCR_noe_str.drst
+$ IDENT: 
+$ TYPE: extended
+$ DIST_COUNT: 261
+$ ATOM_COUNT: 930
+$ Molecule data: 1brv_DOCR_explo_pc.set
+$ Restraint data: 1brv_DOCR_noe_str.drst
+$ Normal info data: 1brv_DOCR_noe_pc.dinf
+$ Info data: 1brv_DOCR_noe_str.dinf
+$ TOTAL_DIST_COUNT: 793
+$ STRUC_COUNT: 48
+
+$ EXPLAIN
+$ Pairs are theoretically observable, as based on the structure(s)
+$ whereas restraints have experimentally been observed.
+$ COMBINATIONS of the following explained:
+$ C      : completeness           cum    : cumulative
+$ M      : matched to pairs       av     : average
+$ N      : number of              sd     : standard deviation
+$ O      : observable             n      : not matched
+$ P      : pairs                  Low    : lower distance
+$ R      : restraints             Upp    : upper distance
+$ S      : shells
+$ 
+$ END
+
+$ DATA  GENERAL
+$ LIST #RECORDS 3
+NRestraints 261
+NStructures 48
+NResidues   19
+$ END
+
+$ DATA PARAMETERS
+$ LIST #RECORDS 13
+Low_P                         2.00
+Upp_P                         4.00
+NS_P                          4
+Low_R                         2.00
+Upp_R                         4.00
+NS_R                          4
+observable_atoms_file         ob_standard
+range_file                    -
+use_intra-residuals           F
+threshold_redundancy          10000
+averaging power               1.00
+savpseu                       F
+double_count                  F
+analyse_ssa                   T
+$ END
+
+$ DATA  SUMMARY_OVERALL
+$ REMARK O_stru : number of observable atoms in test structure
+$ REMARK A_stru : number of all atoms in test structure (including pseudos)
+$ TABLE #RECORDS 1 #ITEMS 6
+     C    N_P   N_RM  N_RnM    N_R O_stru A_stru
+  64.6    127     82    105    187     92    297
+$ END
+
+$ DATA  COMPLETENESS_PER_SHELL
+$ TABLE #RECORDS 4 #ITEMS 10
+  LowP   UppP     NP 2.0- 2.5- 3.0- 3.5-   N_RM      C  C_cum
+  2.00   2.50     13    0    2    2    2      6     46     46
+  2.50   3.00     21    0    2    7    6     15     71     62
+  3.00   3.50     42    0    0    8   21     29     69     66
+  3.50   4.00     51    0    0    3   29     32     63     65
+$ END
+
+$ DATA  COMPLETENESS_PER_CLASS
+$ TABLE #RECORDS 5 #ITEMS 7
+Type          N_P   N_RM      C  N_RnM  N_sd Remark
+intra           0      0  -99.9      0 -99.9 Not_analysed
+sequential     52     43   82.7     39   1.3 _
+medium         34     21   61.8     51  -0.1 _
+long           41     18   43.9     15  -1.2 >sigma
+inter           0      0  -99.9      0 -99.9 No_chains
+$ END
+
+$ DATA  COMPLETENESS_PER_ATOM_TYPE
+$ TABLE #RECORDS 8 #ITEMS 7
+Type          N_P   N_RM      C  N_RnM  N_sd Remark
+amide          90     69   76.7     73   0.9 _
+alpha          56     32   57.1     36   0.2 _
+beta           79     45   57.0     50   0.1 _
+gamma          15      9   60.0     24   0.3 _
+delta          13      9   69.2     27   0.6 _
+epsilon         1      0    0.0      0  -2.1 >sigma
+dzeta           0      0  -99.9      0 -99.9 _
+other           0      0  -99.9      0 -99.9 _
+$ END
+
+$ DATA  COMPLETENESS_PER_RESIDUE_TYPE
+$ TABLE #RECORDS 26 #ITEMS 9
+Resnm    N_r  N_O_a    N_P   N_RM      C  N_RnM  N_sd Remark
+ALA          1      3     10      7   70.0     11   0.5 _
+ARG          0      7      0      0  -99.9      0 -99.9 _
+ASN          1      6     16     10   62.5     25  -0.1 _
+ASP          0      4      0      0  -99.9      0 -99.9 _
+CYS          4      4     84     49   58.3     52  -0.4 _
+GLN          0      7      0      0  -99.9      0 -99.9 _
+GLU          2      5     10      6   60.0     15  -0.3 _
+GLY          1      3      9      6   66.7      9   0.2 _
+HIS          1      6      9      5   55.6      1  -0.6 _
+ILE          1      6      7      4   57.1      3  -0.5 _
+LEU          3      7     66     47   71.2     51   0.6 _
+LYS          0      7      0      0  -99.9      0 -99.9 _
+MET          0      6      0      0  -99.9      0 -99.9 _
+PHE          0      7      0      0  -99.9      0 -99.9 _
+PRO          1      5      8      5   62.5      5  -0.1 _
+SER          2      4     19     16   84.2     19   1.5 _
+THR          1      4      7      6   85.7     15   1.7 _
+TRP          0     10      0      0  -99.9      0 -99.9 _
+TYR          0      6      0      0  -99.9      0 -99.9 _
+VAL          1      5      9      3   33.3      4  -2.3 >sigma
+A            0     10      0      0  -99.9      0 -99.9 _
+C            0     10      0      0  -99.9      0 -99.9 _
+G            0     10      0      0  -99.9      0 -99.9 _
+T            0      9      0      0  -99.9      0 -99.9 _
+U            0      8      0      0  -99.9      0 -99.9 _
+DUR          0      9      0      0  -99.9      0 -99.9 _
+$ END
+
+$ DATA  COMPLETENESS_PER_RESIDUE
+$ TABLE #RECORDS 19 #ITEMS 10
+Chn Resnm Res  N_O_a    N_P   N_RM      C  N_RnM  N_sd Remark
+_  VAL    14       5      9      3   33.3      4  -1.4 >sigma
+_  PRO    15       5      8      5   62.5      5   0.0 _
+_  CYS    16       4     20     12   60.0      7  -0.1 _
+_  SER    17       4      7      7  100.0      7   1.9 _
+_  THR    18       4      7      6   85.7     15   1.1 _
+_  CYS    19       4     25     16   64.0     16   0.1 _
+_  GLU    20       5      8      6   75.0     15   0.6 _
+_  GLY    21       3      9      6   66.7      9   0.2 _
+_  ASN    22       6     16     10   62.5     25   0.0 _
+_  LEU    23       7     12      9   75.0     12   0.6 _
+_  ALA    24       3     10      7   70.0     11   0.4 _
+_  CYS    25       4     22     10   45.5     14  -0.8 _
+_  LEU    26       7     39     29   74.4     24   0.6 _
+_  SER    27       4     12      9   75.0     12   0.6 _
+_  LEU    28       7     15      9   60.0     15  -0.1 _
+_  CYS    29       4     17     11   64.7     15   0.1 _
+_  HIS    30       6      9      5   55.6      1  -0.3 _
+_  ILE    31       6      7      4   57.1      3  -0.3 _
+_  GLU    32       5      2      0    0.0      0  -3.1 >sigma
+$ END
+
+$ DATA  COMPLETENESS_PER_RESATOM
+$ TABLE #RECORDS 168 #ITEMS 11
+Chn Resnm Res Atom  N_O_a    N_P   N_RM      C  N_RnM  N_sd Remark
+_  ALA     1  H         1      5      4   80.0      6   0.5 _
+_  ALA     1  HA        1      4      2   50.0      0  -0.3 _
+_  ALA     1  MB        1      1      1  100.0      5   1.0 _
+_  ARG     2  H         0      0      0  -99.9      0 -99.9 _
+_  ARG     2  HA        0      0      0  -99.9      0 -99.9 _
+_  ARG     2  HB2       0      0      0  -99.9      0 -99.9 _
+_  ARG     2  HB3       0      0      0  -99.9      0 -99.9 _
+_  ARG     2  QG        0      0      0  -99.9      0 -99.9 _
+_  ARG     2  QD        0      0      0  -99.9      0 -99.9 _
+_  ARG     2  HE        0      0      0  -99.9      0 -99.9 _
+_  ASN     3  H         1      7      7  100.0     10   1.0 _
+_  ASN     3  HA        1      1      1  100.0      6   1.0 _
+_  ASN     3  HB2       1      1      0    0.0      1  -1.7 >sigma
+_  ASN     3  HB3       1      7      2   28.6      3  -0.9 _
+_  ASN     3  HD21      1      0      0  -99.9      5 -99.9 _
+_  ASN     3  HD22      1      0      0  -99.9      0 -99.9 _
+_  ASP     4  H         0      0      0  -99.9      0 -99.9 _
+_  ASP     4  HA        0      0      0  -99.9      0 -99.9 _
+_  ASP     4  HB2       0      0      0  -99.9      0 -99.9 _
+_  ASP     4  HB3       0      0      0  -99.9      0 -99.9 _
+_  CYS     5  H         4     19     13   68.4     22   0.1 _
+_  CYS     5  HA        4     21     11   52.4      8  -0.3 _
+_  CYS     5  HB2       4     19      8   42.1     10  -0.6 _
+_  CYS     5  HB3       4     25     17   68.0     12   0.1 _
+_  GLN     6  H         0      0      0  -99.9      0 -99.9 _
+_  GLN     6  HA        0      0      0  -99.9      0 -99.9 _
+_  GLN     6  HB2       0      0      0  -99.9      0 -99.9 _
+_  GLN     6  HB3       0      0      0  -99.9      0 -99.9 _
+_  GLN     6  QG        0      0      0  -99.9      0 -99.9 _
+_  GLN     6  HE21      0      0      0  -99.9      0 -99.9 _
+_  GLN     6  HE22      0      0      0  -99.9      0 -99.9 _
+_  GLU     7  H         2      9      6   66.7      7   0.1 _
+_  GLU     7  HA        2      1      0    0.0      2  -1.7 >sigma
+_  GLU     7  HB2       2      0      0  -99.9      3 -99.9 _
+_  GLU     7  HB3       2      0      0  -99.9      0 -99.9 _
+_  GLU     7  QG        2      0      0  -99.9      3 -99.9 _
+_  GLY     8  H         1      6      3   50.0      5  -0.3 _
+_  GLY     8  HA2       1      2      2  100.0      2   1.0 _
+_  GLY     8  HA3       1      1      1  100.0      2   1.0 _
+_  HIS     9  H         1      5      3   60.0      1  -0.1 _
+_  HIS     9  HA        1      1      0    0.0      0  -1.7 >sigma
+_  HIS     9  HB2       1      1      1  100.0      0   1.0 _
+_  HIS     9  HB3       1      1      1  100.0      0   1.0 _
+_  HIS     9  HD2       1      0      0  -99.9      0 -99.9 _
+_  HIS     9  HE1       1      1      0    0.0      0  -1.7 >sigma
+_  ILE    10  H         1      4      2   50.0      0  -0.3 _
+_  ILE    10  HA        1      3      2   66.7      0   0.1 _
+_  ILE    10  HB        1      0      0  -99.9      0 -99.9 _
+_  ILE    10  MG        1      0      0  -99.9      0 -99.9 _
+_  ILE    10  QG        1      0      0  -99.9      3 -99.9 _
+_  ILE    10  MD        1      0      0  -99.9      0 -99.9 _
+_  LEU    11  H         3     17     15   88.2     11   0.7 _
+_  LEU    11  HA        3     14      9   64.3      6   0.0 _
+_  LEU    11  HB2       3      8      5   62.5      5  -0.0 _
+_  LEU    11  HB3       3      5      3   60.0      4  -0.1 _
+_  LEU    11  HG        3     10      7   70.0      6   0.2 _
+_  LEU    11  MD1       3      6      8  133.3     19   1.9 _
+_  LEU    11  MD2       3      6      0    0.0      0  -1.7 >sigma
+_  LYS    12  H         0      0      0  -99.9      0 -99.9 _
+_  LYS    12  HA        0      0      0  -99.9      0 -99.9 _
+_  LYS    12  HB2       0      0      0  -99.9      0 -99.9 _
+_  LYS    12  HB3       0      0      0  -99.9      0 -99.9 _
+_  LYS    12  QG        0      0      0  -99.9      0 -99.9 _
+_  LYS    12  QD        0      0      0  -99.9      0 -99.9 _
+_  LYS    12  QE        0      0      0  -99.9      0 -99.9 _
+_  MET    13  H         0      0      0  -99.9      0 -99.9 _
+_  MET    13  HA        0      0      0  -99.9      0 -99.9 _
+_  MET    13  HB2       0      0      0  -99.9      0 -99.9 _
+_  MET    13  HB3       0      0      0  -99.9      0 -99.9 _
+_  MET    13  QG        0      0      0  -99.9      0 -99.9 _
+_  MET    13  ME        0      0      0  -99.9      0 -99.9 _
+_  PHE    14  H         0      0      0  -99.9      0 -99.9 _
+_  PHE    14  HA        0      0      0  -99.9      0 -99.9 _
+_  PHE    14  HB2       0      0      0  -99.9      0 -99.9 _
+_  PHE    14  HB3       0      0      0  -99.9      0 -99.9 _
+_  PHE    14  QD        0      0      0  -99.9      0 -99.9 _
+_  PHE    14  QE        0      0      0  -99.9      0 -99.9 _
+_  PHE    14  HZ        0      0      0  -99.9      0 -99.9 _
+_  PRO    15  HA        1      3      0    0.0      0  -1.7 >sigma
+_  PRO    15  HB2       1      4      4  100.0      0   1.0 _
+_  PRO    15  HB3       1      0      0  -99.9      0 -99.9 _
+_  PRO    15  QG        1      0      0  -99.9      2 -99.9 _
+_  PRO    15  QD        1      1      1  100.0      3   1.0 _
+_  SER    16  H         2     13     12   92.3      8   0.8 _
+_  SER    16  HA        2      2      2  100.0      5   1.0 _
+_  SER    16  HB2       2      2      2  100.0      6   1.0 _
+_  SER    16  HB3       2      2      0    0.0      0  -1.7 >sigma
+_  THR    17  H         1      5      4   80.0      3   0.5 _
+_  THR    17  HA        1      1      1  100.0      4   1.0 _
+_  THR    17  HB        1      0      0  -99.9      1 -99.9 _
+_  THR    17  MG        1      1      1  100.0      7   1.0 _
+_  TRP    18  H         0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HA        0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HB2       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HB3       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HD1       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HE3       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HE1       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HZ3       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HZ2       0      0      0  -99.9      0 -99.9 _
+_  TRP    18  HH2       0      0      0  -99.9      0 -99.9 _
+_  TYR    19  H         0      0      0  -99.9      0 -99.9 _
+_  TYR    19  HA        0      0      0  -99.9      0 -99.9 _
+_  TYR    19  HB2       0      0      0  -99.9      0 -99.9 _
+_  TYR    19  HB3       0      0      0  -99.9      0 -99.9 _
+_  TYR    19  QD        0      0      0  -99.9      0 -99.9 _
+_  TYR    19  QE        0      0      0  -99.9      0 -99.9 _
+_  VAL    20  H         1      0      0  -99.9      0 -99.9 _
+_  VAL    20  HA        1      2      1   50.0      1  -0.3 _
+_  VAL    20  HB        1      3      1   33.3      0  -0.8 _
+_  VAL    20  MG1       1      2      1   50.0      3  -0.3 _
+_  VAL    20  MG2       1      2      0    0.0      0  -1.7 >sigma
+_  A      21  H4'       0      0      0  -99.9      0 -99.9 _
+_  A      21  H3'       0      0      0  -99.9      0 -99.9 _
+_  A      21  H2'       0      0      0  -99.9      0 -99.9 _
+_  A      21  H2''      0      0      0  -99.9      0 -99.9 _
+_  A      21  H1'       0      0      0  -99.9      0 -99.9 _
+_  A      21  Q5'       0      0      0  -99.9      0 -99.9 _
+_  A      21  H8        0      0      0  -99.9      0 -99.9 _
+_  A      21  H61       0      0      0  -99.9      0 -99.9 _
+_  A      21  H62       0      0      0  -99.9      0 -99.9 _
+_  A      21  H2        0      0      0  -99.9      0 -99.9 _
+_  C      22  H4'       0      0      0  -99.9      0 -99.9 _
+_  C      22  H3'       0      0      0  -99.9      0 -99.9 _
+_  C      22  H2'       0      0      0  -99.9      0 -99.9 _
+_  C      22  H2''      0      0      0  -99.9      0 -99.9 _
+_  C      22  H1'       0      0      0  -99.9      0 -99.9 _
+_  C      22  Q5'       0      0      0  -99.9      0 -99.9 _
+_  C      22  H41       0      0      0  -99.9      0 -99.9 _
+_  C      22  H42       0      0      0  -99.9      0 -99.9 _
+_  C      22  H5        0      0      0  -99.9      0 -99.9 _
+_  C      22  H6        0      0      0  -99.9      0 -99.9 _
+_  G      23  H4'       0      0      0  -99.9      0 -99.9 _
+_  G      23  H3'       0      0      0  -99.9      0 -99.9 _
+_  G      23  H2'       0      0      0  -99.9      0 -99.9 _
+_  G      23  H2''      0      0      0  -99.9      0 -99.9 _
+_  G      23  H1'       0      0      0  -99.9      0 -99.9 _
+_  G      23  Q5'       0      0      0  -99.9      0 -99.9 _
+_  G      23  H8        0      0      0  -99.9      0 -99.9 _
+_  G      23  H21       0      0      0  -99.9      0 -99.9 _
+_  G      23  H22       0      0      0  -99.9      0 -99.9 _
+_  G      23  H1        0      0      0  -99.9      0 -99.9 _
+_  T      24  H4'       0      0      0  -99.9      0 -99.9 _
+_  T      24  H3'       0      0      0  -99.9      0 -99.9 _
+_  T      24  H2'       0      0      0  -99.9      0 -99.9 _
+_  T      24  H2''      0      0      0  -99.9      0 -99.9 _
+_  T      24  H1'       0      0      0  -99.9      0 -99.9 _
+_  T      24  Q5'       0      0      0  -99.9      0 -99.9 _
+_  T      24  M7        0      0      0  -99.9      0 -99.9 _
+_  T      24  H6        0      0      0  -99.9      0 -99.9 _
+_  T      24  H3        0      0      0  -99.9      0 -99.9 _
+_  U      25  H4'       0      0      0  -99.9      0 -99.9 _
+_  U      25  H3'       0      0      0  -99.9      0 -99.9 _
+_  U      25  H2'       0      0      0  -99.9      0 -99.9 _
+_  U      25  H1'       0      0      0  -99.9      0 -99.9 _
+_  U      25  Q5'       0      0      0  -99.9      0 -99.9 _
+_  U      25  H3        0      0      0  -99.9      0 -99.9 _
+_  U      25  H5        0      0      0  -99.9      0 -99.9 _
+_  U      25  H6        0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H4'       0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H3'       0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H2'       0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H2''      0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H1'       0      0      0  -99.9      0 -99.9 _
+_  DUR    26  Q5'       0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H3        0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H5        0      0      0  -99.9      0 -99.9 _
+_  DUR    26  H6        0      0      0  -99.9      0 -99.9 _
+$ END
+
+$ DATA  COMPLETENESS_PER_ATOM
+$ TABLE #RECORDS 92 #ITEMS 7
+Chn Resnm Res Atom    N_P   N_RM      C  N_RnM  N_sd Remark
+_  VAL    14  HA        2      1   50.0      1  -0.4 _
+_  VAL    14  HB        3      1   33.3      0  -0.8 _
+_  PRO    15  HA        3      0    0.0      0  -1.7 _
+_  PRO    15  HB3       0      0  -99.9      0 -99.9 _
+_  PRO    15  HB2       4      4  100.0      0   0.9 _
+_  CYS    16  H         6      4   66.7      2   0.1 _
+_  CYS    16  HA        8      3   37.5      0  -0.7 _
+_  CYS    16  HB3       3      3  100.0      2   0.9 _
+_  CYS    16  HB2       3      2   66.7      3   0.1 _
+_  SER    17  H         6      6  100.0      1   0.9 _
+_  SER    17  HA        1      1  100.0      5   0.9 _
+_  SER    17  HB3       0      0  -99.9      0 -99.9 _
+_  SER    17  HB2       0      0  -99.9      1 -99.9 _
+_  THR    18  H         5      4   80.0      3   0.4 _
+_  THR    18  HA        1      1  100.0      4   0.9 _
+_  THR    18  HB        0      0  -99.9      1 -99.9 _
+_  CYS    19  H         4      3   75.0      7   0.3 _
+_  CYS    19  HA        4      1   25.0      2  -1.0 _
+_  CYS    19  HB3      10      7   70.0      3   0.2 _
+_  CYS    19  HB2       7      5   71.4      4   0.2 _
+_  GLU    20  H         7      6   85.7      7   0.6 _
+_  GLU    20  HA        1      0    0.0      2  -1.7 _
+_  GLU    20  HB3       0      0  -99.9      0 -99.9 _
+_  GLU    20  HB2       0      0  -99.9      3 -99.9 _
+_  GLY    21  H         6      3   50.0      5  -0.4 _
+_  GLY    21  HA3       1      1  100.0      2   0.9 _
+_  GLY    21  HA2       2      2  100.0      2   0.9 _
+_  ASN    22  H         7      7  100.0     10   0.9 _
+_  ASN    22  HA        1      1  100.0      6   0.9 _
+_  ASN    22  HB3       7      2   28.6      3  -0.9 _
+_  ASN    22  HB2       1      0    0.0      1  -1.7 _
+_  ASN    22  HD22      0      0  -99.9      0 -99.9 _
+_  ASN    22  HD21      0      0  -99.9      5 -99.9 _
+_  LEU    23  H         2      2  100.0      5   0.9 _
+_  LEU    23  HA        7      5   71.4      3   0.2 _
+_  LEU    23  HB3       1      1  100.0      1   0.9 _
+_  LEU    23  HB2       1      1  100.0      1   0.9 _
+_  LEU    23  HG        1      0    0.0      0  -1.7 _
+_  ALA    24  H         5      4   80.0      6   0.4 _
+_  ALA    24  HA        4      2   50.0      0  -0.4 _
+_  CYS    25  H         5      2   40.0      6  -0.6 _
+_  CYS    25  HA        5      4   80.0      4   0.4 _
+_  CYS    25  HB3       8      3   37.5      3  -0.7 _
+_  CYS    25  HB2       4      1   25.0      1  -1.0 _
+_  LEU    26  H         9      8   88.9      1   0.6 _
+_  LEU    26  HA        6      3   50.0      2  -0.4 _
+_  LEU    26  HB3       2      2  100.0      3   0.9 _
+_  LEU    26  HB2       3      2   66.7      2   0.1 _
+_  LEU    26  HG        8      6   75.0      3   0.3 _
+_  SER    27  H         7      6   85.7      7   0.6 _
+_  SER    27  HA        1      1  100.0      0   0.9 _
+_  SER    27  HB3       2      0    0.0      0  -1.7 _
+_  SER    27  HB2       2      2  100.0      5   0.9 _
+_  LEU    28  H         6      5   83.3      5   0.5 _
+_  LEU    28  HA        1      1  100.0      1   0.9 _
+_  LEU    28  HB3       2      0    0.0      0  -1.7 _
+_  LEU    28  HB2       4      2   50.0      2  -0.4 _
+_  LEU    28  HG        1      1  100.0      3   0.9 _
+_  CYS    29  H         4      4  100.0      7   0.9 _
+_  CYS    29  HA        4      3   75.0      2   0.3 _
+_  CYS    29  HB3       4      4  100.0      4   0.9 _
+_  CYS    29  HB2       5      0    0.0      2  -1.7 _
+_  HIS    30  H         5      3   60.0      1  -0.1 _
+_  HIS    30  HA        1      0    0.0      0  -1.7 _
+_  HIS    30  HB3       1      1  100.0      0   0.9 _
+_  HIS    30  HB2       1      1  100.0      0   0.9 _
+_  HIS    30  HD2       0      0  -99.9      0 -99.9 _
+_  HIS    30  HE1       1      0    0.0      0  -1.7 _
+_  ILE    31  H         4      2   50.0      0  -0.4 _
+_  ILE    31  HA        3      2   66.7      0   0.1 _
+_  ILE    31  HB        0      0  -99.9      0 -99.9 _
+_  GLU    32  H         2      0    0.0      0  -1.7 _
+_  GLU    32  HA        0      0  -99.9      0 -99.9 _
+_  GLU    32  HB3       0      0  -99.9      0 -99.9 _
+_  GLU    32  HB2       0      0  -99.9      0 -99.9 _
+_  VAL    14  MG1       2      1   50.0      3  -0.4 _
+_  VAL    14  MG2       2      0    0.0      0  -1.7 _
+_  PRO    15  QG        0      0  -99.9      2 -99.9 _
+_  PRO    15  QD        1      1  100.0      3   0.9 _
+_  THR    18  MG        1      1  100.0      7   0.9 _
+_  GLU    20  QG        0      0  -99.9      3 -99.9 _
+_  LEU    23  MD1       0      0  -99.9      2 -99.9 _
+_  LEU    23  MD2       0      0  -99.9      0 -99.9 _
+_  ALA    24  MB        1      1  100.0      5   0.9 _
+_  LEU    26  MD1       5      8  160.0     13   2.5 _
+_  LEU    26  MD2       6      0    0.0      0  -1.7 _
+_  LEU    28  MD1       1      0    0.0      4  -1.7 _
+_  LEU    28  MD2       0      0  -99.9      0 -99.9 _
+_  ILE    31  MD        0      0  -99.9      0 -99.9 _
+_  ILE    31  QG        0      0  -99.9      3 -99.9 _
+_  ILE    31  MG        0      0  -99.9      0 -99.9 _
+_  GLU    32  QG        0      0  -99.9      0 -99.9 _
+$ END
+
+$ DATA  COMPLETENESS_AVERAGES_AND_SDS
+$ a      : on atom basis          r      : on residue basis
+$ c      : on class basis         t      : on type basis
+$ TABLE #RECORDS 2 #ITEMS 7
+Quantity       c     at     rt      r     ra      a
+av          62.8   53.3   63.9   62.5   62.9   64.1
+sd          15.9   24.9   13.2   20.2   37.0   38.8
+$ END
+
+$ DATA  SSA_PER_TYPE
+$ REMARK   pseudoatom type is set according to the following table:
+$ REMARK    The number between brackets is the number of atoms within.
+$ REMARK  		0 undefined  (*)
+$ REMARK  		1 CH2 or NH2 (2) 		2 methyl or NH3 (3)
+$ REMARK  		3 double CH2/NH2 (4)		4 double methyl (6)
+$ REMARK  		5 Aromat with 2 H (2) 		6 Aromat with 4 H (4)
+$ REMARK  In this file pseudo's of type 0 and 2 can not be used
+$ REMARK  Type 6 depends on type 5 and is not (yet) properly scored
+$ REMARK  Theor : stereospecific groups present
+$ REMARK  Exper : stereospecific assigned according to restraints
+$ REMARK  Perc  : percentage of the Exper to the Theor
+$ TABLE #RECORDS 7 #ITEMS 4
+Type    Theor  Exper   Perc
+     1     21      9   42.9
+     2      0      0  -99.9
+     3      0      0  -99.9
+     4      4      0    0.0
+     5      0      0  -99.9
+     6      0      0  -99.9
+   All     25      9   36.0
+$ END
+
+$ DATA  SSA_PER_ATOM
+$ REMARK  PS    : Pseudo atom representing the stereospecific group
+$ REMARK  AtomA : First Atom of the stereospecific group
+$ REMARK  SSA   : Assignement of the group; assigned if true (T)
+$ TABLE #RECORDS 25 #ITEMS 8
+Chn Resnm Res  PS Type AtomA AtomB SSA
+_  VAL    14   QG    4 MG1   MG2  F
+_  PRO    15   QB    1 HB2   HB3  F
+_  PRO    15   QG    1 HG2   HG3  F
+_  PRO    15   QD    1 HD2   HD3  F
+_  CYS    16   QB    1 HB2   HB3  T
+_  SER    17   QB    1 HB2   HB3  F
+_  CYS    19   QB    1 HB2   HB3  T
+_  GLU    20   QB    1 HB2   HB3  F
+_  GLU    20   QG    1 HG2   HG3  F
+_  GLY    21   QA    1 HA2   HA3  T
+_  ASN    22   QB    1 HB2   HB3  T
+_  ASN    22   QD    1 HD21  HD22 F
+_  LEU    23   QB    1 HB2   HB3  T
+_  LEU    23   QD    4 MD1   MD2  F
+_  CYS    25   QB    1 HB2   HB3  T
+_  LEU    26   QB    1 HB2   HB3  T
+_  LEU    26   QD    4 MD1   MD2  F
+_  SER    27   QB    1 HB2   HB3  F
+_  LEU    28   QB    1 HB2   HB3  F
+_  LEU    28   QD    4 MD1   MD2  F
+_  CYS    29   QB    1 HB2   HB3  T
+_  HIS    30   QB    1 HB2   HB3  T
+_  ILE    31   QG    1 HG12  HG13 F
+_  GLU    32   QB    1 HB2   HB3  F
+_  GLU    32   QG    1 HG2   HG3  F
+$ END

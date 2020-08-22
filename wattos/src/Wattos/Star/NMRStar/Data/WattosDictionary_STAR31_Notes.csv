@@ -1,0 +1,11 @@
+Notes,,
+The relationlist type is a match for the sf category.,,
+Tag names have to be ordered by appearance.,,
+If no attribute is specified it will be taken exactly the same as the tagname.,,
+The 'data type Java' column defines an automatic conversion that can be done on the STAR file upon reading in.,,
+%q adds a space to a value so the value will be quoted in star (todo),,
+%yesno will transform a boolean into yes or no.,,
+
+Not all tags are modelled here:,,
+,Assumed tags like:,_Dist_constraint_tree.Entry_ID
+,,_Dist_constraint_tree.Distance_constraint_list_ID 

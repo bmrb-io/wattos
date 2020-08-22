@@ -1,0 +1,502 @@
+options {
+    IGNORE_CASE         = true;
+    /** The parser can not be constructed multiple times. */
+    STATIC              = true;
+    ERROR_REPORTING     = true;
+    /**Explicitely needed because in the newer versions of the GUI version of 
+      javacc this option is not initialized properly.
+      */
+    KEEP_LINE_COLUMN        = true; 
+    // Followin option is set to default. Only local syntactic LOOKAHEAD is used.
+    LOOKAHEAD               = 1; 
+}
+
+
+PARSER_BEGIN(DiscoverParserAll)
+
+package Wattos.Converters.Discover;
+
+import Wattos.Utils.*;
+import Wattos.Converters.Discover.Utils;
+import Wattos.Converters.Common.*;
+
+import java.util.jar.Attributes;
+import java.util.*;
+import java.io.*;
+
+/**
+ * @author  Jurgen Doreleijers
+ * @version 0.1
+ */
+
+public class DiscoverParserAll {
+    
+    // Type of data to parse
+    static int data_type = Varia.DATA_TYPE_DISTANCE;
+
+    //parser stack to store ASSI statement
+    static Vector stack;
+    //Store all comments
+    static Vector cmtStack;
+    //Store all error lines for second pass
+    static Vector errLineStack;
+    //Store all errors from second pass
+    static Vector errStack;
+
+    //Store most recently parsed Assi line and col 
+    //used by error recording later, for second pass
+    //scanning for errors
+    static int lastAssiLine;
+    static int lastAssiCol;
+
+    /**Constructor
+     */
+    public DiscoverParserAll() {
+        init();
+    }
+
+    public void init() {
+        stack           = new Vector();
+        cmtStack        = new Vector();
+        errLineStack    = new Vector();
+        errStack        = new Vector();
+    }
+
+    /**Start parsing of Discover file 
+     */
+    public void parse(String DiscoverName, int type) {
+        String inputFile = DiscoverName;
+        data_type = type;
+        try{
+            /* Check first if file ends with an end of line, if not, 
+                append an extra "\n" before EOF as this would cause problems later on
+                */
+            RandomAccessFile inputRead = new RandomAccessFile(inputFile, "r");
+            long inputBytes = inputRead.length() - 1;
+            //forward file pointer to last byte char in file
+            inputRead.seek(inputBytes);
+            char lastChar = (char)(inputRead.read());
+            if (lastChar != '\n' && lastChar != '\r') {
+                inputRead.close();
+                // Open an appending writer
+                PrintWriter input = new PrintWriter(new BufferedWriter(new FileWriter(DiscoverName, true)));
+                input.print('\n');
+                input.close();
+            }
+            else 
+                inputRead.close();
+            
+            ReInit( new java.io.FileInputStream(DiscoverName) );
+            getInput();
+
+            //second pass processing errors
+            Utils.saveErrors(inputFile, errLineStack, errStack);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException opening " + DiscoverName );
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
+            System.out.println("ParseException parsing " + DiscoverName );
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("IOException in parse method" );
+            e.printStackTrace();
+        }
+    }        
+
+    
+    void getInput() throws ParseException {
+        switch ( data_type ) {
+            case Varia.DATA_TYPE_DISTANCE:
+                getInputDistanceConstraints();
+                break;
+            case Varia.DATA_TYPE_DIHEDRAL:
+                getInputDihedralConstraints();
+                break;
+            case Varia.DATA_TYPE_DIPOLAR_COUPLING:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_DIPOLAR_COUPLING");
+                break;
+            case Varia.DATA_TYPE_CHEMICAL_SHIFT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_CHEMICAL_SHIFT");
+                break;
+            case Varia.DATA_TYPE_COUPLING_CONSTANT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_COUPLING_CONSTANT");
+                break;
+            case Varia.DATA_TYPE_PLANARITY:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_PLANARITY");
+                break;
+            default:
+                System.out.println("WARNING: Unknown data type: " + data_type );
+                break;
+        }    
+    }
+
+    /**return Vector storing all data
+     * every element is a LogicalNode object
+     */
+    public Vector popResult() {
+        return stack;
+    }
+
+
+    /**return Vector storing all comments
+     * every element is a Comment object
+     */
+    public Vector popComment() {
+        return cmtStack;
+    }
+
+
+    /**return Vector storing all errors
+     * every element is an ErrorLine object
+     */
+    public Vector popError() {
+        return errStack;
+    }
+}
+PARSER_END(DiscoverParserAll)
+
+
+TOKEN_MGR_DECLS :
+{
+}
+
+SKIP:
+{
+    " " | "\t" | "\n" | "\r"
+}
+
+// A section of tokens that are defined locally but will not be visible to other code.
+TOKEN:
+{
+//            < #EOL:                 ("\r\n" | "\n" | "\r")>
+            < #NOT_EOL:             ~["\n", "\r"]>
+    |       < #DIGIT:               ["0"-"9"]>
+    |       < #LETTER:              ["a"-"z"]>
+    |       < #ALPHANUMERIC:        <DIGIT> | <LETTER> >
+    |       < #WHITESPACE:          [" ", "\t", "\r", "\n", "\f"]>
+    |       < #NOT_WHITESPACE:     ~[" ", "\t", "\r", "\n", "\f"]>
+    |       < #OPTIONALWHITESPACE:  (<WHITESPACE>)*>
+    |       < #POUND:               "#">
+    |       < #BANG:                "!">
+    |       < #NOT_DQUOTE:          ~["\""]>
+    |       < #ONE_CHAR_WORD:       ["(", ")", ":", "@", "="]>
+    |       < #NOT_ONE_CHAR_WORD:  ~["(", ")", ":", "@", "="]>                                
+    |       < #SPACEINLINE:         [" ", "\t"]>
+    |       < #SIGN:                ["+","-"]>
+}
+
+/** Regular tokes NAME is never used but is supposed to cover most typos */
+TOKEN:
+{
+    /** Numbers can be integer, float or scientific notation. */
+       <ATOM_ID:            (<DIGIT>)+ ":" <NAME> ":" <NAME> >
+    |  <NUMBER:             (<SIGN>)? (<DIGIT>)+ |
+                            (<SIGN>)? (<DIGIT>)* "." (<DIGIT>)+ |
+                            (<SIGN>)? (<DIGIT>)+ "." (<DIGIT>)* |
+                            (<SIGN>)? (<DIGIT>)* "." (<DIGIT>)+ ["D","E","F"]  <SIGN> (<DIGIT>)+ |
+                            (<SIGN>)? (<DIGIT>)+ "." (<DIGIT>)* ["D","E","F"]  <SIGN> (<DIGIT>)+ >
+    |   <PLUS:              "+">
+    |   <NAME:              <ALPHANUMERIC> (<ALPHANUMERIC> | ["+", "-", "'", "\"", "*", ",", "_"])* >
+}
+
+
+/** Special tokens that will be prepended to returned regular tokens and will
+    then be processed into comments. */
+SPECIAL_TOKEN:
+{ 
+        <POUNDCOMMENT:      (<POUND> | <BANG>)                     (<NOT_EOL>)* >
+}
+
+
+TOKEN:
+{
+     /**Illegal chars: any control char, characters above 127 (decimal), 
+        comma, semicolon, question mark, ampersand, square brackets, or
+        vertical bar.
+        To prevent the parser from resynchronizing right away this token is defined
+        for words in stead of just characters.
+        This token should occur last and therefore have the lowest priority. 
+        It's sole purpose is to satisfy the token manager and make sure that it doesn't crash.
+        In the characters specified in octal notation all control chars except
+        white space characters are included.
+        What is attempted here is to include any words that might occur in the
+        text (anything) that would not result in a matched token by the token
+        manager. @#$%^&*()_+}{":?><~`[]';/.,
+        */
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",     // Invalid control and foreign chars
+                        "{", "}", "[", "]", "(", ")", "<", ">", "\"",               // Brackets
+                        ",", ";", "?", "&", "|", "/", ".", "_", "*", "'", "`", ":", // Unused chars otherwise.
+                        "@", "$", "%", "^", "~", "-"
+                        ]>
+    | <ILLEGAL_WORD:    (<ILLEGAL_CHAR>)+ (<NOT_WHITESPACE>)* >
+}
+
+
+
+
+void getInputDistanceConstraints() :
+{
+    boolean results = false;
+}
+{
+    try {
+        ListDistance() {
+        }
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind != EOF) {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+void ListDistance() throws ParserDoneException  :
+{
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{       
+    try{
+        (   
+            PlusDefinition()|
+            DistanceRestraint()
+        )
+        [ ListDistance() ] 
+        {}
+    } catch (ParseException e) {  
+        //System.out.println("DEBUG: ParseException caught by deep in: ListDistance");
+        error_skipto(ATOM_ID);  
+    }
+}
+
+
+void PlusDefinition() throws ParserDoneException : 
+{
+    String atom_id1, atom_id2;
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    Plus()
+    atom_id1       = AtomId()
+    atom_id2       = AtomId()
+    {
+        Utils.saveDistancePlus( stack, atom_id1, atom_id2 );
+    }
+}
+
+
+void DistanceRestraint() throws ParserDoneException : 
+{
+    String atom_id1, atom_id2, lower, upper;
+    String force_const_lower=null, force_const_upper=null, force_max=null;
+    String target = null;
+    String bogus_var = null;
+    String n1=null, n2=null, n3=null, n4=null;
+   
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    try {
+        atom_id1       = AtomId()
+        atom_id2       = AtomId()
+
+        lower           = Number()
+        upper           = Number()
+        [   n1              = Number()
+            [
+                n2              = Number()
+                n3              = Number()
+                [   n4              = Number()
+                    [bogus_var      = Number()]
+                ]
+            ]
+        ]
+        {
+            /** Cover the following examples 
+            1:U_27:H3          1:A_43:N1                  2.000 4.500                              
+            1:U_27:H3          1:A_43:N1          -1.000  2.000 4.500                              
+            1:U_27:H3          1:A_43:N1           1.600  2.000       50.00 50.00 10000.000
+            1:U_27:H3          1:A_43:N1          -1.000  2.000 4.500 50.00 50.00 10000.000
+            1:GLY_1:HN         1:GLY_1:HA          2.300  3.500 2.900  1.00  1.00 1000.000  0.00
+            */        
+
+            if ( n1 == null ) {
+                /** Example I */                
+            } else if ( n2 == null ) {
+                /** Example II */
+                target = n1;
+            } else if ( n4 == null ) {
+                /** Example III */
+                force_const_lower = n1;
+                force_const_upper = n2;
+                force_max         = n3;
+            } else {
+                /** Example IV and V */
+                target            = n1;
+                force_const_lower = n2;
+                force_const_upper = n3;
+                force_max         = n4;
+            }
+                               
+            Utils.saveDistanceNormal( stack, 
+                atom_id1, atom_id2, lower, upper, 
+                target, force_const_lower, force_const_upper, force_max );
+        }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(ATOM_ID)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        //System.out.println("DEBUG: ParseException caught by deep in: DistanceRestraint");
+        error_skipto(ATOM_ID);  
+    }
+}
+
+
+void getInputDihedralConstraints() :
+{
+    boolean results = false;
+}
+{
+    try {
+        ListDihedral() {
+        }
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind != EOF) {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+void ListDihedral() throws ParserDoneException  :
+{
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{       
+    try{
+        (   
+            DihedralRestraint()
+        )
+        [ ListDihedral() ] 
+        {}
+    } catch (ParseException e) {  
+        //System.out.println("DEBUG: ParseException caught by deep in: ListDihedral");
+        error_skipto(ATOM_ID);  
+    }
+}
+
+
+
+void DihedralRestraint() throws ParserDoneException : 
+{
+    String atom_id1, atom_id2, atom_id3, atom_id4;
+    String n1, n2, n3=null, n4=null, n5=null, n6=null, n7=null;
+    String angle_low, angle_high;
+
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    try {
+        atom_id1       = AtomId()
+        atom_id2       = AtomId()
+        atom_id3       = AtomId()
+        atom_id4       = AtomId()
+
+        n1              = Number()
+        n2              = Number()
+        [
+            n3              = Number()
+            n4              = Number()
+            n5              = Number()
+            [
+                n6              = Number()
+                n7              = Number()
+            ]
+        ]
+
+        {
+            /** Cover the following examples. There have been cases where the
+                number of "Numbers" is 9, 11, and 13 and those cases were
+                disqualified as input.
+
+            #Example I
+            1:CYS_4:C          1:ILE_5:N          1:ILE_5:CA         1:ILE_5:C          -175.000 -75.000
+            #Example II
+            1:CYS_4:C          1:ILE_5:N          1:ILE_5:CA         1:ILE_5:C          -175.000 -75.000 40.00 40.00 1000.000
+            #Example III
+            1:GLA_3:C          1:GLA_4:N          1:GLA_4:CA         1:GLA_4:C           5.85  1.00 60.00 60.00 1000.000 -170.0  -70.0
+            */        
+
+            if ( n3 == null ) { /** OK, so they're the same... */
+                angle_low       = n1;
+                angle_high      = n2;
+            } else if ( n6 == null ) {
+                angle_low       = n1;
+                angle_high      = n2;
+            } else {
+                angle_low       = n6;
+                angle_high      = n7;
+            }                               
+            Utils.saveDihedral( stack, 
+                atom_id1, atom_id2, atom_id3, atom_id4, angle_low, angle_high );
+        }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(ATOM_ID)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        //System.out.println("DEBUG: ParseException caught by deep in: DihedralRestraint");
+        error_skipto(ATOM_ID);  
+    }
+}
+
+
+String Number() :
+{
+    Token t;
+}
+{
+    t = <NUMBER>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String AtomId() :
+{
+    Token t;
+}
+{
+    t = <ATOM_ID>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+
+String Plus() :
+{
+    Token t;
+}
+{
+    t = <PLUS>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+
+JAVACODE
+
+void error_skipto(int kind) throws ParserDoneException {
+    Utils.error_skipto(kind, errLineStack, lastAssiLine, lastAssiCol);
+}  

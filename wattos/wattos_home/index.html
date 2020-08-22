@@ -1,0 +1,750 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Generator" content="Microsoft FrontPage 4.0">
+  <title>Wattos software package</title>    
+  <meta name="Author" content="Jurgen F. Doreleijers, BMRB">
+</head>
+
+
+
+
+<body style="background-color: rgb(255, 255, 204);" alink="#999966" lang="EN-US" link="#666633" vlink="#999966" text="#800000">
+
+
+
+
+
+
+<div class="Section1">
+
+<table class="MsoNormalTable" border="0" cellpadding="0" cellspacing="10">
+  <tbody>
+    <tr>
+      <td style="padding: 6pt;">         
+      <p class="MsoNormal"><a href="http://www.bmrb.wisc.edu/"><span style="text-decoration: none;"></span></a></p>
+      </td>
+      <td style="padding: 6pt;">
+      <h1>Wattos Software Package</h1>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<p><b>Content</b> </p>
+<ul style="margin-top: 0in;" type="disc">
+  <li class="MsoNormal"><a href="#Description"><b>Description</b></a></li>
+  <li class="MsoNormal"><a name="Web_Query_Interface" href="#NMR Restraints Grid"><b>NMR Restraints Grid</b></a></li>
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+
+
+
+  
+
+
+
+
+
+  <li class="MsoNormal"><b><a href="#Distribution">Distribution</a></b></li>
+
+
+
+
+
+
+  <li class="MsoNormal"><a href="#Installation_Notes"><b>Documentation</b></a></li>
+  <li class="MsoNormal"><a href="#javadoc"><b>Javadoc</b></a></li>
+  
+
+
+
+
+
+
+  <li class="MsoNormal"><a href="#References"><b>References</b></a></li>
+
+
+
+
+
+
+  <li class="MsoNormal"><a href="#Acknowledgements"><b>Acknowledgments</b></a></li>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+<p><a name="Description"><b>Description</b></a><br>
+
+
+
+
+
+
+Wattos is a collection of Java programs for structural biology and NMR
+
+spectroscopy. It's programs analyze, annotate, parse, archive, and
+
+disseminate
+
+experimental NMR data deposited by authors world wide into the PDB and
+
+BMRB. </p>
+
+
+
+
+
+
+<p><a name="NMR Restraints Grid"><b>NMR Restraints Grid</b></a> <br>
+
+
+
+
+
+
+A query interface was developed that provides
+
+longitudinal access to all publicly available NMR restraint data from
+
+a
+
+relational database. This interface is available from the <a href="http://www.bmrb.wisc.edu/"> BMRB</a> web site
+
+selecting the&nbsp;<i>Restraints</i> bar in the main
+
+panel on the right hand side or by clicking <a href="http://restraintsgrid.bmrb.wisc.edu/NRG/MRGridServlet">here</a>.
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><a name="Distribution"><b>Distribution&nbsp;</b></a></p>
+
+
+
+
+
+
+<p>Wattos distribution, source, trackers and this home page are all maintained at <a href="http://code.google.com/p/wattos/">Google Code</a>.</p>
+
+
+
+
+
+
+<p><a name="javadoc"><b>Javadoc</b></a></p>
+<p>Can be found <a href="doc">here</a>.
+</p>
+
+<p><a name="Installation_Notes"><b>Documentation</b></a></p>
+
+
+
+
+
+
+<p>Install Java version 1.5 or more recent. Download a distribution zip file and
+
+unpack it into a system-wide installation directory which will create
+
+the
+
+wattos root installation directory (e.g. /share/Wattos or S:\Wattos for
+
+Windows
+
+users) which will be referred to here as <b><span style="font-family: &quot;Courier New&quot;;">WATTOSROOT</span></b>.
+
+All jar files that are required by Wattos have been included. A
+
+directory&nbsp;<b><span style="font-family: &quot;Courier New&quot;;">WATTOSHOME</span></b> can hold
+
+your private settings and the last state of the
+
+program.</p>
+
+
+
+
+
+
+<p>Linux/Mac users follow these steps:</p>
+
+
+
+
+
+
+<ol style="margin-top: 0in;" start="1" type="1">
+
+
+
+
+
+
+  <li class="MsoNormal">Add the following lines to your
+
+start up shell scripts (like ~/.cshrc) replacing&nbsp;<i><span style="font-family: &quot;Courier New&quot;;">wattosroot</span> </i>with
+
+your location of the wattos root installation directory (e.g.
+
+/share/Wattos) and replacing&nbsp;<i><span style="font-family: &quot;Courier New&quot;;">wattoshome</span>&nbsp;</i>with
+
+a (new) directory name (e.g. /share/myName/wattoshome).<br>
+
+
+
+
+
+
+    <span style="font-family: &quot;Courier New&quot;;">alias wsetup
+
+'setenv WATTOSROOT <i>wattosroot</i>; source
+
+$WATTOSROOT/scripts/wsetup'<br>
+
+
+
+
+
+
+setenv WATTOSHOME <i>wattoshome</i> </span>If you
+
+use a shell different than tcsh or csh then you will need to modify
+
+these commands.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Source this start up shell script
+
+or log out and log back in.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Type&nbsp;<i><span style="font-family: Courier;">wsetup</span></i>
+
+and hit return. This will add the required Java code to your
+
+Java&nbsp;CLASSPATH so Java will be able to find it.</li>
+
+
+
+
+
+
+</ol>
+
+
+
+
+
+
+<p>Windows users (Wattos was initially developed on Windows)
+
+follow similar
+
+steps:</p>
+
+
+
+
+
+
+<ol style="margin-top: 0in;" start="1" type="1">
+
+
+
+
+
+
+  <li class="MsoNormal">Set the environment variable
+
+WATTOSROOT to wattos root installation directory (e.g.
+
+S:\Wattos).&nbsp;On Windows XP this can be done by going through <i>Start</i>-&gt;<i>My
+
+Computer</i> and then right click inside the window in an area
+
+without any item. Select <i>Properties</i> from the list.
+
+In the System Properties window that pops up select the&nbsp;<i>Advanced</i>
+
+tab on the top and then select the&nbsp;<i>Environment
+
+Variables</i> button. Create an environment variable WATTOSROOT
+
+to point to the wattos root installation directory (e.g. S:\Wattos).</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Then in the same location you
+
+should define the WATTOSHOME environment variable (e.g.
+
+C:\myName\wattoshome).</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Still&nbsp; in the same
+
+location you can find the PATH environment variable which should be
+
+appended to include the wattos script&nbsp; directory (e.g.
+
+S:\Wattos\scripts). This last step allows you not to have to type the
+
+full path to the installation directory when initializing other
+
+settings and starting wattos.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Start a shell. On Windows XP this
+
+can be done by going through Start-&gt;Run and typing&nbsp;<i>cmd</i>
+
+in the box and selecting the&nbsp;<i>OK</i> button.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">In the window that the shell
+
+opened type:&nbsp;<i>wsetup</i>.</li>
+
+
+
+
+
+
+</ol>
+
+
+
+
+
+
+<p>Then for both OS (Linux and Windows):<br>
+
+
+
+
+
+
+To test if the code is working type:&nbsp;<i><span style="font-family: Courier;">wattos</span></i><span style="font-family: Courier;"> </span>and hit return.
+
+This should start up the
+
+main menu. Wattos will create the home directory (if the environment
+
+variable <span style="font-family: &quot;Courier New&quot;;">WATTOSHOME&nbsp;</span>was
+
+defined and put some
+
+settings in there. Type <i><span style="font-family: Courier;">quit</span></i>
+
+(case-insensitive) to stop execution and save the programs current
+
+state in the
+
+same directory.&nbsp;</p>
+<p></p>
+
+
+
+
+
+
+
+<p><a name="References"><b>References</b></a></p>
+
+
+
+
+
+
+<p>Please cite these references when using Wattos: </p>
+
+
+
+
+
+
+<ul style="margin-top: 0in;" type="disc">
+
+
+
+
+
+
+  <li class="MsoNormal"><a name="Doreleijers_J.F._Nederveen_A.J."></a>Doreleijers
+
+J.F., Nederveen A.J., Vranken W., Lin J., Bonvin A.M., Kaptein R.,
+
+Markley J.L., and Ulrich E.L. BioMagResBank databases DOCR and FRED
+
+with converted and filtered sets of experimental NMR restraints and
+
+coordinates from over 500 protein PDB structures. J. Biomol. NMR 32,
+
+1-12 (2005). <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=16041478&amp;dopt=Abstract">medline</a>&nbsp;
+
+  </li>
+
+
+
+
+
+
+  <li class="MsoNormal"><a name="NederveenA.J._DoreleijersJ.F"></a>Nederveen,A.J.,
+
+Doreleijers,J.F., Vranken,W., Miller,Z., Spronk,C.A., Nabuurs,S.B.,
+
+Guntert,P., Livny,M., Markley,J.L., Nilges,M., Ulrich,E.L., Kaptein,R.
+
+and Bonvin,A.M. (2005). RECOORD: a recalculated coordinate database of
+
+500+ proteins from the PDB using restraints from the BioMagResBank.
+
+Proteins 59, 662-672. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15822098&amp;dopt=Abstract">medline</a></li>
+
+
+
+
+
+
+  <li class="MsoNormal"><a name="NabuursS.B._NederveenA.J."></a><span lang="NL">Nabuurs,S.B.,
+
+Nederveen,A.J., Vranken,W., Doreleijers,J.F., Bonvin,A.M.,
+
+Vuister,G.W., Vriend,G. and Spronk,C.A. (2004). </span>DRESS: a
+
+database of REfined solution NMR structures. Proteins 55, 483-486. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15103611&amp;dopt=Abstract">medline</a></li>
+
+
+
+
+
+
+  <li class="MsoNormal" style="color: windowtext;"><a name="Doreleijers_J.F._Mading_S"></a><span style="color: rgb(102, 0, 0);">Doreleijers, J.F., Mading,
+
+S., Maziuk, D., Sojourner, K., Yin, L., Zhu, J., Markley, J.L., and
+
+Ulrich, E.L., J. Biomol. NMR 26, 139-146 (2003). </span><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12766409&amp;dopt=Abstract"><span style="color: rgb(102, 0, 0);">medline</span></a></li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+<p><a name="Acknowledgements"><b>Acknowledgments</b></a></p>
+
+
+
+
+
+
+<ul style="margin-top: 0in;" type="disc">
+
+
+
+
+
+
+  <li class="MsoNormal">Eldon Ulrich and John Markley at BMRB for all advise over many years. </li>
+
+  <li class="MsoNormal">Steve Mading, Dimitri Maziuk, and
+
+David Tolmie at BMRB and Zsolt Zolnai&nbsp;for useful discussion on
+
+Java implementation techniques. </li>
+
+
+
+
+
+
+  <li class="MsoNormal">Steve Mading for optimizing some
+
+SQL queries.&nbsp;</li>
+
+
+
+
+
+
+  <li class="MsoNormal" style="color: windowtext;"><span style="color: rgb(102, 0, 0);">Hamid Eghbalnia for
+
+suggesting the algorithm to convert ambiguous distance restraint
+
+contributions to the most compact form.</span> </li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+<p class="MsoNormal"><span style="font-size: 13.5pt;"><br>
+
+
+
+
+
+
+<span class="msonormal0">Thanks for code from:</span></span><span style="color: windowtext;"> </span></p>
+
+
+
+
+
+
+<ul style="margin-top: 0in;" type="disc">
+
+
+
+
+
+
+  <li class="MsoNormal">Greg Warren for the PyMol algorithm in modules/chempy/place.py
+    for placing missing atoms.</li>
+
+
+
+
+
+
+  <li class="MsoNormal"> Jonathan Brown for the Graph
+
+package tira
+
+gracefully donated.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Dimitri Maziuk for letting me rip
+
+his SANSJ package.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">David Flanagan for providing the
+
+file copy code. </li>
+
+
+
+
+
+
+  <li class="MsoNormal" style="color: windowtext;"><span style="color: rgb(102, 0, 0);">David Gilbert and Thomas
+
+Morgner for the <a href="http://www.jfree.org/jfreechart">JFreeChart</a>
+
+API for plotting graphs.</span></li>
+
+
+
+
+
+
+  <li class="MsoNormal" style="color: windowtext;"><span style="color: rgb(102, 0, 0);">Bruno Lowagie and Paulo
+
+Soares for the <a href="http://www.lowagie.com/iText/">iText</a>
+
+library for generating PDF files.</span></li>
+
+
+
+
+
+
+  <li class="MsoNormal" style="color: windowtext;"><span style="color: rgb(102, 0, 0);">Folks at CERN for the colt
+
+libraries.</span></li>
+
+
+
+
+
+
+  <li class="MsoNormal"><a href="https://javacc.dev.java.net/">JavaCC</a> authors.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Ronald Tschalr for the .Z UncompressInputStream class.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Tim Stevens for the dihedral angle violation algorithm.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Stephen Ostermiller for the
+
+reading/writing <a href="http://ostermiller.org/">API</a>
+
+of comma-separated-value files.</li>
+
+
+
+
+
+
+  <li class="MsoNormal"><strong><span style="font-weight: normal;">Henrik Bengtsson</span></strong>
+
+for doing old-fashioned printf stuff&nbsp;(see <a href="http://www.braju.com/">here</a>).</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Steven R. Brandt for the XML SAX <a href="http://www.javaworld.com/javatips/jw-javatip128_p.html">parser</a>.</li>
+
+
+
+
+
+
+  <li class="MsoNormal">Jack Shirazi for the fast double
+
+to String routine from his book "<a href="http://books.google.com/books?q=0596003773">Java
+
+Performance Tuning</a>".</li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Please contact  <a href="mailto:jurgenfd@gmail.com">me</a>
+
+for help, if required. </p>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4422425-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

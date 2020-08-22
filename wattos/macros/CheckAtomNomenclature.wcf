@@ -1,0 +1,34 @@
+# simple one line comments are allowed
+
+InitAll
+
+SetProp
+interactiveSession
+false
+
+SetProp
+verbosity
+9
+
+SetProp
+writeSessionOnExit
+false
+
+ListProp
+
+#Input file
+ReadEntryMMCIF
+1cjg_rem_small.cif.gz
+y
+
+#ShowSoupSTAR
+
+CheckAtomNomenclature
+y
+
+
+#WriteEntryNMRSTAR
+#5znf_CheckAtomNomenclature.str
+
+Quit
+

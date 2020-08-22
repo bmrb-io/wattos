@@ -1,0 +1,720 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+   
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+
+   
+  
+  <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+
+
+   
+  
+  
+  <title>Completeness of distance restraints; methods</title>
+  <link href="mailto:jurgen@bmrb.wisc.edu" rev="MADE">
+</head>
+
+
+<body bgcolor="#ffffff">
+
+
+
+<h1>Completeness of distance restraints</h1>
+
+
+
+<h3><b>Content</b></h3>
+
+<ul>
+
+  <li><a href="#Intro">Intro</a></li>
+
+  <li><a href="#Basics">Basics</a></li>
+
+  <li><a href="#Cut-off">
+Cut-off</a></li>
+
+  <li><a href="#Observable_atoms">
+Observable atoms</a></li>
+
+  <li><a href="#Averaging_over_models">
+Averaging over models</a></li>
+
+  <li><a href="#Averaging_over_multiple_atoms">Averaging over multiple atoms</a></li>
+
+  <li><a href="#Stereospecifically_assignable_protons">
+Stereospecifically assignable protons</a></li>
+
+  <li><a href="#Ambiguous_NOEs">Ambiguous NOEs</a></li>
+
+  <li><a href="#Differences_with_Aqua_completeness_check">Differences with Aqua completeness check</a></li>
+
+  <li><a href="#Completeness_and_the_number_of_NOEs">
+Completeness and the number of NOEs</a></li>
+
+  <li><a href="#Flexibility">
+Flexibility</a></li>
+
+  <li><span style="font-weight: bold;"></span><a href="#Reference_values_for_completeness">Reference values for completeness</a></li>
+
+  <li><a href="#Wattos_actions_step_by_step">
+Wattos actions step by step</a></li>
+
+  <li><a href="#Web_server">Web server</a></li>
+
+</ul>
+
+<h3><a name="Intro"></a>Intro</h3>
+
+
+The calculated completeness can be useful in the initial
+phases of structure determination using NMR by focusing on NOE contacts
+in specific regions in a biomolecule or pinpointing problems to specific residues,
+atoms or classes of NOE contacts. The completeness check and its application
+to a large set of structures has been described in:
+<ul>
+
+
+  <li>
+J.F. Doreleijers, M.L. Raves, J.A.C. Rullmann &amp; R. Kaptein.
+"Completeness of NOEs in proteins: a statistical analysis of NMR data"
+    <i>J. Biomol. NMR</i> (1999) <b>14</b>, 123-132.
+  </li>
+
+
+</ul>
+
+
+
+<h3>
+<a name="Basics"></a>Basics</h3>
+
+
+Based on one or more models of a protein structure, a set of contacts expected
+to be observable in a NOESY type NMR experiment is generated. The intersection
+of the set of observable model contacts (set <font color="#0000ff"><b>B</b></font>) and the set of
+NOE contributions (set
+<b><font color="#0000ff">A</font></b>) contains the matched contacts. Completeness is defined as the ratio
+between the number of the matched contacts and the number of observable
+model contacts (set B). The values of the upper-bounds (and lower-bounds)
+are not considered in this analysis.
+
+<h3><a name="Cut-off"></a>
+Cut-off</h3>
+
+
+In a NOESY type NMR experiment contacts between protons separated up to
+~ 5.5 &Aring; can be observed. The maximum distance between protons, up
+to which model contacts are calculated, is an important determinant for
+the level of completeness and can be supplied to the program as a parameter.
+For a low value, like 3.0 &Aring;, nearly all observable model contacts
+will have been observed in the NMR experiment. The number of observable
+model contacts increases approximately quadratically with this value.
+
+<h3><a name="Observable_atoms"></a>
+Observable atoms</h3>
+
+
+
+Which atoms are observable in an NMR experiment? The standard definition
+includes all non-exchangeable protons and stereospecifically assignable
+protons beyond the beta-protons as pseudoatoms. The stereospecifically
+assignable methyl-groups of Valine and Leucine is an exception to this
+general rule. Other <a href="observables.html">definitions</a> of what
+is observable can be supplied to the program.
+
+<h3><a name="Averaging_over_models"></a>
+Averaging over models</h3>
+
+
+Usually a normal average is used instead of an r<sup>-6</sup> average 
+because in practice the latter gives too much weight to the shorter
+distances.
+<h3><a name="Averaging_over_multiple_atoms"></a>Averaging over multiple atoms</h3>
+
+
+
+The averaging method (center, sum, r-6) influences quite a few features from the
+completeness check. In this section the averaging over multiple atoms within one
+model is discussed. The averaging over&nbsp; (average) distances in different
+models is&nbsp; discussed in the previous section.<br>
+
+
+Take the example of a Valine residue with expected observable atoms H, HA, HB,
+HG11 through HG13, and HG21 through HG23. Here are a couple of expected
+distances using different averaging methods. The distances are based on
+simulations done without restricting atom overlap so distances can be as small
+as zero Angstrom.
+<div align="left">
+  
+<table border="1" height="53" width="551">
+
+
+    <tbody>
+
+    <tr>
+
+
+      <td height="6" width="111"></td>
+
+
+      <td height="6" width="110"></td>
+
+
+      <td height="6" width="110"></td>
+
+
+      <td height="6" width="110">Lower limit</td>
+
+
+      <td height="6" width="110">Upper limit</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td colspan="5" height="6" width="551">Averaging: none</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="6" width="111">Val</td>
+
+
+      <td height="6" width="110">H</td>
+
+
+      <td height="6" width="110">HG11</td>
+
+
+      <td height="6" width="110">1.2</td>
+
+
+      <td height="6" width="110">5.5</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td colspan="5" height="6" width="551">Averaging: Sum (smaller than not
+        averaging because of summing effect)</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="6" width="111">Val</td>
+
+
+      <td height="6" width="110">H</td>
+
+
+      <td height="6" width="110">HG11 - HG13</td>
+
+
+      <td height="6" width="110">1.0</td>
+
+
+      <td height="6" width="110">4.6</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td colspan="5" height="5" width="551">Averaging: R-6 (same as not
+        averaging because limits are the same for different pairs).&nbsp;</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="6" width="111">Val</td>
+
+
+      <td height="6" width="110">H</td>
+
+
+      <td height="6" width="110">HG11 - HG13</td>
+
+
+      <td height="6" width="110">1.2</td>
+
+
+      <td height="6" width="110">5.5</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td colspan="5" height="5" width="551">Averaging: Center (distance from H
+        to the center of atoms HG11 through HG13)</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="6" width="111">Val</td>
+
+
+      <td height="6" width="110">H</td>
+
+
+      <td height="6" width="110">HG11 - HG13</td>
+
+
+      <td height="6" width="110">2.1</td>
+
+
+      <td height="6" width="110">4.9</td>
+
+
+    </tr>
+
+
+  
+  
+  </tbody>
+</table>
+
+
+</div>
+
+
+<p>Similar effects can be expected on the more informative inter residual
+constraints. When any averaging method other than "Center" is
+specified then the contacts between groups of atoms like Val&nbsp; HG11 through
+HG13 and HG21 through HG23 are no longer considered fixed in Wattos. This is an
+artifact in the software and users are advised not to include intra-residual
+contacts in their analyses. The inclusion of intra-residual contacts makes it
+hard to compare among different structures anyway because the treatment of
+intra-residuals differs widely on quantity and redundancy.</p>
+
+
+
+<h3><a name="Stereospecifically_assignable_protons"></a>
+Stereospecifically assignable protons</h3>
+
+
+
+The treatment of stereospecifically assignable protons is quite important
+for the outcome of the analysis. If pseudoatoms are used instead of stereospecifically
+assignable protons, then the completeness of contacts between such atoms
+can never be a 100 %. The list of observable atoms should not contain stereospecific
+protons <b>and</b> the pseudoatoms that represent them. Restraints with
+a pseudoatom will be deleted if the same restraint is present with a stereospecific
+atom. This will be signaled in the log file. For Phenylalanine and Tyrosine QD and
+QE and Arginine QH1 and QH2 one cannot calculate the completeness
+of stereospecific protons (<i>e.g.</i> Phe HD1), due to technical limitation
+of the program. These protons are therefore not even included in the set
+of theoretically observable protons. This is due to the fact that the pseudoatoms
+themselves can also be expanded to QR (Phe and Tyr) and QH (Arg) respectively.
+
+<p>
+Two types of cases of stereospecificity are considered:
+</p>
+
+<ol>
+
+
+  <li>
+A restraint contains a stereospecific atom (<i>e.g.</i> HD1) and the list
+of observable atoms contains the representing pseudo atom (<i>e.g.</i>
+QD). The restraint will be adjusted (and pseudoatom correction will be
+added to the upper bound) such that the stereospecific atom is mapped to
+the pseudoatom (QD). Subsequently the list of restraints is cleaned up
+to remove doubly occurring restraints that could arise from this mapping.
+    <i>E.g.</i> restraints X-HD1 and X-HD2 would collapse to a single restraint X-QD.</li>
+
+
+
+  <li>
+A restraint contains a pseudo atom (<i>e.g.</i> QB) and the list of observable
+atoms contains the individual stereospecific atoms (<i>e.g.</i> HB2 and
+HB3). The pseudoatom of the restraint will then be matched to ONE of the
+stereospecifically assignable atoms. In the listing per shell 
+it's (a) the atom in the smaller shell (<i>e.g.</i> HB3) or (b)
+the first atom in the molecule (<i>e.g.</i> HB2). This prevents a "not
+existing violation" from being listed as a violation.
+In general a maximum of 50 % can thus be obtained for completeness for
+this atom type because of the lack of stereospecific assignments. Pseudoatom
+correction will not be subtracted nor added.</li>
+
+
+</ol>
+
+
+
+<p>Note that if one stereospecific assignable nucleus (e.g. HB2)&nbsp; is in the
+set of observable nuclei then also the other one (e.g. HB3) should be present.</p>
+
+
+<h3><a name="Ambiguous_NOEs"></a>Ambiguous NOEs</h3>
+
+
+<p>The completeness of NOE contributions will be higher in general when NOEs are allowed to
+contain more than one contribution of one spin-spin interaction. Since Wattos
+doesn't have access to the chemical shifts of the individual spins it can not
+check if the ambiguity is reasonable. E.g. if just one ambiguous constraint
+contains all atoms on either side (in CNS jargon: <font color="#0000ff" face="Courier">assign
+( name * )&nbsp; ( name * ) 9 9 9</font>) this will result in a 100%
+completeness because it will be matched to any theoretically expected
+contribution. This type of situation should be checked and corrected for using
+additional information like chemical shift assignments before the completeness
+check is done.&nbsp;</p>
+
+
+
+<h3><a name="Differences_with_Aqua_completeness_check"></a>Differences with Aqua completeness check</h3>
+
+
+<p>In the case of ambiguous NOEs, the NOEs will be considered by the
+contributions that make them. E.g. one constraint with two contributions can
+match two expected contacts. So in contrast to the old procedure in Aqua that
+doesn't deal with ambiguity, this procedure can theoretically lead to 100 % completeness even
+if there are less constraints than expected contacts.</p>
+
+
+
+<p>In Aqua the centered position of the pseudo atom was used for deriving the
+expected contacts whereas here the averaging method can be selected to be one of
+center, sum, or r-6 like in CNS. The sum averaging is the most realistic method.</p>
+
+
+
+<p> E.g. for PDB entry 1BRV the completeness up to 4
+Ang. without intraresidual contacts and using center averaging is 64%
+with Aqua and Wattos respectively. If the more normal sum averaging (monomer
+count set to 1) is chosen then the completeness drops to 57%. Below is a summary
+of the numbers:</p>
+
+
+
+<div align="left">
+  
+<table border="1" height="63" width="643">
+
+
+    <tbody>
+
+    <tr>
+
+
+      <td height="9" width="161"></td>
+
+
+      <td height="9" width="161">Center (Aqua and Wattos)</td>
+
+
+      <td height="9" width="160">Sum (Wattos)</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="9" width="161">Expected</td>
+
+
+      <td height="9" width="161">137</td>
+
+
+      <td height="9" width="160">162</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="9" width="161">Matched</td>
+
+
+      <td height="9" width="161">87</td>
+
+
+      <td height="9" width="160">92</td>
+
+
+    </tr>
+
+
+    <tr>
+
+
+      <td height="9" width="161">Completeness</td>
+
+
+      <td height="9" width="161">64</td>
+
+
+      <td height="9" width="160">57</td>
+
+
+    </tr>
+
+
+  
+  
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+<p>This procedure allows to run the check only on the atoms selected. This way
+nucleii known to be unobservable can be excluded from the analysis.&nbsp;</p>
+
+
+
+<h3><a name="Completeness_and_the_number_of_NOEs"></a>
+Completeness and the number of NOEs</h3>
+
+
+The number of NOEs per residue is often plotted as an indicator of how
+well the contacts have been gathered. If the residue type is taken into
+account (which is not always the case) this number is informative and is
+also provided by this program. A plot of this number versus the sequence,
+however, is very scattered. The proposed completeness number is approximately
+the same for each residue type. Residues in a sequence that have a low
+completeness are easily observed.
+<h3><a name="Flexibility"></a>
+Flexibility</h3>
+
+
+The distance between atoms is averaged over all provided models of the
+structure. If this averaged distance is below the maximum distance discussed
+above, the contact is considered as an "observable model contact". In case
+of conformational variability, the averaged distance will often be above
+the threshold. As a consequence, the distance will be discarded from the
+set of observable model contacts. This way a flexible region of a protein
+can have a similar completeness as a rigid region although the latter is
+defined by more NOEs per residue.
+<h3><a name="Reference_values_for_completeness"></a>
+Reference values for completeness</h3>
+
+
+The average completeness for maximum distances of 4.0 and 5.0 &Aring; for
+97 studied NMR protein structures was 48 +/- 13 and 26 +/- 9 %, respectively.
+The best structures had a completeness of 76 (4.0 &Aring;) and 48 % (5.0
+&Aring;). Intra-residual contacts were excluded from the analysis. The
+set of observable atoms was the standard set (see section: <a href="#Observable_atoms">Observable
+atoms</a>). <font color="#ff0000">Fill in current info on the set that includes
+ambiguous distance constraints.</font>
+<h3><a name="Wattos_actions_step_by_step"></a>
+Wattos actions step by step</h3>
+
+
+<ol>
+
+
+  <li>Collapse to compact form the constraints</li>
+
+
+  <li>Split constraints to constraints with only one contribution per constraint
+    keeping track of the original constraint rid.</li>
+
+
+  <li>Sort constraints</li>
+
+
+  <li>Create a list of observable atoms in the first&nbsp; model (a set of
+    molecules with at least 1 member).</li>
+
+
+  <li>Classify not in range by atom selection</li>
+
+
+  <li>Classify not observable</li>
+
+
+  <li>Classify intra if needed</li>
+
+
+  <li>Classify surplus</li>
+
+
+  <li>Add expected contacts and distance info. If the expected distance already
+    occurs in the set don't make a new one. Matching is done by stepping through
+    the sorted list of experimentally observed contributions.</li>
+
+
+  <li>Set <b>A</b> and <b>B</b> can be deduced from the logical operations on
+    the set attributes</li>
+
+
+  <li>Decompose the completeness with respect to: shell expected, shell
+    observed, class of contact (intra, sequential etc.), residue (perhaps
+most useful). All these analyses will produce separate tables in the output STAR file.</li>
+
+
+</ol>
+
+
+
+<p>
+<b>
+A list of distance constraint contributions will be partitioned into the following sets:</b>
+</p>
+
+<ul>
+
+
+  <li>U Universe of contributions in selected constraints from first selected
+  entry for selected atoms.
+  </li>
+
+  <li>V Universe of contributions that theoretically expected shorter than a
+  threshold.
+  </li>
+
+  <li>W = U u V
+  </li>
+
+  <li>E Exceptional constraints; those that contain at least one atom that could
+  not be matched to an atom in the coordinate section.
+  </li>
+
+  <li>O Not observable contributions (e.g. an NOE contribution with Ser HG).
+  </li>
+
+  <li>I Intra-residual contributions if not to be analyzed.
+  </li>
+
+  <li>S Surplus like double contributions . As part of the effect of transforming the
+  experimental contributions into the same roam of the theoretical contributions
+  will lead to
+  double contributions these need to be taken out. If intra residual
+  contributions are to be analyzed for completeness this will also filter out the redundant
+  ones. See documentation on surplus code.
+  </li>
+
+  <li><b><font color="#0000ff">A</font></b> = U - ( E u O u I u S). The set of
+  observable experimental distance contributions.
+  </li>
+
+  <li><font color="#0000ff"><b>B</b></font> = V - ( I u S) The set of observable theoretical
+  distance contributions that are shorter than a threshold. Note that no
+  elements in E and O will occur in V.
+  </li>
+
+  <li>X = ((U - (E u O)) u V but keeps shrinking on removal of (I u S). Internal
+  to Wattos.
+  </li>
+
+  <li>M = A n B The set of matched distances, i.e. those for which both a
+  experimental and theoretical contact exists.
+  </li>
+
+  <li>C = A - M. Unmatched experimental NOE contributions (increasing the threshold distance
+  decreases this set in size) but many contributions (in case of ambiguous
+  constraints) will end up in this set as their contribution fraction is simply
+  too small.
+  </li>
+
+  <li>D = B - M. Theoretically expected but unseen NOE contributions. Check data to explain why
+  which could be absent (many reasons are perfectly valid).
+  </li>
+
+  <li>Bi = contributions in B that fall with shell i for the distance in the
+  ensemble
+  </li>
+
+  <li>Mi = contributions in M that fall with shell i for the distance in the
+  ensemble.
+  </li>
+
+  <li>Mij = contributions in M that fall with shell i for the distance in the
+  ensemble and in shell j for the observed NOE distance. Any constraint in Mij
+  where i&lt;j is a violated constraint.
+  </li>
+
+</ul>
+
+
+<p>
+<b>
+Properties of the sets:</b>
+</p>
+
+<ul>
+
+
+  <li>W = E u O u I u S u A u B
+  </li>
+
+  <li>Contributions in W have attributes in addition to the normal distance
+  constraint attributes like: MSet (indicating the constraint is in set M),
+  etc., dist_theo (averaged distance in the ensemble of models). For
+  classification by shell the attributes exist: inShellExpected_1 through
+  inShellExpected_N and inShellObserved_1 through inShellObserved_M.&nbsp;
+  </li>
+
+  <li>C u D u M = A u B (simple rewrite from above)
+  </li>
+
+  <li>Mi = Union over j of sets Mij
+  </li>
+
+  <li>Completeness for shell i is |Mi|/|Bi|.
+  </li>
+
+  <li>Cumulative Completeness up to cutoff distance d is Sum(i 0 through d) |Mi| /
+  Sum(i 0 through d) |Bi|.
+  </li>
+
+</ul>
+
+<h3><a name="Web_server"></a>Web server
+</h3>
+
+<ul>
+
+
+  <li>
+The AQUA completeness check for unambiguous distance constraints can be performed by the AQUA
+    <a href="http://www.bmrb.wisc.edu/%7Ejurgen/Aqua/server">server</a>. A server for the completeness
+functionality of Wattos is planned for 2006.
+  </li>
+
+
+</ul>
+
+
+</body>
+</html>

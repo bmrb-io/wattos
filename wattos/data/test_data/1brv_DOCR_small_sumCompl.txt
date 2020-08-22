@@ -1,0 +1,55 @@
+The following OPTIONS are used
+shells for observed                          : 1
+    min distance observed                    : 2.0
+    max distance observed                    : 4.0
+shells for expected                          : 1
+    min distance expected                    : 2.0
+    max distance expected                    : 4.0
+Observable atoms from set in url             : file:/C:/jurgen/Wattos/build/web/WEB-INF/classes/Wattos/Soup/Constraint/Data/ob_standard.str
+Use intra-residual contacts                  : false
+Count restraints by atom                     : false
+Averaging power over models                  : 1.0
+Averaging method over contributions          : sum
+Averaging method over contributions monomers : 1
+Overal completeness is 0.5371429 or 54 percent
+
+
+
+SUMMARY:
+Found number of todo constraints:                       261
+Found number of exceptional constraints:                0
+Found number of unobserved constraints:                 0
+Found number of intraresidual constraints to exclude:   74
+Found number of surplus constraints:                    0
+Constraints (U): Size:   576 Cardinality:   261
+Constraints (V): Size:   640 Cardinality:   175
+Constraints (W): Size:  1152 Cardinality:   342
+Constraints (E): Size:   576 Cardinality:     0
+Constraints (O): Size:    64 Cardinality:     0
+Constraints (I): Size:   384 Cardinality:    74
+Constraints (S): Size:    64 Cardinality:     0
+Constraints (A): Size:   576 Cardinality:   187
+Constraints (B): Size:   640 Cardinality:   175
+Constraints (M): Size:   576 Cardinality:    94
+Constraints (C): Size:   576 Cardinality:    93
+Constraints (D): Size:   640 Cardinality:    81
+Completeness per class:
+
+    loop_
+       _Classification
+       _Observed
+       _Expected
+       _Matched
+       _Completeness
+
+       undetermined 0 0 0 . 
+       intraresidue 0 0 0 . 
+       sequential 82 65 46 70.76923 
+       medium-range 72 44 25 56.81818 
+       long-range 33 66 23 34.848484 
+       intermolecular 0 0 0 . 
+       mixed 0 0 0 . 
+    stop_
+
+
+

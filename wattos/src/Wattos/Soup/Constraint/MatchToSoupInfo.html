@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+  
+  
+  <title>Match to Soup</title>
+</head>
+
+
+<body>
+
+
+<h3>Outset:</h3>
+
+
+
+Score the given restraints versus a sequence of residues and use an
+alignment algorithm for determining the best matching regions.
+<br>
+
+
+
+
+<h3>Assumptions:</h3>
+
+
+
+- Atoms in the constraints in the same residue are in the same residue
+in the soup.<br>
+
+
+
+
+- No insertion codes allowed.
+<br>
+
+
+
+
+- Gaps in the soup residue numbering will be penalized heavily.<br>
+
+
+
+
+- Gaps in restraint residue numbering are allowed.
+<br>
+
+
+
+
+- All symmetry related restraints are present.
+<br>
+
+
+
+
+<h3>Nomenclature:</h3>
+
+
+
+
+Query: sequences in restraints<br>
+
+
+
+Subject: sequences in soup (<span id="misp_compose_2" class="hm">SEQRES</span> records of the <span id="misp_compose_3" class="hm">PDB</span>)<br>
+
+
+
+Score:
+
+
+
+Since there could be none, one or multiple contributions per residue the score is NOT a
+probability in the classic sense even though the word is used.
+<p>
+
+
+
+
+[A] Match: a possible correspondence between two residues.<br>
+
+
+
+
+
+[B] Substitutions: atom(s) from the two residues don't match and the residue needs to be
+replaced by another.
+Uncommon but might be useful as error correction for errors in restraints or
+sequence.<br>
+
+
+
+
+[C] Insertions: going from residues in restraints to residues in soup, a
+residue(s) needs to be
+inserted.<br>
+
+
+
+
+[D] Deletions: going from restraints to soup, residues need to be
+deleted. This is uncommon.<br>
+
+
+
+</p>
+
+
+
+<h3>Scores</h3>
+
+
+
+
+Algorithm of Smith-Waterman ("Local" Alignment) needs similarity scores
+that are positive for related residues and negative for substitutions,
+gaps, and
+unrelated residues.
+<ol>
+
+  <li>Score matrix is setup with sequential restraint residues
+(query) over rows and the soup residues (subject) over columns. So
+residues without restraints will never be mapped. The resulting gaps are not
+    important as they will not lead to an info loss.</li>
+
+  <li>The score contribution per unique atom (pa; probability atom) in the restraint list is 1 divided by the number
+of residues in the subject sequence that it could occur in (<span id="misp_compose_6" class="hm">nf;
+    number fulfilled</span>) or zero if
+the atom can not be matched to any subject residue. E.g. an HA3 will be a contribution of 0.1 (assuming 10
+    <span id="misp_compose_7" class="hm">Gly</span> in the soup). HB3 will be a contribution of 0.01 (assuming 100 <span id="misp_compose_8" class="hm">AMX</span>
+spin systems {HB3 containing residues) in the soup). HX9 will be a
+contribution of 0 (assuming no HX9 containing residues).</li>
+
+  <li>Atom that can occur in the subject residue [A] (match) is
+scored a positive contribution. But if it can not occur in the subject
+residue it [B] (substitution) is scored a flat negative contribution (<span id="misp_compose_9" class="hm">cn</span>; contribution negative: -10).</li>
+
+  <li>All atom nomenclatures on file will be considered. A match on one
+of the nomenclature sets is treated the same as if it is in many.</li>
+
+  <li>If the residue name of an atom in a restraint is known [A] it
+will be used in stead of the atom's name. In this case, the score
+contribution per atom is 10 divided by the number of residues in the
+subject sequence that it matches or ZERO if the residue name can not be
+matched to any subject residue name.</li>
+
+  <li>Deletions [D] are not common and are kind of forbidden but can happen e.g. <span id="misp_compose_10" class="hm">PDB</span> annotation
+split one author residue to two <span id="misp_compose_11" class="hm">PDB</span> residues.&nbsp;</li>
+
+  <li>Insertions [C] in the residues in the restraints are very
+common, e.g. an undefined region because of local signal
+broadening.&nbsp;</li>
+
+  <li>A jump [C] from one chain to the next in the subject (soup)
+sequence is a special gap that happens.</li>
+
+  <li>Another special gap&nbsp;[D]  is between restraint residues
+(query) that are non-sequential because of a jump in sequence number to
+indicate a chain jump as common in structures solved with <span id="misp_compose_12" class="hm">CYANA</span>. This
+gap [D] is hard to distinguish from [C] so it will be ignored as a
+separate category.&nbsp;</li>
+
+  <li>The negative score contributions for A, B, and C are
+to be determined by heuristics, e.g. -1/5, -1/2, -1.</li>
+
+  <li>Simple constant gap (insertion and deletion) penalty
+function is used.</li>
+
+  <li>After the contributions are added from this and the violation analyses detailed below, the negative scores
+(penalties) are set to zero.</li>
+
+</ol>
+<h3>
+
+
+
+Smith-Waterman Algorithm</h3>
+
+
+
+
+<ol>
+
+  <li>Assigns a score to each pair of residues
+
+  
+  <ul>
+
+    <li>- Uses similarity scores only</li>
+
+    <li>- Uses positive scores for related residues</li>
+
+    <li>- Uses negative scores for substitutions and gaps</li>
+
+  
+  </ul>
+</li>
+  <li>Initializes edges of the matrix with zeros</li>
+
+  <li>As the scores are summed in the matrix, any score below
+0 is recorded as 0.</li>
+
+  <li>Begins the trace back at the maximum value found
+anywhere in the matrix</li>
+
+  <li>Continues until the score falls to 0.</li>
+
+</ol>
+
+
+
+
+<br>
+
+
+
+
+The modifications to the algorithm should:<br>
+
+
+
+
+<ul>
+
+  <li>Do more than one range. Iterate on the score matrix by
+taking out the matched regions until
+  
+
+  
+  <ul>
+
+    <li>less than MINIMAL_MATCH_LENGHT consecutive residues (mm) are left or </li>
+
+    <li>no
+positive
+scores remain or </li>
+
+  
+    <li>when no matching
+region don't be pick the match again in order to prevent infinite iterations.<br>
+
+
+
+<br>
+
+
+
+    </li>
+  </ul>
+  </li>
+</ul>
+
+
+
+<h3>Violations</h3>
+
+
+
+<ul>
+
+  <li><span id="misp_compose_14" class="hm">Intra</span> residue distance and dihedral angle violations (v) over 1
+    <span id="misp_compose_15" class="hm">Ang</span>. (dc; distance cutoff) and 10 degrees (ac; angle cutoff)
+respectively are penalties (pp). The score contribution for the
+violations (<span id="misp_compose_16" class="hm">pv</span>) will be zero if the restraint can nowhere be
+accommodated.&nbsp;The score will be weighted (<span id="misp_compose_18" class="hm">wv</span>; weight of violations)
+by one over the # residues that could <span id="misp_compose_19" class="hm">fulfill</span> the <span id="misp_compose_20" class="hm">intra residue</span>
+restraint (<span id="misp_compose_21" class="hm">nf</span>; number fulfilled) under the threshold
+    (dc or ac). Doing
+so will make unique restraints more important. Violations of less than
+the cutoff will get a small positive contribution. A factor 5 (<span id="misp_compose_23" class="hm">fv</span>) will
+be used to scale between violations and no violations beyond the
+cutoff. Another weight factor (<span id="misp_compose_24" class="hm">wo</span>=1)&nbsp; adjust this score
+contribution versus the ones by the above. For distance violations, pp
+will be limited to fv.</li>
+
+  <li>E.g. for dihedral angle restraints:</li>
+
+</ul>
+
+
+
+v = 0 if there is no violation<br>
+
+
+
+pp = 1-v^2/ac^2 where v &lt;= ac or<br>
+
+
+
+pp = -<span id="misp_compose_25" class="hm">fv</span>*v^2/ac^2 otherwise<br>
+
+
+
+<span id="misp_compose_26" class="hm">wv</span> = 1/<span id="misp_compose_27" class="hm">nf</span> where <span id="misp_compose_28" class="hm">nf</span> &gt;=1 or<br>
+
+
+
+<span id="misp_compose_29" class="hm">wv</span> = 0 where <span id="misp_compose_30" class="hm">nf</span> = 0<br>
+
+
+
+<span id="misp_compose_31" class="hm">pv</span> = <span id="misp_compose_32" class="hm">wv</span> * pp.<br>
+
+
+
+<span id="misp_compose_33" class="hm">po</span> = pa + <span id="misp_compose_34" class="hm">pv</span> * <span id="misp_compose_35" class="hm">wo</span> (<span id="misp_compose_36" class="hm">po</span>; probability overall)
+<h3><br>
+
+
+
+Abbreviations</h3>
+<p><font face="Courier">ac&nbsp;&nbsp;&nbsp;&nbsp; angle cutoff<br>
+cn&nbsp;&nbsp;&nbsp;&nbsp; contribution negative<br>
+dc&nbsp;&nbsp;&nbsp;&nbsp; distance cutoff<br>
+fv&nbsp;&nbsp;&nbsp;&nbsp; factor violation/no violation<br>
+nf&nbsp;&nbsp;&nbsp;&nbsp; number residues fulfilled<br>
+po&nbsp;&nbsp;&nbsp;&nbsp; probability overall<br>
+pa&nbsp;&nbsp;&nbsp;&nbsp; probability based on atoms<br>
+pp&nbsp;&nbsp;&nbsp;&nbsp; penalty<br>
+pv&nbsp;&nbsp;&nbsp;&nbsp; penalty violation<br>
+v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; violation<br>
+wo&nbsp;&nbsp;&nbsp;&nbsp; weight factor overall<br>
+wv&nbsp;&nbsp;&nbsp;&nbsp; weight of violatio</font>n
+
+
+
+<br>
+
+
+
+</p>
+
+
+
+<h3>Examples</h3>
+
+
+
+<ol>
+
+  <li>A&nbsp;psi dihedral for beta region of <span id="misp_compose_37" class="hm">Ramachandran</span> plot might be violated 180 degrees but below threshold in 30 residues.<br>
+
+
+    <font face="Courier">
+
+
+    <span id="misp_compose_38" class="hm">pv</span> = (1/30)*-5*180^2/180^2 = &nbsp;-1/6</font><br>
+
+
+The same residue has a HA3 restraint that will be 0.1 (pa) as in the example above.<br>
+
+
+    <font face="Courier">
+
+
+    <span id="misp_compose_39" class="hm">po</span> = -1/6 + 1/10 = -1/15<br>
+
+
+    </font>
+
+
+If these are the only restraints for this residue the score will be
+assigned to zero before considering gap penalties. The intuitive idea
+is to weigh pa and <span id="misp_compose_40" class="hm">pv</span> by <span id="misp_compose_41" class="hm">wo</span> so that they are approximately even.</li>
+
+  <li>A distance restraint without a violation (they exist;-) and only
+fulfilled in this residue (<span id="misp_compose_43" class="hm">pv</span> = 1). For the same residue a HG3 atom is
+not found but at least one other residues could accommodate it.<br>
+
+
+    <font face="Courier">
+
+
+pa = -10 (<span id="misp_compose_45" class="hm">cn</span>)&nbsp;</font><br>
+ so that:<br>
+
+
+    <font face="Courier">
+
+
+    <span id="misp_compose_46" class="hm">po</span> = 1 - 10 = -9.</font></li>
+
+</ol>
+
+
+
+
+<h3>Real Examples</h3>
+
+
+
+
+The code here will be tested on the following examples listed in order
+of complexity.
+<ol>
+
+  <li>1BRV soup has a couple extra residues N-terminal. Residue
+types are known.
+  </li>
+
+  <li>1B4C <span id="misp_compose_47" class="hm">homodimer</span>.</li>
+  <li>1PDT DNA/protein complex pretty complete.</li>
+
+  <li>2FV4 dimer with many gaps in restraints.
+  </li>
+
+  <li>1OLG <span id="misp_compose_48" class="hm">homotetramer</span>.
+  </li>
+
+  <li>1B4Y DNA with 5 chains in the restraints but only 1 chain
+in soup. Quite likely to be impossible to get right.
+  </li>
+
+  <li>2FFW protein with 2 Zn ions. Impossible to guess which Zn
+is which without
+looking at distance violations on anything but <span id="misp_compose_49" class="hm">intra</span> residue
+restraints.&nbsp;</li>
+
+  <li>1AUD DNA/protein complex with restraint chain ids of &quot;&quot; and
+    &quot;str1&quot; for the same chain.. Might be impossible.</li>
+
+</ol>
+<h3>Output</h3>
+The target is to generate STAR formatted output that can automatically
+be used to do the mapping. An example file with the combined
+adjustments needed by several PDB entries can be found in Wattos
+subdirectory: Wattos\data\test_data\restraint_map.str. The main loop
+for example entry 1PDT reads:<br>
+<pre>    loop_
+       _Auth_segment_code
+       _Auth_seq_ID
+       _Label_entity_assembly_ID
+       _Label_comp_index_ID
+
+       S1 1 1 1 
+       S2 1 2 9 
+    stop_
+</pre>
+Which maps restraints in S1 to the first and S2 to the second chain. The old residue 1
+in S2 will have a&nbsp; new residue number 9 in the second chain.
+
+</body>
+</html>

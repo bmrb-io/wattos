@@ -1,0 +1,217 @@
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : true
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1brv_DOCR_small
+Appending to summary file                                      : false
+Write nonsurplus constraints                                   : true
+Write surplus constraints                                      : true
+Remove surplus constraints                                     : true
+Found number of todo constraints:                       261
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   0
+No distance constraints selected in toString.
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            1
+DC: 63 lowTheo/uppTheo: 4.2/4.2
+Node 1 Low/target/Upp: 1.8 4.931 4.931
+Member 0 Atom:  HD2 Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HE1 Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+
+Found number of redundant constraints      :            23
+DC: 0 lowTheo/uppTheo: 1.4432658/3.1898966
+Node 1 Low/target/Upp: 1.8 4.978 4.978
+Member 0 Atom:   HA Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG11 Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG12 Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG13 Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG21 Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG22 Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG23 Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+DC: 1 lowTheo/uppTheo: 1.8432401/3.333542
+Node 1 Low/target/Upp: 1.8 6.455 6.455
+Member 0 Atom:  HB2 Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HB3 Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HD2 Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HD3 Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+DC: 2 lowTheo/uppTheo: 2.5431254/3.7417746
+Node 1 Low/target/Upp: 1.8 4.707 4.707
+Member 0 Atom:   HA Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HG2 Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HG3 Res:  15( PRO) Mol:   1 Model:   1 Entry:  1
+DC: 7 lowTheo/uppTheo: 1.6653664/3.5805378
+Node 1 Low/target/Upp: 1.8 3.78 3.78
+Member 0 Atom:   HA Res:  18( THR) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG21 Res:  18( THR) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG22 Res:  18( THR) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG23 Res:  18( THR) Mol:   1 Model:   1 Entry:  1
+DC: 13 lowTheo/uppTheo: 1.8708873/3.7417746
+Node 1 Low/target/Upp: 1.8 4.495 4.495
+Member 0 Atom:    H Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+DC: 14 lowTheo/uppTheo: 1.7817974/3.7417746
+Node 1 Low/target/Upp: 1.8 4.067 4.067
+Member 0 Atom:   HA Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HG2 Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HG3 Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+DC: 18 lowTheo/uppTheo: 1.7863717/4.42557
+Node 1 Low/target/Upp: 1.8 5.186 5.186
+Member 0 Atom:   HA Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+DC: 28 lowTheo/uppTheo: 1.3353055/4.0801
+Node 1 Low/target/Upp: 1.8 5.267 5.267
+Member 0 Atom:   HA Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 29 lowTheo/uppTheo: 1.4094892/3.1157126
+Node 1 Low/target/Upp: 1.8 5.388 5.388
+Member 0 Atom:  HB2 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 30 lowTheo/uppTheo: 1.4094892/3.1157126
+Node 1 Low/target/Upp: 1.8 5.447 5.447
+Member 0 Atom:  HB3 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 31 lowTheo/uppTheo: 1.3353055/4.982145
+Node 1 Low/target/Upp: 1.8 6.235 6.235
+Member 0 Atom:    H Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 42 lowTheo/uppTheo: 1.3353055/4.0801
+Node 1 Low/target/Upp: 1.8 5.31 5.31
+Member 0 Atom:   HA Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 43 lowTheo/uppTheo: 1.3353055/4.982145
+Node 1 Low/target/Upp: 1.8 5.936 5.936
+Member 0 Atom:    H Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 44 lowTheo/uppTheo: 1.4094892/3.1157126
+Node 1 Low/target/Upp: 1.8 5.214 5.214
+Member 0 Atom:  HB2 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 45 lowTheo/uppTheo: 1.4094892/3.1157126
+Node 1 Low/target/Upp: 1.8 5.327 5.327
+Member 0 Atom:  HB3 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 50 lowTheo/uppTheo: 1.7817974/3.7417746
+Node 1 Low/target/Upp: 1.8 4.034 4.034
+Member 0 Atom:    H Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 51 lowTheo/uppTheo: 1.3353055/4.0801
+Node 1 Low/target/Upp: 1.8 5.75 5.75
+Member 0 Atom:   HA Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 52 lowTheo/uppTheo: 1.255712/2.7757845
+Node 1 Low/target/Upp: 1.8 6.454 6.454
+Member 0 Atom:  HB2 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HB3 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 53 lowTheo/uppTheo: 1.3353055/4.982145
+Node 1 Low/target/Upp: 1.8 6.68 6.68
+Member 0 Atom:    H Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD11 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD12 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD13 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD21 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD22 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HD23 Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+DC: 56 lowTheo/uppTheo: 2.2/3.0
+Node 1 Low/target/Upp: 1.8 3.269 3.269
+Member 0 Atom:   HA Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+DC: 68 lowTheo/uppTheo: 1.6927075/3.8308647
+Node 1 Low/target/Upp: 1.8 4.155 4.155
+Member 0 Atom:   HA Res:  31( ILE) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG12 Res:  31( ILE) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom: HG13 Res:  31( ILE) Mol:   1 Model:   1 Entry:  1
+DC: 71 lowTheo/uppTheo: 1.8708873/3.7417746
+Node 1 Low/target/Upp: 1.8 4.323 4.323
+Member 0 Atom:    H Res:  32( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  32( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  32( GLU) Mol:   1 Model:   1 Entry:  1
+DC: 72 lowTheo/uppTheo: 1.7817974/3.7417746
+Node 1 Low/target/Upp: 1.8 4.315 4.315
+Member 0 Atom:   HA Res:  32( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HG2 Res:  32( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HG3 Res:  32( GLU) Mol:   1 Model:   1 Entry:  1
+
+Found number of non-redundant constraints:              237
+Found number of constraints to be surplus (E+C+D+I+F+R):24
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : true
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1brv_DOCR_small
+Appending to summary file                                      : false
+Write nonsurplus constraints                                   : true
+Write surplus constraints                                      : true
+Remove surplus constraints                                     : true
+
+
+
+SUMMARY:
+Found number of todo constraints:                       261
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   0
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            1
+Found number of redundant constraints      :            23
+Found number of non-redundant constraints:              237
+Found number of constraints to be surplus (E+C+D+I+F+R):24
+

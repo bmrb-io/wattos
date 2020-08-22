@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+    
+  <title>The database package</title>
+</head>
+
+
+
+  <body>
+A framework for handling millions of 'objects' efficiently in Java by using
+non-redundant Java Objects wherever possible. 
+The relations between the objects should be usable to
+do many things automatical. E.g. delete the children of a parent if that's
+the violent policy in place;-)
+<p>Columns may contain null values (like <code>Defs.NULL_INT</code>) at every row. Null values are defined values 
+within the range of the variable. E.g. the null value for an int is the maximum
+value of an int minus 1. When a column is a foreign key constraint (fkc) to another relation, the fkc has
+an attribute of whether or not the column can contain nulls. A fkc column that
+can't be nullable but does contains a null will lead to an inconsistency in the database
+that can be checked for with a method within the fkcSet class.
+  </p>
+<p>
+Support is present for:
+</p>
+<ul>
+
+  <li>Foreign key constraints (fkc) on primary indices although the enforcement
+    of these constraints is not necessarily done in order to maintain a good 
+    speed.
+  </li>
+  <li>fkc checking
+  </li>
+  <li>An organized set of tables with related info. E.g. the <code>Wattos.Soup.Constraint.DistConstr</code> is a collection of
+  five tables with information on restraint atoms, members, nodes, and violations.
+  </li>
+  <li>Objects as elements of the table in addition to simple types
+    like native items int, and floats.
+  </li>
+  <li>For strings there is the option to only store the actual string once
+    per column (others will be references).
+  </li>
+  <li>Automatic growing of a table 
+  </li>
+  <li>Cascading delete (delete children when parents are deleted).</li>
+  <li>Serilization&nbsp;</li>
+</ul>
+
+
+  
+<p>
+It doesn't yet support:
+</p>
+<ul>
+
+  <li>your request here...<br>
+  </li>
+</ul>
+
+
+  
+<p>
+Not planned to support:
+</p>
+<ul>
+
+  <li>Automatic shrinking of a table and updating other tables through fkcs&nbsp;</li>
+  <li>Concurrent updates/deletes
+  </li>
+  <li>Roll back, etc.
+  </li>
+</ul>
+
+  
+</body>
+</html>

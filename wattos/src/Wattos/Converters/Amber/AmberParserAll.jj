@@ -1,0 +1,562 @@
+options {
+    IGNORE_CASE         = true;
+    /** The parser can not be constructed multiple times. */
+    STATIC              = true;
+    ERROR_REPORTING     = true;
+    /**Explicitely needed because in the newer versions of the GUI version of 
+      javacc this option is not initialized properly.
+      */
+    KEEP_LINE_COLUMN        = true; 
+    // Followin option is set to default. Only local syntactic LOOKAHEAD is used.
+    DEBUG_TOKEN_MANAGER     = false;
+    DEBUG_PARSER            = false;
+    LOOKAHEAD               = 1; 
+}
+
+
+PARSER_BEGIN(AmberParserAll)
+
+package Wattos.Converters.Amber;
+
+import Wattos.Utils.*;
+import Wattos.Converters.Amber.Utils;
+import Wattos.Converters.Common.*;
+
+import java.util.jar.Attributes;
+import java.util.*;
+import java.io.*;
+
+/**
+ * @author  Jurgen Doreleijers
+ * @version 0.1
+ */
+
+public class AmberParserAll {
+    
+    // Type of data to parse
+    static int data_type = Varia.DATA_TYPE_DISTANCE;
+
+    //parser stack to store ASSI statement
+    static Vector stack;
+    //Store all comments
+    static Vector cmtStack;
+    //Store all error lines for second pass
+    static Vector errLineStack;
+    //Store all errors from second pass
+    static Vector errStack;
+
+    //Store most recently parsed Assi line and col 
+    //used by error recording later, for second pass
+    //scanning for errors
+    static int lastAssiLine;
+    static int lastAssiCol;
+
+    static int dataType;
+
+    /**Constructor
+     */
+    public AmberParserAll() {
+        init();
+    }
+
+    public void init() {
+        stack           = new Vector();
+        cmtStack        = new Vector();
+        errLineStack    = new Vector();
+        errStack        = new Vector();
+        dataType = Varia.DATA_TYPE_DISTANCE; // To be reset later.
+    }
+
+    /**Start parsing of Amber file 
+     */
+    public void parse(String AmberName, int type) {
+        String inputFile = AmberName;
+        data_type = type;
+        try{
+            /* Check first if file ends with an end of line, if not, 
+                append an extra "\n" before EOF as this would cause problems later on
+                */
+            RandomAccessFile inputRead = new RandomAccessFile(inputFile, "r");
+            long inputBytes = inputRead.length() - 1;
+            //forward file pointer to last byte char in file
+            inputRead.seek(inputBytes);
+            char lastChar = (char)(inputRead.read());
+            if (lastChar != '\n' && lastChar != '\r') {
+                inputRead.close();
+                // Open an appending writer
+                PrintWriter input = new PrintWriter(new BufferedWriter(new FileWriter(AmberName, true)));
+                input.print('\n');
+                input.close();
+            }
+            else 
+                inputRead.close();
+            
+            ReInit( new java.io.FileInputStream(AmberName) );
+            dataType = type;
+            
+            getInput();
+
+            //second pass processing errors
+            Utils.saveErrors(inputFile, errLineStack, errStack);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException opening " + AmberName );
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
+            System.out.println("ParseException parsing " + AmberName );
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("IOException in parse method" );
+            e.printStackTrace();
+        }
+    }        
+
+    void getInput() throws ParseException {
+        switch ( data_type ) {
+            case Varia.DATA_TYPE_DISTANCE:
+                getInputDistanceOrDihedral();
+                break;
+            case Varia.DATA_TYPE_DIHEDRAL:
+                getInputDistanceOrDihedral();
+                break;
+            case Varia.DATA_TYPE_DIPOLAR_COUPLING:
+                getInputDipolarCoupling();
+                break;
+            case Varia.DATA_TYPE_CHEMICAL_SHIFT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_CHEMICAL_SHIFT");
+                break;
+            case Varia.DATA_TYPE_COUPLING_CONSTANT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_COUPLING_CONSTANT");
+                break;
+            case Varia.DATA_TYPE_PLANARITY:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_PLANARITY");
+                break;
+        }    
+    }
+
+    
+    /**return Vector storing all data
+     * every element is a LogicalNode object
+     */
+    public Vector popResult() {
+        return stack;
+    }
+
+
+    /**return Vector storing all comments
+     * every element is a Comment object
+     */
+    public Vector popComment() {
+        return cmtStack;
+    }
+
+
+    /**return Vector storing all errors
+     * every element is an ErrorLine object
+     */
+    public Vector popError() {
+        return errStack;
+    }
+}
+PARSER_END(AmberParserAll)
+
+
+TOKEN_MGR_DECLS :
+{
+    // For rememebering a reference to the starting token that
+    // began a curly-brace comment:
+    //static Token starting_curly_token = null;
+    
+    // Keep track of how many will be open. Bogus initialization.
+    //static int curlies_open = 0;
+}
+
+SKIP:
+{
+    " " | "\t" | "\n" | "\r"
+}
+
+// A section of tokens that are defined locally but will not be visible to other code.
+TOKEN:
+{
+            < #EOL:                 ("\r\n" | "\n" | "\r")>
+    |       < #NOT_EOL:             ~["\n", "\r"]>
+    |       < #DIGIT:               ["0"-"9"]>
+    |       < #LETTER:              ["a"-"z"]>
+    |       < #ALPHANUMERIC:        <DIGIT> | <LETTER> >
+    |       < #WHITESPACE:          [" ", "\t", "\r", "\n", "\f"]>
+    |       < #NOT_WHITESPACE:     ~[" ", "\t", "\r", "\n", "\f"]>
+    |       < #OPTIONALWHITESPACE:  (<WHITESPACE>)*>
+    |       < #POUND:               "#">
+    |       < #DQUOTE:              "\"">
+    |       < #NOT_DQUOTE:          ~["\""]>
+    |       < #SQUOTE:              "\'">
+    |       < #NOT_SQUOTE:          ~["\'"]>
+    |       < #ONE_CHAR_WORD:       ["(", ")", ":", "@", "="]>
+    |       < #NOT_ONE_CHAR_WORD:  ~["(", ")", ":", "@", "="]>                                
+}
+
+/** Regular tokes */
+TOKEN:
+{
+        <RST:             "&rst" >
+    |   <END:             "&end" | ["/"] >
+// Other
+    |   <EQUAL:             "=">
+    |   <COMMA:             ",">
+    |   <NUMBER:            (["+","-"])? (<DIGIT>)+ (["."])? (<DIGIT>)* ( ["D","E","F"]  ["+", "-"] (<DIGIT>)+ )? |
+                            (["+","-"])?            (["."])? (<DIGIT>)+ ( ["D","E","F"]  ["+", "-"] (<DIGIT>)+ )? >
+// Simple attributes
+    |   <IXPK:            "ixpk" >
+    |   <NXPK:            "nxpk" >
+    |   <IALTD:           "ialtd" >
+    |   <R1:              "r1" >
+    |   <R2:              "r2" >
+    |   <R3:              "r3" >
+    |   <R4:              "r4" >
+    |   <RK2:             "rk2" >
+    |   <RK3:             "rk3" >
+    |   <IR6:             "ir6" >
+    |   <IGR1:              "igr1" >
+    |   <IGR2:              "igr2" >
+    |   <IAT:               "iat" >
+    |   <IRESID:            "iresid" >
+    |   <IDXX:               "id("   (<DIGIT>)+ ")" >
+    |   <JD1:               "jd("   (<DIGIT>)+ ")" >
+    |   <DOBS1:             "dobs(" (<DIGIT>)+ ")" >
+    |   <DOBSL1:            "dobsl("(<DIGIT>)+ ")" >
+    |   <DOBSU1:            "dobsu("(<DIGIT>)+ ")" >
+    |   <DIJ1:              "dij("  (<DIGIT>)+ ")" >
+// Complex attributes
+    |   <ATNAM:             "atnam">
+    |   <LPAREN:            "(">
+    |   <RPAREN:            ")">
+// lowest specificity
+    |   <WORD:              (<ALPHANUMERIC> | ["#", "_", "%", "*", "+", ":", "@", "<", ">", "^", "~", "-", "/", "'", "`", "\\"])+ |
+                                    <DQUOTE> (<NOT_DQUOTE>)* <DQUOTE> |
+//was                                    <SQUOTE> (<NOT_EOL>){3,5} <SQUOTE> > // special case do deal with single quoted values
+// decreased to min of 1 in order to deal with smaller quoted strings.
+                                    <SQUOTE> (<NOT_EOL>){1,5} <SQUOTE> > // special case do deal with single quoted values
+}
+
+
+/** Special tokens that will be prepended to returned regular tokens and will
+    then be processed into comments. */
+SPECIAL_TOKEN:
+{ 
+    <POUNDCOMMENT:           <POUND>                      (<NOT_EOL>)* <EOL> >
+}
+
+
+
+TOKEN:
+{
+     /**Illegal chars: any control char, characters above 127 (decimal), 
+        comma, semicolon, question mark, ampersand, square brackets, or
+        vertical bar.
+        To prevent the parser from resynchronizing right away this token is defined
+        for words in stead of just characters.
+        This token should occur last and therefore have the lowest priority. 
+        It's sole purpose is to satisfy the token manager and make sure that it doesn't crash.
+        In the characters specified in octal notation all control chars except
+        white space characters are included.
+        What is attempted here is to include any words that might occur in the
+        text (anything) that would not result in a matched token by the token
+        manager.
+
+2003-04-24 Deleted the double quote character from the list of illegal chars to
+            prevent a string like "CYS") be matched as a illegal word as occured
+            in entry 1nj3 for the general distance constraints block.
+        */
+/** original set:
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",
+                        ",", ";", "?", "&", "[", "]", "|" ]>
+*/
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",     // Invalid control and foreign chars
+                        "[", "]", "<", ">",                                         // Brackets
+                        ";", "?", "&", "|", "/", ".", "_", "*", "`", ":", // Unused chars otherwise.
+                        "@", "$", "%", "^", "~"
+                        ]>
+    | <ILLEGAL_WORD:    (<ILLEGAL_CHAR>)+ (<NOT_WHITESPACE>)* >
+}
+
+
+
+
+void getInputDistanceOrDihedral() :
+{
+}
+{
+    try {
+            AssiList() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+void getInputDipolarCoupling() :
+{
+}
+{
+    try {
+            AssiListRDC() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void AssiList() throws ParserDoneException  :
+{
+}
+{    AssiState() [ AssiList() ]
+    {}
+}
+
+void AssiListRDC() throws ParserDoneException  :
+{
+}
+{    AssiStateRDC() [ AssiListRDC() ]
+    {}
+}
+
+
+void AssiStateRDC() throws ParserDoneException : 
+{
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+    HashMap attributeSet;
+    HashMap attrIdxx;
+}
+{
+    try {   
+            attrIdxx = AttrIdxx()
+            attributeSet = AttributeSet()  // skipto IDXX is sufficient to resync correctly.
+            { 
+                attributeSet.putAll( attrIdxx ); 
+                //System.out.println("Found attributes for AssiStateRDC:" + Strings.toString(attributeSet));
+                Utils.saveAssiStateDipolarCoupling( stack, attributeSet);
+            }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(IDXX)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(IDXX);  
+    }
+}
+
+
+
+void AssiState() throws ParserDoneException : 
+{
+    Token t,s;
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+    HashMap attributeSet;
+}
+{
+    try {   t       = <RST> 
+            attributeSet = AttributeSet() 
+            s       = <END> 
+            {
+                Utils.saveComment(t,cmtStack);
+                Utils.saveComment(s,cmtStack);
+                //System.out.println("Found attributes for AssiState:" + Strings.toString(attributeSet));
+                switch ( dataType ) {
+                    case Varia.DATA_TYPE_DISTANCE: {
+                        Utils.saveAssiStateDistance( stack, attributeSet);
+                        break;
+                    }
+                    case Varia.DATA_TYPE_DIHEDRAL: {
+                        Utils.saveAssiStateDihedral( stack, attributeSet);
+                        break;
+                    }
+                    default: {
+                        General.showError("Wrong data type set in AmberParserAll");
+                    }
+                }
+            }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(RST)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(RST);  
+    }
+}
+
+HashMap AttributeSet() :
+{
+    HashMap single, set = null;
+}
+{
+    single = Attr() 
+    [ set = AttributeSet() ]
+    {   
+        if ( set != null ) {
+            single.putAll( set );
+        }
+        return single;
+    }
+}
+
+HashMap Attr():
+{
+    Token t1,t2;
+    String attr_name, attr_value;
+    ArrayList attr_value_list = new ArrayList();
+    HashMap attr = new HashMap();
+}
+{
+    attr_name = AttributeName()
+    t1 = <EQUAL>     
+    attr_value_list = AttributeValueList()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        //General.showDebug("attr_name is: " + attr_name);
+        //General.showDebug("attr_values are: " + Strings.toString(attr_value_list));
+        attr.put(attr_name, attr_value_list);
+        return attr;
+    }
+}
+
+HashMap AttrIdxx():
+{
+    Token idxx,t1,t2;
+    String attr_value;
+    ArrayList attr_value_list = new ArrayList();
+    HashMap attr = new HashMap();
+}
+{
+    idxx = <IDXX>
+    t1 = <EQUAL>     
+    attr_value_list = AttributeValueList()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(idxx, cmtStack);
+        attr.put("idxx", attr_value_list); // hardcoding the attribute key.
+        return attr;
+    }
+}
+
+
+ArrayList AttributeValueList() :
+{
+    Token t1 = null;
+    String attr_value;
+    ArrayList attr_value_list = new ArrayList();
+}
+{
+    attr_value      = AttributeValue()  
+  [ t1 = <COMMA> ]
+  [ attr_value_list = AttributeValueList() ]
+    {   
+        Utils.saveComment(t1, cmtStack);
+        attr_value_list.add(0,attr_value);
+        return attr_value_list;
+    }
+}
+
+
+String AttributeName() :
+{
+    Token t;
+    String s;
+}
+{
+    // simple attribute
+    t = <IXPK>    { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <NXPK>    { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <IALTD>   { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <R1>      { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <R2>      { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <R3>      { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <R4>      { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <RK2>     { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <RK3>     { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <IR6>     { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <IGR1>    { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <IGR2>    { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <IAT>     { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <IRESID>  { Utils.saveComment(t, cmtStack); return t.image; } | 
+    // Hardcoding the changes.
+    //t = <IDXX>     { Utils.saveComment(t, cmtStack); return t.image; } | 
+    t = <JD1>     { Utils.saveComment(t, cmtStack); return "jdxx"; } | 
+    t = <DOBS1>   { Utils.saveComment(t, cmtStack); return "dobsxx"; } | 
+    t = <DOBSL1>  { Utils.saveComment(t, cmtStack); return "dobslxx"; } | 
+    t = <DOBSU1>  { Utils.saveComment(t, cmtStack); return "dobsuxx"; } | 
+    t = <DIJ1>    { Utils.saveComment(t, cmtStack); return "dijxx"; } | 
+    // complex attribute
+    s = AtNam()    { return s; } 
+}
+
+String AttributeValue() :
+{
+    String v;
+}
+{
+    v = Number() { return v; }   |
+    v = Word()   { return v; }
+}
+
+String Number() :
+{
+    Token t;
+}
+{
+    t = <NUMBER>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String AtNam() :
+{
+    Token t,t1,t2;
+    String d;
+}
+{
+    t = <ATNAM>
+    t1= <LPAREN>
+    d = Number()
+    t2= <RPAREN>
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t,  cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        
+        return t.image + d; // should in fact be a single digit; easily digested later.
+    }
+}  
+
+
+String Word() :
+{
+    Token t;
+}
+{
+    t = <WORD>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+
+JAVACODE
+
+void error_skipto(int kind) throws ParserDoneException {
+    Utils.error_skipto(kind, errLineStack, cmtStack, lastAssiLine, lastAssiCol);
+}  

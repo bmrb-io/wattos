@@ -1,0 +1,13 @@
+# Wattos properties 
+#In the file, each property definition is of the form property_name = value. 
+#The pound symbol (#) at the start of a line in the file indicates a comment line. 
+#Use the forward slash (/) as a directory delimiter for all the file path names.
+#If the backward slash (\) is needed (like on Windows), a replacement will be done for you automatically. 
+
+# Give boolean values as true or false 
+ 
+                                      tmp_dir=TMPDIR
+                                   version_id=Tue May 24 11:35:18 CDT 2005
+                                    verbosity=9
+                                  stopOnError=true
+                                  

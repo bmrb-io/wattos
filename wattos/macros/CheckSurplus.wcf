@@ -1,0 +1,58 @@
+InitAll
+
+SetProp
+interactiveSession
+false
+
+SetProp
+verbosity
+4
+
+SetProp
+writeSessionOnExit
+false
+
+ListProp
+
+#Input file
+#Read molecular system and coordinates (y suggested)
+#Read restraints (y suggested)
+#Match restraints to soup by regular STAR tags. (y suggested)
+#Match restraints to soup by author atom and residue names etc. (n suggested; only previous or this can and must be set)
+#Remove unlinked restraints (y suggested)
+ReadEntryNMRSTAR
+1brv_DOCR_small.str.gz
+y
+y
+y
+n
+y
+
+
+# Redundancy tolerance (5% suggested)
+# Should impossible target distance be reset to null (y suggested)
+# Should only fixed distances be considered surplus (n suggested)
+# Averaging method id. Center,Sum,R6 are 0,1, and 2 respectively and -1 to let it be determined per list but that's not completely implemented yet: (1 suggested)
+# Number of monomers but only relevant when Sum averaging is selected: (1 suggested)"));
+# Enter file name base (with path) for output of surplus check summary and constraint lists.
+# Should non-redundant constraints be written (y suggested)
+# Should redundant constraints be written (n suggested)
+# Should redundant constraints be removed (y suggested)
+CheckSurplus
+5.0
+y
+n
+1
+1
+tmp_dir/1hue_DOCR_surplus
+y
+y
+y
+
+
+Quit
+
+
+# Junk follows:
+1hue_DOCR.str.gz
+

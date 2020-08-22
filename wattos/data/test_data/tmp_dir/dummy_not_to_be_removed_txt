@@ -1,0 +1,2 @@
+File to force cvs checkout to include the temporary directory without content
+(except this dummy)

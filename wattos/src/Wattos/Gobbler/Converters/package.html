@@ -1,0 +1,56 @@
+<HTML>
+  <HEAD>
+    <TITLE></TITLE>
+  </HEAD>
+  <BODY>
+    
+<P>
+This partition contains definitions for e.g. our fasta file format, blast files, databases used, etc.
+<UL>
+<LI><B>BMRBHomologyUpdate</B>Updates a directory with star files with the homology matches found by a series of blast runs.
+<LI><B>BMRBToFasta</B>       Extracts the sequences of proteins or all polymers from a directory with star files and writes
+FASTA formated files with the extracted info.
+<LI><B>BlastBin2Csv</B>      Converts binary blast match info from all bin files in a dir to all csv files in a dir.
+<LI><B>BlastTxt2Bin</B>      Converts binary blast match info from all bin files in a dir to all csv files in a dir.
+<LI><B>BlastParser</B>       Parses the one raw blast output file to a binary representation, used by BlastTxt2Bin.
+<LI><B>FastaPdbConverter</B> Converts Fasta files coming from PDB to having ids conforming to this projects specifications
+and also filters out certain sequences.
+<LI><B>FastaToFasta_1</B>    Filters out certain sequences; meant for sequence coming from Sesame db.
+<LI><B>Xml2Fasta_1</B>       Converts the sequence info from the structural genomics dbs to our fasta format.
+</UL>
+
+<P>
+The following contract has been established for the Blast runs with the Condor people; Zachary Miller and 
+Miron Levny.
+
+<P>
+<H4>Contract</H4>
+<UL>
+<LI>Trigger A will be written by BMRB software around 8 pm indicating input is ready for processing
+<LI>Trigger A will be removed when download from BMRB completes
+<LI>Trigger B will be written by CONDOR software in 8 hours; giving 90-95%
+  chance providing dependencies are met; indicating packed output is ready for
+  processing (this is around 2 am)
+<LI>Trigger B will be removed when output is unpacked at BMRB around 2:30 am.
+<LI>Cycle usually completes in 8 hours (condor) plus 8 hours (bmrb) is 16 hours (noon the next day).
+</UL>
+
+<H4>Notes:</H4>
+<UL>
+<LI>If bmrb fails to have trigger A written then condor never starts.
+<LI>If bmrb fails to remove trigger B then condor never starts a new run let alone overwrite the previous output.
+<LI>If condor fails to have trigger A removed before the next period then bmrb stops.
+<LI>If condor fails to have trigger B written within 12 hours after trigger A has been written then it doesn't write trigger B nor does it do the update for that batch anymore. The run is considered failed and will only be attempted the next period. The cut-off time is still needed in order to make sure that runs do not overrun each other. When switching to weekly periods we can increase the time condor can take still further. 
+<LI>Dailies are not used for now.
+</UL>
+
+<H4>Technical details:</H4>
+<UL>
+<LI>Triggers will be looked for every 10 minutes.
+<LI>Trigger A will be a file with path name: blastio/input/triggers/weekly
+<LI>Trigger B will be a file with path name: blastio/output/triggers/weekly
+<LI>Both trigger files will be owned by a member of group web and will be group r/w.
+</UL>
+
+  </BODY>
+</HTML>

@@ -1,0 +1,3 @@
+1brv_DOCR_small.str.gz
+1hue_small.str
+

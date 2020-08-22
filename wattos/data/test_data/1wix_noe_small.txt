@@ -1,0 +1,8 @@
+ 83 SER  HB2    84 TYR  HN      4.59            #peak 10000 #SUP  0.98  #QF  0.98
+ 50 TRP  HE1    84 TYR  HN      4.52            #peak     1 #SUP  0.96  #QF  0.96
+ 83 SER  HB3    84 TYR  HN      4.64            #peak     4 #SUP  0.99  #QF  0.99
+ 81 ILE  HA     84 TYR  HN      4.29            #peak     5 #SUP  0.99  #QF  0.99
+ 84 TYR  HN     84 TYR  HB2     3.66            #peak     6 #SUP  0.98  #QF  0.98
+ 8x4 TYR  HN     84 TYR  HB3     3.62            #peak     8 #SUP  1.00  #QF  1.00
+ 37 VAL  QG1    60 LYS  HN      4.54            #peak    11 #SUP  0.83  #QF  0.83
+

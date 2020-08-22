@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JFD DON'T DELETE edited by JFD -->
+<!-- added memory setting for Java and Junit testing -->
+
+
+<project name="wattos" default="jar" basedir=".">
+    <description>Builds, tests, and runs the project Wattos.</description>
+    <echo>Starting Ant with updated build file</echo>
+    <property file="wattos_madison.properties" />
+
+    <!-- Added for for functionality. Requires a ant-contrib.jar in classpath. -->
+    <!-- Fedora 9: -->
+    <taskdef classpath="/usr/share/java/ant-contrib.jar" resource="net/sf/antcontrib/antlib.xml" />
+    <!-- systems where ant-contrib installs properly: -->
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+    <!-- Set the below to development 0 or production 1-->
+    <property name="isProduction" value="1" />
+
+
+    <target name="init" description="init">
+        <tstamp>
+            <format property="wattos_version" pattern="yyyyMMdd-HHmm" />
+        </tstamp>
+        <echo message="Initiating Wattos version: ${wattos_version}" />
+        <!-- <antcall target="set_version" /> -->
+        <echo message="Now in environment for production." />
+        <property name="servlet.web.machine" value="${servlet.web.machine.prod}" />
+        <property name="servlet.web.user" value="${servlet.web.user.prod}" />
+        <property name="servlet.web.dir" value="${servlet.web.dir.prod}" />
+        <property name="servlet.web.port" value="${servlet.web.port.prod}" />
+        <echo message="servlet.web.machine    : ${servlet.web.machine}" />
+        <echo message="servlet.web.user       : ${servlet.web.user}" />
+        <echo message="servlet.web.dir        : ${servlet.web.dir}" />
+        <echo message="servlet.web.port       : ${servlet.web.port}" />
+
+
+    </target>
+
+    <!-- Is done automatically by ant build but can be used externally.
+    NB the debug settings.
+    -->
+    <target name="compile" description="compile" depends="init">
+        <echo>This compile is incomplete because the resulting jar doesn't run fine on tang. USE AT YOUR OWN RISK
+        For now we depended on automatic features in eclipse.</echo>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="on" debuglevel="lines,vars,source">
+            <classpath>
+                <path path="${javac.classpath}" />
+            </classpath>
+        </javac>
+        <copy todir="${build.dir}">
+            <fileset dir="${src.dir}" includes="**/*.csv" />
+            <fileset dir="${src.dir}" includes="**/*.str" />
+            <fileset dir="${src.dir}" includes="**/*.H" />
+        </copy>
+    </target>
+
+    <target name="clean" description="clean class files" depends="init">
+        <delete dir="${build.dir}" />
+    </target>
+
+    <!--
+    ====================
+    JAR BUILDING SECTION
+    ====================
+    Use:
+        for resigning all jars. They need to be the same for WebApps such as Sjors.
+    -->
+    <target name="jar" depends="compile" description="Build JAR.">
+        <jar destfile="${jar.name}" basedir="${build.dir}" />
+    </target>
+
+
+    <target name="report_errors" if="error_list">
+        <echo message="${error_list}" />
+    </target>
+    <!--
+    <target name="set_version" >
+        <replaceregexp file="${src.dir}/Wattos/CloneWars/UserInterface.java"
+            match="String WATTOS_VERSION=(.*)" replace='String WATTOS_VERSION="${wattos_version}";' byline="true" />
+    </target>
+    -->
+
+    <!-- Installation of production site jars including Wattos -->
+    <target name="install-jars" depends="jar">
+        <echo message="Installing Wattos jar(s) to production site: ${install.dir}" />
+        <copy todir="${install.dir}" verbose="true">
+        <!--	<fileset dir="${lib.local.dir}" includes="**.jar" /> -->
+            <fileset dir="${lib.local.dir}" includes="Wattos.jar" />
+        </copy>
+    </target>
+    <!-- Installation of production site scripts -->
+    <target name="install-scripts">
+        <copy todir="${install.dir}/scripts" verbose="true">
+            <fileset dir="scripts" includes="*" />
+        </copy>
+    </target>
+    <!-- Installation of production site python code -->
+    <target name="install-python">
+        <copy todir="${install.dir}/python" verbose="true">
+            <fileset dir="python" includes="**" />
+        </copy>
+    </target>
+
+    <!--
+    ======================
+    SERVLET SECTION
+    ======================
+    -->
+
+    <target name="war" depends="compile">
+        <copy todir="${wattos.production.local.dir}/WEB-INF/classes">
+            <fileset dir="build" />
+        </copy>
+        <copy todir="${wattos.production.local.dir}/WEB-INF/lib" verbose="true">
+            <fileset dir="lib">
+                <include name="CSVutils.jar"/>
+                <include name="README.txt"/>
+                <include name="JFlex.jar"/>
+                <include name="colt.jar"/>
+                <include name="Jmol.jar"/>
+                <include name="jakarta-regexp.jar"/>
+                <include name="mysql-connector-java-5.0.3-bin.jar"/>
+                <include name="printf_hb15.jar"/>
+                <include name="starlibj_with_source.jar"/>
+            </fileset>
+        </copy>
+        <zip destfile="${wattos.war.file}">
+            <fileset dir="${wattos.production.local.dir}" />
+        </zip>
+    </target>
+    <target name="servlet-wattos-new-install" depends="war">
+<!-- "init"> -->
+<!--
+        <copy todir="${wattos.production.local.dir}/WEB-INF/classes">
+            <fileset dir="build" />
+        </copy>
+-->
+        <!-- The Wattos code changes every now and then so it needs to be included live. Every now and then.
+        ISN'T THIS EXACTLY THE SAME AS THE ABOVE?
+        <copy todir="${wattos.production.local.dir}/WEB-INF/classes">
+            <fileset dir="${WS}/wattos/build"/>
+        </copy>
+        -->
+<!--
+        <zip destfile="${wattos.war.file}">
+            <fileset dir="${wattos.production.local.dir}" />
+        </zip>
+-->
+        <echo message="toDir: ${servlet.web.user}@${servlet.web.machine}:${servlet.web.dir}"/>
+        <echo message="with port = ${servlet.web.port} and knownhosts=${servlet.web.knownhosts} passphrase=${servlet.web.passphrase} keyfile=${servlet.web.keyfile} "/>
+
+        <copy todir="${servlet.web.dir}" verbose="true" >
+            <fileset file="${wattos.war.file}" />
+        </copy>
+    </target>
+
+    <target name="servlet-resources-cp" depends="init">
+        <echo message="Installing giffies and html to servlet engine: ${servlet.web.usermachine}:${servlet.web.dir}/${servlet.resource.remote.dir}" />
+        <scp todir="${servlet.web.usermachine}:${servlet.web.dir}/${servlet.resource.remote.dir}" port="${servlet.web.port}" keyfile="${servlet.web.keyfile}" knownhosts="${servlet.web.knownhosts}" passphrase="${servlet.web.passphrase}" verbose="true">
+            <fileset dir="${servlet.resource.local.dir}" excludes=".svn" />
+        </scp>
+    </target>
+
+</project>

@@ -1,0 +1,439 @@
+options {
+    IGNORE_CASE         = true;
+    /** The parser can not be constructed multiple times. */
+    STATIC              = true;
+    ERROR_REPORTING     = true;
+    /**Explicitely needed because in the newer versions of the GUI version of 
+      javacc this option is not initialized properly.
+      */
+    KEEP_LINE_COLUMN        = true; 
+    // Following option is set to default. Only local syntactic LOOKAHEAD is used.
+    DEBUG_TOKEN_MANAGER     = false;
+    // Normally set to false of course
+    DEBUG_PARSER            = false;
+    LOOKAHEAD               = 1; 
+}
+
+
+PARSER_BEGIN(EmbossParserAll)
+
+package Wattos.Converters.Emboss;
+
+import Wattos.Utils.*;
+import Wattos.Converters.Emboss.Utils;
+import Wattos.Converters.Common.*;
+
+import java.util.jar.Attributes;
+import java.util.*;
+import java.io.*;
+
+/**
+ * @author  Jurgen Doreleijers
+ * @version 0.1
+ */
+
+public class EmbossParserAll {
+    
+    // Type of data to parse
+    static int data_type = Varia.DATA_TYPE_DISTANCE;
+
+    //parser stack to store ASSI statement
+    static Vector stack;
+    //Store all comments
+    static Vector cmtStack;
+    //Store all error lines for second pass
+    static Vector errLineStack;
+    //Store all errors from second pass
+    static Vector errStack;
+
+    //Store most recently parsed Assi line and col 
+    //used by error recording later, for second pass
+    //scanning for errors
+    static int lastAssiLine;
+    static int lastAssiCol;
+
+    /**Constructor
+     */
+    public EmbossParserAll() {
+        init();
+    }
+
+    public void init() {
+        stack           = new Vector();
+        cmtStack        = new Vector();
+        errLineStack    = new Vector();
+        errStack        = new Vector();
+    }
+
+    /**Start parsing of Emboss file 
+     */
+    public void parse(String EmbossName, int type) {
+        String inputFile = EmbossName;
+        data_type = type;
+        try{
+            /* Check first if file ends with an end of line, if not, 
+                append an extra "\n" before EOF as this would cause problems later on
+                */
+            RandomAccessFile inputRead = new RandomAccessFile(inputFile, "r");
+            long inputBytes = inputRead.length() - 1;
+            //forward file pointer to last byte char in file
+            inputRead.seek(inputBytes);
+            char lastChar = (char)(inputRead.read());
+            if (lastChar != '\n' && lastChar != '\r') {
+                inputRead.close();
+                // Open an appending writer
+                PrintWriter input = new PrintWriter(new BufferedWriter(new FileWriter(EmbossName, true)));
+                input.print('\n');
+                input.close();
+            }
+            else 
+                inputRead.close();
+            
+            ReInit( new java.io.FileInputStream(EmbossName) );
+            getInput();
+
+            //second pass processing errors
+            Utils.saveErrors(inputFile, errLineStack, errStack);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException opening " + EmbossName );
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
+            System.out.println("ParseException parsing " + EmbossName );
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("IOException in parse method" );
+            e.printStackTrace();
+        }
+    }        
+
+    
+    void getInput() throws ParseException {
+        switch ( data_type ) {
+            case Varia.DATA_TYPE_DISTANCE:
+                getInputDistance();
+                break;
+            case Varia.DATA_TYPE_DIHEDRAL:
+                getInputDihedral();
+                break;
+        }    
+    }
+
+    /**return Vector storing all data
+     * every element is a LogicalNode object
+     */
+    public Vector popResult() {
+        return stack;
+    }
+
+
+    /**return Vector storing all comments
+     * every element is a Comment object
+     */
+    public Vector popComment() {
+        return cmtStack;
+    }
+
+
+    /**return Vector storing all errors
+     * every element is an ErrorLine object
+     */
+    public Vector popError() {
+        return errStack;
+    }
+}
+PARSER_END(EmbossParserAll)
+
+
+TOKEN_MGR_DECLS :
+{
+    // For rememebering a reference to the starting token that
+    // began a curly-brace comment:
+    static Token starting_curly_token = null;
+    
+    // Keep track of how many will be open. Bogus initialization.
+    static int curlies_open = 0;
+}
+
+SKIP:
+{
+    " " | "\t" | "\n" | "\r"
+}
+
+// A section of tokens that are defined locally but will not be visible to other code.
+TOKEN:
+{
+            < #NOT_EOL:             ~["\n", "\r"]>
+    |       < #DIGIT:               ["0"-"9"]>
+    |       < #LETTER:              ["a"-"z"]>
+    |       < #ALPHANUMERIC:        <DIGIT> | <LETTER> >
+    |       < #WHITESPACE:          [" ", "\t", "\r", "\n", "\f"]>
+    |       < #NOT_WHITESPACE:     ~[" ", "\t", "\r", "\n", "\f"]>
+    |       < #OPTIONALWHITESPACE:  (<WHITESPACE>)*>
+    |       < #EOL:                 ("\r\n" | "\n" | "\r")>
+}
+
+/** Regular tokes */
+TOKEN:
+{
+       <NUMBER:            (["+","-"])? (<DIGIT>)+ (["."])? (<DIGIT>)* ( ["D","E","F"]  ["+", "-"] (<DIGIT>)+ )? |
+                            (["+","-"])?            (["."])? (<DIGIT>)+ ( ["D","E","F"]  ["+", "-"] (<DIGIT>)+ )? >
+    |   <WORD:                (<ALPHANUMERIC> | ["#", "_", "%", "*", "+", "-", ":", "@", "<", ">", "^", "~", "-", "/", "'", "`", "\\"])+ >                                    
+}
+
+
+/** Special tokens that will be prepended to returned regular tokens and will
+    then be processed into comments. */
+SPECIAL_TOKEN:
+{ 
+    <SEMICOLONCOMMENT:           (";"|"!")                      (<NOT_EOL>)* <EOL> >
+}
+
+TOKEN:
+{
+     /**Illegal chars: any control char, characters above 127 (decimal), 
+        comma, semicolon, question mark, ampersand, square brackets, or
+        vertical bar.
+        To prevent the parser from resynchronizing right away this token is defined
+        for words in stead of just characters.
+        This token should occur last and therefore have the lowest priority. 
+        It's sole purpose is to satisfy the token manager and make sure that it doesn't crash.
+        In the characters specified in octal notation all control chars except
+        white space characters are included.
+        What is attempted here is to include any words that might occur in the
+        text (anything) that would not result in a matched token by the token
+        manager.
+
+2003-04-24 Deleted the double quote character from the list of illegal chars to
+            prevent a string like "CYS") be matched as a illegal word as occured
+            in entry 1nj3 for the general distance constraints block.
+        */
+/** original set:
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",
+                        ",", ";", "?", "&", "[", "]", "|" ]>
+*/
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",     // Invalid control and foreign chars
+                        "[", "]", "<", ">",                                         // Brackets
+                        ",", ";", "?", "&", "|", "/", ".", "_", "*", "'", "`", ":", // Unused chars otherwise.
+                        "@", "$", "%", "^", "~"
+                        ]>
+    | <ILLEGAL_WORD:    (<ILLEGAL_CHAR>)+ (<NOT_WHITESPACE>)* >
+}
+
+
+void getInputDihedral() :
+{
+}
+{
+    try {
+            AssiListDihedral() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void getInputDistance() :
+{
+}
+{
+    try {
+            AssiListDistance() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void AssiListDistance() throws ParserDoneException  :
+{
+}
+{    AssiStateDistance() [ AssiListDistance() ]
+    {}
+}
+
+
+void AssiListDihedral() throws ParserDoneException  :
+{
+}
+{    AssiStateDihedral() [ AssiListDihedral() ]
+    {}
+}
+
+
+void AssiStateDistance() throws ParserDoneException : 
+{
+    Token t, bogus;
+    String d1, d2, dminus, dplus;
+    ArrayList select1, select2;
+    ArrayList select_list = null;
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+    bogus = null;
+}
+{
+    try {   
+            select1 = Selection() 
+            select2 = Selection() 
+           
+            d1      = Number() 
+            d2      = Number() 
+
+            dminus  = Number()
+            dplus   = Number()             
+
+            [bogus   = <WORD>]
+           
+            {
+                Utils.saveComment(bogus,cmtStack);
+                Utils.saveAssiStateDistance( stack, select1, select2, dminus, dplus, select_list );
+            }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(NUMBER)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+void AssiStateDihedral() throws ParserDoneException : 
+{
+    Token bogus;
+    String c1, c2;
+    String angle_low, angle_high;
+    ArrayList select1, select2, select3, select4;
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+}
+{
+// Match the following:
+//1    48 C    49 N     49 CA    49 C    1.0  1.0 -140.0 -100.0 NO ;VAL PHI
+    try {   
+            select1 = Selection() 
+            select2 = SelectionSimple() // just residue number and atom name 
+            select3 = SelectionSimple() 
+            select4 = SelectionSimple() 
+            c1      = Number() 
+            c2      = Number() 
+            angle_low    = Number() 
+            angle_high   = Number()
+            bogus   = <WORD> { 
+                Utils.saveComment(bogus,cmtStack);
+                // duplicate segi from 1 assumed.
+                AtomNode atomnode = (AtomNode) select1.get(0);
+                String segi = atomnode.info.getValue( "segi" );
+                atomnode = (AtomNode) select2.get(0); atomnode.info.putValue("segi", segi);
+                atomnode = (AtomNode) select3.get(0); atomnode.info.putValue("segi", segi);
+                atomnode = (AtomNode) select4.get(0); atomnode.info.putValue("segi", segi);
+                Utils.saveAssiStateDihedral( stack, select1, select2, select3, select4, 
+                    angle_low, angle_high  );
+            }
+        | error_skipto(NUMBER)
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+
+
+/** "Selection" using Emboss syntax */
+ArrayList Selection() :
+{
+    String t0, t1, t2, t3;
+    ArrayList sel;
+    t3 = null;
+}
+{
+    t0 = Number() 
+    t1 = Number()
+    t2 = Word()
+    [t3 = Word()]
+    {   
+        sel = new ArrayList();
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("segi", t0);
+        atomnode.info.putValue("resi", t1);
+// The confusion here is because of how to let javacc
+// do non-greedy matching.
+        if ( t3 != null ) {
+            atomnode.info.putValue("resn", t2);
+            atomnode.info.putValue("name", t3);
+        } else {
+            atomnode.info.putValue("resn", t3);
+            atomnode.info.putValue("name", t2);
+        }
+
+        sel.add( atomnode );
+        //System.out.println("Found arraylist for Selection:" + AtomNode.toString( sel ) );
+        return sel;
+    }
+}
+
+/** "Selection" just residue number and atom name using Emboss syntax */
+ArrayList SelectionSimple() :
+{
+    String t1, t2;
+    ArrayList sel;
+}
+{
+    t1 = Number()
+    t2 = Word()
+    {   
+        sel = new ArrayList();
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("segi", Wattos.Utils.NmrStar.STAR_EMPTY); // overriden later.
+        atomnode.info.putValue("resi", t1);
+        atomnode.info.putValue("resn", Wattos.Utils.NmrStar.STAR_EMPTY);
+        atomnode.info.putValue("name", t2);
+
+        sel.add( atomnode );
+        //System.out.println("Found arraylist for simple Selection:" + AtomNode.toString( sel ) );
+        return sel;
+    }
+}
+
+String Number() :
+{
+    Token t;
+}
+{
+    t = <NUMBER>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String Word() :
+{
+    Token t;
+}
+{
+    t = <WORD>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+
+
+
+
+JAVACODE
+
+void error_skipto(int kind) throws ParserDoneException {
+    Utils.error_skipto(kind, errLineStack, cmtStack, lastAssiLine, lastAssiCol);
+}  

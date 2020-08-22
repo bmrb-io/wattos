@@ -1,0 +1,79 @@
+MenuSub0,MenuSub1,MenuSub2,MenuSub3,Command,Keyboard_shortcut,Description,Help_html,Example_html
+Notes:,All commands have a case-insensitive unique name that is a primary key into this table.,,,,,,The help is actually cut-and-pasted from the code base.,
+,Menus have to have different names than commands because they are used to switch into a submenu.,,,,,,,
+,Commands do not need to be in a submenu.,,,,,,,
+,"Keyboard shortcuts are meant for the GUI, not for the UI.",,,,,,,
+,Menus can be empty,,,,,,,
+,The menu are based on MOLMOL by Reto Koradi.,,,,,,,
+,Longest command name is ExecuteStandard with 14 chars. Keep names short and abbreviated where needed to fit maximum of 16 chars.,,,,,,,
+,Longest menu name can be 8 characters,,,,,,,
+,Commands are selection based for the most part. E.g. CalcNOECompl will calculated the completeness of NOEs that have been selected in selected entries.,,,,,,,
+,The order in which the commands are listed is the order in which they will appear in the overall menu. Don't start a mainmenu item more than once.,,,,,,,
+,Commands can not be empty strings.,,,,,,,
+TBL_BEGIN,,,,,,,,X
+File,Read,Entry,,ReadEntryNMRSTAR,,Reads an NMR-STAR formatted BMRB entry,"The types of data that will be read will depend on what is available and what is selected. E.g. if you're trying to read just experimental data like constraints, -1- they have to be present and -2- there should already be a matchable entry with coordinates and all in the soup.",X
+File,Read,Entry,,ReadEntrySetNMRSTAR,,Reads a set of NMR-STAR formatted BMRB entry,"The types of data that will be read will depend on what is available and what is selected. E.g. if you're trying to read just experimental data like constraints, -1- they have to be present and -2- there should already be a matchable entry with coordinates and all in the soup.",X
+File,Read,Entry,,ReadEntryPDB,,Reads a PDB formatted PDB entry,,X
+File,Read,Entry,,ReadEntryMMCIF,,Reads coordinates in an mmCIF formatted PDB entry,,X
+File,Read,Entry,,ReadEntryList,,Reads a file with in it on each line a file name that will be read with ReadEntry. ,The same formats are supported as in ReadEntry. The format needs to be the same for each.,X
+File,Read,Entry,,ReadEntryExtraCoordinatesWHATIFPDB,,Reads the coordinate list from a WHAT IF PDB file and adds any missing atoms to current entry.,,X
+File,Read,Entry,,ReadEntryNomenclatureWHATIFPDB,,Reads the atom nomenclature from a WHAT IF PDB file and applies it to the selected entry.,,X
+File,Read,,,ReadDump,,Reads a compressed serialized class that restores a previously saved program state,,X
+File,Read,Library,,ReadLibResidues,,Reads a type of library used by Wattos,,X
+File,Read,,,ReadConstrNMRSTAR,,"Read distance, dihedral, or dipolar constraints in NMR-STAR, Xplor/CNS, CYANA,  or Discover format",Reads the experimental data of choice to the selected entry (can be only 1).,X
+File,Read,,,ReadShift,,Read chemical shifts in several formats,,X
+File,Read,,,ReadSeq,,Read a sequence in several formats,,X
+File,Read,,,FilterSTAR,,"Reads, optionally filters and writes STAR formatted file.",,X
+File,Write,Entry,,WriteEntryPDB,,Writes a PDB formatted PDB entry,,X
+File,Write,Entry,,WriteEntryNMRSTAR,,Writes an NMR-STAR formatted entry,,X
+File,Write,Entry,,WriteEntryXplor,,Writes files for use with X-PLOR/CNS,,X
+File,Write,Entry,,WriteChecks,,Writes an NMR-STAR formatted violation report on the selected entries and constraint lists. The checks are also shown in output from WriteEntry,,X
+File,Write,,,WriteSQLDump,,Writes all tables in the DBMS in Wattos to the filesystem and creates a SQL command file for loading it into a relational database such as MySQL,,X
+File,Macro,,,ExecuteMacroStandard,,Executes a standard macro,,X
+File,Macro,,,ExecuteMacroUser,,Executes a user-defined macro,,X
+File,,,,Quit,C-c,Stops the execution of the program,,X
+File,,,,End,BACK_SPACE,Moves the menu back up to the next level; all the way to the main menu level. This item is specific to the command-line version. It doesn't do anything in the gui version.,,
+File,,,,InitAll,,Clears the soup,,X
+File,,,,Sleep,,Sleeps a number of milliseconds,,X
+Edit,,,,Hiearchy,C-h,Opens a graphical editor of a tree that represents the data structure in memory ,,X
+Edit,Distance,,,ReassignStereo,,Can deassign or reassign stereospecific atom groups.,,X
+Edit,Distance,,,FilterHighDistanceViol,,Removes violated distance restraints,,X
+Edit,Distance,,,CorDistPseudo,,Adds a distance correction to constraints that are involved in pseudo atoms,,X
+Edit,Distance,,,RemoveDistRed,,Removes intraresidual redundant distances,,X
+Edit,Select,,,SelectAtomsByNameRegExp,,,,X
+Edit,Remove,,,RemoveAtoms,,,,X
+Edit,Remove,,,TruncateEnsembleToMaxResidues,,,,X
+Edit,Remove,,,TruncateEnsembleToMaxModels,,,,X
+View,Plot,,,ShowPlotViolationResidue,,Shows the violation per residue plot in Gui if available.,,X
+View,Plot,,,ShowPlotCompletenessResidue,,Shows the commpleteness per residue plot in Gui if available.,,X
+View,,,,ShowEntries,,Lists the entries,,X
+View,Soup,,,ShowSoup,,Lists the molecules and residues with certain detail,,X
+View,Soup,,,ShowSoupSTAR,,Same as above but now in STAR,,X
+View,,,,ShowTime,,Lists start time and time since last show.,,X
+View,,,,ShowMemory,,Lists the memory used after garbage collection.,,X
+View,,,,ShowDCClass,,"Lists the number of restraints in classes such as intra-residual, sequential, etc.",,X
+Options,,,,SetPathNames,,Set the directory names of certain resources,,X
+Options,,,,SetProp,,Define/reset Wattos internal properties,,verbosity
+Options,,,,ListProp,,List Wattos internal properties,,verbosity
+Prop,,,,DefPropRes,,Define properties of selected residues like 'previouslySelected',"Molmol uses these definitions for things like: selected, visible, all, movable. Internally they are represented by a single bit per entity; very cheap.",x
+Prop,,,,DefPropDist,,Define properties of selected distances like maxUpperBoundViolation,,X
+Attr,,,,ListAttrAtom,,Lists properties of selected atoms like isPseudo,,X
+Calc,,,,CalcBond,,Assigns bonds,,X
+Calc,,,,AddMissingAtoms,,Builds in any missing atoms.,,X
+Calc,,,,CalcDihe,,Calculates regular dihedral angles,,X
+Calc,,,,CalcDist,,Calculates pairs of atoms that are separated by short distances,,X
+Calc,,,,CalcCoPlanarBasesSet,,Prints sets of coplanar bases,,x
+Calc,,,,CalcHydrogenBond,,Assigns hydrogen bonds,,X
+Calc,Check,,,CheckSurplus,,Checks for surplus in the distance constraints,,X
+Calc,Check,,,CheckAtomNomenclature,,Checks and corrects atom nomenclature.,,X
+Calc,Check,,,CheckDist,,Calculates distances ,,X
+Calc,Check,,,CalcDistConstraintViolation,,Calculates distance restraint violations ,,X
+Calc,Check,,,CheckClassification,,"Shows the classification like intra, sequential, etc.",,X
+Calc,Check,,,CalcDihConstraintViolation,,Calculates dihedral angle violations ,,X
+Calc,Check,,,CheckContact,,Checks for atoms that are too close together,,X
+Calc,Check,,,CheckDipo,,Calculates residual dipolar coupling violations ,,X
+Calc,Check,,,CheckCompleteness,,Calculates the NOE completeness and writes several sets ,,X
+Calc,Check,,,CheckAssignment,,Calculates the distance restraint violation energies for the regular and swapped states and modifies stereospecific assignments.,,X
+Calc,Check,,,CheckSoup,,Does a variety of checks on the soups health. E.g. duplicate atoms.,,X
+Help,,,,HelpApropos,,Searches for keywords in the command descriptions thus returning relating commands,,X
+TBL_END,,,,,,,,

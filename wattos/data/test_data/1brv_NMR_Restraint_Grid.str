@@ -1,0 +1,1340 @@
+data_1brv_MR_file_constraints
+
+
+save_global_MR_file_characteristics
+    _File_characteristics.Sf_category       file_characteristics 
+    _File_characteristics.ID                1 
+    _File_characteristics.NMR_STAR_version  3.0 
+    _File_characteristics.PDB_ID            1BRV 
+    _File_characteristics.MR_file_name      1brv.mr 
+    _File_characteristics.Conversion_date   2006-03-22 
+
+    loop_
+        _File_characteristic.File_characteristics_ID 
+        _File_characteristic.MR_file_block_position 
+        _File_characteristic.Program 
+        _File_characteristic.Type 
+        _File_characteristic.Subtype 
+        _File_characteristic.Format 
+
+        1   1   "MR format"     comment                  n/a         n/a      
+        1   2    DISCOVER       stereochemistry          chirality   n/a      
+        1   3    DISCOVER       distance                 NOE         simple   
+        1   4    n/a            comment                  n/a         n/a      
+        1   5    DISCOVER      "dihedral angle"          n/a         n/a      
+        1   6    n/a            comment                  n/a         n/a      
+        1   7   "MR format"    "nomenclature mapping"    n/a         n/a      
+    stop_
+
+save_
+
+
+save_MR_file_comment_1
+    _MR_file_comment.Sf_category             MR_file_comment 
+    _MR_file_comment.ID                      1 
+    _MR_file_comment.MR_file_block_position  1 
+    _MR_file_comment.Program                "MR format" 
+    _MR_file_comment.Type                    comment 
+    _MR_file_comment.Subtype                 n/a 
+    _MR_file_comment.Format                  n/a 
+    _MR_file_comment.Comment_ID              1 
+    _MR_file_comment.Comment                
+;
+*HEADER   GLYCOPROTEIN                            29-MAR-96   1BRV    
+*TITLE    SOLUTION NMR STRUCTURE OF THE IMMUNODOMINANT REGION         
+*TITLE   2 OF PROTEIN G OF BOVINE RESPIRATORY SYNCYTIAL VIRUS,        
+*TITLE   3 48 STRUCTURES                                              
+*COMPND   MOL_ID: 1;                                                  
+*COMPND  2 MOLECULE: PROTEIN G;                                       
+*COMPND  3 CHAIN: NULL;                                               
+*COMPND  4 FRAGMENT: IMMUNODOMINANT REGION, RESIDUES 158 - 189;       
+*COMPND  5 SYNONYM: BRSV-G REGION;                                    
+*COMPND  6 ENGINEERED: YES                                            
+*SOURCE   MOL_ID: 1;                                                  
+*SOURCE  2 SYNTHETIC: YES;                                            
+*SOURCE  3 ORGANISM_SCIENTIFIC: BOVINE RESPIRATORY SYNCYTIAL VIRUS;   
+*SOURCE  4 STRAIN: 391-2                                              
+*KEYWDS   ATTACHMENT PROTEIN G OF BOVINE RESPIRATORY SYNCYTIAL VIRUS, 
+*KEYWDS  2 IMMUNOGLOBULIN-BINDING PROTEIN, TRANSMEMBRANE,             
+*KEYWDS  3 GLYCOPROTEIN                                               
+*EXPDTA   NMR, 48 STRUCTURES                                          
+*AUTHOR   J.F.DORELEIJERS,J.P.M.LANGEDIJK,K.HARD,J.A.C.RULLMANN,      
+*AUTHOR  2 R.BOELENS,W.M.SCHAAPER,J.T.VAN OIRSCHOT,R.KAPTEIN          
+*REVDAT  1   05-JUN-97 1BRV    0                                      
+
+;
+
+save_
+
+
+save_Discover_distance_constraints_3
+    _Distance_constraints.Sf_category             distance_constraints 
+    _Distance_constraints.ID                      1 
+    _Distance_constraints.MR_file_block_position  3 
+    _Distance_constraints.Program                 DISCOVER 
+    _Distance_constraints.Type                    distance 
+    _Distance_constraints.Subtype                 NOE 
+    _Distance_constraints.Format                  simple 
+
+    loop_
+        _Dist_constraint_tree.Constraints_ID 
+        _Dist_constraint_tree.ID 
+        _Dist_constraint_tree.Node_ID 
+        _Dist_constraint_tree.Down_node_ID 
+        _Dist_constraint_tree.Right_node_ID 
+        _Dist_constraint_tree.Logic_operation 
+
+        1     1   1   .   .   .   
+        1     2   1   .   .   .   
+        1     3   1   .   .   .   
+        1     4   1   .   .   .   
+        1     5   1   .   .   .   
+        1     6   1   .   .   .   
+        1     7   1   .   .   .   
+        1     8   1   .   .   .   
+        1     9   1   .   .   .   
+        1    10   1   .   .   .   
+        1    11   1   .   .   .   
+        1    12   1   .   .   .   
+        1    13   1   .   .   .   
+        1    14   1   .   .   .   
+        1    15   1   .   .   .   
+        1    16   1   .   .   .   
+        1    17   1   .   .   .   
+        1    18   1   .   .   .   
+        1    19   1   .   .   .   
+        1    20   1   .   .   .   
+        1    21   1   .   .   .   
+        1    22   1   .   .   .   
+        1    23   1   .   .   .   
+        1    24   1   .   .   .   
+        1    25   1   .   .   .   
+        1    26   1   .   .   .   
+        1    27   1   .   .   .   
+        1    28   1   .   .   .   
+        1    29   1   .   .   .   
+        1    30   1   .   .   .   
+        1    31   1   .   .   .   
+        1    32   1   .   .   .   
+        1    33   1   .   .   .   
+        1    34   1   .   .   .   
+        1    35   1   .   .   .   
+        1    36   1   .   .   .   
+        1    37   1   .   .   .   
+        1    38   1   .   .   .   
+        1    39   1   .   .   .   
+        1    40   1   .   .   .   
+        1    41   1   .   .   .   
+        1    42   1   .   .   .   
+        1    43   1   .   .   .   
+        1    44   1   .   .   .   
+        1    45   1   .   .   .   
+        1    46   1   .   .   .   
+        1    47   1   .   .   .   
+        1    48   1   .   .   .   
+        1    49   1   .   .   .   
+        1    50   1   .   .   .   
+        1    51   1   .   .   .   
+        1    52   1   .   .   .   
+        1    53   1   .   .   .   
+        1    54   1   .   .   .   
+        1    55   1   .   .   .   
+        1    56   1   .   .   .   
+        1    57   1   .   .   .   
+        1    58   1   .   .   .   
+        1    59   1   .   .   .   
+        1    60   1   .   .   .   
+        1    61   1   .   .   .   
+        1    62   1   .   .   .   
+        1    63   1   .   .   .   
+        1    64   1   .   .   .   
+        1    65   1   .   .   .   
+        1    66   1   .   .   .   
+        1    67   1   .   .   .   
+        1    68   1   .   .   .   
+        1    69   1   .   .   .   
+        1    70   1   .   .   .   
+        1    71   1   .   .   .   
+        1    72   1   .   .   .   
+        1    73   1   .   .   .   
+        1    74   1   .   .   .   
+        1    75   1   .   .   .   
+        1    76   1   .   .   .   
+        1    77   1   .   .   .   
+        1    78   1   .   .   .   
+        1    79   1   .   .   .   
+        1    80   1   .   .   .   
+        1    81   1   .   .   .   
+        1    82   1   .   .   .   
+        1    83   1   .   .   .   
+        1    84   1   .   .   .   
+        1    85   1   .   .   .   
+        1    86   1   .   .   .   
+        1    87   1   .   .   .   
+        1    88   1   .   .   .   
+        1    89   1   .   .   .   
+        1    90   1   .   .   .   
+        1    91   1   .   .   .   
+        1    92   1   .   .   .   
+        1    93   1   .   .   .   
+        1    94   1   .   .   .   
+        1    95   1   .   .   .   
+        1    96   1   .   .   .   
+        1    97   1   .   .   .   
+        1    98   1   .   .   .   
+        1    99   1   .   .   .   
+        1   100   1   .   .   .   
+        1   101   1   .   .   .   
+        1   102   1   .   .   .   
+        1   103   1   .   .   .   
+        1   104   1   .   .   .   
+        1   105   1   .   .   .   
+        1   106   1   .   .   .   
+        1   107   1   .   .   .   
+        1   108   1   .   .   .   
+        1   109   1   .   .   .   
+        1   110   1   .   .   .   
+        1   111   1   .   .   .   
+        1   112   1   .   .   .   
+        1   113   1   .   .   .   
+        1   114   1   .   .   .   
+        1   115   1   .   .   .   
+        1   116   1   .   .   .   
+        1   117   1   .   .   .   
+        1   118   1   .   .   .   
+        1   119   1   .   .   .   
+        1   120   1   .   .   .   
+        1   121   1   .   .   .   
+        1   122   1   .   .   .   
+        1   123   1   .   .   .   
+        1   124   1   .   .   .   
+        1   125   1   .   .   .   
+        1   126   1   .   .   .   
+        1   127   1   .   .   .   
+        1   128   1   .   .   .   
+        1   129   1   .   .   .   
+        1   130   1   .   .   .   
+        1   131   1   .   .   .   
+        1   132   1   .   .   .   
+        1   133   1   .   .   .   
+        1   134   1   .   .   .   
+        1   135   1   .   .   .   
+        1   136   1   .   .   .   
+        1   137   1   .   .   .   
+        1   138   1   .   .   .   
+        1   139   1   .   .   .   
+        1   140   1   .   .   .   
+        1   141   1   .   .   .   
+        1   142   1   .   .   .   
+        1   143   1   .   .   .   
+        1   144   1   .   .   .   
+        1   145   1   .   .   .   
+        1   146   1   .   .   .   
+        1   147   1   .   .   .   
+        1   148   1   .   .   .   
+        1   149   1   .   .   .   
+        1   150   1   .   .   .   
+        1   151   1   .   .   .   
+        1   152   1   .   .   .   
+        1   153   1   .   .   .   
+        1   154   1   .   .   .   
+        1   155   1   .   .   .   
+        1   156   1   .   .   .   
+        1   157   1   .   .   .   
+        1   158   1   .   .   .   
+        1   159   1   .   .   .   
+        1   160   1   .   .   .   
+        1   161   1   .   .   .   
+        1   162   1   .   .   .   
+        1   163   1   .   .   .   
+        1   164   1   .   .   .   
+        1   165   1   .   .   .   
+        1   166   1   .   .   .   
+        1   167   1   .   .   .   
+        1   168   1   .   .   .   
+        1   169   1   .   .   .   
+        1   170   1   .   .   .   
+        1   171   1   .   .   .   
+        1   172   1   .   .   .   
+        1   173   1   .   .   .   
+        1   174   1   .   .   .   
+        1   175   1   .   .   .   
+        1   176   1   .   .   .   
+        1   177   1   .   .   .   
+        1   178   1   .   .   .   
+        1   179   1   .   .   .   
+        1   180   1   .   .   .   
+        1   181   1   .   .   .   
+        1   182   1   .   .   .   
+        1   183   1   .   .   .   
+        1   184   1   .   .   .   
+        1   185   1   .   .   .   
+        1   186   1   .   .   .   
+        1   187   1   .   .   .   
+        1   188   1   .   .   .   
+        1   189   1   .   .   .   
+        1   190   1   .   .   .   
+        1   191   1   .   .   .   
+        1   192   1   .   .   .   
+        1   193   1   .   .   .   
+        1   194   1   .   .   .   
+        1   195   1   .   .   .   
+        1   196   1   .   .   .   
+        1   197   1   .   .   .   
+        1   198   1   .   .   .   
+        1   199   1   .   .   .   
+        1   200   1   .   .   .   
+        1   201   1   .   .   .   
+        1   202   1   .   .   .   
+        1   203   1   .   .   .   
+        1   204   1   .   .   .   
+        1   205   1   .   .   .   
+        1   206   1   .   .   .   
+        1   207   1   .   .   .   
+        1   208   1   .   .   .   
+        1   209   1   .   .   .   
+        1   210   1   .   .   .   
+        1   211   1   .   .   .   
+        1   212   1   .   .   .   
+        1   213   1   .   .   .   
+        1   214   1   .   .   .   
+        1   215   1   .   .   .   
+        1   216   1   .   .   .   
+        1   217   1   .   .   .   
+        1   218   1   .   .   .   
+        1   219   1   .   .   .   
+        1   220   1   .   .   .   
+        1   221   1   .   .   .   
+        1   222   1   .   .   .   
+        1   223   1   .   .   .   
+        1   224   1   .   .   .   
+        1   225   1   .   .   .   
+        1   226   1   .   .   .   
+        1   227   1   .   .   .   
+        1   228   1   .   .   .   
+        1   229   1   .   .   .   
+        1   230   1   .   .   .   
+        1   231   1   .   .   .   
+        1   232   1   .   .   .   
+        1   233   1   .   .   .   
+        1   234   1   .   .   .   
+        1   235   1   .   .   .   
+        1   236   1   .   .   .   
+        1   237   1   .   .   .   
+        1   238   1   .   .   .   
+        1   239   1   .   .   .   
+        1   240   1   .   .   .   
+        1   241   1   .   .   .   
+        1   242   1   .   .   .   
+        1   243   1   .   .   .   
+        1   244   1   .   .   .   
+        1   245   1   .   .   .   
+        1   246   1   .   .   .   
+        1   247   1   .   .   .   
+        1   248   1   .   .   .   
+        1   249   1   .   .   .   
+        1   250   1   .   .   .   
+        1   251   1   .   .   .   
+        1   252   1   .   .   .   
+        1   253   1   .   .   .   
+        1   254   1   .   .   .   
+        1   255   1   .   .   .   
+        1   256   1   .   .   .   
+        1   257   1   .   .   .   
+        1   258   1   .   .   .   
+        1   259   1   .   .   .   
+        1   260   1   .   .   .   
+        1   261   1   .   .   .   
+        1   262   1   .   .   .   
+        1   263   1   .   .   .   
+        1   264   1   .   .   .   
+    stop_
+
+
+    loop_
+        _Dist_constraint.Constraints_ID 
+        _Dist_constraint.Dist_constraint_tree_ID 
+        _Dist_constraint.Tree_node_member_node_ID 
+        _Dist_constraint.Contribution_fractional_val 
+        _Dist_constraint.Constraint_tree_node_member_ID 
+        _Dist_constraint.Label_entity_assembly_ID 
+        _Dist_constraint.Label_entity_ID 
+        _Dist_constraint.Label_comp_index_ID 
+        _Dist_constraint.Label_comp_ID 
+        _Dist_constraint.Label_atom_ID 
+        _Dist_constraint.Auth_segment_code 
+        _Dist_constraint.Auth_seq_ID 
+        _Dist_constraint.Auth_comp_ID 
+        _Dist_constraint.Auth_atom_ID 
+
+        1     1   1   .   1   .   .   .   .   .   1   171   VALn   HB     
+        1     1   1   .   2   .   .   .   .   .   1   171   VALn   HN1    
+        1     2   1   .   1   .   .   .   .   .   1   171   VALn   HG*    
+        1     2   1   .   2   .   .   .   .   .   1   171   VALn   HA     
+        1     3   1   .   1   .   .   .   .   .   1   171   VALn   HG*    
+        1     3   1   .   2   .   .   .   .   .   1   171   VALn   HN1    
+        1     4   1   .   1   .   .   .   .   .   1   172   PRO    HB*    
+        1     4   1   .   2   .   .   .   .   .   1   172   PRO    HD*    
+        1     5   1   .   1   .   .   .   .   .   1   172   PRO    HG*    
+        1     5   1   .   2   .   .   .   .   .   1   172   PRO    HA     
+        1     6   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1     6   1   .   2   .   .   .   .   .   1   173   CYS    HA     
+        1     7   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1     7   1   .   2   .   .   .   .   .   1   173   CYS    HN     
+        1     8   1   .   1   .   .   .   .   .   1   173   CYS    HBS    
+        1     8   1   .   2   .   .   .   .   .   1   173   CYS    HN     
+        1     9   1   .   1   .   .   .   .   .   1   175   THR    HB     
+        1     9   1   .   2   .   .   .   .   .   1   175   THR    HA     
+        1    10   1   .   1   .   .   .   .   .   1   175   THR    HG2*   
+        1    10   1   .   2   .   .   .   .   .   1   175   THR    HA     
+        1    11   1   .   1   .   .   .   .   .   1   175   THR    HG2*   
+        1    11   1   .   2   .   .   .   .   .   1   175   THR    HN     
+        1    12   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1    12   1   .   2   .   .   .   .   .   1   176   CYS    HA     
+        1    13   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1    13   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1    14   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1    14   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1    15   1   .   1   .   .   .   .   .   1   177   GLU    HA     
+        1    15   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1    16   1   .   1   .   .   .   .   .   1   177   GLU    HB*    
+        1    16   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1    17   1   .   1   .   .   .   .   .   1   177   GLU    HG*    
+        1    17   1   .   2   .   .   .   .   .   1   177   GLU    HA     
+        1    18   1   .   1   .   .   .   .   .   1   177   GLU    HG*    
+        1    18   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1    19   1   .   1   .   .   .   .   .   1   178   GLY    HAR    
+        1    19   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1    20   1   .   1   .   .   .   .   .   1   178   GLY    HAS    
+        1    20   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1    21   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1    21   1   .   2   .   .   .   .   .   1   179   ASN    HD2*   
+        1    22   1   .   1   .   .   .   .   .   1   179   ASN    HBR    
+        1    22   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1    23   1   .   1   .   .   .   .   .   1   179   ASN    HBS    
+        1    23   1   .   2   .   .   .   .   .   1   179   ASN    HA     
+        1    24   1   .   1   .   .   .   .   .   1   179   ASN    HBS    
+        1    24   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1    25   1   .   1   .   .   .   .   .   1   179   ASN    HD2*   
+        1    25   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1    26   1   .   1   .   .   .   .   .   1   180   LEU    HBR    
+        1    26   1   .   2   .   .   .   .   .   1   180   LEU    HA     
+        1    27   1   .   1   .   .   .   .   .   1   180   LEU    HBR    
+        1    27   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1    28   1   .   1   .   .   .   .   .   1   180   LEU    HBS    
+        1    28   1   .   2   .   .   .   .   .   1   180   LEU    HA     
+        1    29   1   .   1   .   .   .   .   .   1   180   LEU    HBS    
+        1    29   1   .   2   .   .   .   .   .   1   180   LEU    HG     
+        1    30   1   .   1   .   .   .   .   .   1   180   LEU    HBS    
+        1    30   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1    31   1   .   1   .   .   .   .   .   1   180   LEU    HD*    
+        1    31   1   .   2   .   .   .   .   .   1   180   LEU    HA     
+        1    32   1   .   1   .   .   .   .   .   1   180   LEU    HD*    
+        1    32   1   .   2   .   .   .   .   .   1   180   LEU    HBR    
+        1    33   1   .   1   .   .   .   .   .   1   180   LEU    HD*    
+        1    33   1   .   2   .   .   .   .   .   1   180   LEU    HBS    
+        1    34   1   .   1   .   .   .   .   .   1   180   LEU    HD*    
+        1    34   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1    35   1   .   1   .   .   .   .   .   1   180   LEU    HG     
+        1    35   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1    36   1   .   1   .   .   .   .   .   1   181   ALA    HA     
+        1    36   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1    37   1   .   1   .   .   .   .   .   1   181   ALA    HB*    
+        1    37   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1    38   1   .   1   .   .   .   .   .   1   182   CYS    HA     
+        1    38   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1    39   1   .   1   .   .   .   .   .   1   182   CYS    HBR    
+        1    39   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1    40   1   .   1   .   .   .   .   .   1   182   CYS    HBS    
+        1    40   1   .   2   .   .   .   .   .   1   182   CYS    HA     
+        1    41   1   .   1   .   .   .   .   .   1   182   CYS    HBS    
+        1    41   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1    42   1   .   1   .   .   .   .   .   1   183   LEU    HBR    
+        1    42   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1    43   1   .   1   .   .   .   .   .   1   183   LEU    HBS    
+        1    43   1   .   2   .   .   .   .   .   1   183   LEU    HA     
+        1    44   1   .   1   .   .   .   .   .   1   183   LEU    HBS    
+        1    44   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1    45   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1    45   1   .   2   .   .   .   .   .   1   183   LEU    HA     
+        1    46   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1    46   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1    47   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1    47   1   .   2   .   .   .   .   .   1   183   LEU    HBR    
+        1    48   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1    48   1   .   2   .   .   .   .   .   1   183   LEU    HBS    
+        1    49   1   .   1   .   .   .   .   .   1   183   LEU    HG     
+        1    49   1   .   2   .   .   .   .   .   1   183   LEU    HA     
+        1    50   1   .   1   .   .   .   .   .   1   183   LEU    HG     
+        1    50   1   .   2   .   .   .   .   .   1   183   LEU    HBR    
+        1    51   1   .   1   .   .   .   .   .   1   183   LEU    HG     
+        1    51   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1    52   1   .   1   .   .   .   .   .   1   184   SER    HB*    
+        1    52   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1    53   1   .   1   .   .   .   .   .   1   185   LEU    HB*    
+        1    53   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1    54   1   .   1   .   .   .   .   .   1   185   LEU    HD*    
+        1    54   1   .   2   .   .   .   .   .   1   185   LEU    HA     
+        1    55   1   .   1   .   .   .   .   .   1   185   LEU    HD*    
+        1    55   1   .   2   .   .   .   .   .   1   185   LEU    HB*    
+        1    56   1   .   1   .   .   .   .   .   1   185   LEU    HD*    
+        1    56   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1    57   1   .   1   .   .   .   .   .   1   185   LEU    HG     
+        1    57   1   .   2   .   .   .   .   .   1   185   LEU    HA     
+        1    58   1   .   1   .   .   .   .   .   1   185   LEU    HG     
+        1    58   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1    59   1   .   1   .   .   .   .   .   1   186   CYS    HBS    
+        1    59   1   .   2   .   .   .   .   .   1   186   CYS    HA     
+        1    60   1   .   1   .   .   .   .   .   1   186   CYS    HBS    
+        1    60   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1    61   1   .   1   .   .   .   .   .   1   187   HIS    HBS    
+        1    61   1   .   2   .   .   .   .   .   1   187   HIS    HA     
+        1    62   1   .   1   .   .   .   .   .   1   187   HIS    HBS    
+        1    62   1   .   2   .   .   .   .   .   1   187   HIS    HD2    
+        1    63   1   .   1   .   .   .   .   .   1   187   HIS    HBS    
+        1    63   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1    64   1   .   1   .   .   .   .   .   1   187   HIS    HBR    
+        1    64   1   .   2   .   .   .   .   .   1   187   HIS    HD2    
+        1    65   1   .   1   .   .   .   .   .   1   187   HIS    HBR    
+        1    65   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1    66   1   .   1   .   .   .   .   .   1   187   HIS    HD2    
+        1    66   1   .   2   .   .   .   .   .   1   187   HIS    HE1    
+        1    67   1   .   1   .   .   .   .   .   1   187   HIS    HD2    
+        1    67   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1    68   1   .   1   .   .   .   .   .   1   187   HIS    HE1    
+        1    68   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1    69   1   .   1   .   .   .   .   .   1   188   ILE    HB     
+        1    69   1   .   2   .   .   .   .   .   1   188   ILE    HA     
+        1    70   1   .   1   .   .   .   .   .   1   188   ILE    HB     
+        1    70   1   .   2   .   .   .   .   .   1   188   ILE    HN     
+        1    71   1   .   1   .   .   .   .   .   1   188   ILE    HG1*   
+        1    71   1   .   2   .   .   .   .   .   1   188   ILE    HA     
+        1    72   1   .   1   .   .   .   .   .   1   188   ILE    HG1*   
+        1    72   1   .   2   .   .   .   .   .   1   188   ILE    HN     
+        1    73   1   .   1   .   .   .   .   .   1   189   GLU    HA     
+        1    73   1   .   2   .   .   .   .   .   1   189   GLU    HN     
+        1    74   1   .   1   .   .   .   .   .   1   189   GLU    HB*    
+        1    74   1   .   2   .   .   .   .   .   1   189   GLU    HN     
+        1    75   1   .   1   .   .   .   .   .   1   189   GLU    HG*    
+        1    75   1   .   2   .   .   .   .   .   1   189   GLU    HA     
+        1    76   1   .   1   .   .   .   .   .   1   189   GLU    HG*    
+        1    76   1   .   2   .   .   .   .   .   1   189   GLU    HN     
+        1    77   1   .   1   .   .   .   .   .   1   171   VALn   HA     
+        1    77   1   .   2   .   .   .   .   .   1   172   PRO    HD*    
+        1    78   1   .   1   .   .   .   .   .   1   171   VALn   HG*    
+        1    78   1   .   2   .   .   .   .   .   1   172   PRO    HD*    
+        1    79   1   .   1   .   .   .   .   .   1   171   VALn   HN1    
+        1    79   1   .   2   .   .   .   .   .   1   172   PRO    HD*    
+        1    80   1   .   1   .   .   .   .   .   1   172   PRO    HB*    
+        1    80   1   .   2   .   .   .   .   .   1   173   CYS    HN     
+        1    81   1   .   1   .   .   .   .   .   1   173   CYS    HA     
+        1    81   1   .   2   .   .   .   .   .   1   174   SER    HN     
+        1    82   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1    82   1   .   2   .   .   .   .   .   1   174   SER    HA     
+        1    83   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1    83   1   .   2   .   .   .   .   .   1   174   SER    HN     
+        1    84   1   .   1   .   .   .   .   .   1   173   CYS    HBS    
+        1    84   1   .   2   .   .   .   .   .   1   174   SER    HN     
+        1    85   1   .   1   .   .   .   .   .   1   173   CYS    HN     
+        1    85   1   .   2   .   .   .   .   .   1   174   SER    HN     
+        1    86   1   .   1   .   .   .   .   .   1   174   SER    HA     
+        1    86   1   .   2   .   .   .   .   .   1   175   THR    HG2*   
+        1    87   1   .   1   .   .   .   .   .   1   174   SER    HA     
+        1    87   1   .   2   .   .   .   .   .   1   175   THR    HN     
+        1    88   1   .   1   .   .   .   .   .   1   174   SER    HB*    
+        1    88   1   .   2   .   .   .   .   .   1   175   THR    HA     
+        1    89   1   .   1   .   .   .   .   .   1   174   SER    HN     
+        1    89   1   .   2   .   .   .   .   .   1   175   THR    HG2*   
+        1    90   1   .   1   .   .   .   .   .   1   174   SER    HN     
+        1    90   1   .   2   .   .   .   .   .   1   175   THR    HN     
+        1    91   1   .   1   .   .   .   .   .   1   175   THR    HA     
+        1    91   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1    92   1   .   1   .   .   .   .   .   1   175   THR    HB     
+        1    92   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1    93   1   .   1   .   .   .   .   .   1   175   THR    HG2*   
+        1    93   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1    94   1   .   1   .   .   .   .   .   1   175   THR    HN     
+        1    94   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1    95   1   .   1   .   .   .   .   .   1   176   CYS    HA     
+        1    95   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1    96   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1    96   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1    97   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1    97   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1    98   1   .   1   .   .   .   .   .   1   176   CYS    HN     
+        1    98   1   .   2   .   .   .   .   .   1   177   GLU    HA     
+        1    99   1   .   1   .   .   .   .   .   1   176   CYS    HN     
+        1    99   1   .   2   .   .   .   .   .   1   177   GLU    HB*    
+        1   100   1   .   1   .   .   .   .   .   1   176   CYS    HN     
+        1   100   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1   101   1   .   1   .   .   .   .   .   1   177   GLU    HG*    
+        1   101   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1   102   1   .   1   .   .   .   .   .   1   177   GLU    HN     
+        1   102   1   .   2   .   .   .   .   .   1   178   GLY    HAR    
+        1   103   1   .   1   .   .   .   .   .   1   177   GLU    HN     
+        1   103   1   .   2   .   .   .   .   .   1   178   GLY    HAS    
+        1   104   1   .   1   .   .   .   .   .   1   177   GLU    HN     
+        1   104   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1   105   1   .   1   .   .   .   .   .   1   178   GLY    HAR    
+        1   105   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   106   1   .   1   .   .   .   .   .   1   178   GLY    HAS    
+        1   106   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   107   1   .   1   .   .   .   .   .   1   178   GLY    HN     
+        1   107   1   .   2   .   .   .   .   .   1   179   ASN    HA     
+        1   108   1   .   1   .   .   .   .   .   1   178   GLY    HN     
+        1   108   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   109   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1   109   1   .   2   .   .   .   .   .   1   180   LEU    HA     
+        1   110   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1   110   1   .   2   .   .   .   .   .   1   180   LEU    HBR    
+        1   111   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1   111   1   .   2   .   .   .   .   .   1   180   LEU    HD*    
+        1   112   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1   112   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1   113   1   .   1   .   .   .   .   .   1   179   ASN    HBR    
+        1   113   1   .   2   .   .   .   .   .   1   180   LEU    HA     
+        1   114   1   .   1   .   .   .   .   .   1   179   ASN    HD2*   
+        1   114   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1   115   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   115   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1   116   1   .   1   .   .   .   .   .   1   180   LEU    HA     
+        1   116   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   117   1   .   1   .   .   .   .   .   1   180   LEU    HBR    
+        1   117   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   118   1   .   1   .   .   .   .   .   1   180   LEU    HBS    
+        1   118   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   119   1   .   1   .   .   .   .   .   1   180   LEU    HD*    
+        1   119   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   120   1   .   1   .   .   .   .   .   1   180   LEU    HN     
+        1   120   1   .   2   .   .   .   .   .   1   181   ALA    HB*    
+        1   121   1   .   1   .   .   .   .   .   1   180   LEU    HN     
+        1   121   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   122   1   .   1   .   .   .   .   .   1   181   ALA    HB*    
+        1   122   1   .   2   .   .   .   .   .   1   182   CYS    HBS    
+        1   123   1   .   1   .   .   .   .   .   1   181   ALA    HB*    
+        1   123   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1   124   1   .   1   .   .   .   .   .   1   182   CYS    HA     
+        1   124   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   125   1   .   1   .   .   .   .   .   1   182   CYS    HBR    
+        1   125   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   126   1   .   1   .   .   .   .   .   1   182   CYS    HBR    
+        1   126   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   127   1   .   1   .   .   .   .   .   1   182   CYS    HBR    
+        1   127   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   128   1   .   1   .   .   .   .   .   1   182   CYS    HBS    
+        1   128   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   129   1   .   1   .   .   .   .   .   1   182   CYS    HN     
+        1   129   1   .   2   .   .   .   .   .   1   183   LEU    HBR    
+        1   130   1   .   1   .   .   .   .   .   1   182   CYS    HN     
+        1   130   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   131   1   .   1   .   .   .   .   .   1   182   CYS    HN     
+        1   131   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   132   1   .   1   .   .   .   .   .   1   183   LEU    HA     
+        1   132   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   133   1   .   1   .   .   .   .   .   1   183   LEU    HBR    
+        1   133   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   134   1   .   1   .   .   .   .   .   1   183   LEU    HBS    
+        1   134   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   135   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1   135   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   136   1   .   1   .   .   .   .   .   1   183   LEU    HG     
+        1   136   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   137   1   .   1   .   .   .   .   .   1   183   LEU    HN     
+        1   137   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   138   1   .   1   .   .   .   .   .   1   184   SER    HA     
+        1   138   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   139   1   .   1   .   .   .   .   .   1   184   SER    HB*    
+        1   139   1   .   2   .   .   .   .   .   1   185   LEU    HB*    
+        1   140   1   .   1   .   .   .   .   .   1   184   SER    HB*    
+        1   140   1   .   2   .   .   .   .   .   1   185   LEU    HD*    
+        1   141   1   .   1   .   .   .   .   .   1   184   SER    HB*    
+        1   141   1   .   2   .   .   .   .   .   1   185   LEU    HG     
+        1   142   1   .   1   .   .   .   .   .   1   184   SER    HB*    
+        1   142   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   143   1   .   1   .   .   .   .   .   1   184   SER    HN     
+        1   143   1   .   2   .   .   .   .   .   1   185   LEU    HB*    
+        1   144   1   .   1   .   .   .   .   .   1   184   SER    HN     
+        1   144   1   .   2   .   .   .   .   .   1   185   LEU    HD*    
+        1   145   1   .   1   .   .   .   .   .   1   184   SER    HN     
+        1   145   1   .   2   .   .   .   .   .   1   185   LEU    HG     
+        1   146   1   .   1   .   .   .   .   .   1   184   SER    HN     
+        1   146   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   147   1   .   1   .   .   .   .   .   1   185   LEU    HA     
+        1   147   1   .   2   .   .   .   .   .   1   186   CYS    HA     
+        1   148   1   .   1   .   .   .   .   .   1   185   LEU    HA     
+        1   148   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   149   1   .   1   .   .   .   .   .   1   185   LEU    HB*    
+        1   149   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   150   1   .   1   .   .   .   .   .   1   185   LEU    HD*    
+        1   150   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   151   1   .   1   .   .   .   .   .   1   185   LEU    HG     
+        1   151   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   152   1   .   1   .   .   .   .   .   1   185   LEU    HN     
+        1   152   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   153   1   .   1   .   .   .   .   .   1   185   LEU    HN     
+        1   153   1   .   2   .   .   .   .   .   1   186   CYS    HBS    
+        1   154   1   .   1   .   .   .   .   .   1   185   LEU    HN     
+        1   154   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   155   1   .   1   .   .   .   .   .   1   186   CYS    HA     
+        1   155   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1   156   1   .   1   .   .   .   .   .   1   186   CYS    HBR    
+        1   156   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1   157   1   .   1   .   .   .   .   .   1   186   CYS    HN     
+        1   157   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1   158   1   .   1   .   .   .   .   .   1   187   HIS    HBS    
+        1   158   1   .   2   .   .   .   .   .   1   188   ILE    HN     
+        1   159   1   .   1   .   .   .   .   .   1   187   HIS    HBR    
+        1   159   1   .   2   .   .   .   .   .   1   188   ILE    HN     
+        1   160   1   .   1   .   .   .   .   .   1   172   PRO    HB*    
+        1   160   1   .   2   .   .   .   .   .   1   174   SER    HN     
+        1   161   1   .   1   .   .   .   .   .   1   172   PRO    HB*    
+        1   161   1   .   2   .   .   .   .   .   1   175   THR    HG2*   
+        1   162   1   .   1   .   .   .   .   .   1   172   PRO    HB*    
+        1   162   1   .   2   .   .   .   .   .   1   175   THR    HN     
+        1   163   1   .   1   .   .   .   .   .   1   172   PRO    HD*    
+        1   163   1   .   2   .   .   .   .   .   1   175   THR    HG2*   
+        1   164   1   .   1   .   .   .   .   .   1   172   PRO    HD*    
+        1   164   1   .   2   .   .   .   .   .   1   175   THR    HN     
+        1   165   1   .   1   .   .   .   .   .   1   172   PRO    HG*    
+        1   165   1   .   2   .   .   .   .   .   1   175   THR    HG2*   
+        1   166   1   .   1   .   .   .   .   .   1   172   PRO    HG*    
+        1   166   1   .   2   .   .   .   .   .   1   175   THR    HN     
+        1   167   1   .   1   .   .   .   .   .   1   173   CYS    HN     
+        1   167   1   .   2   .   .   .   .   .   1   175   THR    HG2*   
+        1   168   1   .   1   .   .   .   .   .   1   173   CYS    HA     
+        1   168   1   .   2   .   .   .   .   .   1   176   CYS    HBS    
+        1   169   1   .   1   .   .   .   .   .   1   174   SER    HA     
+        1   169   1   .   2   .   .   .   .   .   1   176   CYS    HBS    
+        1   170   1   .   1   .   .   .   .   .   1   174   SER    HA     
+        1   170   1   .   2   .   .   .   .   .   1   176   CYS    HN     
+        1   171   1   .   1   .   .   .   .   .   1   174   SER    HA     
+        1   171   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1   172   1   .   1   .   .   .   .   .   1   175   THR    HA     
+        1   172   1   .   2   .   .   .   .   .   1   177   GLU    HB*    
+        1   173   1   .   1   .   .   .   .   .   1   175   THR    HA     
+        1   173   1   .   2   .   .   .   .   .   1   177   GLU    HG*    
+        1   174   1   .   1   .   .   .   .   .   1   175   THR    HA     
+        1   174   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1   175   1   .   1   .   .   .   .   .   1   175   THR    HG2*   
+        1   175   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1   176   1   .   1   .   .   .   .   .   1   175   THR    HN     
+        1   176   1   .   2   .   .   .   .   .   1   177   GLU    HN     
+        1   177   1   .   1   .   .   .   .   .   1   176   CYS    HA     
+        1   177   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1   178   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   178   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1   179   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1   179   1   .   2   .   .   .   .   .   1   178   GLY    HN     
+        1   180   1   .   1   .   .   .   .   .   1   176   CYS    HA     
+        1   180   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   181   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   181   1   .   2   .   .   .   .   .   1   179   ASN    HBR    
+        1   182   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   182   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   183   1   .   1   .   .   .   .   .   1   177   GLU    HA     
+        1   183   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   184   1   .   1   .   .   .   .   .   1   177   GLU    HB*    
+        1   184   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   185   1   .   1   .   .   .   .   .   1   177   GLU    HG*    
+        1   185   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   186   1   .   1   .   .   .   .   .   1   177   GLU    HN     
+        1   186   1   .   2   .   .   .   .   .   1   179   ASN    HN     
+        1   187   1   .   1   .   .   .   .   .   1   178   GLY    HAR    
+        1   187   1   .   2   .   .   .   .   .   1   180   LEU    HN     
+        1   188   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1   188   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   189   1   .   1   .   .   .   .   .   1   179   ASN    HD2*   
+        1   189   1   .   2   .   .   .   .   .   1   181   ALA    HB*    
+        1   190   1   .   1   .   .   .   .   .   1   179   ASN    HD2*   
+        1   190   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   191   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   191   1   .   2   .   .   .   .   .   1   181   ALA    HN     
+        1   192   1   .   1   .   .   .   .   .   1   179   ASN    HBR    
+        1   192   1   .   2   .   .   .   .   .   1   182   CYS    HA     
+        1   193   1   .   1   .   .   .   .   .   1   179   ASN    HD2*   
+        1   193   1   .   2   .   .   .   .   .   1   182   CYS    HBR    
+        1   194   1   .   1   .   .   .   .   .   1   179   ASN    HD2*   
+        1   194   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1   195   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   195   1   .   2   .   .   .   .   .   1   182   CYS    HBR    
+        1   196   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   196   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1   197   1   .   1   .   .   .   .   .   1   179   ASN    HA     
+        1   197   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   198   1   .   1   .   .   .   .   .   1   179   ASN    HBR    
+        1   198   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   199   1   .   1   .   .   .   .   .   1   179   ASN    HBR    
+        1   199   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   200   1   .   1   .   .   .   .   .   1   179   ASN    HBS    
+        1   200   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   201   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   201   1   .   2   .   .   .   .   .   1   183   LEU    HBR    
+        1   202   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   202   1   .   2   .   .   .   .   .   1   183   LEU    HBS    
+        1   203   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   203   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   204   1   .   1   .   .   .   .   .   1   179   ASN    HN     
+        1   204   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   205   1   .   1   .   .   .   .   .   1   180   LEU    HA     
+        1   205   1   .   2   .   .   .   .   .   1   182   CYS    HN     
+        1   206   1   .   1   .   .   .   .   .   1   180   LEU    HA     
+        1   206   1   .   2   .   .   .   .   .   1   183   LEU    HBS    
+        1   207   1   .   1   .   .   .   .   .   1   180   LEU    HA     
+        1   207   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   208   1   .   1   .   .   .   .   .   1   180   LEU    HA     
+        1   208   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   209   1   .   1   .   .   .   .   .   1   180   LEU    HA     
+        1   209   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   210   1   .   1   .   .   .   .   .   1   180   LEU    HBS    
+        1   210   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   211   1   .   1   .   .   .   .   .   1   180   LEU    HN     
+        1   211   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   212   1   .   1   .   .   .   .   .   1   181   ALA    HN     
+        1   212   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   213   1   .   1   .   .   .   .   .   1   181   ALA    HA     
+        1   213   1   .   2   .   .   .   .   .   1   184   SER    HB*    
+        1   214   1   .   1   .   .   .   .   .   1   181   ALA    HA     
+        1   214   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   215   1   .   1   .   .   .   .   .   1   181   ALA    HB*    
+        1   215   1   .   2   .   .   .   .   .   1   184   SER    HB*    
+        1   216   1   .   1   .   .   .   .   .   1   181   ALA    HN     
+        1   216   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   217   1   .   1   .   .   .   .   .   1   181   ALA    HB*    
+        1   217   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   218   1   .   1   .   .   .   .   .   1   182   CYS    HN     
+        1   218   1   .   2   .   .   .   .   .   1   184   SER    HN     
+        1   219   1   .   1   .   .   .   .   .   1   182   CYS    HA     
+        1   219   1   .   2   .   .   .   .   .   1   185   LEU    HB*    
+        1   220   1   .   1   .   .   .   .   .   1   182   CYS    HA     
+        1   220   1   .   2   .   .   .   .   .   1   185   LEU    HG     
+        1   221   1   .   1   .   .   .   .   .   1   182   CYS    HA     
+        1   221   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   222   1   .   1   .   .   .   .   .   1   182   CYS    HBR    
+        1   222   1   .   2   .   .   .   .   .   1   185   LEU    HD*    
+        1   223   1   .   1   .   .   .   .   .   1   182   CYS    HA     
+        1   223   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   224   1   .   1   .   .   .   .   .   1   183   LEU    HA     
+        1   224   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   225   1   .   1   .   .   .   .   .   1   183   LEU    HN     
+        1   225   1   .   2   .   .   .   .   .   1   185   LEU    HN     
+        1   226   1   .   1   .   .   .   .   .   1   183   LEU    HA     
+        1   226   1   .   2   .   .   .   .   .   1   186   CYS    HA     
+        1   227   1   .   1   .   .   .   .   .   1   183   LEU    HA     
+        1   227   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   228   1   .   1   .   .   .   .   .   1   183   LEU    HA     
+        1   228   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   229   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1   229   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   230   1   .   1   .   .   .   .   .   1   183   LEU    HD*    
+        1   230   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   231   1   .   1   .   .   .   .   .   1   184   SER    HB*    
+        1   231   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   232   1   .   1   .   .   .   .   .   1   171   VALn   HA     
+        1   232   1   .   2   .   .   .   .   .   1   186   CYS    HN     
+        1   233   1   .   1   .   .   .   .   .   1   171   VALn   HB     
+        1   233   1   .   2   .   .   .   .   .   1   186   CYS    HA     
+        1   234   1   .   1   .   .   .   .   .   1   171   VALn   HG*    
+        1   234   1   .   2   .   .   .   .   .   1   186   CYS    HA     
+        1   235   1   .   1   .   .   .   .   .   1   171   VALn   HG*    
+        1   235   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   236   1   .   1   .   .   .   .   .   1   171   VALn   HG*    
+        1   236   1   .   2   .   .   .   .   .   1   186   CYS    HBS    
+        1   237   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1   237   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   238   1   .   1   .   .   .   .   .   1   173   CYS    HBS    
+        1   238   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   239   1   .   1   .   .   .   .   .   1   173   CYS    HA     
+        1   239   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   240   1   .   1   .   .   .   .   .   1   173   CYS    HBS    
+        1   240   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   241   1   .   1   .   .   .   .   .   1   173   CYS    HN     
+        1   241   1   .   2   .   .   .   .   .   1   186   CYS    HBR    
+        1   242   1   .   1   .   .   .   .   .   1   173   CYS    HN     
+        1   242   1   .   2   .   .   .   .   .   1   187   HIS    HN     
+        1   243   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1   243   1   .   2   .   .   .   .   .   1   188   ILE    HA     
+        1   244   1   .   1   .   .   .   .   .   1   173   CYS    HBR    
+        1   244   1   .   2   .   .   .   .   .   1   188   ILE    HG1*   
+        1   245   1   .   1   .   .   .   .   .   1   173   CYS    HBS    
+        1   245   1   .   2   .   .   .   .   .   1   188   ILE    HA     
+        1   246   1   .   1   .   .   .   .   .   1   173   CYS    HBS    
+        1   246   1   .   2   .   .   .   .   .   1   188   ILE    HG1*   
+        1   247   1   .   1   .   .   .   .   .   1   173   CYS    HN     
+        1   247   1   .   2   .   .   .   .   .   1   188   ILE    HG1*   
+        1   248   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   248   1   .   2   .   .   .   .   .   1   182   CYS    HA     
+        1   249   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1   249   1   .   2   .   .   .   .   .   1   182   CYS    HA     
+        1   250   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   250   1   .   2   .   .   .   .   .   1   183   LEU    HBR    
+        1   251   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   251   1   .   2   .   .   .   .   .   1   183   LEU    HBS    
+        1   252   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   252   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   253   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   253   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   254   1   .   1   .   .   .   .   .   1   176   CYS    HBR    
+        1   254   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   255   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1   255   1   .   2   .   .   .   .   .   1   183   LEU    HBS    
+        1   256   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1   256   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   257   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1   257   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   258   1   .   1   .   .   .   .   .   1   176   CYS    HBS    
+        1   258   1   .   2   .   .   .   .   .   1   183   LEU    HN     
+        1   259   1   .   1   .   .   .   .   .   1   176   CYS    HN     
+        1   259   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   260   1   .   1   .   .   .   .   .   1   176   CYS    HN     
+        1   260   1   .   2   .   .   .   .   .   1   183   LEU    HG     
+        1   261   1   .   1   .   .   .   .   .   1   177   GLU    HN     
+        1   261   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   262   1   .   1   .   .   .   .   .   1   178   GLY    HAR    
+        1   262   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   263   1   .   1   .   .   .   .   .   1   178   GLY    HAS    
+        1   263   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+        1   264   1   .   1   .   .   .   .   .   1   178   GLY    HN     
+        1   264   1   .   2   .   .   .   .   .   1   183   LEU    HD*    
+    stop_
+
+
+    loop_
+        _Dist_constraint_value.Constraints_ID 
+        _Dist_constraint_value.Constraint_ID 
+        _Dist_constraint_value.Tree_node_ID 
+        _Dist_constraint_value.Source_experiment_ID 
+        _Dist_constraint_value.Spectral_peak_ID 
+        _Dist_constraint_value.Intensity_val 
+        _Dist_constraint_value.Intensity_lower_val_err 
+        _Dist_constraint_value.Intensity_upper_val_err 
+        _Dist_constraint_value.Distance_val 
+        _Dist_constraint_value.Distance_lower_bound_val 
+        _Dist_constraint_value.Distance_upper_bound_val 
+        _Dist_constraint_value.Weight 
+        _Dist_constraint_value.Spectral_peak_ppm_1 
+        _Dist_constraint_value.Spectral_peak_ppm_2 
+
+        1     1   1   .   .   .   .   .   3.142   1.800   3.142   .   .   .   
+        1     2   1   .   .   .   .   .   4.978   1.800   4.978   .   .   .   
+        1     3   1   .   .   .   .   .   5.530   1.800   5.530   .   .   .   
+        1     4   1   .   .   .   .   .   6.455   1.800   6.455   .   .   .   
+        1     5   1   .   .   .   .   .   4.707   1.800   4.707   .   .   .   
+        1     6   1   .   .   .   .   .   2.556   1.800   2.556   .   .   .   
+        1     7   1   .   .   .   .   .   3.276   1.800   3.276   .   .   .   
+        1     8   1   .   .   .   .   .   3.080   1.800   3.080   .   .   .   
+        1     9   1   .   .   .   .   .   2.839   1.800   2.839   .   .   .   
+        1    10   1   .   .   .   .   .   3.780   1.800   3.780   .   .   .   
+        1    11   1   .   .   .   .   .   4.006   1.800   4.006   .   .   .   
+        1    12   1   .   .   .   .   .   2.884   1.800   2.884   .   .   .   
+        1    13   1   .   .   .   .   .   3.483   1.800   3.483   .   .   .   
+        1    14   1   .   .   .   .   .   2.937   1.800   2.937   .   .   .   
+        1    15   1   .   .   .   .   .   2.564   1.800   2.564   .   .   .   
+        1    16   1   .   .   .   .   .   4.495   1.800   4.495   .   .   .   
+        1    17   1   .   .   .   .   .   4.067   1.800   4.067   .   .   .   
+        1    18   1   .   .   .   .   .   4.694   1.800   4.694   .   .   .   
+        1    19   1   .   .   .   .   .   2.726   1.800   2.726   .   .   .   
+        1    20   1   .   .   .   .   .   2.911   1.800   2.911   .   .   .   
+        1    21   1   .   .   .   .   .   5.186   1.800   5.186   .   .   .   
+        1    22   1   .   .   .   .   .   2.841   1.800   2.841   .   .   .   
+        1    23   1   .   .   .   .   .   2.871   1.800   2.871   .   .   .   
+        1    24   1   .   .   .   .   .   2.890   1.800   2.890   .   .   .   
+        1    25   1   .   .   .   .   .   5.236   1.800   5.236   .   .   .   
+        1    26   1   .   .   .   .   .   3.057   1.800   3.057   .   .   .   
+        1    27   1   .   .   .   .   .   2.919   1.800   2.919   .   .   .   
+        1    28   1   .   .   .   .   .   2.859   1.800   2.859   .   .   .   
+        1    29   1   .   .   .   .   .   2.721   1.800   2.721   .   .   .   
+        1    30   1   .   .   .   .   .   3.407   1.800   3.407   .   .   .   
+        1    31   1   .   .   .   .   .   5.267   1.800   5.267   .   .   .   
+        1    32   1   .   .   .   .   .   5.388   1.800   5.388   .   .   .   
+        1    33   1   .   .   .   .   .   5.447   1.800   5.447   .   .   .   
+        1    34   1   .   .   .   .   .   6.235   1.800   6.235   .   .   .   
+        1    35   1   .   .   .   .   .   2.685   1.800   2.685   .   .   .   
+        1    36   1   .   .   .   .   .   2.909   1.800   2.909   .   .   .   
+        1    37   1   .   .   .   .   .   3.412   1.800   3.412   .   .   .   
+        1    38   1   .   .   .   .   .   3.059   1.800   3.059   .   .   .   
+        1    39   1   .   .   .   .   .   2.958   1.800   2.958   .   .   .   
+        1    40   1   .   .   .   .   .   2.937   1.800   2.937   .   .   .   
+        1    41   1   .   .   .   .   .   2.919   1.800   2.919   .   .   .   
+        1    42   1   .   .   .   .   .   2.839   1.800   2.839   .   .   .   
+        1    43   1   .   .   .   .   .   2.816   1.800   2.816   .   .   .   
+        1    44   1   .   .   .   .   .   3.217   1.800   3.217   .   .   .   
+        1    45   1   .   .   .   .   .   5.310   1.800   5.310   .   .   .   
+        1    46   1   .   .   .   .   .   5.936   1.800   5.936   .   .   .   
+        1    47   1   .   .   .   .   .   5.214   1.800   5.214   .   .   .   
+        1    48   1   .   .   .   .   .   5.327   1.800   5.327   .   .   .   
+        1    49   1   .   .   .   .   .   3.053   1.800   3.053   .   .   .   
+        1    50   1   .   .   .   .   .   2.890   1.800   2.890   .   .   .   
+        1    51   1   .   .   .   .   .   2.830   1.800   2.830   .   .   .   
+        1    52   1   .   .   .   .   .   3.847   1.800   3.847   .   .   .   
+        1    53   1   .   .   .   .   .   4.034   1.800   4.034   .   .   .   
+        1    54   1   .   .   .   .   .   5.750   1.800   5.750   .   .   .   
+        1    55   1   .   .   .   .   .   6.454   1.800   6.454   .   .   .   
+        1    56   1   .   .   .   .   .   6.680   1.800   6.680   .   .   .   
+        1    57   1   .   .   .   .   .   3.523   1.800   3.523   .   .   .   
+        1    58   1   .   .   .   .   .   2.983   1.800   2.983   .   .   .   
+        1    59   1   .   .   .   .   .   3.269   1.800   3.269   .   .   .   
+        1    60   1   .   .   .   .   .   3.745   1.800   3.745   .   .   .   
+        1    61   1   .   .   .   .   .   2.951   1.800   2.951   .   .   .   
+        1    62   1   .   .   .   .   .   3.624   1.800   3.624   .   .   .   
+        1    63   1   .   .   .   .   .   3.244   1.800   3.244   .   .   .   
+        1    64   1   .   .   .   .   .   4.062   1.800   4.062   .   .   .   
+        1    65   1   .   .   .   .   .   3.589   1.800   3.589   .   .   .   
+        1    66   1   .   .   .   .   .   4.931   1.800   4.931   .   .   .   
+        1    67   1   .   .   .   .   .   4.559   1.800   4.559   .   .   .   
+        1    68   1   .   .   .   .   .   3.664   1.800   3.664   .   .   .   
+        1    69   1   .   .   .   .   .   2.946   1.800   2.946   .   .   .   
+        1    70   1   .   .   .   .   .   2.872   1.800   2.872   .   .   .   
+        1    71   1   .   .   .   .   .   4.155   1.800   4.155   .   .   .   
+        1    72   1   .   .   .   .   .   4.134   1.800   4.134   .   .   .   
+        1    73   1   .   .   .   .   .   2.840   1.800   2.840   .   .   .   
+        1    74   1   .   .   .   .   .   4.323   1.800   4.323   .   .   .   
+        1    75   1   .   .   .   .   .   4.315   1.800   4.315   .   .   .   
+        1    76   1   .   .   .   .   .   4.795   1.800   4.795   .   .   .   
+        1    77   1   .   .   .   .   .   3.523   1.800   3.523   .   .   .   
+        1    78   1   .   .   .   .   .   7.978   1.800   7.978   .   .   .   
+        1    79   1   .   .   .   .   .   6.337   1.800   6.337   .   .   .   
+        1    80   1   .   .   .   .   .   5.316   1.800   5.316   .   .   .   
+        1    81   1   .   .   .   .   .   4.192   1.800   4.192   .   .   .   
+        1    82   1   .   .   .   .   .   4.497   1.800   4.497   .   .   .   
+        1    83   1   .   .   .   .   .   3.720   1.800   3.720   .   .   .   
+        1    84   1   .   .   .   .   .   3.510   1.800   3.510   .   .   .   
+        1    85   1   .   .   .   .   .   3.059   1.800   3.059   .   .   .   
+        1    86   1   .   .   .   .   .   5.577   1.800   5.577   .   .   .   
+        1    87   1   .   .   .   .   .   4.057   1.800   4.057   .   .   .   
+        1    88   1   .   .   .   .   .   5.303   1.800   5.303   .   .   .   
+        1    89   1   .   .   .   .   .   6.156   1.800   6.156   .   .   .   
+        1    90   1   .   .   .   .   .   3.877   1.800   3.877   .   .   .   
+        1    91   1   .   .   .   .   .   3.870   1.800   3.870   .   .   .   
+        1    92   1   .   .   .   .   .   4.688   1.800   4.688   .   .   .   
+        1    93   1   .   .   .   .   .   5.625   1.800   5.625   .   .   .   
+        1    94   1   .   .   .   .   .   2.962   1.800   2.962   .   .   .   
+        1    95   1   .   .   .   .   .   4.301   1.800   4.301   .   .   .   
+        1    96   1   .   .   .   .   .   4.343   1.800   4.343   .   .   .   
+        1    97   1   .   .   .   .   .   3.842   1.800   3.842   .   .   .   
+        1    98   1   .   .   .   .   .   4.519   1.800   4.519   .   .   .   
+        1    99   1   .   .   .   .   .   5.970   1.800   5.970   .   .   .   
+        1   100   1   .   .   .   .   .   3.429   1.800   3.429   .   .   .   
+        1   101   1   .   .   .   .   .   6.171   1.800   6.171   .   .   .   
+        1   102   1   .   .   .   .   .   5.319   1.800   5.319   .   .   .   
+        1   103   1   .   .   .   .   .   6.226   1.800   6.226   .   .   .   
+        1   104   1   .   .   .   .   .   3.235   1.800   3.235   .   .   .   
+        1   105   1   .   .   .   .   .   3.754   1.800   3.754   .   .   .   
+        1   106   1   .   .   .   .   .   3.633   1.800   3.633   .   .   .   
+        1   107   1   .   .   .   .   .   4.843   1.800   4.843   .   .   .   
+        1   108   1   .   .   .   .   .   3.209   1.800   3.209   .   .   .   
+        1   109   1   .   .   .   .   .   4.019   1.800   4.019   .   .   .   
+        1   110   1   .   .   .   .   .   3.874   1.800   3.874   .   .   .   
+        1   111   1   .   .   .   .   .   7.077   1.800   7.077   .   .   .   
+        1   112   1   .   .   .   .   .   2.597   1.800   2.597   .   .   .   
+        1   113   1   .   .   .   .   .   4.334   1.800   4.334   .   .   .   
+        1   114   1   .   .   .   .   .   6.206   1.800   6.206   .   .   .   
+        1   115   1   .   .   .   .   .   4.289   1.800   4.289   .   .   .   
+        1   116   1   .   .   .   .   .   3.849   1.800   3.849   .   .   .   
+        1   117   1   .   .   .   .   .   3.245   1.800   3.245   .   .   .   
+        1   118   1   .   .   .   .   .   3.428   1.800   3.428   .   .   .   
+        1   119   1   .   .   .   .   .   7.157   1.800   7.157   .   .   .   
+        1   120   1   .   .   .   .   .   5.644   1.800   5.644   .   .   .   
+        1   121   1   .   .   .   .   .   3.171   1.800   3.171   .   .   .   
+        1   122   1   .   .   .   .   .   5.042   1.800   5.042   .   .   .   
+        1   123   1   .   .   .   .   .   3.860   1.800   3.860   .   .   .   
+        1   124   1   .   .   .   .   .   3.781   1.800   3.781   .   .   .   
+        1   125   1   .   .   .   .   .   6.973   1.800   6.973   .   .   .   
+        1   126   1   .   .   .   .   .   3.611   1.800   3.611   .   .   .   
+        1   127   1   .   .   .   .   .   3.265   1.800   3.265   .   .   .   
+        1   128   1   .   .   .   .   .   3.517   1.800   3.517   .   .   .   
+        1   129   1   .   .   .   .   .   4.301   1.800   4.301   .   .   .   
+        1   130   1   .   .   .   .   .   4.348   1.800   4.348   .   .   .   
+        1   131   1   .   .   .   .   .   2.826   1.800   2.826   .   .   .   
+        1   132   1   .   .   .   .   .   3.862   1.800   3.862   .   .   .   
+        1   133   1   .   .   .   .   .   3.496   1.800   3.496   .   .   .   
+        1   134   1   .   .   .   .   .   3.817   1.800   3.817   .   .   .   
+        1   135   1   .   .   .   .   .   7.197   1.800   7.197   .   .   .   
+        1   136   1   .   .   .   .   .   4.431   1.800   4.431   .   .   .   
+        1   137   1   .   .   .   .   .   3.272   1.800   3.272   .   .   .   
+        1   138   1   .   .   .   .   .   3.875   1.800   3.875   .   .   .   
+        1   139   1   .   .   .   .   .   6.690   1.800   6.690   .   .   .   
+        1   140   1   .   .   .   .   .   7.555   1.800   7.555   .   .   .   
+        1   141   1   .   .   .   .   .   4.771   1.800   4.771   .   .   .   
+        1   142   1   .   .   .   .   .   4.622   1.800   4.622   .   .   .   
+        1   143   1   .   .   .   .   .   6.178   1.800   6.178   .   .   .   
+        1   144   1   .   .   .   .   .   7.798   1.800   7.798   .   .   .   
+        1   145   1   .   .   .   .   .   4.189   1.800   4.189   .   .   .   
+        1   146   1   .   .   .   .   .   3.028   1.800   3.028   .   .   .   
+        1   147   1   .   .   .   .   .   4.390   1.800   4.390   .   .   .   
+        1   148   1   .   .   .   .   .   3.893   1.800   3.893   .   .   .   
+        1   149   1   .   .   .   .   .   4.944   1.800   4.944   .   .   .   
+        1   150   1   .   .   .   .   .   7.347   1.800   7.347   .   .   .   
+        1   151   1   .   .   .   .   .   4.150   1.800   4.150   .   .   .   
+        1   152   1   .   .   .   .   .   5.146   1.800   5.146   .   .   .   
+        1   153   1   .   .   .   .   .   5.713   1.800   5.713   .   .   .   
+        1   154   1   .   .   .   .   .   2.868   1.800   2.868   .   .   .   
+        1   155   1   .   .   .   .   .   4.934   1.800   4.934   .   .   .   
+        1   156   1   .   .   .   .   .   4.053   1.800   4.053   .   .   .   
+        1   157   1   .   .   .   .   .   4.316   1.800   4.316   .   .   .   
+        1   158   1   .   .   .   .   .   4.088   1.800   4.088   .   .   .   
+        1   159   1   .   .   .   .   .   3.597   1.800   3.597   .   .   .   
+        1   160   1   .   .   .   .   .   5.283   1.800   5.283   .   .   .   
+        1   161   1   .   .   .   .   .   5.492   1.800   5.492   .   .   .   
+        1   162   1   .   .   .   .   .   5.383   1.800   5.383   .   .   .   
+        1   163   1   .   .   .   .   .   5.562   1.800   5.562   .   .   .   
+        1   164   1   .   .   .   .   .   5.667   1.800   5.667   .   .   .   
+        1   165   1   .   .   .   .   .   5.646   1.800   5.646   .   .   .   
+        1   166   1   .   .   .   .   .   5.811   1.800   5.811   .   .   .   
+        1   167   1   .   .   .   .   .   9.274   1.800   9.274   .   .   .   
+        1   168   1   .   .   .   .   .   4.043   1.800   4.043   .   .   .   
+        1   169   1   .   .   .   .   .   5.972   1.800   5.972   .   .   .   
+        1   170   1   .   .   .   .   .   4.613   1.800   4.613   .   .   .   
+        1   171   1   .   .   .   .   .   5.859   1.800   5.859   .   .   .   
+        1   172   1   .   .   .   .   .   5.422   1.800   5.422   .   .   .   
+        1   173   1   .   .   .   .   .   5.595   1.800   5.595   .   .   .   
+        1   174   1   .   .   .   .   .   4.763   1.800   4.763   .   .   .   
+        1   175   1   .   .   .   .   .   7.878   1.800   7.878   .   .   .   
+        1   176   1   .   .   .   .   .   5.276   1.800   5.276   .   .   .   
+        1   177   1   .   .   .   .   .   5.685   1.800   5.685   .   .   .   
+        1   178   1   .   .   .   .   .   3.983   1.800   3.983   .   .   .   
+        1   179   1   .   .   .   .   .   3.818   1.800   3.818   .   .   .   
+        1   180   1   .   .   .   .   .   4.783   1.800   4.783   .   .   .   
+        1   181   1   .   .   .   .   .   3.050   1.800   3.050   .   .   .   
+        1   182   1   .   .   .   .   .   3.441   1.800   3.441   .   .   .   
+        1   183   1   .   .   .   .   .   4.336   1.800   4.336   .   .   .   
+        1   184   1   .   .   .   .   .   5.522   1.800   5.522   .   .   .   
+        1   185   1   .   .   .   .   .   7.824   1.800   7.824   .   .   .   
+        1   186   1   .   .   .   .   .   5.316   1.800   5.316   .   .   .   
+        1   187   1   .   .   .   .   .   5.325   1.800   5.325   .   .   .   
+        1   188   1   .   .   .   .   .   3.818   1.800   3.818   .   .   .   
+        1   189   1   .   .   .   .   .   7.127   1.800   7.127   .   .   .   
+        1   190   1   .   .   .   .   .   5.166   1.800   5.166   .   .   .   
+        1   191   1   .   .   .   .   .   5.337   1.800   5.337   .   .   .   
+        1   192   1   .   .   .   .   .   4.459   1.800   4.459   .   .   .   
+        1   193   1   .   .   .   .   .   6.015   1.800   6.015   .   .   .   
+        1   194   1   .   .   .   .   .   5.295   1.800   5.295   .   .   .   
+        1   195   1   .   .   .   .   .   4.129   1.800   4.129   .   .   .   
+        1   196   1   .   .   .   .   .   5.066   1.800   5.066   .   .   .   
+        1   197   1   .   .   .   .   .   7.484   1.800   7.484   .   .   .   
+        1   198   1   .   .   .   .   .   8.269   1.800   8.269   .   .   .   
+        1   199   1   .   .   .   .   .   4.161   1.800   4.161   .   .   .   
+        1   200   1   .   .   .   .   .   8.699   1.800   8.699   .   .   .   
+        1   201   1   .   .   .   .   .   5.160   1.800   5.160   .   .   .   
+        1   202   1   .   .   .   .   .   5.284   1.800   5.284   .   .   .   
+        1   203   1   .   .   .   .   .   7.161   1.800   7.161   .   .   .   
+        1   204   1   .   .   .   .   .   4.487   1.800   4.487   .   .   .   
+        1   205   1   .   .   .   .   .   4.607   1.800   4.607   .   .   .   
+        1   206   1   .   .   .   .   .   3.292   1.800   3.292   .   .   .   
+        1   207   1   .   .   .   .   .   5.543   1.800   5.543   .   .   .   
+        1   208   1   .   .   .   .   .   3.776   1.800   3.776   .   .   .   
+        1   209   1   .   .   .   .   .   3.410   1.800   3.410   .   .   .   
+        1   210   1   .   .   .   .   .   6.599   1.800   6.599   .   .   .   
+        1   211   1   .   .   .   .   .   7.571   1.800   7.571   .   .   .   
+        1   212   1   .   .   .   .   .   9.332   1.800   9.332   .   .   .   
+        1   213   1   .   .   .   .   .   3.881   1.800   3.881   .   .   .   
+        1   214   1   .   .   .   .   .   3.682   1.800   3.682   .   .   .   
+        1   215   1   .   .   .   .   .   5.974   1.800   5.974   .   .   .   
+        1   216   1   .   .   .   .   .   4.513   1.800   4.513   .   .   .   
+        1   217   1   .   .   .   .   .   6.060   1.800   6.060   .   .   .   
+        1   218   1   .   .   .   .   .   4.609   1.800   4.609   .   .   .   
+        1   219   1   .   .   .   .   .   4.696   1.800   4.696   .   .   .   
+        1   220   1   .   .   .   .   .   3.387   1.800   3.387   .   .   .   
+        1   221   1   .   .   .   .   .   4.012   1.800   4.012   .   .   .   
+        1   222   1   .   .   .   .   .   7.631   1.800   7.631   .   .   .   
+        1   223   1   .   .   .   .   .   4.882   1.800   4.882   .   .   .   
+        1   224   1   .   .   .   .   .   4.666   1.800   4.666   .   .   .   
+        1   225   1   .   .   .   .   .   4.784   1.800   4.784   .   .   .   
+        1   226   1   .   .   .   .   .   5.396   1.800   5.396   .   .   .   
+        1   227   1   .   .   .   .   .   4.074   1.800   4.074   .   .   .   
+        1   228   1   .   .   .   .   .   3.948   1.800   3.948   .   .   .   
+        1   229   1   .   .   .   .   .   7.041   1.800   7.041   .   .   .   
+        1   230   1   .   .   .   .   .   8.192   1.800   8.192   .   .   .   
+        1   231   1   .   .   .   .   .   5.981   1.800   5.981   .   .   .   
+        1   232   1   .   .   .   .   .   4.707   1.800   4.707   .   .   .   
+        1   233   1   .   .   .   .   .   3.678   1.800   3.678   .   .   .   
+        1   234   1   .   .   .   .   .   7.401   1.800   7.401   .   .   .   
+        1   235   1   .   .   .   .   .   5.810   1.800   5.810   .   .   .   
+        1   236   1   .   .   .   .   .   5.833   1.800   5.833   .   .   .   
+        1   237   1   .   .   .   .   .   6.816   1.800   6.816   .   .   .   
+        1   238   1   .   .   .   .   .   6.098   1.800   6.098   .   .   .   
+        1   239   1   .   .   .   .   .   3.459   1.800   3.459   .   .   .   
+        1   240   1   .   .   .   .   .   3.748   1.800   3.748   .   .   .   
+        1   241   1   .   .   .   .   .   4.726   1.800   4.726   .   .   .   
+        1   242   1   .   .   .   .   .   3.644   1.800   3.644   .   .   .   
+        1   243   1   .   .   .   .   .   3.923   1.800   3.923   .   .   .   
+        1   244   1   .   .   .   .   .   5.760   1.800   5.760   .   .   .   
+        1   245   1   .   .   .   .   .   3.375   1.800   3.375   .   .   .   
+        1   246   1   .   .   .   .   .   5.358   1.800   5.358   .   .   .   
+        1   247   1   .   .   .   .   .   7.558   1.800   7.558   .   .   .   
+        1   248   1   .   .   .   .   .   4.148   1.800   4.148   .   .   .   
+        1   249   1   .   .   .   .   .   5.097   1.800   5.097   .   .   .   
+        1   250   1   .   .   .   .   .   4.778   1.800   4.778   .   .   .   
+        1   251   1   .   .   .   .   .   4.335   1.800   4.335   .   .   .   
+        1   252   1   .   .   .   .   .   5.892   1.800   5.892   .   .   .   
+        1   253   1   .   .   .   .   .   3.024   1.800   3.024   .   .   .   
+        1   254   1   .   .   .   .   .   3.856   1.800   3.856   .   .   .   
+        1   255   1   .   .   .   .   .   4.568   1.800   4.568   .   .   .   
+        1   256   1   .   .   .   .   .   5.820   1.800   5.820   .   .   .   
+        1   257   1   .   .   .   .   .   3.224   1.800   3.224   .   .   .   
+        1   258   1   .   .   .   .   .   4.362   1.800   4.362   .   .   .   
+        1   259   1   .   .   .   .   .   8.129   1.800   8.129   .   .   .   
+        1   260   1   .   .   .   .   .   4.870   1.800   4.870   .   .   .   
+        1   261   1   .   .   .   .   .   9.338   1.800   9.338   .   .   .   
+        1   262   1   .   .   .   .   .   5.675   1.800   5.675   .   .   .   
+        1   263   1   .   .   .   .   .   6.164   1.800   6.164   .   .   .   
+        1   264   1   .   .   .   .   .   6.586   1.800   6.586   .   .   .   
+    stop_
+
+
+    loop_
+        _Dist_constraint_comment_org.Constraints_ID 
+        _Dist_constraint_comment_org.ID 
+        _Dist_constraint_comment_org.Comment_begin_line 
+        _Dist_constraint_comment_org.Comment_begin_column 
+        _Dist_constraint_comment_org.Comment_end_line 
+        _Dist_constraint_comment_org.Comment_end_column 
+        _Dist_constraint_comment_org.Comment 
+
+        1   1   1   1   1   13   NOE_distance   
+    stop_
+
+save_
+
+
+save_MR_file_comment_4
+    _MR_file_comment.Sf_category             MR_file_comment 
+    _MR_file_comment.ID                      2 
+    _MR_file_comment.MR_file_block_position  4 
+    _MR_file_comment.Program                 n/a 
+    _MR_file_comment.Type                    comment 
+    _MR_file_comment.Subtype                 n/a 
+    _MR_file_comment.Format                  n/a 
+    _MR_file_comment.Comment_ID              2 
+    _MR_file_comment.Comment                
+;
+#mixing_times
+2.000000E-01 
+!
+;
+
+save_
+
+
+save_Discover_dihedral_5
+    _Torsion_angle_constraints.Sf_category             torsion_angle_constraints 
+    _Torsion_angle_constraints.ID                      1 
+    _Torsion_angle_constraints.MR_file_block_position  5 
+    _Torsion_angle_constraints.Program                 DISCOVER 
+    _Torsion_angle_constraints.Type                   "dihedral angle" 
+    _Torsion_angle_constraints.Subtype                 n/a 
+    _Torsion_angle_constraints.Format                  n/a 
+
+    loop_
+        _Torsion_angle_constraint.Constraints_ID 
+        _Torsion_angle_constraint.ID 
+        _Torsion_angle_constraint.Torsion_angle_name 
+        _Torsion_angle_constraint.Label_entity_assembly_ID_1 
+        _Torsion_angle_constraint.Label_entity_ID_1 
+        _Torsion_angle_constraint.Label_comp_index_ID_1 
+        _Torsion_angle_constraint.Label_comp_ID_1 
+        _Torsion_angle_constraint.Label_atom_ID_1 
+        _Torsion_angle_constraint.Label_entity_assembly_ID_2 
+        _Torsion_angle_constraint.Label_entity_ID_2 
+        _Torsion_angle_constraint.Label_comp_index_ID_2 
+        _Torsion_angle_constraint.Label_comp_ID_2 
+        _Torsion_angle_constraint.Label_atom_ID_2 
+        _Torsion_angle_constraint.Label_entity_assembly_ID_3 
+        _Torsion_angle_constraint.Label_entity_ID_3 
+        _Torsion_angle_constraint.Label_comp_index_ID_3 
+        _Torsion_angle_constraint.Label_comp_ID_3 
+        _Torsion_angle_constraint.Label_atom_ID_3 
+        _Torsion_angle_constraint.Label_entity_assembly_ID_4 
+        _Torsion_angle_constraint.Label_entity_ID_4 
+        _Torsion_angle_constraint.Label_comp_index_ID_4 
+        _Torsion_angle_constraint.Label_comp_ID_4 
+        _Torsion_angle_constraint.Label_atom_ID_4 
+        _Torsion_angle_constraint.Auth_segment_code_1 
+        _Torsion_angle_constraint.Auth_seq_ID_1 
+        _Torsion_angle_constraint.Auth_comp_ID_1 
+        _Torsion_angle_constraint.Auth_atom_ID_1 
+        _Torsion_angle_constraint.Auth_segment_code_2 
+        _Torsion_angle_constraint.Auth_seq_ID_2 
+        _Torsion_angle_constraint.Auth_comp_ID_2 
+        _Torsion_angle_constraint.Auth_atom_ID_2 
+        _Torsion_angle_constraint.Auth_segment_code_3 
+        _Torsion_angle_constraint.Auth_seq_ID_3 
+        _Torsion_angle_constraint.Auth_comp_ID_3 
+        _Torsion_angle_constraint.Auth_atom_ID_3 
+        _Torsion_angle_constraint.Auth_segment_code_4 
+        _Torsion_angle_constraint.Auth_seq_ID_4 
+        _Torsion_angle_constraint.Auth_comp_ID_4 
+        _Torsion_angle_constraint.Auth_atom_ID_4 
+        _Torsion_angle_constraint.Angle_upper_bound_val 
+        _Torsion_angle_constraint.Angle_lower_bound_val 
+        _Torsion_angle_constraint.Force_constant_value 
+        _Torsion_angle_constraint.Potential_function_exponent 
+
+        1    1   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   173   CYS    N    1   173   CYS    CA   1   173   CYS   CB   1   173   CYS   SG    -20.000   -100.000   .   .   
+        1    2   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   174   SER    N    1   174   SER    CA   1   174   SER   CB   1   174   SER   OG    100.000     20.000   .   .   
+        1    3   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   176   CYS    N    1   176   CYS    CA   1   176   CYS   CB   1   176   CYS   SG    -20.000   -100.000   .   .   
+        1    4   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   179   ASN    N    1   179   ASN    CA   1   179   ASN   CB   1   179   ASN   CG   -140.000    140.000   .   .   
+        1    5   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   180   LEU    N    1   180   LEU    CA   1   180   LEU   CB   1   180   LEU   CG    -20.000   -100.000   .   .   
+        1    6   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   182   CYS    N    1   182   CYS    CA   1   182   CYS   CB   1   182   CYS   SG   -140.000    140.000   .   .   
+        1    7   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   183   LEU    N    1   183   LEU    CA   1   183   LEU   CB   1   183   LEU   CG    -20.000   -100.000   .   .   
+        1    8   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   186   CYS    N    1   186   CYS    CA   1   186   CYS   CB   1   186   CYS   SG    100.000     20.000   .   .   
+        1    9   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   187   HIS    N    1   187   HIS    CA   1   187   HIS   CB   1   187   HIS   CG    -20.000   -100.000   .   .   
+        1   10   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   186   CYS    C    1   187   HIS    N    1   187   HIS   CA   1   187   HIS   C    -100.000   -140.000   .   .   
+        1   11   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   187   HIS    C    1   188   ILE    N    1   188   ILE   CA   1   188   ILE   C    -100.000   -140.000   .   .   
+        1   12   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   171   VALn   CA   1   171   VALn   C    1   172   PRO   N    1   172   PRO   CA   -178.000    178.000   .   .   
+        1   13   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   172   PRO    CA   1   172   PRO    C    1   173   CYS   N    1   173   CYS   CA   -178.000    178.000   .   .   
+        1   14   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   173   CYS    CA   1   173   CYS    C    1   174   SER   N    1   174   SER   CA   -178.000    178.000   .   .   
+        1   15   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   174   SER    CA   1   174   SER    C    1   175   THR   N    1   175   THR   CA   -178.000    178.000   .   .   
+        1   16   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   175   THR    CA   1   175   THR    C    1   176   CYS   N    1   176   CYS   CA   -178.000    178.000   .   .   
+        1   17   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   176   CYS    CA   1   176   CYS    C    1   177   GLU   N    1   177   GLU   CA   -178.000    178.000   .   .   
+        1   18   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   177   GLU    CA   1   177   GLU    C    1   178   GLY   N    1   178   GLY   CA   -178.000    178.000   .   .   
+        1   19   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   178   GLY    CA   1   178   GLY    C    1   179   ASN   N    1   179   ASN   CA   -178.000    178.000   .   .   
+        1   20   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   179   ASN    CA   1   179   ASN    C    1   180   LEU   N    1   180   LEU   CA   -178.000    178.000   .   .   
+        1   21   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   180   LEU    CA   1   180   LEU    C    1   181   ALA   N    1   181   ALA   CA   -178.000    178.000   .   .   
+        1   22   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   181   ALA    CA   1   181   ALA    C    1   182   CYS   N    1   182   CYS   CA   -178.000    178.000   .   .   
+        1   23   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   182   CYS    CA   1   182   CYS    C    1   183   LEU   N    1   183   LEU   CA   -178.000    178.000   .   .   
+        1   24   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   183   LEU    CA   1   183   LEU    C    1   184   SER   N    1   184   SER   CA   -178.000    178.000   .   .   
+        1   25   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   184   SER    CA   1   184   SER    C    1   185   LEU   N    1   185   LEU   CA   -178.000    178.000   .   .   
+        1   26   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   185   LEU    CA   1   185   LEU    C    1   186   CYS   N    1   186   CYS   CA   -178.000    178.000   .   .   
+        1   27   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   186   CYS    CA   1   186   CYS    C    1   187   HIS   N    1   187   HIS   CA   -178.000    178.000   .   .   
+        1   28   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   187   HIS    CA   1   187   HIS    C    1   188   ILE   N    1   188   ILE   CA   -178.000    178.000   .   .   
+        1   29   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   1   188   ILE    CA   1   188   ILE    C    1   189   GLU   N    1   189   GLU   CA   -178.000    178.000   .   .   
+    stop_
+
+
+    loop_
+        _TA_constraint_comment_org.Constraints_ID 
+        _TA_constraint_comment_org.ID 
+        _TA_constraint_comment_org.Comment_begin_line 
+        _TA_constraint_comment_org.Comment_begin_column 
+        _TA_constraint_comment_org.Comment_end_line 
+        _TA_constraint_comment_org.Comment_end_column 
+        _TA_constraint_comment_org.Comment 
+
+        1   1   1   1   1   13   NMR_dihedral   
+    stop_
+
+save_
+
+
+save_MR_file_comment_6
+    _MR_file_comment.Sf_category             MR_file_comment 
+    _MR_file_comment.ID                      3 
+    _MR_file_comment.MR_file_block_position  6 
+    _MR_file_comment.Program                 n/a 
+    _MR_file_comment.Type                    comment 
+    _MR_file_comment.Subtype                 n/a 
+    _MR_file_comment.Format                  n/a 
+    _MR_file_comment.Comment_ID              3 
+    _MR_file_comment.Comment                
+;
+
+In the entry the amino acid sequence numbers are 170 greater than for the
+submitted coordinate data. These correspomd to the sequence numbers in the
+restraint data and the JRNL reference. (1H and 2H of VAL 1 of the submitted
+coordinate data have been renamed HN1 and HN2 to correspond to the names used
+in the restraint data)
+
+;
+
+save_
+

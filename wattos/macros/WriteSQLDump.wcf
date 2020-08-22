@@ -1,0 +1,24 @@
+InitAll
+
+SetProp
+interactiveSession
+false
+SetProp
+verbosity
+9
+SetProp
+writeSessionOnExit
+false
+
+ReadEntrySetNMRSTAR
+fileSetNMRSTAR.txt
+
+# Comment
+WriteSQLDump
+y
+wattos_dump.sql
+tmp_dir/sql
+
+Quit
+
+

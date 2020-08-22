@@ -1,0 +1,127 @@
+data_atom_nomenclature_library
+
+save_file_characteristics
+    _Saveframe_category  file_characteristics
+    _File_version        1.0
+    _Author              'Jurgen F. Doreleijers'
+
+    loop_
+       _Date
+       _Details
+
+       2007-07-18 'First creation' 
+    stop_
+
+save_
+
+save_atom_nomen_lib
+    _Saveframe_category  atom_nomen_lib
+    _Comment             
+;
+Atom 3 is the (pro)-chiral or stereospecific atom on which the substitutes 
+(atoms 1 and 2 ordered) are checked. Atoms 4 and 5 are the other two attached atoms
+and their order is important too.
+Atoms 6 and on will be swapped for nomenclature too where relevant.
+Each rule is briefly explained below. 
+The order or rule execution is bottom up.
+
+From code:
+METHYLENE_CH2                              0
+AMIDE_NH2_ON_ASN_GLN_ARG_AND_NUCLEIC_ACIDS 1
+AMINO_NH3_ON_LYS_AND_N_TERMINUS            2 # skipping category for now
+SEC_AMINO_NH2_ON_PRO_N_TERMINUS            3
+METHYL_CH3                                 4 # skipping category for now
+ISOPROPYL_CH3_2_ON_VAL_AND_LEU             5
+GUANIDINE_NH2_2_ON_ARG                     6
+OXYGENS_ON_PHOSPHATES                      7
+OXYGENS_ON_ASP_GLU__AND_C_TERMINUS         8
+AROMATIC_C_AND_H_ON_PHE_AND_TYR            9 
+;
+
+
+    loop_
+       _Stereo_type
+       _Residue_type
+       _Atom_ID_1
+       _Atom_ID_2
+       _Atom_ID_3
+       _Atom_ID_4
+       _Atom_ID_5
+       _Atom_ID_6
+       _Atom_ID_7
+       _Atom_ID_8
+       _Atom_ID_9
+       _Atom_ID_10
+       _Atom_ID_11
+       _Comment
+
+       0 PRO HB2  HB3  CB  CA CG     .    .    .    .    .    . 'Checks which angle is closer to expected HB2 HB3 CA CG (72) or (expected is +72) HB3 HB2 CA CG (-73).' 
+       0 PRO HG2  HG3  CG  CB CD     .    .    .    .    .    .  .                                                                                                      
+       0 PRO HD2  HD3  CD  CG N      .    .    .    .    .    .  .                                                                                                      
+       0 ARG HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 ARG HG2  HG3  CG  CB CD     .    .    .    .    .    .  .                                                                                                      
+       0 ARG HD2  HD3  CD  CB NE     .    .    .    .    .    .  .                                                                                                      
+       0 ASN HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 ASP HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 CYS HB2  HB3  CB  CA SG     .    .    .    .    .    .  .                                                                                                      
+       0 GLN HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 GLN HG2  HG3  CG  CB CD     .    .    .    .    .    .  .                                                                                                      
+       0 GLU HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 GLU HG2  HG3  CG  CB CD     .    .    .    .    .    .  .                                                                                                      
+       0 HIS HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 ILE HG12 HG13 CG1 CB CD1    .    .    .    .    .    .  .                                                                                                      
+       0 LEU HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 LYS HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 LYS HG2  HG3  CG  CB CD     .    .    .    .    .    .  .                                                                                                      
+       0 LYS HD2  HD3  CD  CG CE     .    .    .    .    .    .  .                                                                                                      
+       0 LYS HE2  HE3  CE  CD NZ     .    .    .    .    .    .  .                                                                                                      
+       0 MET HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 MET HG2  HG3  CG  CB SD     .    .    .    .    .    .  .                                                                                                      
+       0 PHE HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 SER HB2  HB3  CB  CA OG     .    .    .    .    .    .  .                                                                                                      
+       0 TRP HB2  HB3  CB  CA CG     .    .    .    .    .    .  .                                                                                                      
+       0 TYR HB2  HB3  CB  CA CG     .    .    .    .    .    .  .   
+       
+       0 DA  H2'  H2'' C2'  C3'   C1' .    .    .    .    .    .  .                                                                                                 
+       0 DC  H2'  H2'' C2'  C3'   C1' .    .    .    .    .    .  .                                                                                                 
+       0 DG  H2'  H2'' C2'  C3'   C1' .    .    .    .    .    .  .                                                                                                 
+       0 DU  H2'  H2'' C2'  C3'   C1' .    .    .    .    .    .  .                                                                                                 
+       0 A   H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                  
+       0 C   H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       0 G   H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       0 U   H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       0 DA  H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       0 DC  H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       0 DG  H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       0 DU  H5'  H5'' C5'  C4'   O5' .    .    .    .    .    .  .                                                                                                 
+       
+       1 ARG HH11 HH12 NE  CZ NH1    .    .    .    .    .    . 'Checks if NE CZ NH1 HH11 angle is smaller in absolute value as the other'                              
+       1 ARG HH21 HH22 NE  CZ NH2    .    .    .    .    .    .  .
+       1 ASN HD21 HD22 CB  CG ND2    .    .    .    .    .    .  .                                                                                                      
+       1 GLN HE21 HE22 CG  CD NE2    .    .    .    .    .    .  .                                                                                                      
+       1 A   H61  H62  N1  C6 N6     .    .    .    .    .    .  .                                                                                                      
+       1 C   H41  H42  N3  C4 N4     .    .    .    .    .    .  .                                                                                                      
+       1 G   H21  H22  N1  C2 N2     .    .    .    .    .    .  .                                                                                                      
+       1 DA  H61  H62  N1  C6 N6     .    .    .    .    .    .  .                                                                                                      
+       1 DC  H41  H42  N3  C4 N4     .    .    .    .    .    .  .                                                                                                      
+       1 DG  H21  H22  N1  C2 N2     .    .    .    .    .    .  .                                                                                                      
+       3 PRO H2   H3   N   CA CD     .    .    .    .    .    .  .                                                                                                      
+       5 VAL CG1  CG2  CB  CA HB  HG11 HG12 HG13 HG21 HG22 HG23 'Attached will be changed too; target is taken as 65.0'                                                 
+       5 LEU CD1  CD2  CG  CB HG  HD11 HD12 HD13 HD21 HD22 HD23  .                                                                                                      
+       6 ARG NH1  NH2  CD  NE CZ  HH11 HH12 HH21 HH22    .    .  .                                                                                                      
+       7 A   OP1  OP2  P   O3' O5'   .    .    .    .    .    .  "Note that the O3' is from previous nucleotide; ref value is now -70."                                                                                                 
+       7 C   OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       7 G   OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       7 U   OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       7 DA  OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       7 DC  OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       7 DG  OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       7 DT  OP1  OP2  P   O3' O5'   .    .    .    .    .    .  .                                                                                                 
+       8 ASP OD1  OD2  CA  CB CG     .    .    .    .    .    .  .                                                                                                      
+       8 GLU OE1  OE2  CB  CG CD     .    .    .    .    .    .  .                                                                                                      
+       9 PHE CD1  CD2  CA  CB CG   HD1  HD2  CE1  HE1  CE2  HE2 'Attached will be changed too'                                                                          
+       9 TYR CD1  CD2  CA  CB CG   HD1  HD2  CE1  HE1  CE2  HE2  .                                                                                                      
+    stop_
+
+save_
+

@@ -1,0 +1,699 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Jurgen F. Doreleijers, BMRB/CMBI">
+<title>howto</title>
+<link rel="stylesheet" type="text/css" href="main.css"
+	title="main stylesheet">
+</head>
+<body>
+<table cellpadding="10" cellspacing="10">
+	<tbody>
+		<tr>
+			<td><a href="http://www.bmrb.wisc.edu/"><img
+				style="border: 0px solid; width: 100px; height: 100px;"
+				alt="BMRB logo"
+				src="../images/bmrb_logo_brown_fg_cream_bg.gif"
+				width="100" height="100"></a></td>
+			<td>
+			<h1><a href="http://restraintsgrid.bmrb.wisc.edu">NMR
+			Restraints Grid</a></h1>
+			</td>
+			<td><img style="border: 0px solid; width: 155px; height: 105px;"
+				alt="Data flows from the original raw data to parsed, to the databases DOCR and FRED"
+				src="../images/NMRRestraintsGridFlow.gif"></td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+<h2>Howto</h2>
+
+
+
+<ul>
+
+
+
+	<li><a href="#Getting_started">Getting started</a></li>
+
+
+
+	<li><a href="#Download_data">Download data</a></li>
+
+
+
+	<li><a href="#Faq">Faq</a></li>
+
+
+
+	<li><a href="#Use_downloaded_data_">Use downloaded data</a></li>
+	<li><a href="#Link_to_the_NMR_Restraints_Grid">Link to NMR
+	Restraints Grid</a></li>
+	<li><a href="#Link_to_the_images_of_PDB_entries">Link to
+	images of PDB entries</a></li>
+	<li><a href="#Known_bugs_and_todo_list">Known bugs and todo
+	list</a></li>
+	<li><a href="#NMR_data_format_descriptions">NMR data format
+	descriptions</a></li>
+	<li><a href="#References">References</a></li>
+	<li><a href="#Funding">Funding</a></li>
+</ul>
+
+
+
+<hr style="width: 100%; height: 2px;">
+<h2><a name="Getting_started"></a><b>Getting started</b></h2>
+
+
+
+<ol>
+	<li>Start&nbsp;by&nbsp;selecting the&nbsp;<a
+		href="http://restraintsgrid.bmrb.wisc.edu">NMR
+	Restraints Grid</a> so that the default options are used.</li>
+	<li>Specify a PDB entry to find data for&nbsp;by entering its
+	four-character code (E.g.&nbsp;1A24)</li>
+	<li>Select 0 for&nbsp; <span style="font-style: italic;">Hide
+	the grouped block counts for the software formats if there are less
+	blocks than</span></li>
+	<li>Do a submit by clicking on the <span
+		style="font-style: italic;">Submit</span> button</li>
+	<li>Select the number by clicking on it, in the cell for which
+	both row and column are labeled&nbsp;<span style="font-style: italic;">Total</span></li>
+	<li>Select one of the blocks by clicking on the number in the cell
+	where the column is labeled&nbsp;<span style="font-style: italic;">mrblock_id</span>.
+	E.g. select the block id for where the <span
+		style="font-style: italic;">stage</span> column reads: <span
+		style="font-style: italic;">3-converted-DOCR </span>and the
+	columns&nbsp;<span style="font-style: italic;">program, type,
+	subtype </span>and<span style="font-style: italic;"> format</span> read:<span
+		style="font-style: italic;">&nbsp; XPLOR/CNS, distance, NOE,
+	ambi.</span></li>
+	<li><span style="font-weight: bold;">Congratulations</span>, the
+	NOE distance restraints of entry&nbsp;1A24 from the DOCR database will
+	be on your screen</li>
+	<li>Download a dataset by clicking on the icon at the top of the
+	table. A&nbsp;<a href="readme.html">README</a> and index file will also
+	be included in the download.</li>
+	<li>More background info is available&nbsp;in the rest of this
+	document.</li>
+</ol>
+
+
+
+<h2><a name="Download_data"></a><b>Download data</b></h2>
+
+
+
+<p>Below are three other common usage patterns.</p>
+
+
+
+<ul>
+
+
+
+	<li><b>Get all data in the <a href="#References">DOCR</a>
+	database </b>(<a href="howto.html#Doreleijers_J.F._Mading_S">ref 1</a>)<b>.</b><br><ol>
+
+
+
+		<li>Start&nbsp;by&nbsp;selecting the&nbsp;<a
+			href="http://restraintsgrid.bmrb.wisc.edu">NMR
+		Restraints Grid</a> so that the default options are used.</li>
+
+
+
+		<li>Select&nbsp;<span style="font-style: italic;">3-converted-DOCR</span>
+		for&nbsp;<span style="font-style: italic;">Stage</span></li>
+
+
+
+		<li>Select&nbsp;<span style="font-style: italic;">Blocks</span>
+		for&nbsp;<span style="font-style: italic;">Show</span></li>
+
+
+
+		<li>Leave the other options to their default values and do submit
+		</li>
+
+
+
+		<li>The resulting page shows a table of block counts for
+		different data types for/from many different programs. Select all
+		blocks by selecting the link&nbsp;in the cell for which both column
+		and row are labeled&nbsp;<span style="font-style: italic;">total</span>.
+		It will take a while to download and render on your computer because
+		there are many blocks to show.</li>
+
+
+
+		<li>The resulting page shows another table with the PDB entry
+		codes (in the column labeled&nbsp;<span style="font-style: italic;">pdb_id</span>)
+		of entries in DOCR.&nbsp;</li>
+
+
+
+		<li>To save the actual data, select the icon labeled: <span
+			style="font-style: italic;">Save to zip file containing files
+		for each block</span>. This will start to download a zipped file that
+		contains a separate file for each block in the selection made up to
+		this point. The blocks are named only by their block identifier (a
+		unique number for each block in the database) and change over time so
+		please don't use them for future reference.&nbsp;A&nbsp;<a
+			href="readme.html">README</a> and index file will also be included in
+		the download.</li>
+
+
+
+		<li>WARNING: This is a lot of data so be ready to wait or cancel
+		the streaming at this point.</li>
+
+
+
+
+
+	</ol>
+
+
+
+	</li>
+
+
+
+	<li><b><b>Get all PDB entry codes containing a certain
+	type (e.g. RDCs) of data and then get the original (raw/deposited)
+	data.</b> </b>
+
+
+	<ol>
+
+
+
+		<li>Start&nbsp;by&nbsp;selecting the&nbsp;<a
+			href="http://restraintsgrid.bmrb.wisc.edu">NMR
+		Restraints Grid</a> so that the default options are used.</li>
+
+
+
+		<li>Select&nbsp;<span style="font-style: italic;">1-converted</span>
+		for&nbsp;<span style="font-style: italic;">Stage</span>.</li>
+
+
+
+		<li>Do a submit.</li>
+
+
+
+		<li>The resulting page shows a list of files containing many
+		different data types for/from many different programs. Select the link
+		for the total number of files (in the column labeled&nbsp;<span
+			style="font-style: italic;">Total</span>) with among other data types
+		the data type you're interested in, like&nbsp;<span
+			style="font-style: italic;">dipolar coupling</span> for RDCs.</li>
+
+
+
+		<li>The resulting page shows another table with the PDB entry
+		codes (in the column labeled&nbsp;<span style="font-style: italic;">pdb_id</span>)
+		of entries that have RDCs as part of the deposited data.&nbsp;</li>
+
+
+
+		<li>To save the actual data, select the icon labeled: <span
+			style="font-style: italic;">Save to zip file containing files
+		for each block</span>. This will start to download a zipped file that
+		contains a separate file for each block in the selection made up to
+		this point. The blocks are named only by their block identifier (a
+		unique number for each block in the database) and change over time so
+		please don't use them for future reference.&nbsp;A&nbsp;<a
+			href="readme.html">README</a> and index file will also be included in
+		the download.<b> </b></li>
+
+
+
+
+
+	</ol>
+
+
+
+	</li>
+
+
+
+	<li><b><b>Get all STAR formatted data with one file for
+	each PDB entry.</b> </b>
+
+
+	<ol>
+
+
+
+		<li>Start&nbsp;by&nbsp;selecting the&nbsp;<a
+			href="http://restraintsgrid.bmrb.wisc.edu">NMR
+		Restraints Grid</a> so that the default options are used.</li>
+
+
+
+		<li>Select&nbsp;<span style="font-style: italic;">2-parsed</span>
+		for&nbsp;<span style="font-style: italic;">Stage</span>.</li>
+
+
+
+		<li>Select show&nbsp;<span style="font-style: italic;">Blocks</span>.
+		</li>
+
+
+
+		<li>Do a submit.</li>
+
+
+
+		<li>From the resulting page select the link for the number of
+		blocks where the values to&nbsp;<span style="font-style: italic;">Type</span>
+		and <span style="font-style: italic;">Subtype</span> are all&nbsp;<span
+			style="font-style: italic;">entry </span>and <span
+			style="font-style: italic;">full</span> and is in the column
+		under&nbsp;<span style="font-style: italic;">STAR</span>. <br>
+
+
+
+		Note that the information on program and data type is no longer
+		preserved at the block level because everything is in one text block,
+		e.g. NOEs and RDCs will be merged into one block.</li>
+
+
+
+		<li>To save the actual data, select the icon labeled: <span
+			style="font-style: italic;">Save to zip file containing files
+		for each block</span>. This will start to download a zipped file that
+		contains a separate file for each block in the selection made up to
+		this point. The blocks are named only by their block identifier (a
+		unique number for each block in the database) and change over time so
+		please don't use them for future reference.&nbsp;A&nbsp;<a
+			href="readme.html">README</a> and index file will also be included in
+		the download.</li>
+
+
+
+
+
+	</ol>
+
+
+
+	</li>
+
+
+
+</ul>
+
+
+
+<b> </b>
+<h2><a name="Faq"></a><b>Faq</b></h2>
+
+
+
+<p><a href="http://code.google.com/p/nmrrestrntsgrid/wiki/FindNumberOfRestraintsPerResidue">Find the
+number of restraints per residue</a></p>
+
+
+
+<h2><a name="Use_downloaded_data_"></a><b>Use downloaded data</b></h2>
+
+
+
+<br>
+
+
+
+<p>Unzip the downloaded compressed restraint data into a target
+directory of choice on your computer. The uncompressed files will a <a
+	href="readme.html">README</a> that explains how to use the downloaded
+data.</p>
+
+
+
+<br>
+
+
+
+<ul>
+
+
+
+</ul>
+
+
+
+<h2><a name="Link_to_the_NMR_Restraints_Grid"></a><b>Link to
+the NMR Restraints Grid</b></h2>
+
+
+
+<ul>
+
+
+
+	<li><a href="http://restraintsgrid.bmrb.wisc.edu/NRG/MRGridServlet">Top
+	level</a></li>
+
+
+
+	<li><a
+		href="http://restraintsgrid.bmrb.wisc.edu/NRG/MRGridServlet?bmrb_id=4010&amp;min_items=0">Individual
+	entry</a> (E.g. BMRB id 4010)</li>
+
+
+
+	<li><a
+		href="http://restraintsgrid.bmrb.wisc.edu/NRG/MRGridServlet?pdb_id=1xmw&amp;min_items=0">Individual
+	entry</a> (E.g. PDB id 1XMW)</li>
+
+
+
+</ul>
+
+
+
+<p>WARNING: The numeric identifiers for mrblock and mrfile in the
+database cannot be used as a reference, because they do change every so
+often. No garantee is made that the parameters (other than bmrb_id and
+pdb_id) will be maintained in the future, so if you must use them then
+please check back every so often.</p>
+
+
+
+<p>A database dump in text format is made&nbsp;<a
+	href="http://www.bmrb.wisc.edu/servlet_data/viavia/mr_mysql_backup">available</a>
+every Thursday around 23h00 CDT. The file <span
+	style="font-style: italic;">entry.txt</span> in that location can be
+used to find all the entries in the NMR Restraints Grid.<br>
+
+
+
+<br>
+
+
+
+The links between BMRB and PDB entries are based on the file&nbsp;<span
+	style="font-style: italic;">score_many2one.csv</span>&nbsp;<a
+	href="http://www.bmrb.wisc.edu/servlet_data/viavia/bmrb_pdb_match">available</a>.
+It is updated every Thursday&nbsp;around 16h00 CDT. For more information
+on how the links were created and for lists of many more links look at
+the documentation directory at the same URL.</p>
+
+
+
+<br>
+
+
+
+<h2><a name="Link_to_the_images_of_PDB_entries"></a><b><b>Link
+to the images of PDB entries</b></b></h2>
+
+
+
+<ul>
+
+
+
+	<li><a
+		href="http://www.bmrb.wisc.edu/servlet_data/molgrap/pic/xm/1xmw_xl.gif">Individual
+	entry</a> (E.g. PDB code&nbsp;1XMW)</li>
+
+
+
+	<li><a href="http://www.bmrb.wisc.edu/servlet_data/molgrap">Indexed
+	by BMRB id</a></li>
+
+
+
+	<li><a
+		href="http://www.bmrb.wisc.edu/servlet_data/molgrap/index/index_pdb.html">Indexed
+	by PDB id&nbsp;</a><small>NEW</small></li>
+
+
+
+</ul>
+
+
+
+<h2>&nbsp;<br>
+
+
+</h2>
+
+
+<h2><a name="Known_bugs_and_todo_list"></a>Known bugs and todo list</h2>
+
+
+
+<b><br>
+
+
+
+</b>Please check the issues list at Google Code <a href="http://code.google.com/p/nmrrestrntsgrid/issues/list">here</a>.
+
+	
+
+
+
+
+<h2><a name="NMR_data_format_descriptions"></a>NMR data format
+descriptions</h2>
+
+
+
+<br>
+
+
+
+<p>The formats and how they are converted are described in&nbsp;<a
+	href="http://nmr.cmbi.ru.nl/~jd/wattos/">Wattos</a> Java documentation for
+
+
+Amber, Discover, Dyana, Emboss, and Xplor.</p>
+
+
+<p>Actually, the JavaCC grammar descriptions (source code) give the
+most detailed description. The grammar files can be downloaded
+from&nbsp;<a href="http://nmr.cmbi.ru.nl/~jd/wattos/">Wattos</a> home
+page.</p>
+
+
+<h2><a name="References"></a> References</h2>
+
+
+
+<p>The initial development of the NMR Restraints Grid was carried
+out at BMRB (<a href="#Doreleijers_J.F._Mading_S">ref 1</a>). The
+converted and filtered databases DOCR and FRED (<a
+	href="#Doreleijers_J.F._Nederveen_A.J.">ref 2</a>) were constructed as
+a collaborative project involving individuals from the: <br>
+
+
+
+</p>
+
+
+
+<ul>
+
+
+
+	<li><a href="http://nmr.chem.uu.nl/">Bijvoet Center for
+	Biomolecular Research</a>, (Utrecht University, the Netherlands),</li>
+
+
+
+	<li>BMRB (Madison, WI, USA),</li>
+
+            <li><a href="http://nmr.cmbi.ru.nl">Proteins Biophysics</a>, IMM, (Radboud University Nijmegen, the Netherlands),</li>
+
+
+	<li><a href="http://www.ccpn.ac.uk/">CCPN</a>, and</li>
+
+
+
+	<li><a href="http://www.ebi.ac.uk/msd-srv/docs/NMR/main.html">PDBe</a>, Protein Data Bank Europe, (Hinxton,
+	United Kingdom).&nbsp;</li>
+
+
+
+</ul>
+
+
+
+<p>The <a href="http://www.ebi.ac.uk/msd-srv/docs/NMR/recoord">RECOORD</a>
+database of REcalculated COORdinates (<a
+	href="#NederveenA.J._DoreleijersJ.F">ref 3</a>) was constructed using
+the FRED database. The <a href="http://www.cmbi.ru.nl/dress/">DRESS</a>
+database (<a href="#NabuursS.B._NederveenA.J.">ref 4</a>) was
+constructed using the original restraints from the NMR Restraint Grid.</p>
+
+
+
+<p>The software packages <a
+	href="http://webapps.ccpn.ac.uk/fcweb/">
+FormatConverter</a> and <a href="http://www.bmrb.wisc.edu/wattos/">Wattos</a>
+were used to construct the DOCR and FRED databases.</p>
+
+
+
+<p>Please cite these references when using the data:</p>
+
+
+
+<ol>
+
+
+
+</ol>
+
+
+
+<ol>
+
+
+
+	<li><a name="Doreleijers_J.F._Mading_S"></a>Doreleijers, J.F.,
+	Mading, S., Maziuk, D., Sojourner, K., Yin, L., Zhu, J., Markley, J.L.,
+	and Ulrich, E.L., J. Biomol. NMR <b>26</b>, 139-146 (2003). <a
+		href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12766409&amp;dopt=Abstract">medline</a></li>
+
+
+
+	<li><a name="Doreleijers_J.F._Nederveen_A.J."></a>Doreleijers
+	J.F., Nederveen A.J., Vranken W., Lin J., Bonvin A.M., Kaptein R.,
+	Markley J.L., and Ulrich E.L. BioMagResBank databases DOCR and FRED
+	with converted and filtered sets of experimental NMR restraints and
+	coordinates from over 500 protein PDB structures. J. Biomol. NMR <span
+		style="font-weight: bold;">32</span>, 1-12 (2005). <a
+		href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=16041478&amp;dopt=Abstract">medline</a>&nbsp;
+	</li>
+
+
+
+	<li><a name="NederveenA.J._DoreleijersJ.F"></a>Nederveen,A.J.,
+	Doreleijers,J.F., Vranken,W., Miller,Z., Spronk,C.A., Nabuurs,S.B.,
+	Guntert,P., Livny,M., Markley,J.L., Nilges,M., Ulrich,E.L., Kaptein,R.
+	and Bonvin,A.M. (2005). RECOORD: a recalculated coordinate database of
+	500+ proteins from the PDB using restraints from the BioMagResBank.
+	Proteins 59, 662-672. <a
+		href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15822098&amp;dopt=Abstract">medline</a></li>
+
+
+
+	<li><a name="NabuursS.B._NederveenA.J."></a>Nabuurs,S.B.,
+	Nederveen,A.J., Vranken,W., Doreleijers,J.F., Bonvin,A.M.,
+	Vuister,G.W., Vriend,G. and Spronk,C.A. (2004). DRESS: a database of
+	REfined solution NMR structures. Proteins 55, 483-486. <a
+		href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15103611&amp;dopt=Abstract">medline</a><br>
+
+
+
+	</li>
+
+
+
+</ol>
+
+
+
+<h2><a name="Funding"></a>Funding</h2>
+
+
+
+<p>Funding for the development of the DOCR and FRED databases came
+from:</p>
+
+
+
+<table>
+
+
+
+	<tbody>
+
+
+
+		<tr>
+
+
+
+			<td align="left"><a href="http://www.bmrb.wisc.edu/"><img
+				src="../images/bmrb_logo_brown_fg_cream_bg.gif" border="0"></a></td>
+
+
+
+
+			<td><b>BMRB</b>: grant LM05799 from the National Library of
+			Medicine, NIH</td>
+
+
+
+		</tr>
+
+
+
+		<tr>
+			<td><a href="http://nmr.cmbi.ru.nl"><img src="../images/proteinDynamics.png" border="0" width="150" ></a></td>
+			<td><b>Proteins Biophysics</b>, IMM/CMBI, Radboud University Nijmegen, the Netherlands</td>
+		</tr>
+		<tr>
+			<td><a href="http://www.ccpn.ac.uk/"><img
+				src="../images/ccpnLogo.png" border="0"></a></td>
+
+			<td><b>CCPN</b>: Collaborative Computing Project for NMR</td>
+		</tr>
+		<tr>
+
+
+
+			<td align="left"><a
+				href="http://www.ebi.ac.uk/msd/projects/NMRQUAL.html"><img
+				src="../images/NMRQUAL.gif" border="0"></a></td>
+
+
+
+
+			<td><b>NMRQUAL</b>: European Community Contract No.
+			QLG2-CT-2000-01313 and <br>EU FP6<b> 'ExtendNMR'</b></td>
+
+
+
+		</tr>
+
+
+
+
+
+
+
+
+
+	</tbody>
+</table>
+
+
+
+<hr>
+This file was last updated on: Thu Jan 15 10:29:07 CET 2009
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4413187-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

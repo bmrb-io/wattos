@@ -1,0 +1,9 @@
+InitAll
+
+FilterSTAR
+1brv_DOCR_small.str.gz
+tmp_dir/1brv_DOCR_small_wattos.str
+filter_rules.str
+
+Quit
+

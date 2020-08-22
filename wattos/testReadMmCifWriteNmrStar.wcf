@@ -1,0 +1,10 @@
+ReadEntryMmCIF  
+/dumpzone/pdb/pdb/data/structures/divided/mmCIF/br/1brv.cif.gz
+n
+
+WriteEntryNMRSTAR
+1brv_from_mmcif.str
+
+Quit
+
+

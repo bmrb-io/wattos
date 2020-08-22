@@ -1,0 +1,76 @@
+# wsetup: Script to define Wattos environment variables and aliases
+# ===========================================================
+# Jurgen F. Doreleijers
+# ===========================================================
+# source the script before running Wattos.
+# The variable 'WATTOSROOT' must exist and point to the Wattos top directory.
+# The variable 'WATTOSHOME' must exist and point to a writable user-specific directory
+#	(not needed to exist yet) where Wattos can save settings and state.
+
+# How much memory is wattos allowed to gobble?
+setenv WATTOSMEM        2000m
+
+# -------------------------------------------------
+# leave the rest untouched
+
+# Installation directories.
+setenv WATTOSSRCDIR     $WATTOSROOT/src
+setenv WATTOSCLASSDIR   $WATTOSROOT/build
+setenv WATTOSCLASSDIR   ${WATTOSCLASSDIR}
+setenv WATTOSJARSDIR    $WATTOSROOT/lib
+setenv WATTOSDOCDIR     $WATTOSROOT/doc
+setenv WATTOSDATADIR    $WATTOSROOT/data
+setenv WATTOSBINDIR     $WATTOSROOT/bin
+setenv WATTOSSCRIPTSDIR $WATTOSROOT/scripts
+
+# location of on-line manual for WATTOS:
+setenv WATTOSHELPURL "file:///$WATTOSDOCDIR/index.html"
+
+## Start wattos non-graphical ui
+# Used to include: -DWATTOSHOME=$WATTOSHOME
+alias wattos 'java -Xmx$WATTOSMEM Wattos.CloneWars.UserInterface -at'
+# the most simplest of routines used as a test program
+alias getEpochTime 'java Wattos.Utils.Programs.GetEpochTime'
+# Program to do relational operations on sets like PDB ids
+alias relate 'java Wattos.Utils.Programs.Relate $*'
+# Filter or just reformat a star file
+alias filter 'java Wattos.Star.STARFilter $*'
+# Filter or just reformat a star file
+alias mrannotator 'java -Xmx4g Wattos.Episode_II.MRAnnotate'
+
+# Wattos own classes
+setenv CLASSPATH ${WATTOSJARSDIR}/Wattos.jar
+
+# hostname shows Stella.local or stella.cmbi.umcn.nl
+# lower case hostname on cygwin and upper case on windows.
+# disabled this more advanced way as gawk is not always present on Mac.
+set wattoshost = (`hostname|gawk -F'[.]' '{print tolower($1)}'| sed -e 's/[-0-9]//g'`)
+#set wattoshost = (`hostname`)
+if ( $wattoshost == 'stella' ) then
+    # Disable the next line if on development machine we still want to use the production jar.
+    setenv CLASSPATH ${WATTOSCLASSDIR}
+    # Note that the following statement interfers with scp when shown.
+    # echo "DEBUG: Wattos wsetup found to be on development machine"
+endif
+
+
+# For a description of the jar files see the README.txt in the lib dir.
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/ant-contrib.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/colt.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/CSVutils.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/jakarta-regexp.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/javacc.jar
+#setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/jdbc20x.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/JFlex.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/printf_hb15.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/mysql-connector-java-5.0.3-bin.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/starlibj_with_source.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/swing-layout-1.0.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/jfreechart-1.0.1.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/jcommon-1.0.0.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/gnujaxp.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/itext-1.4.jar
+setenv CLASSPATH ${CLASSPATH}:${WATTOSJARSDIR}/junit-3.8.1.jar
+
+#echo "Initialized Wattos with Java classpath:" $CLASSPATH
+

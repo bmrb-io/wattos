@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE>The Star package</TITLE>
+  </HEAD>
+  <BODY>
+
+  <P>
+API to quickly parse/unparse generic large STAR files like those
+in the NMR-STAR and mmCIF sub formats. This package has very little
+specific functionality for either format. Look in package NMRStar for 
+more specific support.<BR>
+Here support is present for data blocks, saveframes, and unnested loops (tables).<BR>
+It doesn't yet support:
+<UL>
+<LI>global block
+<LI>multiple data blocks
+<LI>dictionary.
+</ul>
+
+Not planned to support nested loops.
+
+<BR>
+Benchmark testing:
+<ul>
+<LI>Tested on a Pentium IV of 1.6 MHz (cod.bmrb.wisc.edu) with 1 Gb.
+<LI>JProfiler was used to identify bottlenecks.
+
+<LI>Loading coordinate section of mmCIF formatted file for PDB entry 1VRE
+    (BMRB entry 4096). For the test it is modeled as having about 10
+    columns of which half are numbers and half are strings.
+    The file is 6.5 Mb and contains 29 models and 2177 atoms per model. 
+    That's ~60,000 atoms times 10 columns or 500,000 objects.
+    Modelling the components above will be done later.
+    The reading proceeds in the following steps:
+    <OL>
+    <LI>Parsing into a STAR tagtable object
+    <LI>Parse the strings to native types
+    <LI>Unparse
+    </OL></LI>
+    </ul>
+<PRE>    
+See code in Wattos.Star.StarGeneralTest (Junit tested)
+Step    Clock time
+1       3.5
+2       ?
+3       3.2
+</PRE>    
+  </BODY>
+</HTML>

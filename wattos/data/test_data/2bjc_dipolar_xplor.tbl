@@ -1,0 +1,10 @@
+! residual dipolar coupling restraints
+!
+assi ( resid 999 and name OO )
+     ( resid 999 and name Z  )
+     ( resid 999 and name X  )
+     ( resid 999 and name Y  )
+     ( resid    5 and name N and segid A )
+     ( resid    5 and name HN and segid A )  -0.743   0.123
+!
+deliberate error introduce for error checking

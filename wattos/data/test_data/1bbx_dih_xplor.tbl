@@ -1,0 +1,25 @@
+!
+! dihedral angle constraints (part of original)
+!
+  assign (segid C and resid  1 and name C ) (segid C and resid  2 and name N )
+         (segid C and resid  2 and name CA) (segid C and resid  2 and name C ) 1.0 -120.0 30.0 2
+
+  assign (segid C and resid  2 and name C ) (segid C and resid  3 and name N )
+         (segid C and resid  3 and name CA) (segid C and resid  3 and name C ) 1.0 -120.0 30.0 2
+
+\ deliberate error introduced for error checking
+  assign (segid C and resid 59 and name C ) (segid C and resid 60 and name N )
+         (segid C and resid 60 and name CA) (segid C and resid 60 and name C ) 1.0 -60.0 30.0 2
+
+  assign (segid C and resid 60 and name C ) (segid C and resid 61 and name N )
+         (segid C and resid 61 and name CA) (segid C and resid 61 and name C ) 1.0 -60.0 30.0 2
+
+ 
+    assi (segid D and resid 56 and name N ) (segid D and resid 56 and name CA)
+         (segid D and resid 56 and name CB) (segid D and resid 56 and name CG) 1.0 -160.0 30.0 2
+
+assign  (segid A and resid 1 and name  c4') (segid A and resid 1 and name  c3')
+        (segid A and resid 1 and name  o3') (segid A and resid 2 and name   p ) 1.0 -120.0 100.0 4
+assign  (segid A and resid 2 and name   p ) (segid A and resid 2 and name  o5')
+        (segid A and resid 2 and name  c5') (segid A and resid 2 and name  c4') 1.0 180.0 110.0 4
+

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE>The XPLOR/CNS converter</TITLE>
+  </HEAD>
+  <BODY>
+
+<P>Parser for X-PLOR, CNS, Aria, and XPLOR-NIH formatted restraint files.
+</p>
+  <P>
+The only source files here that were created by humans are the java source files:
+StarOut.java  and Utils.java and the JavaCC grammar file XplorParser.jj. All other
+files are (re-)generated using JavaCC Parser Generator.
+
+<P> Examples of input are:
+<PRE>
+ASSI { 6} (( segid "SH3 " and resid 53 and name HA )) (( segid "SH3 " and resid 53 and name HE1 )) 3.600 1.700 1.700 peak 6 weight 0.10000E+01 volume 0.14383E-02 ppm1 4.578 ppm2 9.604 CV 1 
+  OR { 6} (( segid "SLP " and resid 83 and name HB )) (( segid "SH3 " and resid 53 and name HE1 ))
+</PRE>
+
+  <P>
+  TO DO:
+  <OL>
+  <LI>For entry 1naj there are RDCs with 3 important atoms which aren't caught yet.
+  <LI>For entry 1ttv there are atom names that start with '*' and the parser 
+  falsely considers it an error. 
+<LI>For entry 2a55 there are RDCs with only 2 atoms that aren't parsable yet.
+</LI></OL>
+
+</BODY>
+</HTML>

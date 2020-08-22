@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title></title>
+
+
+</head>
+
+
+<body>
+
+<p>This package contains Java code specific to the molecular
+objects in a soup. (<a href="http://www.google.com/search?q=whatif+homepage">WHAT IF</a>
+jargon)
+</p>
+
+<p>For the specific entities like atom, residue, molecule, etc.
+look in
+the <code>Atom</code>
+class for the most complete documentation.
+</p>
+
+<p>
+The Atoms class is the basic object which is optimized to deal with
+many atoms.
+The classes above it (like <code>Residue/Molecule/Ensemble/Gumbo</code>)
+organize the atoms in a
+more object oriented fashion. The classes like {@link Wattos.Soup.Atom}
+use primitive data types and non-redundant strings as made possible by
+the {@link Wattos.Database} package in order to
+prevent the generation of many objects like Strings which is
+inefficient in Java beyond the order of a thousand or so.
+</p>
+
+<p>
+Recap of the order with <a href="http://www.google.com/search?q=mmCIF">mmCIF</a>
+and NMR-STAR equivalents<br>
+
+</p>
+
+<pre>-@-1- Atom Atom<br>-:-2- Residue Chemical Component<br>-#-3- Molecule Entity<br>-~-4- Model Assembly<br>-^-5- Entry Same<br>---6- DBMS Same<br></pre>
+
+<p>
+Everything is in one soup (called Gumbo in Wattos).
+</p>
+
+<p>
+In the future a parser will be implemented that can be used to do
+things like: "make an atom taste good" (in <a href="http://www.google.com/search?q=MOLMOL">MOLMOL</a>
+jargon): </p>
+
+<pre>SetProperty @Atom:Residue#Molecule^Ensemble 'jummie'</pre>
+
+<p>
+Estimated maximum number of atoms in the gumbo
+</p>
+
+<pre>-@-1- Atom<br>-:-2- Residue has 20 atoms (including pseudo atoms) 10,000,000 atoms<br>-#-3- Molecule has 100 residues (ions will be a residue when bound) 500,000 residues<br>-~-4- Model has 10 molecules (e.g. multimer) 5,000 molecules<br>-^-5- Entry has 50 500 models<br>---6- DBMS has 10 entries 10 entry<br></pre>
+
+<p>
+Total 10,000,000 atoms for biggest and most complex case above.
+Reading/writing/etc. of such quantities is a matter of seconds in
+Wattos.</p>
+
+</body>
+</html>

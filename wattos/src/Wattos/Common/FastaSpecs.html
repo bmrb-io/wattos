@@ -1,0 +1,92 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 10 (filtered)">
+<title>Revision 0</title>
+
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US>
+
+<div class=Section1>
+
+<p class=MsoNormal>Revision 0.2:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;fasta-entry-list&gt;         ::= { &lt;fasta-entry&gt; }</p>
+
+<p class=MsoNormal>&lt;fasta-entry&gt;               ::= &lt;fasta-summary&gt;
+{ &lt;fasta-sequence&gt; }</p>
+
+<p class=MsoNormal>&lt;fasta-sequence&gt;        ::= { &lt;residue_type_id&gt;
+} &lt;eol&gt;</p>
+
+<p class=MsoNormal>&lt;residue_type_id&gt;      ::= &quot;-&quot; |
+&quot;*&quot; | A | B | C | D | E | F | G | H | I | K | L | M | N | P | Q | R |
+S | T | U | V | W | X | Y | Z</p>
+
+<p class=MsoNormal>&lt;eol&gt;                           ::= &quot;\n&quot; |
+&quot;\r\n&quot; | &quot;\r&quot;</p>
+
+<p class=MsoNormal>&lt;fasta-summary&gt;         ::= &quot;&gt;&quot; &lt;id_set&gt;
+[{&quot;|&quot; &lt;id_set&gt; }] &quot;|&quot; [ &lt;fasta_format_id&gt; ]
+&lt;eol&gt;</p>
+
+<p class=MsoNormal>&lt;fasta_format_id&gt;       ::= FASTA_FORMAT_ID_GENERAL</p>
+
+<p class=MsoNormal>&lt;id_set&gt;                      ::= &lt;db_name&gt;
+&quot;|&quot; &lt;db_id&gt; &quot;|&quot; [ &lt;db_subid&gt; ] &quot;|&quot; [
+&lt;db_molecule_name&gt; ]</p>
+
+<p class=MsoNormal>&lt;db_name&gt;                 ::= sesame | bmrb | pdb | dbj
+| emb | gb | gi | pfam | pir | prf | ref | refseq | sp | SWISS-PROT | tpg</p>
+
+<p class=MsoNormal>&lt;db_id&gt;                      ::= &lt;word&gt;</p>
+
+<p class=MsoNormal>&lt;db_subid&gt;                 ::= &lt;word&gt;</p>
+
+<p class=MsoNormal>&lt;db_molecule_name&gt; ::= &lt;word&gt;</p>
+
+<p class=MsoNormal>&lt;word&gt;                       ::= { &lt;character&gt; }</p>
+
+<p class=MsoNormal>&lt;character&gt;                 ::= &lt;alpha_numeric&gt;
+| &lt;other_allowed&gt;</p>
+
+<p class=MsoNormal>&lt;alpha_numeric&gt;        ::= | A | B | C | D | E | F | G
+| H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | 0
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
+
+<p class=MsoNormal>&lt;other_allowed&gt;         ::= &quot;~&quot; |
+&quot;`&quot; | &quot;!&quot; | &quot;#&quot; | &quot;%&quot; | &quot;^&quot; |
+&quot;*&quot; | &quot;(&quot; | &quot;)&quot; | &quot;-&quot; | &quot;_&quot; |
+&quot;+&quot; | &quot;=&quot; | &quot;{&quot; | &quot;}&quot; | &quot;[&quot; |
+</p>
+
+<p class=MsoNormal>                                                &quot;]&quot;
+| &quot;\&quot; | &quot;;&quot; | &quot;:&quot; | &quot;'&quot; |
+&quot;&quot;&quot; | &quot;,&quot; | &quot;.&quot; | &quot;/&quot; |
+&quot;?&quot;</p>
+
+</div>
+
+</body>
+
+</html>

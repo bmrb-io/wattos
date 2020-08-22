@@ -1,0 +1,151 @@
+data_pseudo_atom_library
+
+save_file_characteristics
+   _Saveframe_category   file_characteristics
+
+   _File_version         1.0
+   _Author               "Jurgen F. Doreleijers"
+
+   loop_
+      _Date
+      _Details
+
+       2000-03-09 "Added ARG QZ (ARG+ QZ was already there)" 
+       2003-05-27 "First creation from Aqua lib"             
+
+   stop_
+
+save_
+
+
+save_pseudo_atom_lib
+   _Saveframe_category   pseudo_atom_lib
+
+   _Details             
+;
+Note: - QR of rings holds 4 protons as in Wuethrichs paper
+      - the LYS QZ (but is NH3 group) is weird 
+The pseudoatom type is set according to the following table:
+     0 undefined  (*)
+     1 CH2 or NH2 (2)                2 methyl or NH3 (3)
+     3 double CH2/NH2 (4)            4 double methyl (6)
+     5 Aromat with 2 H (2)           6 Aromat with 4 H (4)
+The number between brackets is the number of atoms within.
+;
+
+   loop_
+      _Comp_ID
+      _Chem_comp_seq_num
+      _Pseudo_atom_ID
+      _Pseudo_atom_type
+      _Atom_ID_1
+      _Atom_ID_2
+      _Atom_ID_3
+      _Atom_ID_4
+      _Atom_ID_5
+      _Atom_ID_6
+
+       ALA   *  MB   2   HB1   HB2   HB3   .     .     .    
+       ARG   *  QB   1   HB2   HB3   .     .     .     .    
+       ARG   *  QG   1   HG2   HG3   .     .     .     .    
+       ARG   *  QD   1   HD2   HD3   .     .     .     .    
+       ARG   *  QH1  1   HH11  HH12  .     .     .     .    
+       ARG   *  QH2  1   HH21  HH22  .     .     .     .    
+       ARG   *  QH   3   HH11  HH12  HH21  HH22  .     .    
+       ARG   *  QZ   3   HH11  HH12  HH21  HH22  .     .    
+       ARG+  *  QB   1   HB2   HB3   .     .     .     .    
+       ARG+  *  QG   1   HG2   HG3   .     .     .     .    
+       ARG+  *  QD   1   HD2   HD3   .     .     .     .    
+       ARG+  *  QH1  1   HH11  HH12  .     .     .     .    
+       ARG+  *  QH2  1   HH21  HH22  .     .     .     .    
+       ARG+  *  QZ   3   HH11  HH12  HH21  HH22  .     .    
+       ASN   *  QB   1   HB2   HB3   .     .     .     .    
+       ASN   *  QD   1   HD21  HD22  .     .     .     .    
+       ASP   *  QB   1   HB2   HB3   .     .     .     .    
+       ASP-  *  QB   1   HB2   HB3   .     .     .     .    
+       CYS   *  QB   1   HB2   HB3   .     .     .     .    
+       GLN   *  QB   1   HB2   HB3   .     .     .     .    
+       GLN   *  QE   1   HE21  HE22  .     .     .     .    
+       GLN   *  QG   1   HG2   HG3   .     .     .     .    
+       GLU   *  QB   1   HB2   HB3   .     .     .     .    
+       GLU   *  QG   1   HG2   HG3   .     .     .     .    
+       GLU-  *  QB   1   HB2   HB3   .     .     .     .    
+       GLU-  *  QG   1   HG2   HG3   .     .     .     .    
+       GLY   *  QA   1   HA2   HA3   .     .     .     .    
+       HIS   *  QB   1   HB2   HB3   .     .     .     .    
+       HIS+  *  QB   1   HB2   HB3   .     .     .     .    
+       ILE   *  MD   2   HD11  HD12  HD13  .     .     .    
+       ILE   *  QG   1   HG12  HG13  .     .     .     .    
+       ILE   *  MG   2   HG21  HG22  HG23  .     .     .    
+       LEU   *  QB   1   HB2   HB3   .     .     .     .    
+       LEU   *  MD1  2   HD11  HD12  HD13  .     .     .    
+       LEU   *  MD2  2   HD21  HD22  HD23  .     .     .    
+       LEU   *  QD   4   HD11  HD12  HD13  HD21  HD22  HD23 
+       LYS   *  QB   1   HB2   HB3   .     .     .     .    
+       LYS   *  QG   1   HG2   HG3   .     .     .     .    
+       LYS   *  QD   1   HD2   HD3   .     .     .     .    
+       LYS   *  QE   1   HE2   HE3   .     .     .     .    
+       LYS   *  QZ   2   HZ1   HZ2   HZ3   .     .     .    
+       LYS+  *  QB   1   HB2   HB3   .     .     .     .    
+       LYS+  *  QG   1   HG2   HG3   .     .     .     .    
+       LYS+  *  QD   1   HD2   HD3   .     .     .     .    
+       LYS+  *  QE   1   HE2   HE3   .     .     .     .    
+       LYS+  *  QZ   2   HZ1   HZ2   HZ3   .     .     .    
+       MET   *  QB   1   HB2   HB3   .     .     .     .    
+       MET   *  QG   1   HG2   HG3   .     .     .     .    
+       MET   *  ME   2   HE1   HE2   HE3   .     .     .    
+       PHE   *  QB   1   HB2   HB3   .     .     .     .    
+       PHE   *  QD   5   HD1   HD2   .     .     .     .    
+       PHE   *  QE   5   HE1   HE2   .     .     .     .    
+       PHE   *  QR   6   HD1   HD2   HE1   HE2   .     .    
+       PRO   *  QB   1   HB2   HB3   .     .     .     .    
+       PRO   *  QG   1   HG2   HG3   .     .     .     .    
+       PRO   *  QD   1   HD2   HD3   .     .     .     .    
+       SER   *  QB   1   HB2   HB3   .     .     .     .    
+       THR   *  MG   2   HG21  HG22  HG23  .     .     .    
+       TRP   *  QB   1   HB2   HB3   .     .     .     .    
+       TYR   *  QB   1   HB2   HB3   .     .     .     .    
+       TYR   *  QD   5   HD1   HD2   .     .     .     .    
+       TYR   *  QE   5   HE1   HE2   .     .     .     .    
+       TYR   *  QR   6   HD1   HD2   HE1   HE2   .     .    
+       VAL   *  MG1  2   HG11  HG12  HG13  .     .     .    
+       VAL   *  MG2  2   HG21  HG22  HG23  .     .     .    
+       VAL   *  QG   4   HG11  HG12  HG13  HG21  HG22  HG23 
+
+       A     *  Q5'  1   H5'   H5''  .     .     .     .    
+       A     *  Q6   1   H61   H62   .     .     .     .    
+       C     *  Q5'  1   H5'   H5''  .     .     .     .    
+       C     *  Q4   1   H41   H42   .     .     .     .    
+       G     *  Q5'  1   H5'   H5''  .     .     .     .    
+       G     *  Q2   1   H21   H22   .     .     .     .    
+       T     *  Q5'  1   H5'   H5''  .     .     .     .    
+       T     *  M7   2   H71   H72   H73   .     .     .    
+       U     *  Q5'  1   H5'   H5''  .     .     .     .    
+       A     *  Q2'  1   H2'   H2''  .     .     .     .    
+       C     *  Q2'  1   H2'   H2''  .     .     .     .    
+       G     *  Q2'  1   H2'   H2''  .     .     .     .    
+       T     *  Q2'  1   H2'   H2''  .     .     .     .    
+       U     *  Q2'  1   H2'   H2''  .     .     .     .    
+# Inserted in order to work with EBI names for nucleic acids.
+       DA     *  Q5'  1   H5'   H5''  .     .     .     .    
+       DA     *  Q6   1   H61   H62   .     .     .     .    
+       DC     *  Q5'  1   H5'   H5''  .     .     .     .    
+       DC     *  Q4   1   H41   H42   .     .     .     .    
+       DG     *  Q5'  1   H5'   H5''  .     .     .     .    
+       DG     *  Q2   1   H21   H22   .     .     .     .    
+       DT     *  Q5'  1   H5'   H5''  .     .     .     .    
+       DT     *  M7   2   H71   H72   H73   .     .     .    
+       DU     *  Q5'  1   H5'   H5''  .     .     .     .    
+       DA     *  Q2'  1   H2'   H2''  .     .     .     .    
+       DC     *  Q2'  1   H2'   H2''  .     .     .     .    
+       DG     *  Q2'  1   H2'   H2''  .     .     .     .    
+       DT     *  Q2'  1   H2'   H2''  .     .     .     .    
+       DU     *  Q2'  1   H2'   H2''  .     .     .     .    
+
+       DUR   *  Q2'  1   H2'   H2''  .     .     .     .    
+       DUR   *  Q5'  1   H5'   H5''  .     .     .     .    
+
+   stop_
+
+save_
+

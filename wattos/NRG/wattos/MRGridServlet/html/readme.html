@@ -1,0 +1,1550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>readme</title>
+  <link rel="stylesheet" type="text/css" href="main.css" title="main stylesheet">
+</head>
+
+
+<body>
+
+
+
+
+
+
+<table cellpadding="10" cellspacing="10">
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td><a href="http://www.bmrb.wisc.edu/"><img style="border: 0px solid ; width: 100px; height: 100px;" alt="BMRB logo" src="http://www.bmrb.wisc.edu/WebModule/wattos/MRGridServlet/images/bmrb_logo_brown_fg_cream_bg.gif"></a></td>
+
+
+
+
+
+
+      <td>
+      
+      
+      
+      
+      
+      <h1><a href="http://www.bmrb.wisc.edu/NRG/MRGridServlet">NMR
+Restraints Grid</a></h1>
+
+
+
+
+
+
+      </td>
+
+
+
+
+
+
+      <td><img style="border: 0px solid ; width: 155px; height: 105px;" alt="Data flows from the original raw data to parsed, to the databases DOCR and FRED" src="http://www.bmrb.wisc.edu/WebModule/wattos/MRGridServlet/images/NMRRestraintsGridFlow.gif"></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+<br>
+
+
+
+
+
+This
+README describes the content of zip files downloaded from the <a href="http://www.bmrb.wisc.edu/NRG/MRGridServlet">NMR
+Restraints Grid</a> at the <a href="http://www.bmrb.wisc.edu/">BMRB</a>.<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+<h2>
+
+Content
+</h2>
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+  <li><a href="#Organization">Organization</a></li>
+
+
+
+
+
+
+  <li><a href="#Using_downloaded_data">Using
+downloaded data</a></li>
+
+
+
+
+
+
+  <li><a href="#Using_the_index_file">Using the
+index file</a></li>
+
+
+
+
+
+
+  <li><a href="#List_of_file_extensions">List of
+file extensions</a></li>
+
+
+
+
+
+
+  <li><a href="#List_of_columns_in_index_file">List of columns in
+index file</a></li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">
+<h2><a name="Organization"></a>Organization</h2>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<table border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="font-weight: bold;">File
+name</td>
+
+
+
+
+
+
+      <td style="font-weight: bold;">Description</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>readme.html</td>
+
+
+
+
+
+
+      <td>This
+file</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>index.csv</td>
+
+
+
+
+
+
+      <td>Index
+file used for looking up mr_block_id(s) for specific entries or data
+types</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+      <td>main.css</td>
+
+
+      <td>Hypertext Cascading Style Sheet used by your browser for
+rendering the readme. Keep this file in the same directory as the
+readme. Not important otherwise.</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>errors.txt</td>
+      <td>An optional file that describes any errors that might have
+been encountered downloading the data from the database. It is possible
+that modifications to the database during download removed requested
+blocks. That is one example that would be documented in this file.</td>
+    </tr>
+    <tr>
+
+
+
+
+
+
+      <td>block_123.txt</td>
+
+
+
+
+
+
+      <td>File
+with data on the block with mr_block_id equal to e.g. 123</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>block_124.tgz</td>
+
+
+
+
+
+
+      <td>File
+with binary data of a gzipped tar file with for
+example XML files. A full list of possible file extensions is detailed
+      <a href="#List_of_file_extensions">below</a>.</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>block_125.txt</td>
+
+
+
+
+
+
+      <td><span style="font-style: italic;">Etc</span>.</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<h2><a name="Using_downloaded_data"></a>Using downloaded
+dat<span style="font-weight: bold;">a</span></h2>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+The
+data is split up into one or more blocks each in their own file called
+block_XXXX.txt. In order to use the data you will need the index file:
+index.csv. Each row contains information specific for a data file. One of the columns in the index file lists the mrblock_id.<br>
+
+
+
+
+
+
+&nbsp;&nbsp;
+&nbsp;<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<h2><a name="Using_the_index_file"></a><span style="font-weight: bold;">Using
+the index file</span></h2>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+Most spreadsheet programs, e.g.
+Gnumeric and MS Excel, can read csv formatted files such as the index
+files. Alternatively, you might want to use a scripting language such
+as gawk to access subsets of the data. The meaning of the all columns
+is documented&nbsp;<a href="#List_of_columns_in_index_file">below</a>.<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+For
+example,
+to locate the block ids with the data on a specific PDB entry, &nbsp;the Unix tool&nbsp;<span style="font-style: italic;"></span><span style="font-style: italic;">gawk</span> could be used with the PDB code on the index file. E.g.,
+replacing XXXX by the PDB code of interest in:<br>
+
+
+
+
+
+
+<pre>gawk -F',' '{if($4=="XXXX")print $2}' index.csv &gt; block_ids.txt</pre>
+
+
+
+
+
+
+Note that the field number&nbsp;of the PDB code might be 3 in stead of 4 depending on whether or not any BMRB codes are listed.<br>
+
+<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<h2><a name="List_of_file_extensions"></a><span style="font-weight: bold;">List of file
+extensions</span></h2>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+Alphabetically sorted by filename extension.<br>
+
+
+
+
+
+
+<table style="width: 635px; height: 368px;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="font-weight: bold;">Filename
+extension</td>
+
+
+
+
+
+
+      <td style="font-weight: bold;">Explanation</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>aco</td>
+
+
+
+
+
+
+      <td>DYANA/DIANA for dihedral
+angle restraints</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>csv</td>
+
+
+
+
+
+
+      <td>Comma Separate Values</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>lol</td>
+
+
+
+
+
+
+      <td>DYANA/DIANA upper limits
+for distance restraints</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>mtf</td>
+
+
+
+
+
+
+      <td>CNS Molecular Topology File</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>pdb</td>
+
+
+
+
+
+
+      <td>Protein DataBank</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>seq</td>
+
+
+
+
+
+
+      <td>DYANA/DIANA sequence</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>str</td>
+
+
+
+
+
+
+      <td>STAR: Self-defining Text
+Archive and Retrieval</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>tbl</td>
+
+
+
+
+
+
+      <td>XPLOR/CNS tables of data</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>tgz</td>
+
+
+
+
+
+
+      <td>Gzipped tar</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>txt</td>
+
+
+
+
+
+
+      <td>General text</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>upl</td>
+
+
+
+
+
+
+      <td>DYANA/DIANA upper limits
+for distance restraints</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>xml</td>
+
+
+
+
+
+
+      <td>EXtensible Markup Language</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;<br>
+
+
+
+
+
+
+<h2><a name="List_of_columns_in_index_file"></a><span style="font-weight: bold;">List
+of columns</span> in
+index file</h2>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+Alphabetically sorted by<span style="font-weight: bold;">&nbsp;</span>column
+label.
+<table style="width: 707px; height: 452px;" border="1" cellpadding="2" cellspacing="2">
+
+
+
+
+
+
+  <tbody>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td style="font-weight: bold;">Column</td>
+
+
+
+
+
+
+      <td style="font-weight: bold;">Explanation</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>bmrb_id</td>
+
+
+
+
+
+
+      <td>BMRB accession number</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>format</td>
+
+
+
+
+
+
+      <td>Format of the data e.g.
+"ambi" for ambiguous distance restraints</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>image</td>
+
+
+
+
+
+
+      <td>Molecular image of the
+PDB entry</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>in_dress</td>
+
+
+
+
+
+
+      <td>True if the structure
+has been recalculated in <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15103611&amp;dopt=Abstract">DRESS</a></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>in_recoord</td>
+
+
+
+
+
+
+      <td>True if the
+structure has been recalculated in <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15822098&amp;dopt=Abstract">RECOORD</a></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>item_count</td>
+
+
+
+
+
+
+      <td>Total number of
+distance, dihedral angle, and RDC restraints. Currently only STAR formatted files generated at BMRB are counted.</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>mrblock_id</td>
+
+
+
+
+
+
+      <td>Numeric id in the
+database for this block (may change over time)</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>mrfile_id</td>
+
+
+
+
+
+
+      <td>Numeric id in the
+database for the file this block is part of</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>other_prop</td>
+
+
+
+
+
+
+      <td>Other type of
+information e.g. "LOWER_ONLY=true" for CYANA data</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>pdb_id</td>
+
+
+
+
+
+
+      <td>PDB code being a numeral
+followed by three alphanumericals</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>position</td>
+
+
+
+
+
+
+      <td>Position of this block
+in the file (the first block is numbered 0)</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>program</td>
+
+
+
+
+
+
+      <td>Program or software
+format, e.g. XPLOR/CNS, STAR</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>stage</td>
+
+
+
+
+
+
+      <td>Data flows from original,
+parsed, converted, to filtered, see the NMR Restraint Grid <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12766409&amp;dopt=Abstract">paper</a></td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>subtype</td>
+
+
+
+
+
+
+      <td>Subtype of the data
+such as "NOE" for distance restraints</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+    <tr>
+
+
+
+
+
+
+      <td>type</td>
+
+
+
+
+
+
+      <td>Type of the data such as
+"distance" for distance restraints</td>
+
+
+
+
+
+
+    </tr>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  </tbody>
+</table>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+Note: The list of
+allowed data in the NMR Restraints Grid is available with the Wattos <a href="http://nmr.cmbi.ru.nl/~jd/wattos/">documentation</a>.<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<hr>This file was last updated on: Wed Jan 14 08:28:09 CST 2009
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4422425-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

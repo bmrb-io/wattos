@@ -1,0 +1,23 @@
+# simple one line comments are allowed
+InitAll
+SetProp
+interactiveSession
+false
+SetProp
+verbosity
+9
+SetProp
+writeSessionOnExit
+false
+ListProp
+
+# Extra argument is for syncing.
+ReadEntryMmCIF
+/Users/jd/wattosTestingPlatform/pdb/data/structures/divided/mmCIF/ai/1ai0.cif.gz
+y
+
+WriteEntryNMRSTAR
+/Users/jd/workspace/Wattos/tmp_dir/1ai0_rem.str.gz
+
+Quit
+

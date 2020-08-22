@@ -1,0 +1,108 @@
+data_1brv_DOCR_small
+
+save_assign_stereo
+    _Stereo_list.Sf_category          stereo_assignments
+    _Stereo.Entry_ID                  1
+    _Stereo.Stereo_list_ID            1
+    _Stereo_list.Triplet_count        9
+    _Stereo_list.Swap_count           0
+    _Stereo_list.Swap_percentage      0.0
+    _Stereo_list.Deassign_count       1
+    _Stereo_list.Deassign_percentage  11.1
+    _Stereo_list.Model_count          2
+    _Stereo_list.Total_e_low_states   2.282
+    _Stereo_list.Total_e_high_states  31.802
+    _Stereo_list.Crit_abs_e_diff      1.000
+    _Stereo_list.Crit_rel_e_diff      0.000
+    _Stereo_list.Crit_mdls_favor_pct  49.0
+    _Stereo_list.Crit_sing_mdl_viol   1.000
+    _Stereo_list.Crit_multi_mdl_viol  0.500
+    _Stereo_list.Crit_multi_mdl_pct   50.0
+    _Stereo_list.Details              
+;
+Description of the tags in this list:
+*  1 * NMR-STAR 3 administrative tag
+*  2 * NMR-STAR 3 administrative tag
+*  3 * NMR-STAR 3 administrative tag
+*  4 * Number of triplets (atom-group pair and pseudo)
+*  5 * Number of triplets that were swapped
+*  6 * Percentage of triplets that were swapped
+*  7 * Number of deassigned triplets
+*  8 * Percentage of deassigned triplets
+*  9 * Number of models in ensemble
+* 10 * Energy of the states with the lower energies summed for all triplets (Ang.**2)
+* 11 * Energy of the states with the higher energies summed for all triplets (Ang.**2)
+* 12 * Item 9-8
+* 13 * Criterium for swapping assignment on the absolute energy difference (Ang.**2)
+* 14 * Criterium for swapping assignment on the relative energy difference (Ang.**2)
+* 15 * Criterium for swapping assignment on the percentage of models favoring a swap
+* 16 * Criterium for deassignment on a single model violation (Ang.)
+* 17 * Criterium for deassignment on a multiple model violation (Ang.)
+* 18 * Criterium for deassignment on a percentage of models
+* 19 * this tag
+
+Description of the tags in the table below:
+*  1 * Chain identifier (can be absent if none defined)
+*  2 * Residue number
+*  3 * Residue name
+*  4 * Name of pseudoatom representing the triplet
+*  5 * Ordinal number of assignment (1 is assigned first)
+*  6 * 'yes' if assignment state is swapped with respect to restraint file
+*  7 * Percentage of models in which the assignment with the lowest
+        overall energy is favoured
+*  8 * Percentage of difference between lowest and highest overall energy
+        with respect to the highest overall energy
+*  9 * Difference between lowest and highest overall energy
+* 10 * Energy of the highest overall energy state (Ang.**2)
+* 11 * Energy of the lowest overall energy state (Ang.**2)
+* 12 * Number of restraints involved with the triplet. The highest ranking
+        triplet on this number, is assigned first
+* 13 * Number of restraints involved with the triplet that are ambiguous
+        besides the ambiguity from this triplet
+* 14 * 'yes' if restraints included in this triplet are deassigned
+* 15 * Maximum unaveraged violation before deassignment (Ang.)
+* 16 * Number of violated restraints above threshold for a single model
+        before deassignment (given by 
+       _Stereo_assignments.Violation_single_model_criterium_count)
+* 17 * Number of violated restraints above threshold for a multiple models
+        before deassignment (given by 
+       _Stereo_assignments.Violation_multi_model_criterium_count)
+* 18 * NMR-STAR 3.0 administrative tag
+* 19 * NMR-STAR 3.0 administrative tag
+;
+
+
+    loop_
+       _Stereo.Entity_ID
+       _Stereo.Comp_index_ID
+       _Stereo.Comp_ID
+       _Stereo.Pseudo_Atom_ID
+       _Stereo.Assignment_ID
+       _Stereo.Swapped
+       _Stereo.Models_favoring_pct
+       _Stereo.Energy_difference_pct
+       _Stereo.Energy_difference
+       _Stereo.Energy_high_state
+       _Stereo.Energy_low_state
+       _Stereo.Restraint_count
+       _Stereo.Restraint_ambi_count
+       _Stereo.Deassigned
+       _Stereo.Violation_max
+       _Stereo.Single_mdl_crit_count
+       _Stereo.Multi_mdl_crit_count
+       _Stereo_list.Entry_ID
+       _Stereo_list.ID
+
+       1 16 CYS QB 3 no 100.0 89.8 3.186 3.549 0.363 13 1 no  0.474 0 0 1 1 
+       1 19 CYS QB 1 no 100.0 93.2 7.770 8.334 0.565 22 4 no  0.389 0 0 1 1 
+       1 21 GLY QA 7 no 100.0 91.0 0.180 0.198 0.018  9 0 no  0.134 0 0 1 1 
+       1 22 ASN QB 8 no 100.0 94.8 7.524 7.937 0.413  9 1 yes 0.606 0 2 1 1 
+       1 23 LEU QB 6 no 100.0 95.2 2.711 2.850 0.138 11 0 no  0.289 0 0 1 1 
+       1 25 CYS QB 5 no 100.0 98.7 4.380 4.436 0.056 11 0 no  0.238 0 0 1 1 
+       1 26 LEU QB 2 no 100.0 87.7 3.278 3.737 0.459 15 3 no  0.491 0 0 1 1 
+       1 29 CYS QB 4 no 100.0 66.8 0.356 0.533 0.177 12 1 no  0.419 0 0 1 1 
+       1 30 HIS QB 9 no 100.0 59.5 0.136 0.228 0.092  7 0 no  0.293 0 0 1 1 
+    stop_
+
+save_
+

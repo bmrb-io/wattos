@@ -1,0 +1,47 @@
+<HTML>
+  <HEAD>
+    <TITLE></TITLE>
+  </HEAD>
+  <BODY>   
+This partition contains the conversion programs and the objects specific for
+describing the results from Blast, i.e. all the BlastMatch classes.
+<BR>
+The CSV files put out by Wattos follow the following syntax:
+
+<P>for each query identifier set (usually just 1):
+<UL>
+<LI>orf_db_name
+<LI>orf_db_id
+<LI>orf_db_subid
+<LI>molecule_name
+</UL>
+
+<P>followed by:
+<UL>
+<LI> bit_score
+<LI>  bit_score_maximum
+<LI>  expectation_value
+<LI>  match_size
+<LI>  number_gaps
+<LI>  number_identities
+<LI>  number_positives
+<LI>  query_orf_length (full length query)
+<LI>  query_orf_match_start
+<LI>  query_orf_sequence (Only the part that's matched)
+<LI>  query_is_positive_strand (only significant for nucleotides; true/false)
+<LI>  subject_orf_length (the whole sequence; not just the matched part)
+<LI>  subject_orf_match_start
+<LI>  subject_orf_sequence (Only the part that's matched)
+<LI>  subject_is_positive_strand (only significant for nucleotides; true/false)
+</UL>
+
+<P>and then for each subject identifier set (usually just 1)
+<UL>
+<LI>orf_db_name
+<LI>orf_db_id
+<LI>orf_db_subid
+<LI>molecule_name
+</UL>
+
+  </BODY>
+</HTML>

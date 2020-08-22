@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+    
+  <title>Distance constraint surplus</title>
+</head>
+
+
+
+  <body>
+
+    
+<h1><b>Distance constraint surplus</b></h1>
+<span style="font-weight: bold;"></span>
+<h3><span style="font-weight: bold;"></span><b>Content</b></h3>
+<ul style="font-weight: bold;">
+  <li><a href="#Partitioning">Partitioning</a></li>
+  <li><a href="#Properties_of_the_sets">
+Properties of the sets</a></li>
+  <li>
+    <a href="#Definitions">Definitions</a></li>
+  <li><a href="#Differences_with_Aqua_redundancy_check">
+  Differences with Aqua redundancy check</a></li>
+  <li><a href="#Web_server">Web server</a></li>
+</ul>
+<h3><b><a name="Partitioning"></a>Partitioning</b></h3>
+<p>
+A list of author defined distance constraints will be partitioned into the following sets:
+</p>
+<ul>
+
+  <li>U Universe of all distance constraints in author deposition list.
+  </li>
+  <li>Q Unparsed constraints (e.g. syntax or grammar of constraint was unclear). Note
+that it might be hard to know exactly how many constraints an unparsed piece of text contains.
+Elements in Q exist as parse errors in STAR files.
+  </li>
+  <li>A Unmatched (unlinked in CCPN jargon) constraints. E.g. a constraint containing an atom
+name "abracadabra". Elements in A exist as conversion errors in STAR files.
+  </li>
+  <li>E Exceptional constraints that according to CCPN linking are present but could not be found
+by Wattos. E.g. H* for the N terminal residue H1, H2, H3. This set might be empty if all is well.
+  </li>
+  <li>D Double constraints. As a side effect of partitioning
+constraints into this set all constraints that were not partitioned before will be simplified and
+possibly combined. 
+    
+    <ol>
+
+    <li>A constraint between the same atoms, say A-A is considered double. The constraint is also
+        flagged as double if it has even one such pair as above. E.g. A, B-A.
+    </li>
+      <li>A-B, B to just A-B.<br>
+
+        (A-B or A-B) to just A-B.<br>
+
+        (A-B or A-C) to just A-B, C and many more complicated cases to simplify the number of pairs and atoms listed.
+    </li>
+      <li>A-B if there was already a constraint A-B before. Combine a constraint A-B with c_low, c_high (see Definitions below for what
+c_low etc. mean) of 3, 5 Ang. with a constraint HA-HB with c_low, c_high of 4, 6 to a constraint having the tightest bounds
+(representing all information in both constraints) i.e. HA-HB with c_low, c_high of 4, 5.
+    </li>
+    </ol>
+
+  </li>
+  <li>I Impossible constraints. Constraints that are incompatible with the molecular topology. 
+First the following corrections will be applied.
+    
+    <ol>
+
+    <li>Lower bound below averaged sum of involved atom radii (e.g. 1.8) will be nilled.
+    </li>
+      <li>Upper bound above the diameter of the structure will be nilled.
+    </li>
+      <li>The above two checks will also be done for the target.
+    </li>
+    </ol>
+
+Constraints that have no target and lower, and upper bound, and intensity and volume 
+will be marked as impossible too. If a target is out it's range then it will simply
+  be nilled.
+If a model exists for the structure. The largest diameter in the first model will 
+determine the t_upp for distances not in the dictionary of known theoretical distances.
+The t_low is set to the sum of the vdw radii - 0.2 (e.g. 1.8 for 2 protons) if the
+distance isn't found in the same dictionary. If the element type isn't known
+then t_low is unknown. So neither t_low nor t_upp always exist.<br>
+
+A node is impossible if:<br>
+
+    <pre>(t_upp.exists &amp;&amp; c_low.exists &amp;&amp; c_low &gt; t_upp) ||<br>(t_low.exists &amp;&amp; c_upp.exists &amp;&amp; c_upp &lt; t_low) ||<br>(c_low.exists &amp;&amp; c_upp.exists &amp;&amp; c_low &gt; c_upp) ||<br>(c_tar.exists &amp;&amp; (t_low.exists &amp;&amp; (c_tar  &lt; t_low ) || (t_upp.exists &amp;&amp; c_tar &gt; t_upp )))<br></pre>
+
+A constraint is impossible if any node is impossible.
+  </li>
+  <li>F Fixed constraints. Constraints between atoms that have no variability in their distance
+if only dihedral angles are allowed to rotate. So:
+t_low.exists &amp;&amp; t_upp.exists &amp;&amp; t_low == t_upp.
+  </li>
+  <li>R Redundant constraints. Constraints that don't add restrictions on the distance between
+the atoms in addition to the molecular topology if only dihedral angles are allowed to rotate.
+  thresholdRedundancy is introduced to allow constraints that are on the edge of
+  being redundant to still be non-redundant. The usual setting is 5 %.<br>
+
+  
+    <pre>c_low.exists &amp;&amp; t_low.exists &amp;&amp; c_low &lt;= (t_low - lowTheo*thresholdRedundancy/100) then lower bound is redundant<br>c_upp.exists &amp;&amp; t_upp.exists &amp;&amp; c_upp &gt;= (t_upp + uppTheo*thresholdRedundancy/100) then upper bound is redundant<br></pre>
+
+constraint is only redundant if all 3 distances are either not present or are redundant.
+This is in contrast to the impossible constraints for which only 1 distance needs to be impossible 
+in order to qualify the whole restraint as impossible.
+  </li>
+  <li>N Non-redundant constraints. The remaining constraints so that equation 1 (see below)
+holds.
+  </li>
+</ul>
+
+<h3><a name="Properties_of_the_sets"></a>
+Properties of the sets
+</h3>
+<ul>
+
+  <li>U = Q u A u S u N <br>
+
+Sets are mutually disjoint except with U. E.g. no element in Q is in A.
+  </li>
+  <li>Set S = E u C u D u I u F u R <br>
+
+Set S doesn't add information to structure calculation and is Surplus.
+  </li>
+</ul>
+
+<h3><a name="Definitions"></a>
+Definitions</h3>
+<ul>
+
+  <li><span style="font-family: monospace;">c_low</span>: lower bound distance of constraint
+  </li>
+  <li><span style="font-family: monospace;">c_upp</span>: upper bound distance of constraint
+  </li>
+  <li><span style="font-family: monospace;">t_low:</span> smallest distance possible in theory if only dihedral angles with a residue are allowed to move.
+  </li>
+  <li><span style="font-family: monospace;">t_upp</span>: largest distance possible in theory if only dihedral angles with a residue are allowed to move.
+  </li>
+</ul>
+
+<p>
+As part of the redundancy check the components in the constraints will be somewhat ordered. Within one
+member the 'smallest' atom will be the first atom. Within one
+node the member with the 'smallest' atom will be the first member.
+Within one constraint the node with the member with the smallest atom will be the first node (after the logical
+node).
+An atom is ranked the smallest if it occurs first in the model. E.g. HN of residue 1 before
+HA of residue 2.
+<br>
+
+</p>
+<pre>This means the following re-orderings take place:<br>    hc          -   hb   or<br>    hd, ha      -   hb<br>becomes:<br>    ha, hc, hd  -   hb<br>by:<br>-1- swapping atoms hd, ha to ha, hd, and<br>-2- combining nodes 1 and 2.<br></pre>
+
+
+
+
+<p>
+The ideas presented here are derived from the implementation of the redundancy checks 
+that Aqua is able to perform on unambiguous constraints.
+</p>
+<h3><a name="Differences_with_Aqua_redundancy_check"></a>
+  Differences with Aqua redundancy check</h3>
+Aqua can only work with unambiguous constraints. Aqua can only use center averaging in redundancy check. The combination of
+    center averaging and ambiguous constraints is not possible in Wattos
+    because it doesn't make sense.<br>
+<p>
+    Aqua uses a cutoff distance of 1.8 Ang. instead of 2.0 Ang. in Wattos for
+    the minimum theoretical distance between intra residual contacts. Wattos
+    increased this because it wasn't considering constraints with exactly 1.8
+    Ang as the lower bound as redundant anymore when using the default 5%
+    allowance. Apparently Aqua didn't use the allowance on lower bounds but 
+    it should have.</p>
+<h3><a name="Web_server"></a>Web server
+</h3>
+
+<ul>
+  <li>
+The AQUA surplus check for unambiguous distance constraints can be performed by the AQUA
+    <a href="http://www.bmrb.wisc.edu/%7Ejurgen/Aqua/server">server</a>. A server for the surplus
+functionality of Wattos is planned for 2006.
+  </li>
+</ul>
+<p></p>
+<p>
+  </p>
+</body>
+</html>

@@ -1,0 +1,298 @@
+#!/bin/gawk -f
+#
+# jfd @ Tue Apr  5 13:37:02 CDT 2005
+#
+# Converts a coordinate list from NMR-STAR format to PDB format following the 
+#       specifications at: 
+#      - BMRB NMR-STAR data dictionary (2004), 
+#       http://www.bmrb.wisc.edu/dictionary/htmldocs/nmr_star/dictionary.html.
+#      - Atomic Coordinate Entry Format Description,
+#       http://www.rcsb.org/pdb/docs/format/pdbguide2.2/guide2.2_frame.html
+        
+# Limitiations:
+# -1- Assumes all atom info is always on 1 line in the STAR file.
+# -2- Only 36 Chains are supported.
+# -3- Only 9,999,999 atoms are supported.
+# -4- Quotes around values except atom names are not supported.
+# -5- Quotes around any value with white space are not supported.
+# -6- Won't do element ids.
+# -7- Atom names like HN4_2 will be truncated to HN42 in order to fit 4 character
+#       space. HN432 will not be allowed.
+# No limitation:
+# -1- TER and ATOM records are numbered sequentially over file. Just like PDB entries.
+# -2- Numeral and single quote at the end of a atom name is supported.
+   
+# No change below this line.
+##########################################################################
+function showUsage() {
+    print "USAGE: convert_star2pdb star_file pdb_file" > "/dev/stderr"
+    error_found ++
+    exit
+}
+# Remove leading and trailing spaces 
+function trim(xxx) {
+    sub(/^ */,"",xxx)
+    sub(/ *$/,"",xxx)
+    return xxx
+}
+# Remove quotes if present 
+function trimQuotes(xxx) {
+    # gawk doesn't support backreferences
+    startChar = substr(xxx,1,1)
+    endChar = substr(xxx,1,1)
+    
+    if (  startChar == "'" && endChar == "'" ) {
+        sub(/^'/,"",xxx)
+        sub(/'$/,"",xxx)
+    }
+    if (  startChar == "\"" && endChar == "\"" ) {
+        sub(/^"/,"",xxx)
+        sub(/"$/,"",xxx)
+    }    
+    return xxx
+}
+# Method adapted from Wattos.Soup.PdbFile.
+function translateResidueName( xxx ) {
+    #print "DEBUG: Trying to translate residue name: " xxx 
+    gsub("[+-]","",xxx)
+    gsub(/^[D]?A$/,"ADE",xxx)
+    gsub(/^[D]?T$/,"THY",xxx)
+    gsub(/^[D]?G$/,"GUA",xxx)
+    gsub(/^[D]?C$/,"CYT",xxx)
+    gsub(/^[D]?U$/,"URI",xxx)
+    
+    #if ( length(xxx) != 3 ) {
+        #print "DEBUG: found residue name that wasn't 3 characters long: [" xxx "]"
+    #}
+    return xxx;
+}
+# Method adapted from Wattos.Soup.PdbFile.
+function translateAtomName( xxx ) {
+    result = trimQuotes(xxx);
+    result = trim(result);
+    stringLength = length(result);
+    firstChar    = substr(result,0           ,1);
+    lastChar     = substr(result,stringLength,1);
+    #print "DEBUG: in: " result " length:" stringLength " char:" firstChar " char:" lastChar       
+        if ( firstChar ~ /^[0-9']$/ ) {  
+            ## Repetive code for efficiency.
+            if ( stringLength == 1) {
+                return result "   "                    
+            } else if ( stringLength == 2) {
+                return result "  ";
+            } else if ( stringLength == 3) {
+                return result " ";
+            } else if ( stringLength == 4) {
+                return result;
+            } else if ( stringLength == 0) {
+                print "ERROR: -A- atom name is 0 chars" > "/dev/stderr"
+                print "on line: " $0 > "/dev/stderr"
+                error_found ++
+                exit
+            } else {
+                gsub("_","",xxx)
+                stringLength = length(xxx);
+                if ( stringLength > 4) {
+                    print "ERROR: -A- atom name is longer than 4 non-collapsable chars: " xxx > "/dev/stderr"
+                    print "on line: " $0 > "/dev/stderr"
+                    error_found ++
+                    exit
+                }
+                return result;
+            }
+        }
+        
+        ## Not that common and taken care of within java code Wattos.Soup.Atom.swapPostFixedOrdinalsAtomName
+##        if ( (stringLength == 4 ) && (lastChar ~ /^[0-9']$/)) {
+##                return lastChar substr(result,0,3);
+##        }
+        
+        ## Repetive code for efficiency.
+        if ( stringLength == 1) {
+            return " " result "  ";                
+        } else if ( stringLength == 2) {
+            return " " result " ";
+        } else if ( stringLength == 3) {
+            return " " result;
+        } else if ( stringLength == 4) {
+            return result;
+        } else if ( stringLength == 0) {
+            print "ERROR: -B- atom name is 0 chars" > "/dev/stderr"
+            print "on line: " $0 > "/dev/stderr"
+            error_found ++
+            exit
+        } else {
+            gsub("_","",xxx)
+            stringLength = length(xxx);
+            if ( stringLength > 4) {
+                print "ERROR: -B- atom name is longer than 4 non-collapsable chars: " xxx > "/dev/stderr"
+                print "on line: " $0 > "/dev/stderr"
+                error_found ++
+                exit
+            }
+            return result;
+        }
+}
+# Translates 123456789 etc. to ABCDEFGHIJKLMNOPQRSTUVWXYZ
+function translateEntityAssemblyID( xxx ) {
+    if ( xxx > 36 ) {
+        print "ERROR: EntityAssemblyID is over 36: " xxx  > "/dev/stderr"
+        error_found ++
+        exit
+    }
+    return substr("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", xxx, 1)
+}
+# Translates . to ""
+function translateType_symbol( xxx ) {
+    if ( xxx == "." ) {
+        return ""
+    }
+    return xxx
+}
+BEGIN {
+    print "WARNING: This code is dead; will not be update please use the Java code in Wattos.Soup.PdbWriter." 
+    print "WARNING: The Wattos command is: WriteEntryPDB"
+     
+    if ( ARGC != 3 ) {
+        print "Got number of arguments: " ARGC " but expected 3 (including program name)" > "/dev/stderr"
+        showUsage()
+    }
+    FILENAME_OUT = ARGV[2]
+    
+    atom_ter_count = 1
+    table_start = 0    
+    
+    ## Scan to start of table. Up to some large max value not to keep looping.
+    while ( ! table_start ) {
+        status = getline
+        if ( status == 0 ) {
+            print "ERROR: found end of file before finding table in file: " FILENAME  > "/dev/stderr"
+            error_found ++
+            exit
+        }
+        if ( status == -1 ) {
+            print "ERROR: while reading file: " FILENAME  > "/dev/stderr"
+            error_found ++
+            exit
+        }
+        if ( $0 ~ "_Atom_site.PDB_extracted_Bfactor_col" ) {
+            #print "DEBUG: Start " NR " " $0
+            table_start = 1
+        }
+    }
+}
+# Skip empty lines
+/^ *$/ {
+    next
+}
+## Process each atom record.
+/stop_/ {
+        #print "DEBUG: Stop " NR " " $0
+        exit
+}        
+{
+    if ( NF != 17 ) {
+        print "ERROR: expected 17 columns but found: " NF  > "/dev/stderr"
+        print "on line: " $0 > "/dev/stderr"
+        error_found ++
+        exit
+    }
+            
+    Conformer_family_coord_set_ID   = $1
+    Model_ID                        = $2 # model number
+    ID                              = $3 # atom number
+    Label_entity_assembly_ID        = $4 # chain id
+    Label_entity_ID                 = $5 # 
+    Label_comp_index_ID             = $6 # res numb
+    Label_comp_ID                   = $7 # res name
+    Label_atom_ID                   = $8 # atom name
+#    Auth_segment_code               = $9
+#    Auth_seq_ID                     = $10
+#    Auth_comp_ID                    = $11
+#    Auth_atom_ID                    = $12
+#  Type_symbol                     = substr(Label_atom_ID,1,1)
+    Type_symbol                     = $13
+    Cartn_x                         = $14
+    Cartn_y                         = $15
+    Cartn_z                         = $16
+    PDB_extracted_Bfactor_col       = $17
+    
+    Label_atom_ID            = translateAtomName( Label_atom_ID )
+    Label_entity_assembly_ID = translateEntityAssemblyID( Label_entity_assembly_ID )
+    Type_symbol              = translateType_symbol( Type_symbol )
+    Label_comp_ID            = translateResidueName( Label_comp_ID )
+    
+    #print "DEBUG: model: Model_ID " Model_ID " Model_IDOrg " Model_IDOrg 
+    #print "DEBUG: model: Label_entity_assembly_ID " Label_entity_assembly_ID " Label_entity_assembly_IDOrg " Label_entity_assembly_IDOrg
+    
+    # I break for chains and models.  
+    if ( Model_ID != Model_IDOrg ) {
+        if ( Model_IDOrg ~ "^$" ) { 
+            print "REMARK"                                      >  FILENAME_OUT 
+            print "REMARK PDB file converted by Wattos"         >> FILENAME_OUT
+            print "REMARK http://www.bmrb.wisc.edu/wattos"      >> FILENAME_OUT 
+            print "REMARK"                                      >> FILENAME_OUT             
+        } else {
+            printf "TER %7d\n",  atom_ter_count                 >> FILENAME_OUT 
+            atom_ter_count ++
+            print "ENDMDL"                                      >> FILENAME_OUT
+        }
+        printf "MODEL      %3d\n", Model_ID                     >> FILENAME_OUT  
+        Model_IDOrg = Model_ID
+    } else {
+        if ( Label_entity_assembly_ID != Label_entity_assembly_IDOrg ) {
+            if ( Label_entity_assembly_IDOrg !~ "^$" ) {
+                printf "TER %7d\n",  atom_ter_count                 >> FILENAME_OUT 
+                atom_ter_count ++
+            }
+        }
+    }
+    Label_entity_assembly_IDOrg = Label_entity_assembly_ID
+#6    1 -  6        Record name     "ATOM  "
+#5    7 - 11        Integer         serial        Atom serial number.
+#4   13 - 16        Atom            name          Atom name.
+#1   17             Character       altLoc        Alternate location indicator.
+#3   18 - 20        Residue name    resName       Residue name.
+#1   22             Character       chainID       Chain identifier.
+#4   23 - 26        Integer         resSeq        Residue sequence number.
+#1   27             AChar           iCode         Code for insertion of residues.
+#8   31 - 38        Real(8.3)       x             Orthogonal coordinates for X in
+#8   39 - 46        Real(8.3)       y             Orthogonal coordinates for Y in
+#8   47 - 54        Real(8.3)       z             Orthogonal coordinates for Z in
+#6   55 - 60        Real(6.2)       occupancy     Occupancy.
+#6   61 - 66        Real(6.2)       tempFactor    Temperature factor.
+#4   73 - 76        LString(4)      segID         Segment identifier, left-justified.
+#2   77 - 78        LString(2)      element       Element symbol, right-justified funny....
+#2   79 - 80        LString(2)      charge        Charge on the atom.
+    
+    printf "ATOM%7d %4s %3s",
+        atom_ter_count, Label_atom_ID, Label_comp_ID    >> FILENAME_OUT
+    atom_ter_count ++
+    atom_count ++
+    printf " %1s%4d    ",
+        Label_entity_assembly_ID, Label_comp_index_ID   >> FILENAME_OUT  
+    printf "%8.3f%8.3f%8.3f  ",
+        Cartn_x, Cartn_y, Cartn_z                       >> FILENAME_OUT
+#           5    60   5    7    5    
+    printf "1.00  0.00      %-1s  ",
+        Label_entity_assembly_ID                        >> FILENAME_OUT                      
+#            5    80    
+    printf "     %-2s\n",
+        Type_symbol                                     >> FILENAME_OUT                      
+}  
+                                        
+END {                                       
+    if ( error_found ) {
+        print "ERROR: found errors: " error_found  > "/dev/stderr"
+        exit error_found
+    }
+    
+    printf "TER %7d\n",  atom_ter_count                 >> FILENAME_OUT 
+    atom_ter_count ++
+    print "ENDMDL"                                      >> FILENAME_OUT
+    print "END"                                         >> FILENAME_OUT
+    
+    print "DEBUG: Read/written number of atom records     " atom_count
+    #print "DEBUG: Read/written number of atom_ter records " atom_ter_count
+    exit 0
+}

@@ -1,0 +1,122 @@
+data_atom_library
+
+save_file_characteristics
+   _Saveframe_category   file_characteristics
+
+   _File_version         1.0
+   _Author               "Jurgen F. Doreleijers"
+
+   loop_
+      _Date
+      _Details
+
+       2007-05-15 "First attempts" 
+
+   stop_
+
+save_
+
+
+save_atom_lib
+   _Saveframe_category   atom_lib
+
+   _Details             
+;
+- sequence neighbouring (seg_id = -,.,+) (e.g. omega)
+- space neighbouring (seq_id = 1 and 2) (e.g. disulfide chi3)
+- other symbols:
+.   any
+na  nucleic acid
+py  pyrimidine
+pu  purine
+CYS cysteine
+
+Order is taken from this list too.
+;
+
+   loop_
+      _Pol_type       # May occur multiple times with different spec. First possible used.
+      _Comp_ID
+      _Angle_name       # May occur multiple times with different spec. First possible used.
+      
+      _Atom_ID_1
+      _Atom_ID_2
+      _Atom_ID_3
+      _Atom_ID_4
+      
+      _Comp_seq_ID_1
+      _Comp_seq_ID_2
+      _Comp_seq_ID_3
+      _Comp_seq_ID_4
+      
+      
+
+# amino acids   
+      aa .   omega     CA C  N  CA - - . .   
+      aa .   phi       C  N  CA C  - . . .   
+      aa .   psi       N  CA C  N  . . . +  
+      
+      aa PRO chi1      N  CA CB CG . . . .   
+      aa ARG chi1      N  CA CB CG . . . .   
+      aa ASN chi1      N  CA CB CG . . . .   
+      aa ASP chi1      N  CA CB CG . . . .   
+      aa CYS chi1      N  CA CB SG . . . .   
+      aa GLN chi1      N  CA CB CG . . . .   
+      aa GLU chi1      N  CA CB CG . . . .   
+      aa HIS chi1      N  CA CB CG . . . .   
+      aa ILE chi1      N  CA CB CG1 . . . .   
+      aa LEU chi1      N  CA CB CG . . . .   
+      aa LYS chi1      N  CA CB CG . . . .   
+      aa MET chi1      N  CA CB CG . . . .   
+      aa PHE chi1      N  CA CB CG . . . .   
+      aa SER chi1      N  CA CB OG . . . .   
+      aa THR chi1      N  CA CB OG1 . . . .   
+      aa TRP chi1      N  CA CB CG . . . .   
+      aa TYR chi1      N  CA CB CG . . . .   
+      aa VAL chi1      N  CA CB CG1 . . . .   
+
+      aa PRO chi2      CA CB CG CD  . . . .   
+      aa ARG chi2      CA CB CG CD  . . . .   
+      aa ASN chi2      CA CB CG OD1  . . . .   
+      aa ASP chi2      CA CB CG OD1  . . . .   
+      aa GLN chi2      CA CB CG CD  . . . .   
+      aa GLU chi2      CA CB CG CD  . . . .   
+      aa HIS chi2      CA CB CG ND1  . . . .   
+      aa ILE chi21     CA CB CG1 CD1  . . . .   
+      aa LEU chi2      CA CB CG CD1  . . . .   
+      aa LYS chi2      CA CB CG CD  . . . .   
+      aa MET chi2      CA CB CG SD  . . . .   
+      aa PHE chi2      CA CB CG CD1  . . . .   
+      aa TRP chi2      CA CB CG CD1  . . . .   
+      aa TYR chi2      CA CB CG CD1  . . . .   
+
+      aa PRO chi3      CB CG CD N  . . . .
+      aa ARG chi3      CB CG CD NE  . . . .
+      aa GLN chi3      CB CG CD OE1  . . . .
+      aa GLU chi3      CB CG CD OE1  . . . .
+      aa LYS chi3      CB CG CD CE  . . . .
+      aa MET chi3      CB CG SD CE  . . . .
+      aa ARG chi3      CB CG CD CE  . . . .
+#      aa CYS chi3      CB SG SG CB 1 1 2 2   # todo allow in code.
+
+      aa ARG   chi4      CG CD NE CZ  . . . .
+      aa LYS   chi4      CG CD CE NZ  . . . .
+      
+      na  .  alpha   O3' P   O5' C5'  - . . .  
+      na  .  beta    P   O5' C5' C4'  . . . .  
+      na  .  gamma   O5' C5' C4' C3'  . . . .  
+      na  .  delta   C5' C4' C3' O3'  . . . .  
+      na  .  epsilon C4' C3' O3' P    . . . +  
+      na  .  zeta    C3' O3' P   O5'  . . + +                                               
+      na  .  nu0     C4' O4' C1' C2'  . . . .  
+      na  .  nu1     O4' C1' C2' C3'  . . . .  
+      na  .  nu2     C1' C2' C3' C4'  . . . .  
+      na  .  nu3     C2' C3' C4' O4'  . . . .  
+      na  .  nu4     C3' C4' O4' C1'  . . . .  
+      na  py chi     O4' C1' N1  C2  . . . .
+      na  pu chi     O4' C1' N9  C4  . . . .
+
+   stop_
+
+save_
+

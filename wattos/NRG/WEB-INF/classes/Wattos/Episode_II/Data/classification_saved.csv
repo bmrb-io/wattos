@@ -1,0 +1,55 @@
+-,-,-,-,In schema:,,,-,-,,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
+Type,Subtype,Format,Saveframe Category,2.1,3,dev,n/a,other,shell,unknown,ARIA,STAR,Wattos,MR format,XPLOR/CNS,AMBER,AQUA,DISCOVER,CONGEN,DYANA/DIANA,DISGEO,DISTGEO,DISMAN,GROMOS,DSPACE,DGII,EMBOSS,HADDOCK,SPARKY,SYBYL,TINKER,TRIPOS,XEASY,PIPP,PDB,NMRView,NMRPipe,NMRCOMPASS,SHIFTY,MARDIGRAS/CORMA,XML
+angle,n/a,n/a,MR_file_angle,-,-,Y,X,X,X,X,X,X,-,X,X,X,-,X,X,X,X,X,X,X,X,X,-,X,X,X,-,-,-,-,-,-,-,-,-,-,-
+chemical shift,n/a,format 1,assigned_chemical_shifts,Y,-,-,X,X,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,-,-
+chemical shift,n/a,format 2,assigned_chemical_shifts,Y,-,-,X,X,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,-,-
+chemical shift,n/a,format 3,assigned_chemical_shifts,Y,-,-,X,X,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,-,-
+chemical shift,n/a,n/a,assigned_chemical_shifts,Y,-,-,X,X,X,X,X,X,-,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,X,X,-,-,-,-
+chemical shift anisotropy,n/a,n/a,chemical_shift_anisotropy,-,Y,-,X,X,X,X,X,X,-,X,X,X,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,-,-
+chemical shift difference,n/a,n/a,chem_shift_interaction_diff,-,Y,-,X,X,X,X,X,X,-,X,X,X,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,-,-
+comment,n/a,n/a,MR_file_comments,-,-,Y,99,99,99,99,99,99,-,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99
+check,stereo assignment,distance,stereo_assignments,-,-,Y,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+check,surplus,distance,distance_constraint_surplus,-,-,Y,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+check,violation,distance,distance_constraint_statistics,-,-,Y,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+check,violation,dihedral angle,distance_constraint_statistics,-,-,Y,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+check,completeness,distance,NOE_completeness_statistics,-,-,Y,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+coordinate,alignment tensor,n/a,unknown_sf_category,-,-,Y,X,X,X,X,X,X,-,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,-,-,X,-,-,-,-,-,-
+coordinate,initial,n/a,MR_file_coordinate_initial,-,-,Y,X,X,X,X,X,X,-,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,-,-,X,-,-,-,-,-,-
+coordinate,ensemble,n/a,MR_file_coordinate_initial,-,-,Y,X,X,X,X,X,X,-,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,-,-,X,-,-,-,-,-,-
+coupling constant,n/a,n/a,coupling_constants,Y,-,-,X,X,X,X,X,X,-,X,X,X,X,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,-,-
+dihedral angle,n/a,n/a,torsion_angle_constraints,Y,-,-,X,X,X,X,X,X,-,X,2,402,X,202,X,102,X,X,X,X,-,-,302,X,X,X,X,X,-,-,-,X,X,X,-,-,-
+dihedral combo,ambi,n/a,torsion_angle_constraints,Y,-,-,X,X,X,X,X,X,-,X,2,402,X,202,X,102,X,X,X,X,-,-,302,X,X,X,X,X,-,-,-,X,X,X,-,-,-
+dipolar coupling,n/a,n/a,dipolar_coupling_constraints,Y,-,-,X,X,X,X,X,X,-,X,3,403,-,X,-,103,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X,X,-,-,X,-
+distance,disulfide bond,ambi,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,-,201,X,101,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,X,X,X,-,-,-
+distance,disulfide bond,simple,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,X,201,X,101,X,X,X,X,X,X,301,X,X,X,X,X,-,-,-,X,X,X,-,X,-
+distance,general distance,ambi,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,-,201,X,101,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,X,X,X,-,-,-
+distance,general distance,simple,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,X,201,X,101,X,X,X,X,X,X,301,X,X,X,X,X,-,-,-,X,X,X,-,X,-
+distance,hydrogen bond,ambi,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,-,201,X,101,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,X,X,X,-,-,-
+distance,hydrogen bond,simple,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,X,201,X,101,X,X,X,X,X,X,301,X,X,X,X,X,-,-,-,X,X,X,-,X,-
+distance,NOE,ambi,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,-,201,X,101,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,X,X,X,-,-,-
+distance,NOE,simple,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,1,401,X,201,X,101,X,X,X,X,X,X,301,X,X,X,X,X,-,-,-,X,X,X,-,X,-
+distance,NOE build-up,simple,distance_constraints,Y,-,-,X,X,X,X,X,X,-,X,X,-,-,-,-,-,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,X,X,X,-,-,-
+distance,NOE not seen,ambi,distance_constraints,Y,-,-,X,X,X,X,X,-,-,X,1,401,-,201,X,101,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,X,X,X,-,-,-
+distance,NOE not seen,simple,distance_constraints,Y,-,-,X,X,X,X,X,-,-,X,1,401,-,201,X,101,X,X,X,X,X,X,301,X,X,X,X,X,-,-,-,X,X,X,-,X,-
+distance,symmetry,simple,distance_constraints,Y,-,-,X,X,X,X,X,-,-,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+entry,full,n/a,MR_file_n/a,-,-,Y,-,-,-,-,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,X
+exchange,n/a,n/a,H_exch_rates,Y,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+intervector projection angle,n/a,n/a,unknown_sf_category,-,-,-,-,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+small-angle x-ray scattering,n/a,n/a,unknown_sf_category,-,-,-,-,-,-,X,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+line-broadening,n/a,n/a,MR_file_line-broadening,-,-,Y,X,X,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+nomenclature mapping,n/a,n/a,conformer_atom_nom_map,Y,-,-,X,X,X,X,X,X,-,X,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+molecular system,n/a,n/a,molecular_system,Y,-,-,X,X,X,X,X,X,-,X,X,X,X,X,X,X,X,X,X,X,X,X,-,X,X,X,X,X,-,-,-,-,-,-,-,-,-
+n/a,n/a,n/a,unknown_sf_category,-,-,Y,X,X,X,X,-,-,-,X,X,X,X,X,X,X,X,X,X,X,X,X,-,X,X,X,X,X,-,-,-,-,-,-,-,-,-
+order parameter,n/a,n/a,MR_file_n/a,-,-,Y,X,X,X,X,-,-,-,X,X,X,X,X,X,X,X,X,X,X,X,X,-,X,X,X,X,X,-,-,-,-,-,-,-,-,-
+other,n/a,n/a,other_constraints,Y,-,-,X,X,X,X,X,X,-,X,X,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+peak,n/a,n/a,spectral_peak_list,Y,-,-,X,X,X,X,X,X,-,X,X,-,-,-,-,X,-,-,-,-,-,-,-,X,X,-,-,-,X,X,-,X,X,X,X,X,X
+planarity,n/a,n/a,MR_file_planarity,-,-,Y,X,X,X,X,X,X,-,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+protocol,structure calculation,n/a,unknown_sf_category,-,-,-,X,X,X,X,-,-,-,X,X,X,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+pseudocontact shift,n/a,n/a,chem_shift_interaction_diff,-,Y,-,X,X,X,X,-,-,-,X,-,X,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+relaxation,n/a,n/a,unknown_sf_category,-,Y,-,X,X,X,X,X,X,-,X,-,X,-,-,-,X,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-
+sequence,n/a,n/a,monomeric_polymer,Y,-,-,X,X,X,X,X,X,-,X,X,X,-,X,X,X,X,X,X,X,X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+stereochemistry,chirality,n/a,MR_file_stereochemistry_chirality,-,-,Y,X,X,X,X,-,-,-,X,X,X,-,X,X,X,X,X,X,X,X,X,-,X,X,X,X,X,-,-,-,-,-,-,-,-,-
+stereochemistry,prochirality,n/a,MR_file_stereochemistry_prochirality,-,-,Y,X,X,X,X,-,-,-,X,X,X,-,X,X,X,X,X,X,X,X,X,-,X,X,X,X,X,-,-,-,-,-,-,-,-,-
+stereospecific assignment,n/a,n/a,floating_chiral_stereo_assign,-,Y,-,X,X,X,X,-,-,-,X,X,X,X,X,X,X,X,X,X,X,X,X,-,X,X,X,X,X,-,-,-,-,-,-,-,-,-
+topology,n/a,n/a,unknown_sf_category,-,Y,-,-,-,-,-,-,-,-,-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+unknown,n/a,n/a,other_constraints,Y,-,-,X,X,X,X,X,X,-,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,-

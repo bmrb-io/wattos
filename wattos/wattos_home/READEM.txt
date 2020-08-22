@@ -1,0 +1,11 @@
+1aj3_xplor_distance_noe_ambi.tbl    Example for Sjors
+Bugs.xls                            Bug list 
+READEM.txt                          This file
+Thumbs.db                           Windows garbage                           
+WattosData_2005-08-12.vsd           Visio overview of Wattos data structures
+WebAppSjors.html                    Sjors Applet
+WebAppWattos.html                   Wattos Applet (prelim.)
+applet.gif                          Pin up
+bmrb_logo_brown_fg_cream_bg.gif     Logo
+index.html                          Wattos homepage
+wattos_2.1.zip                      Wattos src and all.

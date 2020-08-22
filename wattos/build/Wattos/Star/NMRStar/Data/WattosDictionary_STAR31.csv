@@ -1,0 +1,390 @@
+Wattos Relation Name,Wattos Attribute Name,Wattos Data Type,Text Format,SF Category,Tag Name,Tag Name CIF,Comments,,Placeholder so that all columns get written by spreadsheet programs like Excel or Gnumeric.
+entry_main,_Study_list.Sf_category,STRING,,study_list,_Study_list.Sf_category,,,,X
+entry_main,_Study.ID,INTEGER,,study_list,_Study.ID,,,,X
+entry_main,_Study.Name,STRING,,study_list,_Study.Name,,,,X
+entry_main,_Study.Type,STRING,,study_list,_Study.Type,,,,X
+entry_main,_Study.Details,STRING,,study_list,_Study.Details,,,,X
+entry_information,_Entry.Sf_category        ,STRING,,entry_information,_Entry.Sf_category        ,,,,X
+entry_information,_Entry.ID                 ,STRING,,entry_information,_Entry.ID                 ,,,,X
+entry_information,_Entry.Title              ,STRING,,entry_information,_Entry.Title              ,,,,X
+entry_information,_Entry.NMR_STAR_version   ,STRING,,entry_information,_Entry.NMR_STAR_version   ,_pdbx_version.major_version,,,X
+entry_information,_Entry.PDB_coordinate_file_version   ,STRING,,entry_information,_Entry.PDB_coordinate_file_version   ,,,,X
+entry_information,_Entry.Experimental_method,STRING,,entry_information,_Entry.Experimental_method,,,,X
+entry_information,_Entry.Details            ,STRING,,entry_information,_Entry.Details            ,,,,X
+entry_main,_Assembly.Sf_category,STRING,,assembly,_Assembly.Sf_category,,,,X
+entry_main,name,STRING,,assembly,_Assembly.Name       ,,,,X
+entry_main,_Assembly.Number_of_components,INTEGER,,assembly,_Assembly.Number_of_components,,,,X
+entry_main,_Assembly.Organic_ligands     ,STRINGNR,,assembly,_Assembly.Organic_ligands     ,,,,X
+entry_main,_Assembly.Metal_ions          ,STRINGNR,,assembly,_Assembly.Metal_ions          ,,,,X
+entry_main,_Assembly.Paramagnetic        ,STRING,,assembly,_Assembly.Paramagnetic        ,,,,X
+entry_main,_Assembly.Thiol_state         ,STRING,,assembly,_Assembly.Thiol_state         ,,,,X
+entry_main,_Assembly.Molecular_mass      ,FLOAT,%.2f,assembly,_Assembly.Molecular_mass      ,,,,X
+mol_main,mol_id,INTEGER,,assembly,_Entity_assembly.ID,_struct_asym.id,Of different datatype than in Wattos,,X
+mol_main,_Entity_assembly.Entity_assembly_name,STRING,,assembly,_Entity_assembly.Entity_assembly_name,,,,X
+mol_main,_Entity_assembly.Entity_ID,INTEGER,,assembly,_Entity_assembly.Entity_ID,_struct_asym.entity_id,,,X
+mol_main,_Entity_assembly.Entity_label,STRING,,assembly,_Entity_assembly.Entity_label,,,,X
+mol_main,_Entity_assembly.Asym_ID,STRING,,assembly,_Entity_assembly.Asym_ID,,,,X
+mol_main,_Entity_assembly.Details,STRING,,assembly,_Entity_assembly.Details,,,,X
+mol_main,entry_id,INTEGER,,assembly,_Entity_assembly.Assembly_ID,,,,X
+res_main,_PDBX_nonpoly_scheme.Entity_assembly_ID ,INTEGER,,assembly,_PDBX_nonpoly_scheme.Entity_assembly_ID ,_pdbx_nonpoly_scheme.asym_id ,,,X
+res_main,_PDBX_nonpoly_scheme.Entity_ID          ,INTEGER,,assembly,_PDBX_nonpoly_scheme.Entity_ID          ,_pdbx_nonpoly_scheme.entity_id,,,X
+res_main,_PDBX_nonpoly_scheme.Mon_ID             ,STRING,,assembly,_PDBX_nonpoly_scheme.Mon_ID             ,_pdbx_nonpoly_scheme.mon_id,,,X
+res_main,_PDBX_nonpoly_scheme.Comp_index_ID      ,INTEGER,,assembly,_PDBX_nonpoly_scheme.Comp_index_ID      ,_pdbx_nonpoly_scheme.ndb_seq_num ,,,X
+res_main,_PDBX_nonpoly_scheme.Comp_ID            ,STRING,,assembly,_PDBX_nonpoly_scheme.Comp_ID            ,_pdbx_nonpoly_scheme.pdb_mon_id,,,X
+res_main,_PDBX_nonpoly_scheme.Auth_seq_num       ,INTEGER,,assembly,_PDBX_nonpoly_scheme.Auth_seq_num       ,_pdbx_nonpoly_scheme.auth_seq_num,,,X
+mol_main,_Entity.Sf_category,STRING,,entity,_Entity.Sf_category,,,,X
+mol_main,_Entity.ID,INTEGER,,entity,_Entity.ID,_entity.id,,,X
+mol_main,type,STRING,,entity,_Entity.Type       ,_entity.type,,,X
+mol_main,name,STRING,,entity,_Entity.Name    ,_entity.pdbx_description,,,X
+mol_main,_entity_poly.entity_id,INTEGER,,entity,_entity_poly.entity_id,_entity_poly.entity_id,,,X
+mol_main,pol_type,STRING,,entity,_Entity.Polymer_type   ,_entity_poly.type,,,X
+mol_main,_Entity.Seq_length ,INTEGER,,entity,_Entity.Number_of_monomers,,,,X
+mol_main,_Entity.Seq        ,STRING,,entity,_Entity.Polymer_seq_one_letter_code ,,,,X
+mol_main,_pdbx_entity_nonpoly.entity_id,INTEGER,,entity,,_pdbx_entity_nonpoly.entity_id,,,X
+mol_main,_pdbx_entity_nonpoly.comp_id,STRINGNR,,entity,_pdbx_entity_nonpoly.comp_id,_pdbx_entity_nonpoly.comp_id,,,X
+res_main,_Entity_comp_index.Entity_ID,INTEGER,,entity,_Entity_comp_index.Entity_ID,,n/a,,X
+res_main,_Entity_comp_index.ID,INTEGER,,entity,_Entity_comp_index.ID,,n/a,,X
+res_main,_Entity_comp_index.Comp_ID,STRING,,entity,_Entity_comp_index.Comp_ID,,n/a,,X
+res_main,_Entity_comp_index.Comp_label,STRING,,entity,_Entity_comp_index.Comp_label,,n/a,,X
+res_main,mol_id,INTEGER,,entity,_Entity_poly_seq.Entity_ID     ,_entity_poly_seq.entity_id,,,X
+res_main,res_id,INTEGER,,entity,_Entity_poly_seq.Num,_entity_poly_seq.num,,,X
+res_main,number,INTEGER,,entity,_Entity_poly_seq.Comp_index_ID,,,,X
+res_main,name,STRING,,entity,_Entity_poly_seq.Mon_ID,_entity_poly_seq.mon_id,,,X
+res_main,_Chem_comp.Sf_category,STRINGNR,,chem_comp,_Chem_comp.Sf_category,,,,X
+res_main,_Chem_comp.ID,STRINGNR,,chem_comp,_Chem_comp.ID,_chem_comp.id,,,X
+res_main,_Chem_comp.Type,STRINGNR,,chem_comp,_Chem_comp.Type,,n/a,,X
+res_main,_pdbx_nonpoly_scheme.asym_id,STRINGNR,,chem_comp,_pdbx_nonpoly_scheme.asym_id,_pdbx_nonpoly_scheme.asym_id,,,X
+res_main,_pdbx_nonpoly_scheme.mon_id,STRINGNR,,chem_comp,_pdbx_nonpoly_scheme.mon_id,_pdbx_nonpoly_scheme.mon_id,,,X
+res_main,_pdbx_nonpoly_scheme.ndb_seq_num,STRINGNR,,chem_comp,_pdbx_nonpoly_scheme.ndb_seq_num,_pdbx_nonpoly_scheme.ndb_seq_num,,,X
+atom_main,_Conformer_family_coord_set.Sf_category,STRING,,conformer_family_coord_set,_Conformer_family_coord_set.Sf_category,,,,X
+atom_main,_Atom_site.Conformer_family_coord_set_ID,INTEGER,,conformer_family_coord_set,_Atom_site.Conformer_family_coord_set_ID,,,,X
+atom_main,_Atom_site.Model_ID,INTEGER,,conformer_family_coord_set,_Atom_site.Model_ID,_atom_site.pdbx_PDB_model_num,not mandatory?,,X
+atom_main,_Atom_site.Assembly_atom_ID,INTEGER,,conformer_family_coord_set,_Atom_site.Assembly_atom_ID,,,,X
+atom_main,_Atom_site.ID,INTEGER,,conformer_family_coord_set,_Atom_site.ID,_atom_site.id,,,X
+atom_main,_Atom_site.Label_entity_assembly_ID,INTEGER,,conformer_family_coord_set,_Atom_site.Label_entity_assembly_ID,,,,X
+atom_main,_Atom_site.Label_asym_ID,STRINGNR,,conformer_family_coord_set,_Atom_site.PDBX_label_asym_ID,_atom_site.label_asym_id,,,X
+atom_main,_Atom_site.Label_entity_ID,INTEGER,,conformer_family_coord_set,_Atom_site.Label_entity_ID,_atom_site.label_entity_id,,,X
+atom_main,_Atom_site.Label_comp_index_ID,INTEGER,,conformer_family_coord_set,_Atom_site.Label_comp_index_ID,_atom_site.label_seq_id,,,X
+atom_main,_Atom_site.Label_seq_ID,STRINGNR,,conformer_family_coord_set,_Atom_site.Label_seq_ID,,,,X
+atom_main,_Atom_site.Label_comp_ID,STRINGNR,,conformer_family_coord_set,_Atom_site.Label_comp_ID,_atom_site.label_comp_id,,,X
+atom_main,_Atom_site.PDB_ins_code,STRINGNR,,conformer_family_coord_set,_Atom_site.PDB_ins_code,_atom_site.pdbx_PDB_ins_code,,,X
+atom_main,name,STRINGNR,,conformer_family_coord_set,_Atom_site.Label_atom_ID,_atom_site.label_atom_id,,,X
+atom_main,auth_mol_name,STRINGNR,,conformer_family_coord_set,_Atom_site.PDB_strand_ID,_atom_site.auth_asym_id,,,X
+atom_main,auth_res_id,STRINGNR,,conformer_family_coord_set,_Atom_site.PDB_residue_no,_atom_site.auth_seq_id,,,X
+atom_main,auth_res_name,STRINGNR,,conformer_family_coord_set,_Atom_site.PDB_residue_name,_atom_site.auth_comp_id,,,X
+atom_main,auth_atom_name,STRINGNR,,conformer_family_coord_set,_Atom_site.PDB_atom_name,_atom_site.auth_atom_id,,,X
+atom_main,auth_alt_id,STRINGNR,,conformer_family_coord_set,_Atom_site.Auth_alt_ID,_atom_site.pdbx_auth_alt_id,,,X
+atom_main,auth_atom_name2,STRINGNR,,conformer_family_coord_set,_Atom_site.Auth_atom_name,_atom_site.pdbx_auth_atom_name,,,X
+atom_main,element_id,STRINGNR,,conformer_family_coord_set,_Atom_site.Type_symbol,_atom_site.type_symbol,,,X
+atom_main,coor_x,FLOAT,%.3f,conformer_family_coord_set,_Atom_site.Cartn_x,_atom_site.Cartn_x,,,X
+atom_main,coor_y,FLOAT,%.3f,conformer_family_coord_set,_Atom_site.Cartn_y,_atom_site.Cartn_y,,,X
+atom_main,coor_z,FLOAT,%.3f,conformer_family_coord_set,_Atom_site.Cartn_z,_atom_site.Cartn_z,,,X
+atom_main,b_factor,FLOAT,%.1f,conformer_family_coord_set,_Atom_site.Uncertainty ,_atom_site.B_iso_or_equiv,,,X
+atom_main,occupancy,FLOAT,%.2f,conformer_family_coord_set,_Atom_site.Occupancy,_atom_site.occupancy,,,X
+atom_main,_Atom_site.Details,STRINGNR,,conformer_family_coord_set,_Atom_site.Details,,,,X
+unknown,_Distance_constraint_list.Sf_category,STRINGNR,,distance_constraints,_Distance_constraint_list.Sf_category,,,,X
+unknown,_Distance_constraint_list.Constraint_type,STRINGNR,,distance_constraints,_Distance_constraint_list.Constraint_type,,,,X
+unknown,_Distance_constraint_list.Constraint_file_ID,INTEGER,,distance_constraints,_Distance_constraint_list.Constraint_file_ID,,,,X
+unknown,_Distance_constraint_list.Block_ID,INTEGER,,distance_constraints,_Distance_constraint_list.Block_ID,,,,X
+unknown,_Distance_constraint_list.Details,STRINGNR,,distance_constraints,_Distance_constraint_list.Details,,,,X
+dc_main,number,INTEGER,,distance_constraints,_Dist_constraint_tree.Constraint_ID,,,,X
+dc_node,node_id,INTEGER,,distance_constraints,_Dist_constraint_tree.Node_ID,,,,X
+dc_node,down_node_id,INTEGER,,distance_constraints,_Dist_constraint_tree.Down_node_ID,,,,X
+dc_node,right_node_id,INTEGER,,distance_constraints,_Dist_constraint_tree.Right_node_ID,,,,X
+dc_node,logic_op,STRINGNR,,distance_constraints,_Dist_constraint_tree.Logic_operation,,,,X
+dc_node,_Dist_constraint.Tree_node_member_constraint_ID,INTEGER,,distance_constraints,_Dist_constraint.Tree_node_member_constraint_ID,,,,X
+dc_node,number,INTEGER,,distance_constraints,_Dist_constraint.Tree_node_member_node_ID,,,,X
+dc_member,member_id,INTEGER,,distance_constraints,_Dist_constraint.Constraint_tree_node_member_ID,,,,X
+dc_atom,_Atom_site.Label_entity_assembly_ID,INTEGER,,distance_constraints,_Dist_constraint.Entity_assembly_ID,,,,X
+dc_atom,_Atom_site.Label_entity_ID,INTEGER,,distance_constraints,_Dist_constraint.Entity_ID,,,,X
+dc_atom,_Atom_site.Label_comp_index_ID,INTEGER,,distance_constraints,_Dist_constraint.Comp_index_ID,,,,X
+dc_atom,_Dist_constraint.Seq_ID,INTEGER,,distance_constraints,_Dist_constraint.Seq_ID,,,,X
+dc_atom,_Atom_site.Label_comp_ID,STRINGNR,,distance_constraints,_Dist_constraint.Comp_ID,,,,X
+dc_atom,name,STRINGNR,,distance_constraints,_Dist_constraint.Atom_ID,,,,X
+dc_atom,resonance_id,STRINGNR,,distance_constraints,_Dist_constraint.Resonance_ID,,,,X
+dc_atom,auth_mol_name,STRINGNR,,distance_constraints,_Dist_constraint.Auth_asym_ID,,,,X
+dc_atom,auth_res_id,STRINGNR,,distance_constraints,_Dist_constraint.Auth_seq_ID,,,,X
+dc_atom,auth_res_name,STRINGNR,,distance_constraints,_Dist_constraint.Auth_comp_ID,,,,X
+dc_atom,auth_atom_name,STRINGNR,,distance_constraints,_Dist_constraint.Auth_atom_ID,,,,X
+dc_node,number_2,INTEGER,,distance_constraints,_Dist_constraint_value.Constraint_ID,,,,X
+dc_node,node_id_3,INTEGER,,distance_constraints,_Dist_constraint_value.Tree_node_ID,,,,X
+dc_node,sourceExpId,STRINGNR,,distance_constraints,_Dist_constraint_value.Source_experiment_ID,,,,X
+dc_node,peakId,STRINGNR,,distance_constraints,_Dist_constraint_value.Spectral_peak_ID,,,,X
+dc_node,peakIntensity,FLOAT,,distance_constraints,_Dist_constraint_value.Intensity_val,,,,X
+dc_node,peakIntensityLowerValueError,FLOAT,,distance_constraints,_Dist_constraint_value.Intensity_lower_val_err,,,,X
+dc_node,peakIntensityUpperValueError,FLOAT,,distance_constraints,_Dist_constraint_value.Intensity_upper_val_err,,,,X
+dc_node,distanceValue,FLOAT,,distance_constraints,_Dist_constraint_value.Distance_val,,,,X
+dc_node,distanceLowerBound,FLOAT,,distance_constraints,_Dist_constraint_value.Distance_lower_bound_val,,,,X
+dc_node,distanceUpperBound,FLOAT,,distance_constraints,_Dist_constraint_value.Distance_upper_bound_val,,,,X
+dc_node,peakWeight,FLOAT,,distance_constraints,_Dist_constraint_value.Weight,,,,X
+dc_node,peakPpm1,FLOAT,,distance_constraints,_Dist_constraint_value.Spectral_peak_ppm_1,,,,X
+dc_node,peakPpm2,FLOAT,,distance_constraints,_Dist_constraint_value.Spectral_peak_ppm_2,,,,X
+unknown,_Torsion_angle_constraint_list.Sf_category           ,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint_list.Sf_category           ,,,,X
+unknown,_Torsion_angle_constraint_list.Constraint_file_ID,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint_list.Constraint_file_ID,,,,X
+unknown,_Torsion_angle_constraint_list.MR_file_block_position,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint_list.Block_ID,,,,X
+unknown,_Torsion_angle_constraint_list.Details,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint_list.Details,,,,X
+cdih_main,number,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.ID,,,,X
+cdih_main,name,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Torsion_angle_name,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_assembly_ID_1,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_assembly_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_ID_1,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_index_ID_1,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_index_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Seq_ID_1,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Seq_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_ID_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Atom_ID_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Atom_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Resonance_ID_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Resonance_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_assembly_ID_2,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_assembly_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_ID_2,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_index_ID_2,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_index_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Seq_ID_2,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Seq_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_ID_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Atom_ID_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Atom_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Resonance_ID_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Resonance_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_assembly_ID_3,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_assembly_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_ID_3,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_index_ID_3,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_index_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Seq_ID_3,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Seq_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_ID_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Atom_ID_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Atom_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Resonance_ID_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Resonance_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_assembly_ID_4,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_assembly_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Entity_ID_4,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Entity_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_index_ID_4,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_index_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Seq_ID_4,INTEGER,,torsion_angle_constraints,_Torsion_angle_constraint.Seq_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Comp_ID_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Comp_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Atom_ID_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Atom_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Resonance_ID_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Resonance_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_segment_code_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_asym_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_seq_ID_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_seq_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_comp_ID_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_comp_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_atom_ID_1,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_atom_ID_1,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_segment_code_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_asym_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_seq_ID_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_seq_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_comp_ID_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_comp_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_atom_ID_2,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_atom_ID_2,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_segment_code_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_asym_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_seq_ID_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_seq_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_comp_ID_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_comp_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_atom_ID_3,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_atom_ID_3,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_segment_code_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_asym_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_seq_ID_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_seq_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_comp_ID_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_comp_ID_4,,,,X
+cdih_atom,_Torsion_angle_constraint.Auth_atom_ID_4,STRINGNR,,torsion_angle_constraints,_Torsion_angle_constraint.Auth_atom_ID_4,,,,X
+cdih_atom,uppBound,FLOAT,,torsion_angle_constraints,_Torsion_angle_constraint.Angle_upper_bound_val,,,,X
+cdih_atom,lowBound,FLOAT,,torsion_angle_constraints,_Torsion_angle_constraint.Angle_lower_bound_val,,,,X
+cdih_atom,forceConstant,FLOAT,,torsion_angle_constraints,_Torsion_angle_constraint.Force_constant_value,,,,X
+cdih_atom,potentialFunction,FLOAT,,torsion_angle_constraints,_Torsion_angle_constraint.Potential_function_exponent,,,,X
+unknown,_RDC_constraint_list.Sf_category           ,STRINGNR,,RDC_constraints,_RDC_constraint_list.Sf_category           ,,,,X
+unknown,_RDC_constraint_list.Constraint_file_ID,INTEGER,,RDC_constraints,_RDC_constraint_list.Constraint_file_ID,,,,X
+unknown,_RDC_constraint_list.MR_file_block_position,INTEGER,,RDC_constraints,_RDC_constraint_list.Block_ID,,,,X
+unknown,_RDC_constraint_list.Details,STRINGNR,,RDC_constraints,_RDC_constraint_list.Details,,,,X
+rdc_main,number,INTEGER,,RDC_constraints,_RDC_constraint.ID,,,,X
+rdc_atom,_RDC_constraint.Entity_assembly_ID_1,INTEGER,,RDC_constraints,_RDC_constraint.Entity_assembly_ID_1,,,,X
+rdc_atom,_RDC_constraint.Entity_ID_1,INTEGER,,RDC_constraints,_RDC_constraint.Entity_ID_1,,,,X
+rdc_atom,_RDC_constraint.Comp_index_ID_1,INTEGER,,RDC_constraints,_RDC_constraint.Comp_index_ID_1,,,,X
+rdc_atom,_RDC_constraint.Seq_ID_1,INTEGER,,RDC_constraints,_RDC_constraint.Seq_ID_1,,,,X
+rdc_atom,_RDC_constraint.Comp_ID_1,STRINGNR,,RDC_constraints,_RDC_constraint.Comp_ID_1,,,,X
+rdc_atom,_RDC_constraint.Atom_ID_1,STRINGNR,,RDC_constraints,_RDC_constraint.Atom_ID_1,,,,X
+rdc_atom,_RDC_constraint.Resonance_ID_1,STRINGNR,,RDC_constraints,_RDC_constraint.Resonance_ID_1,,,,X
+rdc_atom,_RDC_constraint.Entity_assembly_ID_2,INTEGER,,RDC_constraints,_RDC_constraint.Entity_assembly_ID_2,,,,X
+rdc_atom,_RDC_constraint.Entity_ID_2,INTEGER,,RDC_constraints,_RDC_constraint.Entity_ID_2,,,,X
+rdc_atom,_RDC_constraint.Comp_index_ID_2,INTEGER,,RDC_constraints,_RDC_constraint.Comp_index_ID_2,,,,X
+rdc_atom,_RDC_constraint.Seq_ID_2,INTEGER,,RDC_constraints,_RDC_constraint.Seq_ID_2,,,,X
+rdc_atom,_RDC_constraint.Comp_ID_2,STRINGNR,,RDC_constraints,_RDC_constraint.Comp_ID_2,,,,X
+rdc_atom,_RDC_constraint.Atom_ID_2,STRINGNR,,RDC_constraints,_RDC_constraint.Atom_ID_2,,,,X
+rdc_atom,_RDC_constraint.Resonance_ID_2,STRINGNR,,RDC_constraints,_RDC_constraint.Resonance_ID_2,,,,X
+rdc_atom,_RDC_constraint.Auth_segment_code_1,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_asym_ID_1,,,,X
+rdc_atom,_RDC_constraint.Auth_seq_ID_1,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_seq_ID_1,,,,X
+rdc_atom,_RDC_constraint.Auth_comp_ID_1,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_comp_ID_1,,,,X
+rdc_atom,_RDC_constraint.Auth_atom_ID_1,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_atom_ID_1,,,,X
+rdc_atom,_RDC_constraint.Auth_segment_code_2,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_asym_ID_2,,,,X
+rdc_atom,_RDC_constraint.Auth_seq_ID_2,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_seq_ID_2,,,,X
+rdc_atom,_RDC_constraint.Auth_comp_ID_2,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_comp_ID_2,,,,X
+rdc_atom,_RDC_constraint.Auth_atom_ID_2,STRINGNR,,RDC_constraints,_RDC_constraint.Auth_atom_ID_2,,,,X
+rdc_main,target,FLOAT,,RDC_constraints,_RDC_constraint.RDC_val,,,,X
+rdc_main,_RDC_constraint.RDC_lower_bound,FLOAT,,RDC_constraints,_RDC_constraint.RDC_lower_bound,,,,X
+rdc_main,_RDC_constraint.RDC_upper_bound,FLOAT,,RDC_constraints,_RDC_constraint.RDC_upper_bound,,,,X
+rdc_main,targetError,FLOAT,,RDC_constraints,_RDC_constraint.RDC_val_err,,,,X
+stereo_assignments,_Stereo_assignments.Sf_category,STRINGNR,,stereo_assignments,_Stereo_assign_list.Sf_category,,,,X
+stereo_assignments,_Stereo_assignments.Triplet_count,INTEGER,,stereo_assignments,_Stereo_assign_list.Triplet_count,,,,X
+stereo_assignments,_Stereo_assignments.Swap_count,INTEGER,,stereo_assignments,_Stereo_assign_list.Swap_count,,,,X
+stereo_assignments,_Stereo_assignments.Swap_percentage,FLOAT,%.1f,stereo_assignments,_Stereo_assign_list.Swap_percentage,,,,X
+stereo_assignments,_Stereo_assignments.Deassign_count,INTEGER,,stereo_assignments,_Stereo_assign_list.Deassign_count,,,,X
+stereo_assignments,_Stereo_assignments.Deassign_percentage,FLOAT,%.1f,stereo_assignments,_Stereo_assign_list.Deassign_percentage,,,,X
+stereo_assignments,_Stereo_assignments.Model_count,INTEGER,,stereo_assignments,_Stereo_assign_list.Model_count,,,,X
+stereo_assignments,_Stereo_assignments.Total_energy_low_states,FLOAT,%.3f,stereo_assignments,_Stereo_assign_list.Total_e_low_states,,,,X
+stereo_assignments,_Stereo_assignments.Total_energy_high_states,FLOAT,%.3f,stereo_assignments,_Stereo_assign_list.Total_e_high_states,,,,X
+stereo_assignments,_Stereo_assignments.Criterium_absolute_energy_difference,FLOAT,%.3f,stereo_assignments,_Stereo_assign_list.Crit_abs_e_diff,,Criterium on absolute energy difference (0.1 A^2 per model per triplet suggested),,X
+stereo_assignments,_Stereo_assignments.Criterium_relative_energy_difference,FLOAT,%.3f,stereo_assignments,_Stereo_assign_list.Crit_rel_e_diff,,Criterium on relative energy difference (0 % suggested),,X
+stereo_assignments,_Stereo_assignments.Criterium_percentage_models_favoring,FLOAT,%.1f,stereo_assignments,_Stereo_assign_list.Crit_mdls_favor_pct,,Criterium on perc. models in favored state (>=49 % suggested),,X
+stereo_assignments,_Stereo_assignments.Criterium_deassign_single_model_violation,FLOAT,%.3f,stereo_assignments,_Stereo_assign_list.Crit_sing_mdl_viol,,Deassignment criterium for single model violation (1.0 Angstrom suggested),,X
+stereo_assignments,_Stereo_assignments.Criterium_deassign_multiple_model_violation,FLOAT,%.3f,stereo_assignments,_Stereo_assign_list.Crit_multi_mdl_viol,,Deassignment criterium for multiple model violation (0.5 Angstrom suggested),,X
+stereo_assignments,_Stereo_assignments.Criterium_deassign_multiple_model_percentage,FLOAT,%.1f,stereo_assignments,_Stereo_assign_list.Crit_multi_mdl_pct,,Deassignment criterium for multiple model violation percentage (50 % suggested),,X
+stereo_assignments,_Stereo_assignments.Explanation,STRINGNR,,stereo_assignments,_Stereo_assign_list.Details,,,,X
+stereo_assignments,_Stereo_assignments.Label_pseudo_ID,STRINGNR,,stereo_assignments,_Stereo_assign.Pseudo_Atom_ID,,,,X
+stereo_assignments,_Stereo_assignments.Label_comp_index_ID,INTEGER,,stereo_assignments,_Stereo_assign.Comp_index_ID,,,,X
+stereo_assignments,_Stereo_assignments.Label_comp_ID,STRINGNR,,stereo_assignments,_Stereo_assign.Comp_ID,,,,X
+stereo_assignments,_Stereo_assignments.Label_entity_ID,INTEGER,,stereo_assignments,_Stereo_assign.Entity_assembly_ID,,,,X
+stereo_assignments,_Stereo_assignments.Assignment_ID,INTEGER,,stereo_assignments,_Stereo_assign.Num,,,,X
+stereo_assignments,_Stereo_assignments.Swapped,BIT,%yesno,stereo_assignments,_Stereo_assign.Swapped,,,,X
+stereo_assignments,_Stereo_assignments.Percentage_models_favoring,FLOAT,%.1f,stereo_assignments,_Stereo_assign.Models_favoring_pct,,,,X
+stereo_assignments,_Stereo_assignments.Percentage_energy_difference,FLOAT,%.1f,stereo_assignments,_Stereo_assign.Energy_difference_pct,,,,X
+stereo_assignments,_Stereo_assignments.Energy_difference,FLOAT,%.3f,stereo_assignments,_Stereo_assign.Energy_difference,,,,X
+stereo_assignments,_Stereo_assignments.Energy_high_state,FLOAT,%.3f,stereo_assignments,_Stereo_assign.Energy_high_state,,,,X
+stereo_assignments,_Stereo_assignments.Energy_low_state,FLOAT,%.3f,stereo_assignments,_Stereo_assign.Energy_low_state,,,,X
+stereo_assignments,_Stereo_assignments.Restraint_count,INTEGER,,stereo_assignments,_Stereo_assign.Constraint_count,,,,X
+stereo_assignments,_Stereo_assignments.Restraint_ambi_count,INTEGER,,stereo_assignments,_Stereo_assign.Constraint_ambi_count,,,,X
+stereo_assignments,_Stereo_assignments.Deassigned,BIT,%yesno,stereo_assignments,_Stereo_assign.Deassigned,,,,X
+stereo_assignments,_Stereo_assignments.Maximum_violation,FLOAT,%.3f,stereo_assignments,_Stereo_assign.Violation_max,,,,X
+stereo_assignments,_Stereo_assignments.Violation_single_model_criterium_count,INTEGER,,stereo_assignments,_Stereo_assign.Single_mdl_crit_count,,,,X
+stereo_assignments,_Stereo_assignments.Violation_multi_model_criterium_count,INTEGER,,stereo_assignments,_Stereo_assign.Multi_mdl_crit_count,,,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Sf_category    ,STRINGNR,,distance_constraint_surplus,_Distance_constraint_surplus.Sf_category    ,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Redundancy_threshold_pct    ,FLOAT,%.2f,distance_constraint_surplus,_Distance_constraint_surplus.Redundancy_threshold_pct    ,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Update_original_restraints,BIT,%yesno,distance_constraint_surplus,_Distance_constraint_surplus.Update_original_constraints,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Only_filter_fixed,BIT,%yesno,distance_constraint_surplus,_Distance_constraint_surplus.Only_filter_fixed,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Averaging_method,STRINGNR,,distance_constraint_surplus,_Distance_constraint_surplus.Averaging_method,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Number_of_monomers_sum_average,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Number_of_monomers_sum_average,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_exceptional_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_exceptional_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_double_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_double_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_impossible_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_impossible_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_fixed_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_fixed_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_redundant_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_redundant_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_surplus_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_surplus_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Restraint_nonsurplus_count,INTEGER,,distance_constraint_surplus,_Distance_constraint_surplus.Constraint_nonsurplus_count,,Saveframe category name,,X
+distance_constraint_surplus,_Distance_constraint_surplus.Details,STRINGNR,,distance_constraint_surplus,_Distance_constraint_surplus.Details,,Saveframe category name,,X
+NOE_completeness,_NOE_compl_list.Sf_category    ,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_stats.Sf_category    ,,Saveframe category name,,X
+NOE_completeness,_NOE_compl_list.Rst_unexp_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_unexpanded_count,,,,X
+NOE_completeness,_NOE_compl_list.Restraint_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_count,,,,X
+NOE_completeness,_NOE_compl_list.Model_count    ,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Model_count    ,,,,X
+NOE_completeness,_NOE_compl_list.Residue_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Residue_count,,,,X
+NOE_completeness,_NOE_compl_list.Observ_atoms   ,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_stats.Observable_atom_definition   ,,,,X
+NOE_completeness,_NOE_compl_list.Use_intra_resid,BIT,%yesno,NOE_completeness_statistics,_NOE_completeness_stats.Use_intra_residue_restraints,,,,X
+NOE_completeness,_NOE_compl_list.Threshold_redun,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_stats.Redundancy_threshold_pct,,,,X
+NOE_completeness,_NOE_compl_list.Averaging_power,FLOAT,%.2f,NOE_completeness_statistics,_NOE_completeness_stats.Distance_averaging_power,,,,X
+NOE_completeness,_NOE_compl_list.Compl_cutoff   ,FLOAT,%.2f,NOE_completeness_statistics,_NOE_completeness_stats.Completeness_cutoff   ,,,,X
+NOE_completeness,_NOE_compl_list.Compl_cumul    ,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_stats.Completeness_cumulative_pct    ,,,,X
+NOE_completeness,_NOE_compl_list.Pair_count     ,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_exp_unfiltered_count     ,,,,X
+NOE_completeness,_NOE_compl_list.Rst_match_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_matched_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_unmat_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_unmatched_count,,,,X
+NOE_completeness,_NOE_compl_list.Obs_atom_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Observable_atom_count,,,,X
+NOE_completeness,_NOE_compl_list.Tot_atom_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Total_atom_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_excep_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_exceptional_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_nonob_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_nonobservable_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_intra_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_intraresidue_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_surpl_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_surplus_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_obser_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_observed_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_expec_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_expected_count,,,,X
+NOE_completeness,_NOE_compl_list.Rst_exnob_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_stats.Constraint_exp_nonobs_count,,,,X
+NOE_completeness,_NOE_compl_list.Details,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_stats.Details,,,,X
+NOE_completeness,_NOE_compl_clas.Type,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_class.Type,,,,X
+NOE_completeness,_NOE_compl_clas.Rst_obser_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_class.Constraint_observed_count,,,,X
+NOE_completeness,_NOE_compl_clas.Rst_expec_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_class.Constraint_expected_count,,,,X
+NOE_completeness,_NOE_compl_clas.Rst_match_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_class.Constraint_matched_count,,,,X
+NOE_completeness,_NOE_compl_clas.Compl_cumul,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_class.Completeness_cumulative_pct,,,,X
+NOE_completeness,_NOE_compl_clas.Stand_deviat,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_class.Std_dev,,,,X
+NOE_completeness,_NOE_compl_clas.Details,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_class.Details,,,,X
+NOE_completeness,_NOE_compl_res.Entity_ID,INTEGER,,NOE_completeness_statistics,_NOE_completeness_comp.Entity_assembly_ID,,,,X
+NOE_completeness,_NOE_compl_res.Comp_index_ID,INTEGER,,NOE_completeness_statistics,_NOE_completeness_comp.Comp_index_ID,,,,X
+NOE_completeness,_NOE_compl_res.Comp_ID,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_comp.Comp_ID,,,,X
+NOE_completeness,_NOE_compl_res.Obs_atom_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_comp.Obs_atom_count,,,,X
+NOE_completeness,_NOE_compl_res.Rst_obser_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_comp.Constraint_observed_count,,,,X
+NOE_completeness,_NOE_compl_res.Rst_expec_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_comp.Constraint_expected_count,,,,X
+NOE_completeness,_NOE_compl_res.Rst_match_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_comp.Constraint_matched_count,,,,X
+NOE_completeness,_NOE_compl_res.Compl_cumul,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_comp.Completeness_cumulative_pct,,,,X
+NOE_completeness,_NOE_compl_res.Stand_deviat,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_comp.Std_dev,,,,X
+NOE_completeness,_NOE_compl_res.Details,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_comp.Details,,,,X
+NOE_completeness,_NOE_compl_shel.Shell_start,FLOAT,%.2f,NOE_completeness_statistics,_NOE_completeness_shell.Shell_start,,,,X
+NOE_completeness,_NOE_compl_shel.Shell_end,FLOAT,%.2f,NOE_completeness_statistics,_NOE_completeness_shell.Shell_end,,,,X
+NOE_completeness,_NOE_compl_shel.Rst_expec_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_shell.Constraint_expected_count,,,,X
+NOE_completeness,_NOE_compl_shel.Rst_obser_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_shell.Constraint_observed_count,,,,X
+NOE_completeness,_NOE_compl_shel.Rst_match_count,INTEGER,,NOE_completeness_statistics,_NOE_completeness_shell.Constraint_matched_count,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_1,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_1,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_2,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_2,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_3,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_3,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_4,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_4,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_5,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_5,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_6,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_6,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_7,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_7,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_8,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_8,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_9,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_9,,,,X
+NOE_completeness,_NOE_compl_shel.Matched_shel_o,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Matched_shell_overflow,,,,X
+NOE_completeness,_NOE_compl_shel.Details,STRINGNR,,NOE_completeness_statistics,_NOE_completeness_shell.Type,,,,X
+NOE_completeness,_NOE_compl_shel.Compl_shell,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_shell.Completeness_shell_pct,,,,X
+NOE_completeness,_NOE_compl_shel.Compl_cumul,FLOAT,%.1f,NOE_completeness_statistics,_NOE_completeness_shell.Completeness_cumulative_pct,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Sf_category    ,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats_list.Sf_category    ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Restraint_list_ID  ,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_list.Constraint_list_ID        ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Restraint_count          ,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_list.Constraint_count          ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Viol_count           ,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_list.Viol_count           ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Viol_total            ,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats_list.Viol_total            ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Viol_max              ,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats_list.Viol_max              ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Viol_rms              ,FLOAT,%.4f,distance_constraint_statistics,_Distance_constraint_stats_list.Viol_rms              ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Viol_average_all_restraints              ,FLOAT,%.4f,distance_constraint_statistics,_Distance_constraint_stats_list.Viol_average_all_restraints              ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Viol_average_violations_only           ,FLOAT,%.4f,distance_constraint_statistics,_Distance_constraint_stats_list.Viol_average_violations_only           ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Cutoff_violation_report         ,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats_list.Cutoff_violation_report         ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_list.Details,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats_list.Details,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Restraint_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Restraint_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_1_entity_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Atom_1_entity_assembly_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_1_comp_index_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Atom_1_comp_index_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_1_comp_ID,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats.Atom_1_comp_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_1_ID,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats.Atom_1_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_2_entity_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Atom_2_entity_assembly_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_2_comp_index_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Atom_2_comp_index_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_2_comp_ID,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats.Atom_2_comp_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Atom_2_ID,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats.Atom_2_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Node_1_distance_val,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Node_1_distance_val,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Node_1_distance_lower_bound_val,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Node_1_distance_lower_bound_val,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Node_1_distance_upper_bound_val,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Node_1_distance_upper_bound_val,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Distance_minimum  ,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Distance_minimum  ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Distance_average  ,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Distance_average  ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Distance_maximum ,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Distance_maximum ,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Max_violation,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats.Max_violation,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Max_violation_model_number,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Max_violation_model_number,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Above_cutoff_violation_count,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Over_cutoff_violation_count,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Above_cutoff_violation_per_model,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats.Over_cutoff_viol_per_model,,,,X
+distance_constraint_statistics,_Distance_constraint_stats.Distance_constraint_stats_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats.Distance_constraint_stats_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Atom_entity_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_per_res.Atom_entity_assembly_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Atom_comp_index_ID,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_per_res.Atom_comp_index_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Atom_comp_ID,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats_per_res.Atom_comp_ID,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Total_violation,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats_per_res.Total_violation,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Max_violation,FLOAT,%.3f,distance_constraint_statistics,_Distance_constraint_stats_per_res.Max_violation,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Max_violation_model_number,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_per_res.Max_violation_model_number,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Above_cutoff_violation_count,INTEGER,,distance_constraint_statistics,_Distance_constraint_stats_per_res.Over_cutoff_viol_count,,,,X
+distance_constraint_statistics,_Distance_constraint_stats_per_res.Above_cutoff_violation_per_model,STRINGNR,,distance_constraint_statistics,_Distance_constraint_stats_per_res.Over_cutoff_viol_per_model,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Sf_category                 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Sf_category    ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Restraint_list_ID  ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Constraint_list_ID        ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Constraint_count            ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Constraint_count          ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_count                  ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_count           ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_total                  ,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_total            ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_max                    ,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_max              ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_rms                    ,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_rms              ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_average_all_restraints ,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_average_all_restraints              ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_average_violations_only,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Viol_average_violations_only           ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Cutoff_violation_report     ,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Cutoff_violation_report         ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats_list.Details                     ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats_list.Details,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Restraint_ID,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Restraint_ID,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Torsion_angle_name,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Torsion_angle_name,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_1,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_1,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_1 ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_1 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_1 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_1 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_1 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_1 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_2,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_2,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_2 ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_2 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_2 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_2 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_2 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_2 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_3,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_3,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_3 ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_3 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_3 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_3 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_3 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_3 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_4,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Entity_assembly_ID_4,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_4 ,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_index_ID_4 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_4 ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Comp_ID_4 ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_4        ,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Atom_ID_4        ,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_lower_bound_val,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_lower_bound_val,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_upper_bound_val,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_upper_bound_val,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_average,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_average,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_minimum,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_minimum,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_maximum,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats.Angle_maximum,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Max_violation,FLOAT,%.2f,torsion_angle_constraint_statistics,_TA_constraint_stats.Max_violation,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Max_violation_model_number,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Max_violation_model_number,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Above_cutoff_violation_count,INTEGER,,torsion_angle_constraint_statistics,_TA_constraint_stats.Over_cutoff_violation_count,,,,X
+torsion_angle_constraint_statistics,_TA_constraint_stats.Above_cutoff_violation_per_model,STRINGNR,,torsion_angle_constraint_statistics,_TA_constraint_stats.Over_cutoff_violation_per_model,,,,X

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!-- Java Network Launching Protocol file for starting Wattos over internet. -->
+
+<jnlp spec="0.2 1.0"
+      codebase="http://wattos.sourceforge.net/lib"
+      href="../scripts/Wattos.jnlp">
+   <information> 
+      <title>Wattos</title> 
+      <vendor>jurgen@gmail.com</vendor>
+      <homepage href="http://wattos.sourceforge.net"/>
+      <description>Collection of programs for structural biology and NMR spectroscopy.</description>
+      <icon href="bmrb_logo_brown_fg_cream_bg.gif"/>
+   </information>
+   <security>
+     <all-permissions/>
+   </security>
+   <resources>
+      <j2se version="1.4+" max-heap-size="192m"/>
+      <jar href="Wattos.jar"/>
+      <jar href="colt.jar"/>
+      <jar href="CSVutils.jar"/>
+      <jar href="jakarta-regexp.jar"/>
+      <jar href="printf_hb15.jar"/>
+      <jar href="starlibj_with_source.jar"/>
+      <jar href="swing-layout-1.0.jar"/>
+      <jar href="jfreechart-1.0.1.jar"/>
+      <jar href="jcommon-1.0.0.jar"/>
+      <jar href="gnujaxp.jar"/>
+      <jar href="itext-1.4.jar"/>
+      <property name="WATTOSSCRIPT" value="http://wattos.sourceforge.net/macros/SleepWithoutQuit.wcf"/>
+   </resources>
+   <application-desc 
+        main-class="Wattos.CloneWars.UserInterface">
+   </application-desc>
+</jnlp> 
+

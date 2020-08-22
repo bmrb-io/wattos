@@ -1,0 +1,50 @@
+InitAll
+
+SetProp
+interactiveSession
+false
+
+SetProp
+verbosity
+4
+
+SetProp
+writeSessionOnExit
+false
+
+ListProp
+
+#Input file
+#Read molecular system and coordinates (y suggested)
+#Read restraints (y suggested)
+#Match restraints to soup by regular STAR tags. (y suggested)
+#Match restraints to soup by author atom and residue names etc. (n suggested; only previous or this can and must be set)
+#Remove unlinked restraints (y suggested)
+ReadEntryNMRSTAR
+1brv_DOCR_small.str.gz
+y
+y
+y
+n
+y
+
+
+CheckCompleteness                
+3                
+2                    
+6                  
+8
+2
+3
+2
+1.0    
+1
+1      
+y
+ob_standard.str                  
+tmp_dir/1brv_DOCR_compl_sum.str
+n                    
+tmp_dir/1brv_DOCR_compl
+
+Quit
+

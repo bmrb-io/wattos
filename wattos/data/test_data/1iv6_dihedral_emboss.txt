@@ -1,0 +1,4 @@
+;GAMMA
+  2  1 O5'   1 C5'   1 C4'   1 C3'     1.0     1.0    20.0   120.0 NO      ;
+error introduced for error checking
+  2  2 O6'   2 C6'   2 C5'   2 C4'     1.0     1.0    20.0   120.0 NO      ;

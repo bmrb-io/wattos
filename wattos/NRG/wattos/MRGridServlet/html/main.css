@@ -1,0 +1,411 @@
+
+body  {  
+    font-family: Arial, Verdana, Helvetica, sans-serif; 
+    font-size: 100%; 
+    color: #660000 ; 
+    background-color: #FFFFCC; 
+    margin-left: 3px; 
+    margin-right: 3px; 
+    margin-top:0 
+}
+
+
+TD {
+	text-align: left;
+}
+
+A:active     { color: #920000 }
+A:link       { color: #330000 }
+A:visited    { color: #920000 }
+A:hover      { color: #BB2200 }
+
+ A.statistics:active, A.statistics:link,  A.statistics:visited  { 
+	font-family: Courier, serif; 
+	font-size: 100%; 
+	color: #660000; 
+}
+A.statistics:hover      { font-family: Courier, serif; font-size: 100%; color: #BB2200 }
+
+
+
+A.noChange:active     { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+A.noChange:link       { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+A.noChange:visited    { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+A.noChange:hover      { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+
+A.noVisitChange:active     { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+A.noVisitChange:link       { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+A.noVisitChange:visited    { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #660000 }
+A.noVisitChange:hover      { font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 100%; color: #BB2200 }
+
+A.title:active     { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%;  color: #660000 }
+A.title:link       { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%;  color: #660000 }
+A.title:visited    { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%;  color: #660000 }
+A.title:hover      { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%;  color: #BB2200 }
+
+A.frontpage:active     { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #660000 }
+A.frontpage:link       { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #660000 }
+A.frontpage:visited    { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #660000 }
+A.frontpage:hover      { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; font-size: 80%;  color: #BB2200 }
+
+A.catchspam:active     { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #FFFFCC }
+A.catchspam:link       { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #FFFFCC }
+A.catchspam:visited    { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #FFFFCC }
+A.catchspam:hover      { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 80%;  color: #FFFFCC }
+
+
+A.wattos:active     { font-family: "Times New Roman", serif; font-size: 100%; color: #666633 }
+A.wattos:link       { font-family: "Times New Roman", serif; font-size: 100%; color: #666633 }
+A.wattos:visited    { font-family: "Times New Roman", serif; font-size: 100%; color: #999966 }
+A.wattos:hover      { font-family: "Times New Roman", serif; font-size: 100%; color: #BB2200 }
+
+
+
+H1 {  font-family: Arial, Verdana, Helvetica, sans-serif; 
+      font-size: 200%; }
+
+H2 {  font-family: Arial, Verdana, Helvetica, sans-serif; 
+      font-size: 150%;
+      margin-bottom: -.1em;  }  
+      
+H3 {  font-family: Arial, Verdana, Helvetica, sans-serif; 
+      font-size: 115%;
+      margin-bottom: -.1em } 
+
+H4 {  font-family: Arial, Verdana, Helvetica, sans-serif; 
+      font-size: 105%;
+      font-weight: bold;
+       } 
+
+
+/* title and search */
+TD.titlesearch {
+    padding-left:.5em; 
+    padding-right:.5em; 
+    padding-bottom:.5em; 
+    padding-top:.1em; 
+}
+
+
+/*  */
+TD.rightAligned {
+	text-align: right;
+}
+
+
+
+/* title and search */
+TD.centerAligned {
+	text-align: center;
+/*	margin-left: auto;
+	margin-right: auto;  */
+}
+
+
+/* title and search */
+TD.molData {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;  
+}
+
+
+TABLE.content {
+	padding-left:2em; 
+	padding-right:2em; 
+	padding-bottom:2em; 
+	width:100%;  /* IE - xp puts the logo off the page at 100% */
+}
+
+
+/* top menu */
+.topmenu A:active, .topmenu A:link, .topmenu A:visited {
+	text-decoration:none; 
+	font-weight: 575;
+	font-size: 100%;  
+	color: #660000 
+}
+.topmenu A:hover {
+	text-decoration:none; 
+	font-weight: 550;
+	font-size: 100%;  
+	color: #FFFFCC 
+}
+
+TD.topmenu {
+	width: 20%; 
+	height:2em;
+    background-color: #999966; 
+	text-align: center; /* can we wrap the A:active, etc into this? */
+}
+
+/* top sub menu */
+
+TABLE.topsubmenu {
+    color: #660000 ; 
+    border:0;
+    text-align:center;
+  /*  background-color: #99AA77; */
+    width:100%;  /* IE - xp puts the logo off the page at 100% */
+}
+
+/* top submenu */
+.topsubmenu A:active, .topsubmenu A:link, .topsubmenu A:visited {
+	text-decoration:none; 
+	font-size: 80%;  
+	font-weight: 550;
+	color: #660000 
+}
+.topsubmenu A:hover {
+	text-decoration:none; 
+	font-size: 80%;  
+	font-weight: 550;
+	color: #FFFFCC 
+}
+
+TD.topsubmenu {
+	width: 14%;
+	height:1.75em;
+	text-align: center; /* can we wrap the A:active, etc into this? */
+	background-color: #99AA77;	
+}
+
+
+
+/*****************/
+/* side menu */
+TD.sidemenuCol {
+	background-color: #660000;
+	color: #FFFFCC;
+	width: 15%;
+	text-align:center;
+	vertical-align:top;
+}
+A.sidemenu:active     { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%; color: #FF00FF }
+A.sidemenu:link       { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%; color: #FFFFCC }
+A.sidemenu:visited    { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%; color: #FFFFEE }
+A.sidemenu:hover      { font-family: Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-size: 100%; color: #EEFFFF }
+
+ul.sidemenu {
+	text-align: left;
+	margin: 2em 0 1em 0;
+	padding: 0;
+	list-style-type: none;
+	}
+
+ul.sidemenu li {
+	margin: 1em 1em 0 1em;
+	padding-left: 0;
+	font-size: 100%;
+	background: none;
+	}
+	
+ul.accent {
+	text-align: left;
+	margin-top: 2em;
+	margin-left: 1em;
+	padding: 0;
+	list-style-type: none;
+	font-weight: bold;
+	line-height: 2.5em
+	}
+
+ul.accent li {
+	list-style-type: none;
+	padding-left: 0;
+	font-size: 100%;
+	background: none;
+	}
+
+ul.nobullet {
+	text-align: left;
+	margin-left: 1em;
+	padding: 0;
+	list-style-type: none;
+	}
+
+ul.nobullet li {
+	list-style-type: none;
+	padding-left: 0;
+	font-size: 100%;
+	background: none;
+	}
+
+ul.aa_list {
+	text-align: left;
+	margin: 0em 0 1em 0;
+	padding-left: 0em;
+	padding-right: 3em;
+	list-style-type: none;
+	}
+
+ul.aa_list li {
+	margin: 0em 0em 0 1em;
+	padding-left: 0;
+	font-size: 100%;
+	background: none;
+	}
+	
+
+ul.nested_list {
+	text-align: left;
+	padding-bottom:0.5em;
+	}
+
+ul.edu {
+	text-align: left;
+	padding-bottom:0.5em;
+	list-style-type: none;
+	}
+
+ul.edu li {
+	list-style-type: none;
+	padding-left: 0;
+	padding-bottom:0.5em;
+	font-size: 100%;
+	}
+	
+ol.bibli {
+	text-align: left;
+	margin-left: 0.5em;
+	padding-left: 0em;
+}	
+	
+ol.bibli li {
+	margin-left: 1em;
+	padding-left: 0em;
+	list-style-type:decimal;
+}	
+
+ol.bibli_roman {
+	text-align: left;
+	margin-left: 0.5em;
+	padding-left: 0em;
+}	
+	
+ol.bibli_roman li {
+	margin-left: 1em;
+	padding-left: 0em;
+	list-style-type:lower-roman;
+}	
+	
+/*****************/
+
+TD.wattos {
+     font-family:"Times New Roman", serif;
+}
+
+TD.Wattos {
+    font-family:"Times New Roman", serif;
+	padding-top:1em;
+	padding-bottom: 3em;  
+}
+
+H1.wattos {  
+	  font-family: "Times New Roman", serif; 
+      font-size: 200%; }
+
+
+/*****************/
+
+TD.personlist {
+     padding-left:1em;
+     text-align:left;
+     height:2em;
+}
+
+TD.residueData {
+     width:3em;
+     text-align:center;
+}
+
+TD.topContentTitle {
+	padding-top:1em;
+	padding-bottom: 1em;
+    text-align:center;
+}
+
+/* TD.topContentIcon {
+	width: 65px;   
+	height:65px;
+	text-align: right;
+	padding-right:5px; 
+	padding-top:5px;
+} */
+
+
+/* Get rid of what isn't necessary */
+TD.databaseList {
+	border-bottom-width:2px;
+}
+
+TR.databaseList {
+	padding-bottom:2px;
+	font-size: 80%;
+}
+
+
+.summary {
+	font-size: 95%;
+	text-align: left;
+	vertical-align: top;
+	padding-bottom: 1.5em;
+}
+
+TR.bodySpace {
+	height: 2em;
+}
+
+TR.bottomSpace {
+	height: 3em;
+}
+
+P { 
+   	margin-left: 1em;
+    margin-right: 2em; 
+}
+
+P.summarySource { 
+   	margin-left: 1em;
+    margin-right: 2em; 
+	margin-top:0;
+	margin-bottom:1em;
+}
+
+P.quote { 
+   	margin-left: 4em;
+    margin-right: 4em; 
+}
+
+P.sitemap { 
+   	margin-left: 1em;
+    margin-right: 1em; 
+	font-size: 80%;
+}
+
+ul.nested_sitemap_list {
+	text-align: left;
+	padding-bottom:0;
+	padding-top:0;
+	font-size: 80%;
+}
+
+
+P.codon { 
+   	margin-left: 0;
+    margin-right: 0; 
+}
+
+
+DD.searchList {
+    margin-left:0em;
+	margin-right:1em;
+	padding-left:1em; 
+}
+
+
+em.journal {
+	font-weight: bold;
+	font-style:italic;
+}
+

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE>Discover Converter</TITLE>
+  </HEAD>
+  <BODY>
+<P>Parser for Discover/MSI/Biosym formatted restraint files.
+</p>
+
+<PRE>
+Cover the following actual examples:
+
+Distance:
+
+1:U_27:H3          1:A_43:N1                  2.000 4.500                              
+1:U_27:H3          1:A_43:N1          -1.000  2.000 4.500                              
+1:U_27:H3          1:A_43:N1           1.600  2.000       50.00 50.00 10000.000
+1:U_27:H3          1:A_43:N1          -1.000  2.000 4.500 50.00 50.00 10000.000
+1:GLY_1:HN         1:GLY_1:HA          2.300  3.500 2.900  1.00  1.00 1000.000  0.00
+19:METn_A1:HA  19:LYX_A18:HA  1.8  5.5 5.5
+ 50.00 50.00 1000.00 0.00
+The large numbers at the end here are force constants. Like the 50 and 10,000.
+The first number is lower and the second number is a upper bound distance.
+Except in the case of 3 numbers where the last number is the upper.
+For a complete description look at DistanceRestraint method in DiscoverParserAll.jj.
+
+Dihedrals:
+
+1:CYS_4:C          1:ILE_5:N          1:ILE_5:CA         1:ILE_5:C          -175.000 -75.000
+1:CYS_4:C          1:ILE_5:N          1:ILE_5:CA         1:ILE_5:C          -175.000 -75.000 40.00 40.00 1000.000
+1:GLA_3:C          1:GLA_4:N          1:GLA_4:CA         1:GLA_4:C           5.85      1.00  60.00 60.00 1000.000 -170.0  -70.0
+</PRE>
+
+<P>Description:<BR>
+The atom identifier is given as a colon separated list of chain, residue name and number, and atom name.<BR>
+What follows are the distance or dihedrals bounds and each restraint ends with information on the force constants
+and usually a maximum value for the individual restraint energy.
+
+<P>DONE:
+<UL>
+  <LI>2003-03-13 Allowed line breaks to occur at arbitrary position in restraint. See last example under distances.
+</UL>
+
+<P>TO DO:
+<UL>
+  <LI>Have better scanning for the next possible real distance constraint.
+  <BR>Now only a requirement is used that it is an integer, which might
+be a residue number.
+  <LI>For PDB entry 1sy8 there are hydrogen bonds with only one distance per restraint defined which
+  isn't captured.
+  <LI>For PDB entry 1xrw there is an 'A' character starting the atom specifier in stead of a number.
+  <LI>For PDB entry 1mvg the target is not the same as in the above covered cases:
+<PRE>
+	1:ALAN_1:HN1       1:PHE_2:HN          1.800  4.560 10.000    10.000    10.000   100.000  0.00
+													    ^bad target.
+    1:GLY_1:HN         1:GLY_1:HA          2.300  3.500 2.900  1.00  1.00 1000.000  0.00
+</PRE>
+  <LI>For PDB entry 2p7c the residue number includes a chain id.
+<PRE>
+1:TX_7:H5M*       1:LEU_49B:HD11    -1.000     7.0     50.00  50.00  1000.000  0.0
++ 1:TX_7:H5M*      1:LEU_49B:HD12
+                           ^ bad residue number
+</PRE>
+</LI>
+</UL>
+  </BODY>
+</HTML>

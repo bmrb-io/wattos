@@ -1,0 +1,44 @@
+data_2hgh_MR_file_constraints
+
+
+save_global_MR_file_characteristics
+    _File_characteristics.Sf_category       file_characteristics 
+    _File_characteristics.ID                1 
+    _File_characteristics.NMR_STAR_version  3.0 
+    _File_characteristics.PDB_ID            2HGH 
+    _File_characteristics.MR_file_name      2hgh.mr 
+    _File_characteristics.Conversion_date   2007-01-30 
+
+    loop_
+        _File_characteristic.File_characteristics_ID 
+        _File_characteristic.MR_file_block_position 
+        _File_characteristic.Program 
+        _File_characteristic.Type 
+        _File_characteristic.Subtype 
+        _File_characteristic.Format 
+
+        1   1   "MR format"    comment   n/a   n/a   
+    stop_
+
+save_
+
+
+save_MR_file_comment_1
+    _MR_file_comment.Sf_category             MR_file_comment 
+    _MR_file_comment.ID                      1 
+    _MR_file_comment.MR_file_block_position  1 
+    _MR_file_comment.Program                "MR format" 
+    _MR_file_comment.Type                    comment 
+    _MR_file_comment.Subtype                 n/a 
+    _MR_file_comment.Format                  n/a 
+    _MR_file_comment.Comment_ID              1 
+    _MR_file_comment.Comment                
+;
+VARS   RESID_I RESNAME_I ATOMNAME_I RESID_J RESNAME_J ATOMNAME_J D DD W
+FORMAT %5d     %6s       %6s        %5d     %6s    %6s %9.3f %9.3f %.2f
+;
+
+save_
+
+
+

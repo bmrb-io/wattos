@@ -1,0 +1,52 @@
+data_moreQuotes_to_test
+
+save_moreQuotes_to_test
+    _Details
+;
+Test cases that are automatically tested by JUnit every time Wattos is tested.
+The test cases are mostly taken from PDB entry MR files with some
+explanation added. 
+; 
+  
+  
+    loop_
+       _Quote_test.id
+       _Quote_test.value
+
+        1  a                                                                                                                                                                                                                    
+        2 $sfCode                                                                                                                                                                                                            
+        3 "a b"                                                                                                                                                                                                               
+        4  c_d                                                                                                                                                                                                                  
+        5  e"f                                                                                                                                                                                                                  
+        6  g'h                                                                                                                                                                                                                  
+        7  
+;
+values in semi-colons enclose
+and multiple lines
+;                                                                                                                                                            
+        8  
+; values with not real # comments enclosed
+and multiple lines
+;
+                                                                                                                                  
+        9 'not ### a "" comment'
+       10  H1'-H2"                                                                                                                                                                                                              
+       11 "h1"-H2": internal quotes are not ending :"                                                                                                                                                                                                          
+       12  .                                                                                                                                                                                                                    
+       13 "_tagNameOrNot"                                                                                                                                                                                                       
+       14 "$$$$$$$$---A value starting with dollar but with spaces--$$$$$$$#"
+       15 "$$$$$$$$---PRO35 is TRANS- but qd is doubtfull!--$$$$$$$#"
+       16 
+;
+some text from entry 1tus that can't be expressed in star as defined. 
+Next lines should have first character
+removed.
+ ;or other options have been superceded.
+ ;
+;
+
+      17 "1:G_19:H1 1:C_20:H1'	1.80	 5.00 10.00 10.00 1000.00 note the tab character after the internal quote" 
+    stop_
+
+save_
+

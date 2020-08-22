@@ -1,0 +1,1 @@
+keytool -genkey -dname "cn=Jurgen Doreleijers, ou=BMRB, o=UW-Madison, c=US" -alias business -keypass test123 -keystore "C:\Documents and Settings\jurgen.WHELK.000\workspace\Wattos\scripts\keystore" -storepass secret -validity 180

@@ -1,0 +1,32 @@
+InitAll
+
+SetProp
+interactiveSession
+false
+
+SetProp
+verbosity
+9
+
+SetProp
+writeSessionOnExit
+false
+
+SetProp
+stopOnError
+true
+
+ListProp
+
+#Input file
+ReadEntryMMCIF
+1cjg_rem_small.cif.gz
+y
+
+# Output file name 
+WriteEntryPDB
+tmp_dir/1cjg_rem_small.pdb
+y
+
+
+Quit

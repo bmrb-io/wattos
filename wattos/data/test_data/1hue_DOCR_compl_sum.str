@@ -1,0 +1,367 @@
+data_1hue_DOCR
+
+save_NOE_Completeness
+    _NOE_completeness_stats.Sf_category                      NOE_completeness_statistics
+    _NOE_completeness_stats.Entry_ID                         1
+    _NOE_completeness_stats.Compl_stats_ID                   1
+    _NOE_completeness_stats.Model_count                      25
+    _NOE_completeness_stats.Residue_count                    180
+    _NOE_completeness_stats.Total_atom_count                 2774
+    _NOE_completeness_stats.Observable_atom_definition       ob_standard
+    _NOE_completeness_stats.Observable_atom_count            936
+    _NOE_completeness_stats.Use_intra_residue_restraints     no
+    _NOE_completeness_stats.Redundancy_threshold_pct         5.0
+    _NOE_completeness_stats.Distance_averaging_power         1.00
+    _NOE_completeness_stats.Completeness_cutoff              4.00
+    _NOE_completeness_stats.Completeness_cumulative_pct      51.1
+    _NOE_completeness_stats.Restraint_unexpanded_count       2540
+    _NOE_completeness_stats.Restraint_count                  2540
+    _NOE_completeness_stats.Restraint_overall_unfiltr_count  2511
+    _NOE_completeness_stats.Restraint_exceptional_count      0
+    _NOE_completeness_stats.Restraint_nonobservable_count    50
+    _NOE_completeness_stats.Restraint_intraresidue_count     346
+    _NOE_completeness_stats.Restraint_surplus_count          2
+    _NOE_completeness_stats.Restraint_observed_count         2142
+    _NOE_completeness_stats.Restraint_expected_count         2509
+    _NOE_completeness_stats.Restraint_matched_count          1282
+    _NOE_completeness_stats.Restraint_unmatched_count        860
+    _NOE_completeness_stats.Restraint_expected_nonobs_count  1227
+    _NOE_completeness_stats.Details                          
+;
+A detailed methodology description is available at:
+http://www.bmrb.wisc.edu/wattos/doc/Wattos/Soup/Constraint/dc_completeness.html
+
+Please note that the contributions in ambiguous restraints are considered
+separate 'restraints' for the sets defined below.
+The cut off for all statistics except those in the by-shell table is
+given below by the above tag: _NOE_completeness_stats.Completeness_cutoff
+
+Description of the tags in this list:
+*  1 * Administrative tag
+*  2 * Administrative tag
+*  3 * Administrative tag
+*  4 * Number of models
+*  5 * Number of residues
+*  6 * Number of atoms
+*  7 * Standard set name of observable atom definitions
+see: Doreleijers et al., J.Biomol.NMR 14, 123-132 (1999).
+*  8 * Observable atom(group)s
+*  9 * Include intra residue restraints
+*  10 * Surplus threshold for determining redundant restraints
+*  11 * Power for averaging the distance over models
+*  12 * Up to what distance are NOEs expected
+*  13 * Cumulative completeness percentage
+*  14 * Number of unexpanded restraints in restraint list.
+*  15 * Number of restraints in restraint list.           Set U
+*  16 * Expected restraints based on criteria in list.    Set V
+*  17 * Exceptional restraints, i.e. with an unknown atom.Set E
+*  18 * Not observable NOEs with e.g. hydroxyl Ser HG.    Set O
+Even though restraints with these atom types might have been observed they are
+excluded from the analysis.
+*  19 * Intra-residue restraints if not to be analyzed.   Set I
+*  20 * Surplus like double restraints.                   Set S
+*  21 * Observed restraints.                              Set A = U - (E u O u I u S)
+*  22 * Expected restraints based on criteria as in A.    Set B = V - (I u S)
+*  23 * Observed restraints matched to the expected.      Set M = A n B
+*  24 * Observed restraints that were not expected.       Set C = A - M
+*  25 * Expected restraints that were not observed.       Set D = B - M
+*  26 * This tag
+
+Description of the tags in the class table:
+*  1 * Class of restraint. Note that 'medium-range' involves (2<=i<=4) contacts.
+Possible values are: intraresidue,sequential,medium-range,long-range, and intermolecular.
+*  2 * Observed restraints.                              Set A = U - (E u O u I u S)
+*  3 * Expected restraints based on criteria as in A.    Set B = V - (I u S)
+*  4 * Observed restraints matched to the expected.      Set M = A n B
+*  5 * Completeness percentage
+*  6 * Standard deviation from the average over the classes.
+*  7 * Extra information
+*  8 * Administrative tag
+*  9 * Administrative tag
+
+Description of the tags in the shell table.
+The first row shows the lower limit of the shells requested and
+The last row shows the total number of restraints over the shells.
+*  1 * Description of the content of the row: edges, shell, or sums.
+The value determines the meaning of the values to the nine 'Matched_shell_x' tags among others.
+*  2 * Lower limit of shell of expected restraints.
+*  3 * Upper limit of shell of expected restraints.
+*  4 * Expected restraints based on criteria as in A.    Set B = V - (I u S)
+*  5 * Observed restraints matched to the expected.      Set M = A n B
+*  6 * Matched restraints with experimental distance in shell 1
+*  7 * Matched restraints with experimental distance in shell 2
+*  8 * Matched restraints with experimental distance in shell 3
+*  9 * Matched restraints with experimental distance in shell 4
+*  10 * Matched restraints with experimental distance in shell 5
+*  11 * Matched restraints with experimental distance in shell 6
+*  12 * Matched restraints with experimental distance in shell 7
+*  13 * Matched restraints with experimental distance in shell 8
+*  14 * Matched restraints with experimental distance in shell 9
+*  15 * Matched restraints overflowing the last shell
+*  16 * Completeness percentage for this shell
+*  17 * Completeness percentage up to upper limit of this shell
+*  18 * Administrative tag
+*  19 * Administrative tag
+
+Description of the tags in the residue table:
+*  1 * Chain identifier
+*  2 * Residue number
+*  3 * Residue name
+*  4 * Observable atom(group)s for this residue.
+*  5 * Observed restraints.                              Set A = U - (E u O u I u S)
+*  6 * Expected restraints based on criteria as in A.    Set B = V - (I u S)
+*  7 * Observed restraints matched to the expected.      Set M = A n B
+*  8 * Completeness percentage
+*  9 * Standard deviation from the average over the residues.
+*  10 * Extra information
+*  11 * Administrative tag
+*  12 * Administrative tag
+;
+
+
+    loop_
+       _NOE_completeness_class.Type
+       _NOE_completeness_class.Restraint_observed_count
+       _NOE_completeness_class.Restraint_expected_count
+       _NOE_completeness_class.Restraint_matched_count
+       _NOE_completeness_class.Completeness_cumulative_pct
+       _NOE_completeness_class.Std_dev
+       _NOE_completeness_class.Details
+       _NOE_completeness_class.Entry_ID
+       _NOE_completeness_class.Compl_stats_ID
+
+       intraresidue     0   0   0    .    . 'no intras' 1 1 
+       sequential     838 716 531 74.2  1.1 >sigma      1 1 
+       medium-range   632 580 318 54.8  0.3 .           1 1 
+       long-range     506 757 319 42.1 -0.3 .           1 1 
+       intermolecular 166 456 114 25.0 -1.1 >sigma      1 1 
+    stop_
+
+    loop_
+       _NOE_completeness_shell.Type
+       _NOE_completeness_shell.Shell_start
+       _NOE_completeness_shell.Shell_end
+       _NOE_completeness_shell.Restraint_expected_count
+       _NOE_completeness_shell.Restraint_matched_count
+       _NOE_completeness_shell.Matched_shell_1
+       _NOE_completeness_shell.Matched_shell_2
+       _NOE_completeness_shell.Matched_shell_3
+       _NOE_completeness_shell.Matched_shell_4
+       _NOE_completeness_shell.Matched_shell_5
+       _NOE_completeness_shell.Matched_shell_6
+       _NOE_completeness_shell.Matched_shell_7
+       _NOE_completeness_shell.Matched_shell_8
+       _NOE_completeness_shell.Matched_shell_9
+       _NOE_completeness_shell.Matched_shell_overflow
+       _NOE_completeness_shell.Completeness_shell_pct
+       _NOE_completeness_shell.Completeness_cumulative_pct
+       _NOE_completeness_shell.Entry_ID
+       _NOE_completeness_shell.Compl_stats_ID
+
+       edges    .    .    .    . 2.00 2.50 3.00 3.50 4.00 4.50 5.00 5.50 .   .    .    . 1 1 
+       shell 0.00 2.00   36   32    0    3    2    4    3    4   10    6 .   0 88.9 88.9 1 1 
+       shell 2.00 2.50  312  236    0   92   22   19   36   18   28    4 .  17 75.6 77.0 1 1 
+       shell 2.50 3.00  447  272    0   78    0   48   35   18   49    9 .  35 60.9 67.9 1 1 
+       shell 3.00 3.50  643  307    0    1    2   59   61   18   94   15 .  57 47.7 58.9 1 1 
+       shell 3.50 4.00 1071  435    0    0    6   73   94    8  162   18 .  74 40.6 51.1 1 1 
+       sums     .    . 2509 1282    0  174   32  203  229   66  343   52 . 183    .    . 1 1 
+    stop_
+
+    loop_
+       _NOE_completeness_comp.Entity_assembly_ID
+       _NOE_completeness_comp.Comp_index_ID
+       _NOE_completeness_comp.Comp_ID
+       _NOE_completeness_comp.Obs_atom_count
+       _NOE_completeness_comp.Constraint_observed_count
+       _NOE_completeness_comp.Restraint_expected_count
+       _NOE_completeness_comp.Restraint_matched_count
+       _NOE_completeness_comp.Completeness_cumulative_pct
+       _NOE_completeness_comp.Std_dev
+       _NOE_completeness_comp.Details
+       _NOE_completeness_comp.Entry_ID
+       _NOE_completeness_comp.Compl_stats_ID
+
+       1  1 MET 6 23 38 15  39.5 -1.1 >sigma 1 1 
+       1  2 ASN 6 23 23  8  34.8 -1.4 >sigma 1 1 
+       1  3 LYS 7 29 47 17  36.2 -1.3 >sigma 1 1 
+       1  4 THR 4 31 24 18  75.0  1.1 >sigma 1 1 
+       1  5 GLU 5 25 25 12  48.0 -0.6 .      1 1 
+       1  6 LEU 7 56 58 28  48.3 -0.5 .      1 1 
+       1  7 ILE 6 49 54 34  63.0  0.3 .      1 1 
+       1  8 ASN 6 28 20 17  85.0  1.7 >sigma 1 1 
+       1  9 ALA 3 33 23 17  73.9  1.0 >sigma 1 1 
+       1 10 VAL 5 47 53 24  45.3 -0.7 .      1 1 
+       1 11 ALA 3 39 33 21  63.6  0.4 .      1 1 
+       1 12 GLU 5 25 14 11  78.6  1.3 >sigma 1 1 
+       1 13 THR 4 23 19 14  73.7  1.0 .      1 1 
+       1 14 SER 4 18 27 10  37.0 -1.2 >sigma 1 1 
+       1 15 GLY 3 12 10  6  60.0  0.2 .      1 1 
+       1 16 LEU 7 39 48 27  56.3 -0.1 .      1 1 
+       1 17 SER 4 21 26 14  53.8 -0.2 .      1 1 
+       1 18 LYS 7 24 22 13  59.1  0.1 .      1 1 
+       1 19 LYS 7 16 14  8  57.1 -0.0 .      1 1 
+       1 20 ASP 4 27 33 20  60.6  0.2 .      1 1 
+       1 21 ALA 3 38 36 28  77.8  1.2 >sigma 1 1 
+       1 22 THR 4 30 27 21  77.8  1.2 >sigma 1 1 
+       1 23 LYS 7 27 25 16  64.0  0.4 .      1 1 
+       1 24 ALA 3 31 33 19  57.6  0.0 .      1 1 
+       1 25 VAL 5 41 55 25  45.5 -0.7 .      1 1 
+       1 26 ASP 4 20 18 12  66.7  0.6 .      1 1 
+       1 27 ALA 3 26 29 20  69.0  0.7 .      1 1 
+       1 28 VAL 5 33 56 22  39.3 -1.1 >sigma 1 1 
+       1 29 PHE 7 47 67 31  46.3 -0.7 .      1 1 
+       1 30 ASP 4 16 18 12  66.7  0.6 .      1 1 
+       1 31 SER 4 20 17 12  70.6  0.8 .      1 1 
+       1 32 ILE 6 52 70 39  55.7 -0.1 .      1 1 
+       1 33 THR 4 18 29  9  31.0 -1.6 >sigma 1 1 
+       1 34 GLU 5 21 17 12  70.6  0.8 .      1 1 
+       1 35 ALA 3 31 30 19  63.3  0.4 .      1 1 
+       1 36 LEU 7 38 72 24  33.3 -1.4 >sigma 1 1 
+       1 37 ARG 7 26 26 12  46.2 -0.7 .      1 1 
+       1 38 LYS 7 19 14  9  64.3  0.4 .      1 1 
+       1 39 GLY 3 12 13  6  46.2 -0.7 .      1 1 
+       1 40 ASP 4 14 15 10  66.7  0.6 .      1 1 
+       1 41 LYS 7 15 30  9  30.0 -1.6 >sigma 1 1 
+       1 42 VAL 5 42 57 30  52.6 -0.3 .      1 1 
+       1 43 GLN 7 28 30 18  60.0  0.2 .      1 1 
+       1 44 LEU 7 33 60 20  33.3 -1.4 >sigma 1 1 
+       1 45 ILE 6 15 20  9  45.0 -0.7 .      1 1 
+       1 46 GLY 3 12 12  8  66.7  0.6 .      1 1 
+       1 47 PHE 7 23 67 17  25.4 -1.9 >sigma 1 1 
+       1 48 GLY 3 14 25 10  40.0 -1.0 >sigma 1 1 
+       1 49 ASN 6 20 24 14  58.3  0.1 .      1 1 
+       1 50 PHE 7 45 61 25  41.0 -1.0 .      1 1 
+       1 51 GLU 5 17 32 12  37.5 -1.2 >sigma 1 1 
+       1 52 VAL 5 26 51 12  23.5 -2.0 >sigma 1 1 
+       1 53 ARG 7 25 20 16  80.0  1.4 >sigma 1 1 
+       1 54 GLU 5 17 14 11  78.6  1.3 >sigma 1 1 
+       1 55 ARG 7 24 15 12  80.0  1.4 >sigma 1 1 
+       1 56 ALA 3  9  7  7 100.0  2.6 >sigma 1 1 
+       1 57 ALA 3 13 15  8  53.3 -0.2 .      1 1 
+       1 58 ARG 7 17 20 11  55.0 -0.1 .      1 1 
+       1 59 LYS 7 12 12  7  58.3  0.1 .      1 1 
+       1 60 GLY 3 17 14 10  71.4  0.9 .      1 1 
+       1 61 ARG 7 18 15 10  66.7  0.6 .      1 1 
+       1 62 ASN 6 18 11  7  63.6  0.4 .      1 1 
+       1 63 PRO 5 10  7  5  71.4  0.9 .      1 1 
+       1 64 GLN 7 12 13  9  69.2  0.7 .      1 1 
+       1 65 THR 4 14 10  7  70.0  0.8 .      1 1 
+       1 66 GLY 3 12  7  5  71.4  0.9 .      1 1 
+       1 67 GLU 5 13  8  6  75.0  1.1 >sigma 1 1 
+       1 68 GLU 5 16 10  8  80.0  1.4 >sigma 1 1 
+       1 69 MET 6 20 18 12  66.7  0.6 .      1 1 
+       1 70 GLU 5 11 10  6  60.0  0.2 .      1 1 
+       1 71 ILE 6 30 33 17  51.5 -0.3 .      1 1 
+       1 72 PRO 5 10  7  6  85.7  1.7 >sigma 1 1 
+       1 73 ALA 3 11 17  8  47.1 -0.6 .      1 1 
+       1 74 SER 4 16 13  9  69.2  0.7 .      1 1 
+       1 75 LYS 7 23 35 15  42.9 -0.9 .      1 1 
+       1 76 VAL 5 31 21 16  76.2  1.1 >sigma 1 1 
+       1 77 PRO 5 26 50 18  36.0 -1.3 >sigma 1 1 
+       1 78 ALA 3 16 16 11  68.8  0.7 .      1 1 
+       1 79 PHE 7 21 45 12  26.7 -1.8 >sigma 1 1 
+       1 80 LYS 7 17 20 11  55.0 -0.1 .      1 1 
+       1 81 PRO 5 19 36 11  30.6 -1.6 >sigma 1 1 
+       1 82 GLY 3 13 19  5  26.3 -1.9 >sigma 1 1 
+       1 83 LYS 7 15 18  9  50.0 -0.4 .      1 1 
+       1 84 ALA 3 22 18 13  72.2  0.9 .      1 1 
+       1 85 LEU 7 41 63 25  39.7 -1.1 >sigma 1 1 
+       1 86 LYS 7 19 32 12  37.5 -1.2 >sigma 1 1 
+       1 87 ASP 4 27 17 15  88.2  1.9 >sigma 1 1 
+       1 88 ALA 3 20 21 12  57.1 -0.0 .      1 1 
+       1 89 VAL 5 32 51 19  37.3 -1.2 >sigma 1 1 
+       1 90 LYS 7 17 13  9  69.2  0.7 .      1 1 
+       2  1 MET 6 23 40 16  40.0 -1.0 >sigma 1 1 
+       2  2 ASN 6 23 21  8  38.1 -1.2 >sigma 1 1 
+       2  3 LYS 7 29 47 17  36.2 -1.3 >sigma 1 1 
+       2  4 THR 4 31 24 18  75.0  1.1 >sigma 1 1 
+       2  5 GLU 5 25 26 12  46.2 -0.7 .      1 1 
+       2  6 LEU 7 56 63 29  46.0 -0.7 .      1 1 
+       2  7 ILE 6 49 53 34  64.2  0.4 .      1 1 
+       2  8 ASN 6 28 19 17  89.5  1.9 >sigma 1 1 
+       2  9 ALA 3 33 24 16  66.7  0.6 .      1 1 
+       2 10 VAL 5 47 54 24  44.4 -0.8 .      1 1 
+       2 11 ALA 3 39 33 22  66.7  0.6 .      . . 
+       2 12 GLU 5 25 14 11  78.6  1.3 >sigma . . 
+       2 13 THR 4 23 17 13  76.5  1.2 >sigma . . 
+       2 14 SER 4 18 25 10  40.0 -1.0 >sigma . . 
+       2 15 GLY 3 12 10  6  60.0  0.2 .      . . 
+       2 16 LEU 7 39 46 27  58.7  0.1 .      . . 
+       2 17 SER 4 21 25 14  56.0 -0.1 .      . . 
+       2 18 LYS 7 24 21 14  66.7  0.6 .      . . 
+       2 19 LYS 7 16 14  8  57.1 -0.0 .      . . 
+       2 20 ASP 4 27 31 20  64.5  0.4 .      . . 
+       2 21 ALA 3 38 36 28  77.8  1.2 >sigma . . 
+       2 22 THR 4 30 26 21  80.8  1.4 >sigma . . 
+       2 23 LYS 7 27 27 16  59.3  0.1 .      . . 
+       2 24 ALA 3 31 33 19  57.6  0.0 .      . . 
+       2 25 VAL 5 41 55 25  45.5 -0.7 .      . . 
+       2 26 ASP 4 20 18 12  66.7  0.6 .      . . 
+       2 27 ALA 3 26 31 20  64.5  0.4 .      . . 
+       2 28 VAL 5 33 56 21  37.5 -1.2 >sigma . . 
+       2 29 PHE 7 47 68 31  45.6 -0.7 .      . . 
+       2 30 ASP 4 16 18 12  66.7  0.6 .      . . 
+       2 31 SER 4 20 17 12  70.6  0.8 .      . . 
+       2 32 ILE 6 52 73 38  52.1 -0.3 .      . . 
+       2 33 THR 4 18 29 10  34.5 -1.4 >sigma . . 
+       2 34 GLU 5 21 17 12  70.6  0.8 .      . . 
+       2 35 ALA 3 31 29 19  65.5  0.5 .      . . 
+       2 36 LEU 7 38 74 24  32.4 -1.5 >sigma . . 
+       2 37 ARG 7 26 28 12  42.9 -0.9 .      . . 
+       2 38 LYS 7 19 14  9  64.3  0.4 .      . . 
+       2 39 GLY 3 12 14  6  42.9 -0.9 .      . . 
+       2 40 ASP 4 14 16 10  62.5  0.3 .      . . 
+       2 41 LYS 7 15 23  8  34.8 -1.4 >sigma . . 
+       2 42 VAL 5 42 57 30  52.6 -0.3 .      . . 
+       2 43 GLN 7 28 29 15  51.7 -0.3 .      . . 
+       2 44 LEU 7 33 57 20  35.1 -1.3 >sigma . . 
+       2 45 ILE 6 15 19  9  47.4 -0.6 .      . . 
+       2 46 GLY 3 12 12  8  66.7  0.6 .      . . 
+       2 47 PHE 7 23 65 17  26.2 -1.9 >sigma . . 
+       2 48 GLY 3 14 25 10  40.0 -1.0 >sigma . . 
+       2 49 ASN 6 20 19 12  63.2  0.4 .      . . 
+       2 50 PHE 7 45 61 25  41.0 -1.0 .      . . 
+       2 51 GLU 5 17 28 12  42.9 -0.9 .      . . 
+       2 52 VAL 5 26 52 12  23.1 -2.1 >sigma . . 
+       2 53 ARG 7 25 20 16  80.0  1.4 >sigma . . 
+       2 54 GLU 5 17 16 11  68.8  0.7 .      . . 
+       2 55 ARG 7 24 17 12  70.6  0.8 .      . . 
+       2 56 ALA 3  9  8  6  75.0  1.1 >sigma . . 
+       2 57 ALA 3 13 14  8  57.1 -0.0 .      . . 
+       2 58 ARG 7 17 18 10  55.6 -0.1 .      . . 
+       2 59 LYS 7 12 11  6  54.5 -0.2 .      . . 
+       2 60 GLY 3 17 15 11  73.3  1.0 .      . . 
+       2 61 ARG 7 18 15 10  66.7  0.6 .      . . 
+       2 62 ASN 6 18  9  7  77.8  1.2 >sigma . . 
+       2 63 PRO 5 10  6  5  83.3  1.6 >sigma . . 
+       2 64 GLN 7 12 13  9  69.2  0.7 .      . . 
+       2 65 THR 4 14 11  8  72.7  0.9 .      . . 
+       2 66 GLY 3 12  7  5  71.4  0.9 .      . . 
+       2 67 GLU 5 13  9  7  77.8  1.2 >sigma . . 
+       2 68 GLU 5 16 11  8  72.7  0.9 .      . . 
+       2 69 MET 6 20 17 12  70.6  0.8 .      . . 
+       2 70 GLU 5 11 10  6  60.0  0.2 .      . . 
+       2 71 ILE 6 30 34 19  55.9 -0.1 .      . . 
+       2 72 PRO 5 10  8  7  87.5  1.8 >sigma . . 
+       2 73 ALA 3 11 17  8  47.1 -0.6 .      . . 
+       2 74 SER 4 16 13  9  69.2  0.7 .      . . 
+       2 75 LYS 7 23 34 14  41.2 -1.0 .      . . 
+       2 76 VAL 5 31 21 15  71.4  0.9 .      . . 
+       2 77 PRO 5 26 46 17  37.0 -1.2 >sigma . . 
+       2 78 ALA 3 16 17 11  64.7  0.4 .      . . 
+       2 79 PHE 7 21 45 12  26.7 -1.8 >sigma . . 
+       2 80 LYS 7 17 19 10  52.6 -0.3 .      . . 
+       2 81 PRO 5 19 36 11  30.6 -1.6 >sigma . . 
+       2 82 GLY 3 13 17  5  29.4 -1.7 >sigma . . 
+       2 83 LYS 7 15 16  8  50.0 -0.4 .      . . 
+       2 84 ALA 3 22 18 13  72.2  0.9 .      . . 
+       2 85 LEU 7 41 67 24  35.8 -1.3 >sigma . . 
+       2 86 LYS 7 19 31 12  38.7 -1.1 >sigma . . 
+       2 87 ASP 4 27 17 15  88.2  1.9 >sigma . . 
+       2 88 ALA 3 20 20 12  60.0  0.2 .      . . 
+       2 89 VAL 5 32 51 19  37.3 -1.2 >sigma . . 
+       2 90 LYS 7 17 13  9  69.2  0.7 .      . . 
+    stop_
+
+save_
+

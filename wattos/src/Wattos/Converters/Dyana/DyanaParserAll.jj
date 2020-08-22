@@ -1,0 +1,629 @@
+options {
+    IGNORE_CASE         = true;
+    /** The parser can not be constructed multiple times. */
+    STATIC              = true;
+    ERROR_REPORTING     = true;
+    /**Explicitely needed because in the newer versions of the GUI version of 
+      javacc this option is not initialized properly.
+      */
+    KEEP_LINE_COLUMN        = true; 
+    // Followin option is set to default. Only local syntactic LOOKAHEAD is used.
+    LOOKAHEAD               = 1; 
+}
+
+
+PARSER_BEGIN(DyanaParserAll)
+
+package Wattos.Converters.Dyana;
+
+import Wattos.Utils.*;
+import Wattos.Converters.Dyana.Utils;
+import Wattos.Converters.Common.*;
+
+import java.util.jar.Attributes;
+import java.util.*;
+import java.io.*;
+
+/**
+ * @author  Jurgen Doreleijers
+ * @version 0.1
+ */
+
+public class DyanaParserAll {
+    
+    // Type of data to parse
+    static int data_type = Varia.DATA_TYPE_DISTANCE;
+    /** Number of parameters on the second part of a restraint definition as
+        split up in the grammar below.
+    */
+    static final int NUMBER_OF_VARIABLE_PARAMETERS_DISTANCE = 5;
+    /** The residue number and atom name respectively. */
+    static final int NUMBER_OF_VARIABLE_PARAMETERS_AMBIG    = 2;
+
+    //parser stack to store ASSI statement
+    static Vector stack;
+    //parser stack to store AMBIG statement
+    static Vector ambigStack;
+    //Store all comments
+    static Vector cmtStack;
+    //Store all error lines for second pass
+    static Vector errLineStack;
+    //Store all errors from second pass
+    static Vector errStack;
+
+    //Store most recently parsed Assi line and col 
+    //used by error recording later, for second pass
+    //scanning for errors
+    static int lastAssiLine;
+    static int lastAssiCol;
+
+    /**Constructor
+     */
+    public DyanaParserAll() {
+        init();
+    }
+
+    public void init() {
+        stack           = new Vector();
+        ambigStack      = new Vector();
+        cmtStack        = new Vector();
+        errLineStack    = new Vector();
+        errStack        = new Vector();
+    }
+
+    /**Start parsing of Dyana file 
+     */
+    public void parse(String DyanaName, int type, boolean parse) {
+        String inputFile = DyanaName;
+        data_type = type;
+        try{
+            /* Check first if file ends with an end of line, if not, 
+                append an extra "\n" before EOF as this would cause problems later on
+                */
+            RandomAccessFile inputRead = new RandomAccessFile(inputFile, "r");
+            long inputBytes = inputRead.length() - 1;
+            //forward file pointer to last byte char in file
+            inputRead.seek(inputBytes);
+            char lastChar = (char)(inputRead.read());
+            if (lastChar != '\n' && lastChar != '\r') {
+                inputRead.close();
+                // Open an appending writer
+                PrintWriter input = new PrintWriter(new BufferedWriter(new FileWriter(DyanaName, true)));
+                input.print('\n');
+                input.close();
+            }
+            else 
+                inputRead.close();
+            
+            ReInit( new java.io.FileInputStream(DyanaName) );
+            getInput();
+
+            //second pass processing errors
+            Utils.saveErrors(inputFile, errLineStack, errStack);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException opening " + DyanaName );
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
+            System.out.println("ParseException parsing " + DyanaName );
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("IOException in parse method" );
+            e.printStackTrace();
+        }
+    }        
+
+    
+    void getInput() throws ParseException {
+        switch ( data_type ) {
+            case Varia.DATA_TYPE_DISTANCE:
+                getInputDistanceConstraints();
+                break;
+            case Varia.DATA_TYPE_DIHEDRAL:
+                getInputDihedral();
+                break;
+            case Varia.DATA_TYPE_DIPOLAR_COUPLING:
+                getInputDipolar();
+                break;
+            case Varia.DATA_TYPE_CHEMICAL_SHIFT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_CHEMICAL_SHIFT");
+                break;
+            case Varia.DATA_TYPE_COUPLING_CONSTANT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_COUPLING_CONSTANT");
+                break;
+            case Varia.DATA_TYPE_PLANARITY:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_PLANARITY");
+                break;
+        }    
+    }
+
+    /**return Vector storing all data
+     * every element is a LogicalNode object
+     */
+    public Vector popResult() {
+        return stack;
+    }
+
+
+    /**return Vector storing all comments
+     * every element is a Comment object
+     */
+    public Vector popComment() {
+        return cmtStack;
+    }
+
+
+    /**return Vector storing all errors
+     * every element is an ErrorLine object
+     */
+    public Vector popError() {
+        return errStack;
+    }
+}
+PARSER_END(DyanaParserAll)
+
+
+TOKEN_MGR_DECLS :
+{
+}
+
+SKIP:
+{
+    " " | "\t"
+}
+
+// A section of tokens that are defined locally but will not be visible to other code.
+TOKEN:
+{
+            < #NOT_EOL:             ~["\n", "\r"]>
+    |       < #DIGIT:               ["0"-"9"]>
+    |       < #LETTER:              ["a"-"z"]>
+    |       < #ALPHANUMERIC:        <DIGIT> | <LETTER> >
+    |       < #WHITESPACE:          [" ", "\t", "\r", "\n", "\f"]>
+    |       < #NOT_WHITESPACE:     ~[" ", "\t", "\r", "\n", "\f"]>
+    |       < #OPTIONALWHITESPACE:  (<WHITESPACE>)*>
+    |       < #POUND:               "#">
+    |       < #NOT_DQUOTE:          ~["\""]>
+    |       < #ONE_CHAR_WORD:       ["(", ")", ":", "@", "="]>
+    |       < #NOT_ONE_CHAR_WORD:  ~["(", ")", ":", "@", "="]>                                
+    |       < #SPACEINLINE:         [" ", "\t"]>
+    |       < #SIGN:                ["+","-"]>
+}
+
+/** Regular tokes */
+TOKEN:
+{
+        <AMBIG:             "AMBIG">
+    |   <EQUAL_SIGN:        "=">
+    /** Numbers can be integer, float or scientific notation. */
+    |   <NUMBER:            (<SIGN>)? (<DIGIT>)+ |
+                            (<SIGN>)? (<DIGIT>)* "." (<DIGIT>)+ |
+                            (<SIGN>)? (<DIGIT>)+ "." (<DIGIT>)* |
+                            (<SIGN>)? (<DIGIT>)* "." (<DIGIT>)+ ["D","E","F"]  <SIGN> (<DIGIT>)+ |
+                            (<SIGN>)? (<DIGIT>)+ "." (<DIGIT>)* ["D","E","F"]  <SIGN> (<DIGIT>)+ >
+    |   <NAME:              (<ALPHANUMERIC> | ["+", "-", ":", "'", "\"", "/"])+ >
+    |   <EOL:               ("\r\n" | "\n" | "\r")>
+}
+
+
+/** Special tokens that will be prepended to returned regular tokens and will
+    then be processed into comments. */
+SPECIAL_TOKEN:
+{ 
+        <POUNDCOMMENT:      (["<", ">"])? <POUND>                     (<NOT_EOL>)* >
+}
+
+
+TOKEN:
+{
+     /**Illegal chars: any control char, characters above 127 (decimal), 
+        comma, semicolon, question mark, ampersand, square brackets, or
+        vertical bar.
+        To prevent the parser from resynchronizing right away this token is defined
+        for words in stead of just characters.
+        This token should occur last and therefore have the lowest priority. 
+        It's sole purpose is to satisfy the token manager and make sure that it doesn't crash.
+        In the characters specified in octal notation all control chars except
+        white space characters are included.
+        What is attempted here is to include any words that might occur in the
+        text (anything) that would not result in a matched token by the token
+        manager.
+        */
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",
+                        ",", ";", "?", "&", "[", "]", "|", "(", ")", "<", ">", "/", ".", "_", "*", "'", "`"  ]>
+    | <ILLEGAL_WORD:    (<ILLEGAL_CHAR>)+ (<NOT_WHITESPACE>)* >
+}
+
+void getInputDipolar() :
+{}
+{
+    try {
+        ListDipolar() {
+        }
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind != EOF) {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void ListDipolar() throws ParserDoneException  :
+{
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{       
+    try{
+        (   
+            Eol()|
+            DipolarRestraint()
+        )+
+        {}
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+void DipolarRestraint() throws ParserDoneException : 
+{
+    String residue_number_1, residue_name_1, atom_name_1;
+    String residue_number_2=null, residue_name_2=null, atom_name_2=null;
+    String value, value_error;
+    String optional_relative_weight_force_constant;
+    value_error = null;
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    try {
+        residue_number_1= Number()
+        residue_name_1  = Name()
+        atom_name_1     = Name()
+        [   // TODO check if this is enough hints to parser.
+            LOOKAHEAD(2)
+            residue_number_2= Number()
+            residue_name_2  = Name()
+            atom_name_2     = Name()
+        ]
+        value           = Number()
+        [ LOOKAHEAD(1) value_error   = Number() // Always eat what's on your plate.
+            [ LOOKAHEAD(1) optional_relative_weight_force_constant = Number() ]
+        ]
+        ( LOOKAHEAD(1) Eol())* 
+        { 
+            Utils.saveDipolar( stack, 
+                residue_number_1, residue_name_1, atom_name_1, 
+                residue_number_2, residue_name_2, atom_name_2, 
+                value, value_error );
+        }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(NUMBER)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+void getInputDihedral() :
+{}
+{
+    try {
+        ListDihedral() {
+        }
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind != EOF) {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void ListDihedral() throws ParserDoneException  :
+{
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{       
+    try{
+        (   
+            Eol()|
+            DihedralRestraint()
+        )+
+        {}
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+void DihedralRestraint() throws ParserDoneException : 
+{
+    String residue_number, residue_name, angle_name, angle_low, angle_high;
+    String optional_relative_weight_force_constant;
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    try {
+        residue_number  = Number()
+        residue_name    = Name()
+        angle_name      = Name()
+        angle_low       = Number()
+        angle_high      = Number()
+        [ LOOKAHEAD(1) optional_relative_weight_force_constant = Number() ] // Ignored.
+        ( LOOKAHEAD(1) Eol())* // Always eat what's on your plate.
+        { 
+            Utils.saveDihedral( stack, residue_number, residue_name, angle_name, angle_low, angle_high );
+        }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(NUMBER)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+/** This code depends on the fact that the ambig section is always last
+in the constraint file; it will go and erroneously try to match ambi
+ statements even though they might be another listdistance if order
+is not followed.
+*/
+void getInputDistanceConstraints() :
+{
+    boolean results = false;
+}
+{
+    try {
+        ListDistance() {
+        }
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind != EOF) {
+            System.out.println("Caught ParserDone");
+        }
+    } finally {
+        if ( ambigStack.size() > 0  ) {
+            Utils.processDistanceAmig(stack, ambigStack);
+        }
+    }
+}
+
+/** The skipto Number will not do correct error recovery in the ambi
+cases but since there are so few of those that's ok for now.
+*/
+void ListDistance() throws ParserDoneException  :
+{
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{       
+    try{
+        (   
+            Eol()|
+            AmbigDefinition()|
+            DistanceRestraint()
+        )+ 
+        {}
+/** the below block caused java to throw a java.lang.StackOverflow because
+when more than 4,000 restraints were processed the recursion was too bad.   
+    try{
+        (   
+            Eol()|
+            AmbigDefinition()|
+            DistanceRestraint()
+        )
+        [ ListDistance() ] 
+        {}
+*/
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+
+/** The lookahead is given because we know what we're doing; consume by
+this non-terminal if it comes up.
+*/
+void AmbigDefinition() throws ParserDoneException : 
+{
+    String atom_name;
+    ArrayList results = new ArrayList();
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    Ambig()
+    (
+        atom_name       = Name()|
+        atom_name       = Number()
+    )
+    EqualSign()
+    results         = AmbigSet()
+    (LOOKAHEAD(1) Eol())+  
+    {
+        results.add(0, atom_name ); /** mixed nuts in this bag; watch out */
+        ambigStack.add(results);
+    }
+}
+
+ArrayList AmbigSet() throws ParserDoneException  :
+{
+    String[] result_one_restraint;
+    ArrayList results = null;
+}
+{   result_one_restraint = AmbigSetPart() 
+    [ results = AmbigSet() ]
+    {
+        if ( results == null ) {
+            results = new ArrayList();
+        }
+        /** Insert at beginning important. */
+        results.add( 0, result_one_restraint );
+        return results;
+    }
+}
+
+String[] AmbigSetPart() throws ParserDoneException : 
+{
+    String residue_number, atom_name;
+    String[] result_one_restraint = new String[ NUMBER_OF_VARIABLE_PARAMETERS_AMBIG ];
+}
+{
+    atom_name         = Name()
+    residue_number    = Number()
+    {
+        /** The mapping could of course be collapsed for efficiency. */
+        result_one_restraint[ 0 ] = atom_name;
+        result_one_restraint[ 1 ] = residue_number;
+
+        return result_one_restraint;
+    }
+}
+
+
+void DistanceRestraint() throws ParserDoneException : 
+{
+    String residue_number_1, residue_name_1;
+    ArrayList results = null;
+    int[] coor = Utils.storeBeginOfRestraint();
+    lastAssiLine    = coor[0];
+    lastAssiCol     = coor[1];
+}
+{
+    try {
+        residue_number_1 = Number()
+        residue_name_1   = Name()
+        ( LOOKAHEAD(1) Eol())* // Always eat what's on your plate.
+        [results          = DistanceSet()]
+        {
+            if ( results != null ) {
+                Utils.saveDistance( stack, residue_number_1, residue_name_1, results );
+            }
+        }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(NUMBER)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(NUMBER);  
+    }
+}
+
+ArrayList DistanceSet() throws ParserDoneException  :
+{
+    String[] result_one_restraint;
+    ArrayList results = null;
+}
+{    result_one_restraint = DistanceSetPart()
+     [ results = DistanceSet() ]     
+    {
+        if ( results == null ) {
+            results = new ArrayList();
+        }
+        /** Insert at beginning important. */
+        results.add( 0, result_one_restraint );
+        return results;
+    }
+}
+
+
+/** The lookahead is given because we know what we're doing; consume by
+this non-terminal if it comes up.*/
+String[] DistanceSetPart() throws ParserDoneException : 
+{
+    String atom_name_1;
+    String residue_number_2, residue_name_2, atom_name_2, upper_limit;
+    String bogus_relative_weight = null;
+    String[] result_one_restraint = new String[ NUMBER_OF_VARIABLE_PARAMETERS_DISTANCE ];
+}
+{
+    atom_name_1         = Name()
+    residue_number_2    = Number()
+    residue_name_2      = Name()
+    ( /** Strange but observed for a file with ambis (pdb code: ) 
+            Not allowed for atom_name_1 !*/
+        atom_name_2         = Name() |
+        atom_name_2         = Number() 
+    )
+    upper_limit         = Number()
+    [bogus_relative_weight = Number()]
+    (LOOKAHEAD(1) Eol())+
+    {
+        /** The mapping could of course be collapsed for efficiency. */
+        result_one_restraint[ 0 ] = atom_name_1;
+        result_one_restraint[ 1 ] = residue_number_2;
+        result_one_restraint[ 2 ] = residue_name_2;
+        result_one_restraint[ 3 ] = atom_name_2;
+        result_one_restraint[ 4 ] = upper_limit;
+
+        return result_one_restraint;
+    }
+}
+
+
+String EqualSign() :
+{
+    Token t;
+}
+{
+    t = <EQUAL_SIGN>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String Number() :
+{
+    Token t;
+}
+{
+    t = <NUMBER>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String Name() :
+{
+    Token t;
+}
+{
+    t = <NAME>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String Ambig() :
+{
+    Token t;
+}
+{
+    t = <AMBIG>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String Eol() :
+{
+    Token t;
+}
+{
+    t = <EOL>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+JAVACODE
+
+void error_skipto(int kind) throws ParserDoneException {
+    Utils.error_skipto(kind, errLineStack, lastAssiLine, lastAssiCol);
+}  

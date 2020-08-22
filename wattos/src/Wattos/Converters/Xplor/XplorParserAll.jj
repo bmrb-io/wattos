@@ -1,0 +1,1000 @@
+options {
+    IGNORE_CASE         = true;
+    /** The parser can not be constructed multiple times. */
+    STATIC              = true;
+    ERROR_REPORTING     = true;
+    /**Explicitely needed because in the newer versions of the GUI version of 
+      javacc this option is not initialized properly.
+      */
+    KEEP_LINE_COLUMN        = true; 
+    // Followin option is set to default. Only local syntactic LOOKAHEAD is used.
+    DEBUG_TOKEN_MANAGER     = false;
+    DEBUG_PARSER            = false;
+    LOOKAHEAD               = 1; 
+}
+
+
+PARSER_BEGIN(XplorParserAll)
+
+package Wattos.Converters.Xplor;
+
+import Wattos.Utils.*;
+import Wattos.Converters.Xplor.Utils;
+import Wattos.Converters.Common.*;
+
+import java.util.jar.Attributes;
+import java.util.*;
+import java.io.*;
+
+/**
+ * @author  Jurgen Doreleijers
+ * @version 0.1
+ */
+
+public class XplorParserAll {
+    
+    // Type of data to parse
+    static int data_type = Varia.DATA_TYPE_DISTANCE;
+
+    //parser stack to store ASSI statement
+    static Vector stack;
+    //Store all comments
+    static Vector cmtStack;
+    //Store all error lines for second pass
+    static Vector errLineStack;
+    //Store all errors from second pass
+    static Vector errStack;
+
+    //Store most recently parsed Assi line and col 
+    //used by error recording later, for second pass
+    //scanning for errors
+    static int lastAssiLine;
+    static int lastAssiCol;
+
+    /**Constructor
+     */
+    public XplorParserAll() {
+        init();
+    }
+
+    public void init() {
+        stack           = new Vector();
+        cmtStack        = new Vector();
+        errLineStack    = new Vector();
+        errStack        = new Vector();
+    }
+
+    /**Start parsing of Xplor file 
+     */
+    public void parse(String XplorName, int type) {
+        String inputFile = XplorName;
+        data_type = type;
+        try{
+            /* Check first if file ends with an end of line, if not, 
+                append an extra "\n" before EOF as this would cause problems later on
+                */
+            RandomAccessFile inputRead = new RandomAccessFile(inputFile, "r");
+            long inputBytes = inputRead.length() - 1;
+            //forward file pointer to last byte char in file
+            inputRead.seek(inputBytes);
+            char lastChar = (char)(inputRead.read());
+            if (lastChar != '\n' && lastChar != '\r') {
+                inputRead.close();
+                // Open an appending writer
+                PrintWriter input = new PrintWriter(new BufferedWriter(new FileWriter(XplorName, true)));
+                input.print('\n');
+                input.close();
+            }
+            else 
+                inputRead.close();
+            
+            ReInit( new java.io.FileInputStream(XplorName) );
+            getInput();
+
+            //second pass processing errors
+            Utils.saveErrors(inputFile, errLineStack, errStack);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException opening " + XplorName );
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
+            System.out.println("ParseException parsing " + XplorName );
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            System.out.println("IOException in parse method" );
+            e.printStackTrace();
+        }
+    }        
+
+    
+    void getInput() throws ParseException {
+        switch ( data_type ) {
+            case Varia.DATA_TYPE_DISTANCE:
+                getInputDistance();
+                break;
+            case Varia.DATA_TYPE_DIHEDRAL:
+                getInputDihedral();
+                break;
+            case Varia.DATA_TYPE_DIPOLAR_COUPLING:
+                getInputDipolarCoupling();
+                break;
+            case Varia.DATA_TYPE_CHEMICAL_SHIFT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_CHEMICAL_SHIFT");
+                break;
+            case Varia.DATA_TYPE_COUPLING_CONSTANT:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_COUPLING_CONSTANT");
+                break;
+            case Varia.DATA_TYPE_PLANARITY:
+                System.out.println("WARNING: Not implemented yet: DATA_TYPE_PLANARITY");
+                break;
+        }    
+    }
+
+    /**return Vector storing all data
+     * every element is a LogicalNode object
+     */
+    public Vector popResult() {
+        return stack;
+    }
+
+
+    /**return Vector storing all comments
+     * every element is a Comment object
+     */
+    public Vector popComment() {
+        return cmtStack;
+    }
+
+
+    /**return Vector storing all errors
+     * every element is an ErrorLine object
+     */
+    public Vector popError() {
+        return errStack;
+    }
+}
+PARSER_END(XplorParserAll)
+
+
+TOKEN_MGR_DECLS :
+{
+    // For rememebering a reference to the starting token that
+    // began a curly-brace comment:
+    static Token starting_curly_token = null;
+    
+    // Keep track of how many will be open. Bogus initialization.
+    static int curlies_open = 0;
+}
+
+SKIP:
+{
+    " " | "\t" | "\n" | "\r"
+}
+
+// A section of tokens that are defined locally but will not be visible to other code.
+TOKEN:
+{
+            < #EOL:                 ("\r\n" | "\n" | "\r")>
+    |       < #NOT_EOL:             ~["\n", "\r"]>
+    |       < #DIGIT:               ["0"-"9"]>
+    |       < #LETTER:              ["a"-"z"]>
+    |       < #ALPHANUMERIC:        <DIGIT> | <LETTER> >
+    |       < #WHITESPACE:          [" ", "\t", "\r", "\n", "\f"]>
+    |       < #NOT_WHITESPACE:     ~[" ", "\t", "\r", "\n", "\f"]>
+    |       < #OPTIONALWHITESPACE:  (<WHITESPACE>)*>
+    |       < #BANG:                "!">
+    |       < #DOLLAR:              "$">
+    |       < #DQUOTE:              "\"">
+    |       < #NOT_DQUOTE:          ~["\""]>
+    |       < #END:                 "end">
+    |       < #REMARK:              "rema" (<LETTER>)* >
+    |       < #SET:                 "set">
+    |       < #ONE_CHAR_WORD:       ["(", ")", ":", "@", "="]>
+    |       < #NOT_ONE_CHAR_WORD:  ~["(", ")", ":", "@", "="]>                                
+    |       < #WORD:                (<ALPHANUMERIC> | ["#", "_", "%", "*", "+", ":", "@", "<", ">", "^", "~", "-", "/", "'", "`", "\\"])+ |
+                                    <DQUOTE> (<NOT_DQUOTE>)* <DQUOTE> >
+    |       <#LCURLY:            "{">
+    |       <#RCURLY:            "}">
+    |       <#NOT_CURLY:         ~["{", "}"] >
+}
+
+/** Regular tokes */
+TOKEN:
+{
+    <ASSI:                  "assi" (<LETTER>)*>
+    |   <SEGI:              "segi" (<LETTER>)*>
+    |   <RESI:              "resi" (<LETTER>)*>
+    |   <RESN:              "resn" (<LETTER>)*>
+    |   <NAME:              "name">
+    |   <ATOM:              "atom">
+    |   <AND:               "and" >
+    |   <OR:                "or" >
+    |   <PEAK:              "peak" >
+    |   <VOLUME:            "volu" (<LETTER>)*>
+    |   <WEIGHT:            "weig" (<LETTER>)*>
+    |   <SPECTRUM:          "spec" (<LETTER>)*>
+    |   <HPM1:              "hpm1" >
+    |   <HPM2:              "hpm2" >
+    |   <PPM1:              "ppm1" >
+    |   <PPM2:              "ppm2" >
+    |   <CV:                "cv" >
+    |   <LPAREN:            "(">
+    |   <RPAREN:            ")">
+    |   <EQUAL:             "=">
+    |   <NUMBER:            (["+","-"])? (<DIGIT>)+ (["."])? (<DIGIT>)* ( ["D","E","F"]  ["+", "-"] (<DIGIT>)+ )? |
+                            (["+","-"])?            (["."])? (<DIGIT>)+ ( ["D","E","F"]  ["+", "-"] (<DIGIT>)+ )? >
+    |   <XPLOR_SYMBOL:      <DOLLAR> (<ALPHANUMERIC> | "_" )+> // Maximum of 20 characters actually in XPLOR
+    |   <IDENTIFIER:        <WORD> (<OPTIONALWHITESPACE> ":" <OPTIONALWHITESPACE> <WORD>)? >
+    |   <SPACEINLINE:       [" ", "\t"]>
+}
+
+
+/** Special tokens that will be prepended to returned regular tokens and will
+    then be processed into comments. */
+SPECIAL_TOKEN:
+{ 
+    <BANGCOMMENT:           <BANG>                      (<NOT_EOL>)* <EOL> >
+    |   <REMARKCOMMENT:     <REMARK>                    (<NOT_EOL>)* <EOL> >
+    /* The set command is treated as a comment here. Note that the restriction
+    that all the text should be on the same line is artificial. */
+    |   <SETCOMMENT:        <SET>       <WHITESPACE>    (<NOT_EOL>)* <END> >
+
+    |   <CURLYCOMMENT:  <LCURLY>    >
+        {
+            curlies_open    = 1;
+            /** Reference to the token that this rule is going to be returning
+            once the token manager gets back out of <CURLY_STATE>. */
+	    starting_curly_token = matchedToken;  
+        }: CURLY_STATE
+}
+
+/** 
+These are SKIP tokens, so that the token manager won't attach them to the chain of special tokens.
+The code written here will still run when the tokens are encountered,
+but the token manager will just throw the token away after the code
+in the curly braces is done with it.
+*/
+<CURLY_STATE> SKIP:
+{
+    // Not curlies
+    < ( <NOT_CURLY> )+ >
+    {
+        starting_curly_token.image = starting_curly_token.image + image.toString();
+    }
+    | < <LCURLY> >
+    {
+        starting_curly_token.image = starting_curly_token.image + image.toString();
+        curlies_open++;
+    } 
+    | < <RCURLY> >
+    {
+        starting_curly_token.image = starting_curly_token.image + image.toString();
+        curlies_open--;
+        if (curlies_open < 1) {
+            SwitchTo( DEFAULT );
+        }
+    }
+}
+
+
+TOKEN:
+{
+     /**Illegal chars: any control char, characters above 127 (decimal), 
+        comma, semicolon, question mark, ampersand, square brackets, or
+        vertical bar.
+        To prevent the parser from resynchronizing right away this token is defined
+        for words in stead of just characters.
+        This token should occur last and therefore have the lowest priority. 
+        It's sole purpose is to satisfy the token manager and make sure that it doesn't crash.
+        In the characters specified in octal notation all control chars except
+        white space characters are included.
+        What is attempted here is to include any words that might occur in the
+        text (anything) that would not result in a matched token by the token
+        manager.
+
+2003-04-24 Deleted the double quote character from the list of illegal chars to
+            prevent a string like "CYS") be matched as a illegal word as occured
+            in entry 1nj3 for the general distance constraints block.
+        */
+/** original set:
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",
+                        ",", ";", "?", "&", "[", "]", "|" ]>
+*/
+    <#ILLEGAL_CHAR:     ["\000"-"\010", "\013", "\016"-"\034", "\177" - "\377",     // Invalid control and foreign chars
+                        "[", "]", "<", ">",                                         // Brackets
+                        ",", ";", "?", "&", "|", "/", ".", "_", "*", "'", "`", ":", // Unused chars otherwise.
+                        "@", "$", "%", "^", "~"
+                        ]>
+/**    | <ILLEGAL_WORD:    (<ILLEGAL_CHAR>)+ (<NOT_WHITESPACE>)* > changed from on 1/12/05 for entry 1ttv which has atom names like "*H33" 
+that are followed by ")" and were made into a word.
+*/
+    | <ILLEGAL_WORD:    (<ILLEGAL_CHAR>)+ >
+}
+
+
+void getInputDihedral() :
+{
+}
+{
+    try {
+            AssiListDihedral() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void getInputDistance() :
+{
+}
+{
+    try {
+            AssiListDistance() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+void getInputDipolarCoupling() :
+{
+}
+{
+    try {
+            AssiListDipolarCoupling() {}
+    } catch ( ParserDoneException e) {
+        if (getNextToken().kind == EOF) {
+            ;
+        } else {
+            System.out.println("Caught ParserDone");    
+        }
+    }
+}
+
+
+void AssiListDistance() throws ParserDoneException  :
+{
+}
+{    AssiStateDistance() [ AssiListDistance() ]
+    {}
+}
+
+void AssiListDihedral() throws ParserDoneException  :
+{
+}
+{    AssiStateDihedral() [ AssiListDihedral() ]
+    {}
+}
+
+void AssiListDipolarCoupling() throws ParserDoneException  :
+{
+}
+{    AssiStateDipolarCoupling() [ AssiListDipolarCoupling() ]
+    {}
+}
+
+void AssiStateDistance() throws ParserDoneException : 
+{
+    Token t;
+    String d, dminus, dplus;
+    ArrayList select1, select2;
+    Attributes opt_info =null;
+    ArrayList select_list = null;
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+}
+{
+    try {   t       = <ASSI> 
+            select1 = Selection() 
+            select2 = Selection() 
+            d       = Number() 
+            dminus  = Number() 
+            dplus   = Number() 
+            [ opt_info      = OptionalInfoDistanceList() ]
+            [ select_list   = SelectListORDistance() ]
+            {
+                Utils.saveComment(t,cmtStack);
+                //System.out.println("Found arraylist for AssiStateDistance:" + AtomNode.toString( select1 ) );
+                Utils.saveAssiStateDistance( stack, select1, select2, d, dminus, dplus, opt_info, select_list );
+            }
+        /** Handle shallow error recovery; see javacc tutorial on "Error reporting and recovery" */
+        | error_skipto(ASSI)
+    /** Handle deep error recovery */
+    } catch (ParseException e) {  
+        error_skipto(ASSI);  
+    }
+}
+
+void AssiStateDihedral() throws ParserDoneException : 
+{
+    Token t;
+    String constant, target, range, exponent;
+    ArrayList select1, select2, select3, select4;
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+}
+{
+    try {   t       = <ASSI> 
+            select1 = Selection() 
+            select2 = Selection() 
+            select3 = Selection() 
+            select4 = Selection() 
+            constant= Number() 
+            target  = Number() 
+            range   = Number()
+            exponent= Number() {
+                Utils.saveComment(t,cmtStack);
+                Utils.saveAssiStateDihedral( stack, select1, select2, select3, select4, constant, target, range, exponent );
+            }
+        | error_skipto(ASSI)
+    } catch (ParseException e) {  
+        error_skipto(ASSI);  
+    }
+}
+
+void AssiStateDipolarCoupling() throws ParserDoneException : 
+{
+    Token t;
+    String number1 = null;
+    String number2 = null;
+    String number3 = null;
+    ArrayList dummy, select1, select2, select3=null, select4=null;
+    Token assiStart = getToken(1);
+    lastAssiLine = assiStart.beginLine;
+    lastAssiCol = assiStart.beginColumn;
+    assiStart = null;
+}
+{
+    // Add possibility of just 2 selection statements as observed in entry 1ny9 later...
+    try {   
+            t       = <ASSI> 
+            dummy = Selection() 
+            dummy = Selection() 
+            select1 = Selection() 
+            select2 = Selection() 
+            [
+                select3 = Selection() 
+                select4 = Selection() 
+            ]
+            number1 = Number()
+            number2 = Number() 
+            /** JFD: Optional third number; My python code also incorporated an optional
+            additional set of 3 more numbers (total 6) for identifying this data type
+            but the classifications don't show an example on 2002-08-14 so it is left
+            out. Below is the alternative 4 atom selections configuration as used
+            in e.g. 2gat.
+            */
+            [ number3   = Number() ] 
+            {
+                Utils.saveComment(t,cmtStack);
+
+                /** Ignore atoms defining the axes, sometimes 2 usually 4*/
+                if ( select3 != null ) {
+                    Utils.saveAssiStateDipolarCoupling( stack, select3, select4, number1, number2, number3 );
+                } else {
+                    Utils.saveAssiStateDipolarCoupling( stack, select1, select2, number1, number2, number3 );
+                }
+            }
+        | error_skipto(ASSI)
+    } catch (ParseException e) {  
+        error_skipto(ASSI);  
+    }
+}
+
+
+Attributes OptionalInfoDistanceList():
+{
+    Attributes sel;
+    Attributes sel_new = new Attributes();
+}
+{    sel = OptionalInfoDistanceState() [ sel_new = OptionalInfoDistanceList() ]
+    {
+        General.appendAttributes(sel, sel_new);
+        return sel;    
+    }
+}
+
+
+Attributes OptionalInfoDistanceState() :
+{
+    Attributes sel;
+}
+{
+    sel = Spectrum()    { return sel; } | 
+    sel = Weight()      { return sel; } | 
+    sel = Peak()        { return sel; } |
+    sel = Volume()      { return sel; } |
+    sel = Ppm1()        { return sel; } |
+    sel = Ppm2()        { return sel; } |
+    sel = Hpm1()        { return sel; } |
+    sel = Hpm2()        { return sel; } |
+    sel = Cv()          { return sel; }
+}
+
+Attributes Spectrum() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<SPECTRUM>  [t2 = <EQUAL>]     value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("spectrum", value);
+        return sel;
+    }
+}
+
+Attributes Weight() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<WEIGHT>  [t2 = <EQUAL>]     value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("weight", value);
+        return sel;
+    }
+}
+
+Attributes Peak() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<PEAK>   [t2 = <EQUAL>]    value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("peak", value);
+        return sel;
+    }
+}
+
+Attributes Volume() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<VOLUME>  [t2 = <EQUAL>]     value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("volume", value);
+        return sel;
+    }
+}
+
+Attributes Ppm1() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<PPM1>  [t2 = <EQUAL>]     value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("ppm1", value);
+        return sel;
+    }
+}
+
+Attributes Ppm2() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<PPM2>   [t2 = <EQUAL>]    value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("ppm2", value);
+        return sel;
+    }
+}
+
+Attributes Hpm1() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<HPM1>  [t2 = <EQUAL>]     value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("hpm1", value);
+        return sel;
+    }
+}
+
+Attributes Hpm2() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<HPM2>   [t2 = <EQUAL>]    value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        sel.putValue("hpm2", value);
+        return sel;
+    }
+}
+
+
+/** Will not be stored. CV stands for cross-validation the
+number indicates to which partition number the restraint belongs. */
+Attributes Cv() :
+{
+    Token t1,t2=null;
+    String value;
+    Attributes sel = new Attributes();;
+}
+{
+    t1=<CV>   [t2 = <EQUAL>]    value    = Number()
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        return sel;
+    }
+}
+
+
+
+ArrayList SelectListORDistance() throws ParserDoneException  :
+{
+    ArrayList select_list;
+    ArrayList select_list_new = null;
+}
+{    select_list = SelectStateORDistance() [ select_list_new = SelectListORDistance() ]
+    {
+        if ( select_list_new != null ) {
+            select_list.addAll(select_list_new);
+        }
+        return select_list;
+    }
+}
+
+
+ArrayList SelectStateORDistance() throws ParserDoneException : 
+{
+    Token t;
+    ArrayList select1, select2;
+    ArrayList select_both = new ArrayList();
+}
+{
+    t = <OR>
+    select1 = Selection() 
+    select2 = Selection() 
+    {
+        Utils.saveComment(t,cmtStack);
+        select_both.add( select1 );
+        select_both.add( select2 );
+        return select_both;
+    }
+}
+
+/** "Selection" using Xplor syntax */
+ArrayList Selection() :
+{
+    Token t1, t2;
+    ArrayList sel;
+}
+{
+    t1 = <LPAREN> sel = SelExpr() t2 = <RPAREN>
+    {   
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        //System.out.println("Found arraylist for Selection:" + AtomNode.toString( sel ) );
+        if ( sel == null ) {
+            sel = new ArrayList();
+        }
+        return sel;
+    }
+}
+
+/** "SelectionExpression" using Xplor syntax */
+ArrayList SelExpr() :
+{
+    ArrayList sel, sel_tail;
+}
+{
+    sel         = Term()
+    sel_tail    = SelExprTail()
+    {   
+        if ( sel_tail != null ) {
+            sel = AtomNode.combineAtomList( Varia.OPERATION_TYPE_OR, sel, sel_tail );
+        }
+        //System.out.println("Found arraylist for SelExpr:" + AtomNode.toString( sel ) );
+        return sel;
+    } 
+}
+
+ArrayList SelExprTail() :
+{
+    Token   t;
+    ArrayList sel=null, sel_tail;
+}
+{
+    try {
+        t           = <OR>
+        sel         = Term()
+        sel_tail    = SelExprTail()
+        {   
+            Utils.saveComment(t, cmtStack);
+            if ( sel_tail != null ) {
+                sel = AtomNode.combineAtomList( Varia.OPERATION_TYPE_OR, sel, sel_tail );
+            }
+            //System.out.println("Found arraylist for SelExprTail:" + AtomNode.toString( sel ) );
+            return sel;
+        }
+    } catch (ParseException e) {
+        return sel;
+    }
+}
+
+/** "Term" using Xplor syntax */
+ArrayList Term() :
+{
+    ArrayList sel, sel_tail;
+}
+{
+    sel         = Factor()
+    sel_tail    = TermTail()
+    {   
+        if ( sel_tail != null ) {
+            sel = AtomNode.combineAtomList( Varia.OPERATION_TYPE_AND, sel, sel_tail );
+        }
+        //System.out.println("Found arraylist for Term:" + AtomNode.toString( sel ) );
+        return sel;
+    } 
+}
+
+ArrayList TermTail() :
+{
+    Token   t;
+    ArrayList sel=null, sel_tail;
+}
+{
+    try {
+        t           = <AND>
+        sel         = Factor()
+        sel_tail    = TermTail()
+        {   
+            Utils.saveComment(t, cmtStack);
+            if ( sel_tail != null ) {
+                sel = AtomNode.combineAtomList( Varia.OPERATION_TYPE_AND, sel, sel_tail );
+            }
+            //System.out.println("Found arraylist for TermTail:" + AtomNode.toString( sel ) );
+            return sel;
+        }
+    } catch (ParseException e) {
+        ArrayList bogus = new ArrayList();
+        //System.out.println("Found arraylist for TermTail:" + AtomNode.toString( bogus ) );
+        return sel;
+    }
+}
+
+
+
+ArrayList Factor() :
+{
+    ArrayList sel = new ArrayList();
+    AtomNode atomnode;
+    Token   t1;
+    Token   t2;
+}
+{
+    t1 = <LPAREN>    sel = SelExpr()    t2 = <RPAREN>
+    {
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        return sel;
+    } |
+    atomnode = SegiSelection()       {
+        sel.add( atomnode );
+        //System.out.println("Found arraylist for factor:" + AtomNode.toString( sel ) );
+        return sel; 
+    } |
+    atomnode = ResiSelection()       {
+        sel.add( atomnode );
+        //System..out.println("Found arraylist for factor:" + AtomNode.toString( sel ) );
+        return sel; 
+    } |
+    atomnode = ResnSelection()       {
+        sel.add( atomnode );
+        //System.out.println("Found arraylist for factor:" + AtomNode.toString( sel ) );
+        return sel; 
+    } |
+    atomnode = NameSelection()       {
+        sel.add( atomnode );
+        //System.out.println("Found arraylist for factor:" + AtomNode.toString( sel ) );
+        return sel; 
+    } |
+    atomnode = AtomSelection()       {
+        sel.add( atomnode );
+        //System.out.println("Found arraylist for factor:" + AtomNode.toString( sel ) );
+        return sel; 
+    } 
+}
+
+
+AtomNode SegiSelection() :
+{
+    String name;
+    Token   t1,t2=null;
+}
+{
+    t1 = <SEGI> [t2 = <EQUAL>] name = Name()
+    {
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("segi", name);
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        return atomnode;
+    }
+}
+
+
+AtomNode ResiSelection() :
+{
+    String name;
+    Token   t1,t2=null;
+}
+{
+    t1 = <RESI> [t2 = <EQUAL>] name = Name()
+    {
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("resi", name);
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        return atomnode;
+    }
+}
+
+
+AtomNode ResnSelection() :
+{
+    String name;
+    Token   t1,t2=null;
+}
+{
+    t1 = <RESN> [t2 = <EQUAL>] name = Name()
+    {
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("resn", name);
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        return atomnode;
+    }
+}
+
+
+AtomNode NameSelection() :
+{
+    String name;
+    Token   t1,t2=null;
+}
+{
+    t1 = <NAME> [t2 = <EQUAL>] name = Name()
+    {
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("name", name);
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        //System.out.println("Found atomnode for nameselection:" + atomnode );
+        return atomnode;
+    }
+}
+
+
+AtomNode AtomSelection() :
+{
+    String name_segi;
+    String name_resi;
+    String name_name;
+    Token   t1,t2=null;
+}
+{
+    t1 = <ATOM> 
+    [t2 = <EQUAL>] 
+    name_segi = Name()
+    name_resi = Name()
+    name_name = Name()
+    {
+        AtomNode atomnode = new AtomNode();
+        atomnode.info.putValue("segi", name_segi);
+        atomnode.info.putValue("resi", name_resi);
+        atomnode.info.putValue("name", name_name);
+        Utils.saveComment(t1, cmtStack);
+        Utils.saveComment(t2, cmtStack);
+        return atomnode;
+    }
+}
+
+
+String Name() :
+{
+    String n;
+}
+{   n = Identifier()    {return n;}
+    |
+    n = Number()    {return n;}
+}
+
+
+String Number() :
+{
+    Token t;
+}
+{
+    t = <NUMBER>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    } |   
+    t = <XPLOR_SYMBOL>
+    {   Utils.saveComment(t,cmtStack);
+        return t.image;
+    }
+}  
+
+String Identifier() :
+{
+    Token t;
+}
+{            
+    t = <IDENTIFIER>
+    {
+        Utils.saveComment(t,cmtStack);
+        int length = t.image.length();
+        if ( length < 2 ) {
+            return t.image;
+        }
+        // Check if quotes are at the beginning and end of the image
+        // This will ignore double quotes in the middle.
+        if ( t.image.endsWith(  "\"") &&
+             t.image.startsWith("\"") ) {
+            //get rid of quotes
+            return t.image.substring(1,length-1);
+        }
+        return t.image;                
+    }
+}
+
+
+JAVACODE
+
+void error_skipto(int kind) throws ParserDoneException {
+    Utils.error_skipto(kind, errLineStack, cmtStack, lastAssiLine, lastAssiCol);
+}  

@@ -1,0 +1,17 @@
+InitAll
+
+SetProp
+interactiveSession
+false
+
+SetProp
+verbosity
+9
+
+SetProp
+writeSessionOnExit
+false
+
+ListProp
+
+Quit

@@ -1,0 +1,84 @@
+data_restraint_map
+
+save_order_of_operations
+    _Saveframe_category  rule_order
+    _Details             
+;
+Maps restraint chain, res, atoms to NMR-STAR entity, component, atoms.
+Example given is a combination of mappings taken from PDB entries: 1pdt 1cfl 1dzc
+JFD: Mon Jun 19 10:39:59 CDT 2006
+;
+
+
+    loop_
+       _rule
+
+       chainResRangeByChainResRange_1pdt 
+       atomNameByResType_1cfl            
+       setAtomNomenClature_1dzc          
+    stop_
+
+save_
+
+save_chainResRangeByChainResRange_1pdt
+    _Saveframe_category  chainResRangeByChainResRange
+    _Details             
+;
+#Created chain 'A', start seqCode 1, end seqCode 8, molecule 'DNA (5'-D(*GP*AP*CP*AP*TP*AP*GP*C)-3''...
+#Created chain 'B', start seqCode 9, end seqCode 17, molecule 'PEPTIDE NUCLEIC ACID PEPTIDE NUCLEIC ACID'...
+SEQRES derived records
+A   1    G    2    A    3    C    4    A    5    T    6    A    7    G    8    C
+B   1  GPN    2  CPN    3  TPN    4  APN    5  TPN    6  GPN    7  TPN    8  CPN    9  NH2
+
+Restraint ranges
+Rst:   S1   1   .  h1' -   8   .  h1' diff   7 ch.range   8
+Rst:   S2   9   .   h8 -  16   .   h5 diff   7 ch.range   8
+;
+
+    loop_
+       _Auth_segment_code
+       _Auth_seq_ID
+       _Label_entity_assembly_ID
+       _Label_comp_index_ID
+
+       S1 1 1 1 
+       S2 1 2 9 
+    stop_
+
+save_
+
+save_atomNameByResTypeMappings_1cfl
+    _Saveframe_category  atomNameByResTypeMappings
+    _Details             
+;
+Maps some residue specific atom names.
+;
+
+    loop_
+       _Auth_comp_ID
+       _Auth_atom_ID
+       _Label_atom_ID
+
+       T  1H2'  H2'  
+       T  2H2'  H2'' 
+       T '#H5M' M7   
+       A  1H2'  H2'  
+       A  2H2'  H2'' 
+       C  1H2'  H2'  
+       C  2H2'  H2'' 
+       G  1H2'  H2'  
+       G  2H2'  H2'' 
+    stop_
+
+save_
+
+save_setAtomNomenClature_1dzc
+    _Saveframe_category  setAtomNomenClature
+    _Details             
+;
+Simply sets the preferred atom nomenclature definition.
+;
+    _AtomNomenClature    GROMOS
+
+save_
+

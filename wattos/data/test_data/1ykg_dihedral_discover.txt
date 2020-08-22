@@ -1,0 +1,9 @@
+#NMR_dihedral
+!from Talos
+! phi residue     54
+19:THR_53:C        19:PRO_54:N         19:PRO_54:CA        19:PRO_54:C         -94.150 -54.150  200.00 200.00 1000.000
+! psi residue     54
+error introduced for error checking
+19:PRO_54:N        19:PRO_54:CA         19:PRO_54:C        19:ALA_55:N         116.520 156.520  200.00 200.00 1000.000
+! phi residue     56
+19:ALA_55:C        19:PRO_56:N         19:PRO_56:CA        19:PRO_56:C         -97.000 -57.000  200.00 200.00 1000.000

@@ -1,0 +1,50 @@
+  1 RGUA H8      1 RGUA H3'     3.30 #intra b-s
+deliberately introduced error for testing code.    
+  1 RGUA H1'     2 RGUA H8      5.00 #seq b-s
+  1 RGUA H2'     2 RGUA H8      2.70 #seq b-s
+  1 RGUA H2'     2 RGUA H5'     3.30 #seq s-s
+  1 RGUA H3'     2 RGUA H8      3.30 #seq b-s
+  1 RGUA H8      2 RGUA H8      5.00 #seq b-b
+# 1 RGUA H1      2 RGUA H1'     5.00 #seq i-s
+  1 RGUA H1      2 RGUA H1      5.00 #seq i-i
+# 1 RGUA H1     55 RCYT H5      5.00 #x-s i-b
+# 1 RGUA H1     55 RCYT H1'     5.00 #x-s i-s
+# 1 RGUA H1     55 RCYT H2'     5.00 #x-s i-s
+  2 RGUA H8      2 RGUA H3'     3.30 #intra b-s
+  2 RGUA H1'     3 RGUA H8      5.00 #seq b-s
+  2 RGUA H2'     3 RGUA H8      2.70 #seq b-s
+  2 RGUA H2'     3 RGUA H5'     3.30 #seq s-s
+  2 RGUA H3'     3 RGUA H8      3.30 #seq b-s
+  2 RGUA H8      3 RGUA H8      5.00 #seq b-b
+# 2 RGUA H1      3 RGUA H1'     5.00 #seq i-s
+  2 RGUA H1      3 RGUA H1      5.00 #seq i-i
+# 2 RGUA H1     54 RCYT H5      5.00 #x-s i-b
+# 2 RGUA H1     54 RCYT H1'     5.00 #x-s i-s
+# 2 RGUA H1     54 RCYT H2'     5.00 #x-s i-s
+  2 RGUA H1     55 RCYT H5      4.50 #x-s i-b
+# 2 RGUA H1     55 RCYT H1'     5.00 #x-s i-s
+  3 RGUA H8      3 RGUA H3'     3.30 #intra b-s
+  3 RGUA H1'     4 RCYT H6      5.00 #seq b-s
+  3 RGUA H2'     4 RCYT H5      5.00 #seq b-s
+  3 RGUA H2'     4 RCYT H6      2.70 #seq b-s
+  3 RGUA H2'     4 RCYT H5'     3.30 #seq s-s
+  3 RGUA H3'     4 RCYT H5      5.00 #seq b-s
+  3 RGUA H3'     4 RCYT H6      3.30 #seq b-s
+  3 RGUA H8      4 RCYT H5      5.00 #seq b-b
+  3 RGUA H8      4 RCYT H6      5.00 #seq b-b
+# 3 RGUA H1      4 RCYT H5      5.00 #seq i-b
+# 3 RGUA H1      4 RCYT H1'     5.00 #seq i-s
+  3 RGUA H1     52 RGUA H1      5.00 #x-s i-i
+# 3 RGUA H1     53 RCYT H5      5.00 #x-s i-b
+# 3 RGUA H1     53 RCYT H1'     5.00 #x-s i-s
+# 3 RGUA H1     53 RCYT H2'     5.00 #x-s i-s
+  3 RGUA H1     54 RCYT H5      4.50 #x-s i-b
+# 3 RGUA H1     54 RCYT H1'     5.00 #x-s i-s
+  4 RCYT H6      4 RCYT H3'     3.30 #intra b-s
+  4 RCYT H2'     5 RCYT H1'     6.00 #seq s-s 19jul4 
+  4 RCYT H2'     5 RCYT H5      5.00 #seq b-s 19jul4 
+  4 RCYT H2'     5 RCYT H6      5.00 #seq b-s 19jul4
+  4 RCYT H3'     5 RCYT H1'     6.00 #seq s-s 19jul4 rlx 9aug4
+  4 RCYT H3'     5 RCYT H5      3.30 #seq b-s 21jun4 switch h3' to h2' 16jul4 to h3' 19jul4
+  4 RCYT H3'     5 RCYT H6      3.30 #seq b-s 21jun4 switch h3' to h2' 16jul4 to h3' 19jul4
+  4 RCYT H5      8 RADE H2      6.00 #16jul4 switch h2' to h5 19jul4

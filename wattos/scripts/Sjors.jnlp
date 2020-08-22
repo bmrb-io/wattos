@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!-- Java Network Launching Protocol file for starting Wattos over internet. -->
+
+<jnlp spec="0.2 1.0"
+      codebase="http://wattos.sourceforge.net/lib"
+      href="../scripts/Sjors.jnlp">
+   <information> 
+      <title>Sjors</title> 
+      <vendor>jurgen@gmail.com</vendor>
+      <homepage href="http://wattos.sourceforge.net"/>
+      <description>Restraints parser; STAR Java Organize RestraintS</description>
+      <icon href="bmrb_logo_brown_fg_cream_bg.gif"/>
+   </information> 
+   <security>
+     <all-permissions/>
+   </security>
+   <resources>
+      <j2se version="1.4+" max-heap-size="192m"/>
+      <jar href="Wattos.jar"/>
+      <jar href="colt.jar"/>
+      <jar href="jakarta-regexp.jar"/>
+      <jar href="printf_hb15.jar"/>
+      <jar href="starlibj_with_source.jar"/>
+      <jar href="swing-layout-1.0.jar"/>
+      <property name="bmrb.NameComponent2" value="Vault2"/> 
+   </resources>
+   <application-desc main-class="Wattos.Episode_II.Sjors">
+   </application-desc>
+</jnlp> 
+

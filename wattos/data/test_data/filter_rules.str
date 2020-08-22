@@ -1,0 +1,49 @@
+data_test_rules
+
+save_order_of_operations
+   _Saveframe_category   rule_order
+
+   loop_
+      _Rule
+
+       removeAllButSaveframeCategories_1
+       insertTag_1
+
+   stop_
+
+save_
+
+
+save_removeAllButSaveframeCategories_1
+   _Saveframe_category   removeAllButSaveframeCategories
+   loop_
+      _Saveframe_category_name
+
+	  file_characteristics
+      distance_constraints
+      torsion_angle_constraints
+      residual_dipolar_couplings              
+
+   stop_
+
+save_
+
+       
+
+save_insertTag_1
+   _Saveframe_category          insertTag
+   
+   loop_
+      _Saveframe_category_name    
+      _Tag_name_identifying
+      _Tag_name
+      _Value
+      _Location # Use 0 or . to put the tag at the begin or end. 
+      
+      distance_constraints  "_Dist_constraint.Auth_segment_code" "_Entry_id" ENTRY_ID 0
+
+   stop_
+
+save_
+
+

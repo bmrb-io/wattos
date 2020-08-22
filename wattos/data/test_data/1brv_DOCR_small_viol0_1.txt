@@ -1,0 +1,219 @@
+DC: 3 violUppMax: 0.207 at model: 2
+Node 1 Low/target/Upp: 1.8 2.556 2.556
+Member 0 Atom:  HB3 Res:  16( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  16( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 26 violUppMax: 0.289 at model: 2
+Node 1 Low/target/Upp: 1.8 2.721 2.721
+Member 0 Atom:  HB3 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HG Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 32 violUppMax: 0.235 at model: 1
+Node 1 Low/target/Upp: 1.8 2.685 2.685
+Member 0 Atom:   HG Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 41 violUppMax: 0.137 at model: 2
+Node 1 Low/target/Upp: 1.8 3.217 3.217
+Member 0 Atom:  HB3 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 59 violUppMax: 0.208 at model: 1
+Node 1 Low/target/Upp: 1.8 3.624 3.624
+Member 0 Atom:  HB2 Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HD2 Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+
+DC: 65 violUppMax: 0.566 at model: 2
+Node 1 Low/target/Upp: 1.8 3.664 3.664
+Member 0 Atom:  HE1 Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+
+DC: 94 violUppMax: 0.384 at model: 1
+Node 1 Low/target/Upp: 1.8 4.519 4.519
+Member 0 Atom:    H Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+
+DC: 98 violUppMax: 0.134 at model: 2
+Node 1 Low/target/Upp: 1.8 5.319 5.319
+Member 0 Atom:    H Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HA2 Res:  21( GLY) Mol:   1 Model:   1 Entry:  1
+
+DC: 103 violUppMax: 0.38 at model: 1
+Node 1 Low/target/Upp: 1.8 4.843 4.843
+Member 0 Atom:    H Res:  21( GLY) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+
+DC: 105 violUppMax: 0.329 at model: 1
+Node 1 Low/target/Upp: 1.8 4.019 4.019
+Member 0 Atom:   HA Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 106 violUppMax: 0.208 at model: 2
+Node 1 Low/target/Upp: 1.8 3.874 3.874
+Member 0 Atom:   HA Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 109 violUppMax: 0.606 at model: 1
+Node 1 Low/target/Upp: 1.8 4.334 4.334
+Member 0 Atom:  HB3 Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 114 violUppMax: 0.119 at model: 2
+Node 1 Low/target/Upp: 1.8 3.428 3.428
+Member 0 Atom:  HB3 Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  24( ALA) Mol:   1 Model:   1 Entry:  1
+
+DC: 124 violUppMax: 0.238 at model: 1
+Node 1 Low/target/Upp: 1.8 3.517 3.517
+Member 0 Atom:  HB2 Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 125 violUppMax: 0.14 at model: 2
+Node 1 Low/target/Upp: 1.8 4.301 4.301
+Member 0 Atom:    H Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 126 violUppMax: 0.527 at model: 2
+Node 1 Low/target/Upp: 1.8 4.348 4.348
+Member 0 Atom:    H Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HG Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 127 violUppMax: 0.139 at model: 1
+Node 1 Low/target/Upp: 1.8 2.826 2.826
+Member 0 Atom:    H Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 132 violUppMax: 0.359 at model: 2
+Node 1 Low/target/Upp: 1.8 4.431 4.431
+Member 0 Atom:   HG Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  27( SER) Mol:   1 Model:   1 Entry:  1
+
+DC: 141 violUppMax: 0.207 at model: 1
+Node 1 Low/target/Upp: 1.8 4.189 4.189
+Member 0 Atom:    H Res:  27( SER) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HG Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 143 violUppMax: 0.425 at model: 2
+Node 1 Low/target/Upp: 1.8 4.39 4.39
+Member 0 Atom:   HA Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 147 violUppMax: 0.383 at model: 1
+Node 1 Low/target/Upp: 1.8 4.15 4.15
+Member 0 Atom:   HG Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 149 violUppMax: 0.202 at model: 1
+Node 1 Low/target/Upp: 1.8 5.713 5.713
+Member 0 Atom:    H Res:  28( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB2 Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 153 violUppMax: 0.142 at model: 1
+Node 1 Low/target/Upp: 1.8 4.316 4.316
+Member 0 Atom:    H Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+
+DC: 155 violUppMax: 0.293 at model: 2
+Node 1 Low/target/Upp: 1.8 3.597 3.597
+Member 0 Atom:  HB3 Res:  30( HIS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  31( ILE) Mol:   1 Model:   1 Entry:  1
+
+DC: 174 violUppMax: 0.242 at model: 1
+Node 1 Low/target/Upp: 1.8 3.983 3.983
+Member 0 Atom:  HB3 Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  21( GLY) Mol:   1 Model:   1 Entry:  1
+
+DC: 175 violUppMax: 0.389 at model: 2
+Node 1 Low/target/Upp: 1.8 3.818 3.818
+Member 0 Atom:  HB2 Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  21( GLY) Mol:   1 Model:   1 Entry:  1
+
+DC: 179 violUppMax: 0.167 at model: 2
+Node 1 Low/target/Upp: 1.8 4.336 4.336
+Member 0 Atom:   HA Res:  20( GLU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+
+DC: 184 violUppMax: 0.236 at model: 1
+Node 1 Low/target/Upp: 1.8 3.818 3.818
+Member 0 Atom:   HA Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  24( ALA) Mol:   1 Model:   1 Entry:  1
+
+DC: 187 violUppMax: 0.506 at model: 1
+Node 1 Low/target/Upp: 1.8 5.337 5.337
+Member 0 Atom:    H Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  24( ALA) Mol:   1 Model:   1 Entry:  1
+
+DC: 188 violUppMax: 0.22 at model: 2
+Node 1 Low/target/Upp: 1.8 4.459 4.459
+Member 0 Atom:  HB3 Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 192 violUppMax: 0.238 at model: 2
+Node 1 Low/target/Upp: 1.8 5.066 5.066
+Member 0 Atom:    H Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 198 violUppMax: 0.491 at model: 2
+Node 1 Low/target/Upp: 1.8 5.284 5.284
+Member 0 Atom:    H Res:  22( ASN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 201 violUppMax: 0.142 at model: 2
+Node 1 Low/target/Upp: 1.8 4.607 4.607
+Member 0 Atom:   HA Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 202 violUppMax: 0.102 at model: 1
+Node 1 Low/target/Upp: 1.8 3.292 3.292
+Member 0 Atom:   HA Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 205 violUppMax: 0.199 at model: 1
+Node 1 Low/target/Upp: 1.8 3.41 3.41
+Member 0 Atom:   HA Res:  23( LEU) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 219 violUppMax: 0.158 at model: 2
+Node 1 Low/target/Upp: 1.8 4.882 4.882
+Member 0 Atom:   HA Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 228 violUppMax: 0.591 at model: 1
+Node 1 Low/target/Upp: 1.8 4.707 4.707
+Member 0 Atom:   HA Res:  14( VAL) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 236 violUppMax: 0.419 at model: 1
+Node 1 Low/target/Upp: 1.8 3.748 3.748
+Member 0 Atom:  HB2 Res:  16( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  29( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 239 violUppMax: 0.474 at model: 2
+Node 1 Low/target/Upp: 1.8 3.923 3.923
+Member 0 Atom:  HB3 Res:  16( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  31( ILE) Mol:   1 Model:   1 Entry:  1
+
+DC: 241 violUppMax: 0.319 at model: 2
+Node 1 Low/target/Upp: 1.8 3.375 3.375
+Member 0 Atom:  HB2 Res:  16( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  31( ILE) Mol:   1 Model:   1 Entry:  1
+
+DC: 244 violUppMax: 0.186 at model: 2
+Node 1 Low/target/Upp: 1.8 4.148 4.148
+Member 0 Atom:  HB3 Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 245 violUppMax: 0.387 at model: 1
+Node 1 Low/target/Upp: 1.8 5.097 5.097
+Member 0 Atom:  HB2 Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:   HA Res:  25( CYS) Mol:   1 Model:   1 Entry:  1
+
+DC: 247 violUppMax: 0.371 at model: 2
+Node 1 Low/target/Upp: 1.8 4.335 4.335
+Member 0 Atom:  HB3 Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1
+
+DC: 251 violUppMax: 0.195 at model: 1
+Node 1 Low/target/Upp: 1.8 4.568 4.568
+Member 0 Atom:  HB2 Res:  19( CYS) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:  HB3 Res:  26( LEU) Mol:   1 Model:   1 Entry:  1

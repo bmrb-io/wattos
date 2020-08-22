@@ -1,0 +1,564 @@
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       2148
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              2146
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       2148
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              2146
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       6543
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 8289 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 8290 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              6541
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       6543
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              6541
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       37559
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 8289 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 8290 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              37557
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       37559
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              37557
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 4522 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 4523 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+The following OPTIONS are used
+Threshold percentage for redundancy                            : 5.0
+Update original constraints                                    : false
+Only filter fixed                                              : false
+Averaging method                                               : sum
+Number of monomers (only important for sum averaging)          : 1
+File name base (for this and other files)                      : 1hue_DOCR_compl
+Appending to summary file                                      : true
+Write nonsurplus constraints                                   : false
+Write surplus constraints                                      : false
+Remove surplus constraints                                     : false
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+No distance constraints selected in toString.
+Found number of constraints to be double with others:   2
+DC: 8289 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   1 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   1 Model:   1 Entry:  1
+DC: 8290 lowTheo/uppTheo: ./.
+Node 1 Low/target/Upp: 1.8 4.0 4.0
+Member 0 Atom:  HG2 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 0 Atom:  HG3 Res:  64( GLN) Mol:   2 Model:   1 Entry:  1
+Member 1 Atom:    H Res:  65( THR) Mol:   2 Model:   1 Entry:  1
+
+Found number of impossible constraints     :            0
+No distance constraints selected in toString.
+Found number of fixed constraints          :            0
+No distance constraints selected in toString.
+Found number of redundant constraints      :            0
+No distance constraints selected in toString.
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+
+
+
+SUMMARY:
+Found number of todo constraints:                       3371
+Found number of exceptional constraints:                0
+Found number of constraints to be double with others:   2
+Found number of impossible constraints     :            0
+Found number of fixed constraints          :            0
+Found number of redundant constraints      :            0
+Found number of non-redundant constraints:              3369
+Found number of constraints to be surplus (E+C+D+I+F+R):2
+

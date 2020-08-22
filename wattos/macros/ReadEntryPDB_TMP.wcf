@@ -1,0 +1,21 @@
+InitAll
+
+SetProp
+interactiveSession
+false
+SetProp
+verbosity
+3
+SetProp
+writeSessionOnExit
+false
+ListProp
+
+ReadEntryPDB
+C:\Documents and Settings\jurgen.WHELK.000\Desktop\pdb2hgh.ent.gz
+
+#WriteEntryNMRSTAR
+#C:\Documents and Settings\jurgen.WHELK.000\workspace\Wattos\data\test_data\pdb2hgh_rem_small.str
+
+Quit
+
