@@ -12,8 +12,8 @@ plus containerized version of the NMR Restraints Grid servlet.
 ------
 
 Wattos was originally on google code and its commit history went away with that.
-It was imported into git from out local working copy in 2019, a decade after it's
-been written.
+It was imported into git from out local working copy in 2019, a decade after it
+was written.
 
 ## NRG containers:
 -------------------------------
