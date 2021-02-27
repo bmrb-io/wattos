@@ -34,16 +34,17 @@ if [ ! -d /var/lib/mysql/mysql ] ; then
         delete from mysql.user WHERE User='';
         create user if not exists 'root'@'%';
         update mysql.user set password = PASSWORD( '5up3r53kr37' ) where user like 'root%';
-        grant all privileges on *.* to 'root'@'localhost';
-        grant all privileges on *.* to 'root'@'127.0.0.1';
-        grant all privileges on *.* to 'root'@'::1';
-        grant all privileges on *.* to 'root'@'%';
+        grant all privileges on *.* to 'root'@'%' with grant option;
+        grant all privileges on *.* to 'root'@'localhost' with grant option;
+        grant all privileges on *.* to 'root'@'127.0.0.1' with grant option;
+        grant all privileges on *.* to 'root'@'::1' with grant option;
+        flush privileges;
+        create user if not exists 'wattos1'@'%' identified by '4I4KMS';
+        grant all privileges on *.* to 'wattos1'@'%';
         create user if not exists 'wattos1'@'localhost' identified by '4I4KMS';
         grant all privileges on *.* to 'wattos1'@'localhost';
         create user if not exists 'wattos1'@'127.0.0.1' identified by '4I4KMS';
         grant all privileges on *.* to 'wattos1'@'127.0.0.1';
-        create user if not exists 'wattos1'@'%' identified by '4I4KMS';
-        grant all privileges on *.* to 'wattos1'@'%';
         flush privileges;
         create database if not exists wattos1;
         use wattos1;
@@ -102,10 +103,11 @@ EOSQL
 
 fi
 
+# for centos 6:
 # add fixed ip address: works on 1.7
 #  container must run with --cap-add=NET_ADMIN
 #
-ip addr add 172.18.0.2 dev eth0
+#ip addr add 172.18.0.2 dev eth0
 
 # "$@" is docker CMD, should be 'mysqld'
 # then docker will keep the container running while mysqld is up

@@ -1,25 +1,27 @@
-mysql container for wattos
+# mysql container for wattos
 
-Need fixed ip for tomcat container to talk to us.
+Simple deployment: run tomcat container with `--link <name>`
 
-run:
+## run
 
-sudo docker run -d \
+```
+docker run -d \
     --restart=always \
     -p 3306:3306 \
-    -v /websites/wattos/dbfs:/wattos/dbfs \
-    -v /websites/wattos/html:/wattos/html \
+    -e MYSQL_ROOT_PASSWORD=<supersekret> \
+    -v <initdb>:/docker-entrypoint-initdb.d/ \
+    -v <dbfs>:/wattos/dbfs \
+    -v <html>:/wattos/html \
     --name <name> \
-    --cap-add=NET_ADMIN \
-    <image>
+    mysql:5 --secure-file-priv=/wattos/dbfs
 
-On centos 6 (docker 1.7) "--ip 172.18.0.2" doesn't work
-so it is set inside the entrypoint script instead. That
-requires NET_ADMIN capability.
-
-On newer docker you could just run with " --network <net> --ip <addr>" 
-but then you'll need to also edit startup.sh and remove "ip addr add".
+```
 
 on DB update:
 
-sudo docker exec <name> sh -c 'mysql -uroot -p5up3r53kr37 wattos1 < /wattos_load.sql'
+```
+sudo docker exec <name> sh -c 'mysql -uroot -p<supersekret> wattos1 < /docker-entrypoint-initdb.d/wattos_load.sql'
+```
+  * pin to mysql v.5 becasue newer versions (and mariadb) require updating JDBC JAR in the wattos WAR file.
+  * <initdb>: put `01_create_db.sql` and `wattos_load.sql` there, they'll be execuetd on startup.
+  * <dbfs>: is where the CSV files are loaded from by `wattos_load.sql` and `--secure-file-priv=/wattos/dbfs` is needed to load them.
