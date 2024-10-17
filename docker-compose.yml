@@ -3,8 +3,6 @@ services:
     image: mysql:5
     container_name: wattos-mysql
     restart: always
-    ports:
-      - "3306:3306"
     user: "17473:10144"
     environment:
       MYSQL_ROOT_PASSWORD: PASSWORD
@@ -13,6 +11,8 @@ services:
       - /projects/BMRB/public/wattos/dbfs:/wattos/dbfs
       - /projects/BMRB/public/wattos/html:/wattos/html
     command: --secure-file-priv=/wattos/dbfs
+    networks:
+      - wattos-network
 
   wattos-tomcat:
     image: tomcat:7-jre8-alpine
@@ -30,3 +30,9 @@ services:
       - /projects/BMRB/public/ftp/pub/pdb:/pdb
     depends_on:
       - wattos-mysql
+    networks:
+      - wattos-network
+
+networks:
+  wattos-network:
+    driver: bridge
