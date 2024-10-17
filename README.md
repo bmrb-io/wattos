@@ -18,6 +18,8 @@ was written.
 ## NRG containers:
 -------------------------------
 
+Note: You can use `docker compose up -d` to start the containers using docker-compose.
+
 1. mysql
 
 2. tomcat

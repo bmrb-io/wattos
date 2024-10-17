@@ -5,8 +5,7 @@
 #db_driver = com.mysql.jdbc.Driver
 #db_conn_prefix = jdbc:mysql://
 
-#db_machine  = 172.17.0.2
-db_machine = wattos-mysql
+db_machine  = wattos-mysql
 db_password = 4I4KMS
 db_username = wattos1
 
@@ -27,15 +26,15 @@ servlet_molgrap_dir = /molgrap/images
 # static content (?)
 servlet_top_dir     = /
 
-servlet_root_url = http://restraintsgrid.bmrb.wisc.edu
+servlet_root_url = http://restraintsgrid.bmrb.io
 
 # "send zip" needs this
-servlet_html_absolute_url = http://restraintsgrid.bmrb.wisc.edu/NRG/wattos/MRGridServlet/html
+servlet_html_absolute_url = http://restraintsgrid.bmrb.io/NRG/wattos/MRGridServlet/html
 
 # edit to taste
-servlet_webmaster = webmaster@bmrb.wisc.edu
-dbmatch = http://www.bmrb.wisc.edu/search/pdbcode.php?pdbcode=
-bmrb_url = http://www.bmrb.wisc.edu/data_library/generate_summary.php?bmrbId=
+servlet_webmaster = dl-bmrb-sysadmin@uchc.edu
+dbmatch = http://www.bmrb.io/search/pdbcode.php?pdbcode=
+bmrb_url = http://www.bmrb.io/data_library/generate_summary.php?bmrbId=
 recoord_url = http://www.ebi.ac.uk/pdbe/recalculated-nmr-data
 dress_url = http://www.cmbi.ru.nl/dress/index.spy?site=dress&action=Home&pdbid=
 
@@ -48,19 +47,19 @@ nrg_cing_url = http://nmr.cmbi.ru.nl/NRG-CING/data/%t/%s/%s.cing
 MRGridServlet = MRGridServlet
 servlet_top_url = NRG
 
-apache_data_url = http://restraintsgrid.bmrb.wisc.edu/servlet_data
+apache_data_url = http://restraintsgrid.bmrb.io/servlet_data
 servlet_mrgrid_url = NRG/MRGridServlet
 servlet_wattos_dir = NRG/wattos
 servlet_servlet_dir = NRG/wattos/MRGridServlet
 servlet_html_dir = NRG/wattos/MRGridServlet/html
 servlet_image_dir = NRG/wattos/MRGridServlet/images
 
-servlet_top_absolute_url = http://restraintsgrid.bmrb.wisc.edu/NRG
-servlet_mrgrid_absolute_url = http://restraintsgrid.bmrb.wisc.edu/NRG/MRGridServlet
-servlet_image_absolute_url = http://restraintsgrid.bmrb.wisc.edu/NRG/wattos/MRGridServlet/images
+servlet_top_absolute_url = http://restraintsgrid.bmrb.io/NRG
+servlet_mrgrid_absolute_url = http://restraintsgrid.bmrb.io/NRG/MRGridServlet
+servlet_image_absolute_url = http://restraintsgrid.bmrb.io/NRG/wattos/MRGridServlet/images
 
 # ???????
 
 testing        = false
-wattos_home_page = http://restraintsgrid.bmrb.wisc.edu
+wattos_home_page = http://restraintsgrid.bmrb.io
 #
