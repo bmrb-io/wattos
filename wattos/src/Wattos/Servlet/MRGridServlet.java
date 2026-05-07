@@ -89,7 +89,7 @@ public class MRGridServlet extends HttpServlet {
     public void initDb() throws ServletException {
 
         /** Set the desired verbosity level */
-        General.setVerbosityToDebug();
+        // General.setVerbosityToDebug(); // disabled: per-query DEBUG output is too noisy in production
         General.showDebug("Now in initDb");
 //        General.showDebug("Wattos version: " + UserInterface.WATTOS_VERSION);
         System.setOut(System.err);
