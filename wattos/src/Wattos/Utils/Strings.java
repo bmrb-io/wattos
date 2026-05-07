@@ -899,6 +899,29 @@ public class Strings {
             return false;
     }
 
+    /** HTML-escape a string for safe inclusion in HTML body or attribute values.
+     * Escapes &amp;, &lt;, &gt;, &quot;, &#x27;. Use this on every user-controlled
+     * (or DB-sourced) string that is concatenated into an HTML response.
+     */
+    public static String htmlEscape( String input ) {
+        if ( input == null ) {
+            return "";
+        }
+        StringBuilder out = new StringBuilder( input.length() + 16 );
+        for ( int i = 0; i < input.length(); i++ ) {
+            char c = input.charAt(i);
+            switch ( c ) {
+                case '&':  out.append("&amp;");  break;
+                case '<':  out.append("&lt;");   break;
+                case '>':  out.append("&gt;");   break;
+                case '"':  out.append("&quot;"); break;
+                case '\'': out.append("&#x27;"); break;
+                default:   out.append(c);
+            }
+        }
+        return out.toString();
+    }
+
     /** Checks if the string could be a pdb id like "1brv".
      * See regular expression in the code.
      * @return <CODE>true</CODE> if it is valid pdb code.

@@ -164,7 +164,7 @@ public class MRGridServlet extends HttpServlet {
         Properties subs = new Properties();
         subs.setProperty("<!-- INSERT DATE HERE -->", java.text.DateFormat.getDateTimeInstance(
                 java.text.DateFormat.FULL, java.text.DateFormat.FULL).format(new java.util.Date()));
-        subs.setProperty("<!-- INSERT DB_USERNAME HERE -->", g.getValueString("db_username"));
+        subs.setProperty("<!-- INSERT DB_USERNAME HERE -->", Strings.htmlEscape(g.getValueString("db_username")));
         html_footer_text = Strings.replaceMulti(html_footer_text, subs);
         out.println(html_footer_text);
     }
@@ -325,7 +325,7 @@ public class MRGridServlet extends HttpServlet {
             }
             showArchive(resp, options);
         } else {
-            showCompleteError(resp, "Invalid request_type parameter value:" + request_type);
+            showCompleteError(resp, "Invalid request_type parameter value:" + Strings.htmlEscape(request_type));
         }
     }
 
@@ -1029,9 +1029,9 @@ public class MRGridServlet extends HttpServlet {
 
             out.println("<PRE>");
             if (mrb.isTextBlock()) {
-                out.println(mrb.toString());
+                out.println(Strings.htmlEscape(mrb.toString()));
             } else {
-                out.println("Looking at file: " + mrb.fileName);
+                out.println("Looking at file: " + Strings.htmlEscape(mrb.fileName));
                 out
                         .println("The data in this block can't be rendered as text, please save and open with appropriate program.");
             }
@@ -2072,11 +2072,11 @@ public class MRGridServlet extends HttpServlet {
                 if (pdb_id[i].equals(NOT_A_SELECTION_STRING)) {
                     continue;
                 }
-                pdb_id[i] = Strings.replace(pdb_id[i].toLowerCase().trim(), "['\"\\s,<>]", " ");
+                pdb_id[i] = Strings.replace(pdb_id[i].toLowerCase().trim(), "['\"\\s,<>;\\\\]", " ");
                 if (!Strings.is_pdb_code(pdb_id[i])) {
                     showActualError(resp, "Parameters: pdb_id failed to resolve to a valid pdb code or is ''.\n"
                             + "Does it conform to the regular expression pattern: "
-                            + "<PRE>^[:digit:][:alnum:]{3}$</PRE><BR>\n" + "Value give was: [" + pdb_id[i]
+                            + "<PRE>^[:digit:][:alnum:]{3}$</PRE><BR>\n" + "Value give was: [" + Strings.htmlEscape(pdb_id[i])
                             + "] (put in lower case and trimmed for spurious white spaces).");
                     return false;
                 }
@@ -2088,12 +2088,12 @@ public class MRGridServlet extends HttpServlet {
         if (bmrb_id_str != null) {
             bmrb_id_str = Strings.splitAllNoEmpties(bmrb_id_str, " ");
             for (int i = 0; i < bmrb_id_str.length; i++) {
-                String bmrb_id = Strings.replace(bmrb_id_str[i], "['\"\\s,<>]", " ");
+                String bmrb_id = Strings.replace(bmrb_id_str[i], "['\"\\s,<>;\\\\]", " ");
                 if (!bmrb_id.equals(NOT_A_SELECTION_STRING)) {
                     bmrb_id = bmrb_id.trim();
                     if (!Strings.is_bmrb_code(bmrb_id)) {
                         showActualError(resp, "Parameters: bmrb_id failed to resolve to a valid bmrb code.\n"
-                                + "Value give was: [" + bmrb_id + "] (trimmed for spurious white spaces).");
+                                + "Value give was: [" + Strings.htmlEscape(bmrb_id) + "] (trimmed for spurious white spaces).");
                         return false;
                     }
                     bmrb_ids.add(bmrb_id);
@@ -2104,7 +2104,7 @@ public class MRGridServlet extends HttpServlet {
         if (block_text_type != null) {
             for (int i = 0; i < block_text_type.length; i++) {
                 String value = decodeStringFromUrl(block_text_type[i]);
-                value = Strings.replace(value, "['\"\\s,<>]", " ");
+                value = Strings.replace(value, "['\"\\s,<>;\\\\]", " ");
                 General.showDebug("block_text_type[i] :" + value);
                 if (!value.equals(NOT_A_SELECTION_STRING)) {
                     block_text_types.add(value);
@@ -2123,7 +2123,7 @@ public class MRGridServlet extends HttpServlet {
         if (program != null) {
             for (int i = 0; i < program.length; i++) {
                 String value = decodeStringFromUrl(program[i]);
-                value = Strings.replace(value, "['\"\\s,<>]", " ");
+                value = Strings.replace(value, "['\"\\s,<>;\\\\]", " ");
                 General.showDebug("program[i] :" + value);
                 if (!value.equals(NOT_A_SELECTION_STRING))
                     programs.add(value);
@@ -2133,7 +2133,7 @@ public class MRGridServlet extends HttpServlet {
         if (type != null) {
             for (int i = 0; i < type.length; i++) {
                 String value = decodeStringFromUrl(type[i]);
-                value = Strings.replace(value, "['\"\\s,<>]", " ");
+                value = Strings.replace(value, "['\"\\s,<>;\\\\]", " ");
                 General.showDebug("type[i] :" + value);
                 if (!value.equals(NOT_A_SELECTION_STRING))
                     types.add(value);
@@ -2143,7 +2143,7 @@ public class MRGridServlet extends HttpServlet {
         if (subtype != null) {
             for (int i = 0; i < subtype.length; i++) {
                 String value = decodeStringFromUrl(subtype[i]);
-                value = Strings.replace(value, "['\"\\s,<>]", " ");
+                value = Strings.replace(value, "['\"\\s,<>;\\\\]", " ");
                 General.showDebug("subtype[i] :" + value);
                 if (!value.equals(NOT_A_SELECTION_STRING))
                     subtypes.add(value);
@@ -2153,7 +2153,7 @@ public class MRGridServlet extends HttpServlet {
         if (format != null) {
             for (int i = 0; i < format.length; i++) {
                 String value = decodeStringFromUrl(format[i]);
-                value = Strings.replace(value, "['\"\\s,<>]", " ");
+                value = Strings.replace(value, "['\"\\s,<>;\\\\]", " ");
                 General.showDebug("format[i] :" + value);
                 if (!value.equals(NOT_A_SELECTION_STRING))
                     formats.add(value);
@@ -2168,7 +2168,7 @@ public class MRGridServlet extends HttpServlet {
                     try {
                         mrblock_id = Integer.parseInt(mrblock_id_str[i]);
                     } catch (NumberFormatException e) {
-                        showActualError(resp, "Parameter: mrblock_id [" + Strings.replace(mrblock_id_str[i], "['\"\\s,<>]", " ")
+                        showActualError(resp, "Parameter: mrblock_id [" + Strings.htmlEscape(Strings.replace(mrblock_id_str[i], "['\"\\s,<>;\\\\]", " "))
                                 + "] failed to resolve to a positive integer value.\n" + "Please check.");
                         return false;
                     }
