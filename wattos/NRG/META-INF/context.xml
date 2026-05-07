@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Per-webapp Tomcat context for NRG. Defines the pooled JDBC DataSource
+  that SQL_Generic looks up at startup via java:comp/env/jdbc/wattos.
+
+  Replaces the old single-shared-Connection model that lived inside
+  SQL_Episode_II/SQL_Generic. With a pool we get:
+    - validation on borrow (testOnBorrow + validationQuery), so an
+      idle-timed-out connection is replaced before the servlet sees it
+    - per-request connections (no race between concurrent threads
+      stepping on each other's Statements during reconnect)
+    - bounded concurrency to MySQL (maxActive)
+
+  Connection details mirror wattos.runtime.properties.uchc — same
+  secrets-in-git posture as the rest of this deployment.
+-->
+<Context>
+    <!-- Pooled MySQL DataSource for the wattos1 database. SQL_Generic
+         looks it up via JNDI as java:comp/env/jdbc/wattos (the matching
+         resource-ref lives in WEB-INF/web.xml). -->
+    <Resource name="jdbc/wattos"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://wattos-mysql:3306/wattos1"
+              username="wattos1"
+              password="4I4KMS"
+              maxActive="10"
+              maxIdle="5"
+              minIdle="1"
+              initialSize="1"
+              maxWait="10000"
+              testOnBorrow="true"
+              validationQuery="SELECT 1"
+              validationInterval="0"
+              testWhileIdle="true"
+              timeBetweenEvictionRunsMillis="60000"
+              minEvictableIdleTimeMillis="300000"
+              removeAbandoned="true"
+              removeAbandonedTimeout="60"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" />
+</Context>

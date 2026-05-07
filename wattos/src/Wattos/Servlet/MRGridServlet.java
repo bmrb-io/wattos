@@ -101,7 +101,10 @@ public class MRGridServlet extends HttpServlet {
         sql_epiII = new SQL_Episode_II(g);
         DBFSFile.g = g; // Update this one so they're taken from the right resource.
 
-        if (sql_epiII.conn == null) {
+        // testConnection() validates the JNDI-pooled DataSource (servlet) or
+        // the legacy DriverManager conn (CLI). Either path being unreachable
+        // here is a hard misconfig.
+        if (!sql_epiII.testConnection()) {
             String msg = "Database access failed during initialization.\n"
                     + "Try again in a minute and please report the problem\n"
                     + "if the connection could again not be made, thank you.";
@@ -258,20 +261,11 @@ public class MRGridServlet extends HttpServlet {
             initDb();
         }
 
-        // Check if the db has a good connection, if not then try to reopen the connection
-        // but return if not successful.
-        if (!sql_epiII.testConnection()) {
-            if (!sql_epiII.reconnect(g)) {
-                // Report error and ask for user's patience.
-                showCompleteError(
-                        resp,
-                        "The database is most likely not up. <BR>Trying to reopen the connection failed.\n"
-                                + "<P>Please try again in a couple of minutes as the database might be off-line for maintenance.\n"
-                                + "<P>Please report the problem to the web master (e-mail address is accessible below)\n"
-                                + "if the connection could again not be made, thank you.");
-                return;
-            }
-        }
+        // The pooled DataSource (META-INF/context.xml) validates each
+        // connection on borrow (testOnBorrow + validationQuery=SELECT 1)
+        // and discards broken ones, so we no longer pre-check + reconnect
+        // here. If the database is genuinely down the per-call SQL methods
+        // will surface it through their normal error paths.
 
         String request_type = (String) options.get("request_type");
         if (request_type.equals("grid")) {

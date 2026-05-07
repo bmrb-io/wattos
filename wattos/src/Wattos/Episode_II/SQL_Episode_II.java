@@ -120,7 +120,7 @@ public class SQL_Episode_II extends SQL_Generic{
         ArrayList ids = new ArrayList();
         String mrblock_table = SQL_table_prefix + "mrblock";
 
-        try
+        try (Connection conn = getConnection())
         {
             String q =  "SELECT DISTINCT TEXT_TYPE\n" +
                         "FROM " + mrblock_table;
@@ -399,7 +399,7 @@ public class SQL_Episode_II extends SQL_Generic{
     /** Retrieve the total number of parsed entries */
     public int getCountParsedEntries() {
         int result = -1;
-        try {
+        try (Connection conn = getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = null;
             String q =  "select count(distinct pdb_id) from `mrfile`" +
@@ -422,7 +422,7 @@ public class SQL_Episode_II extends SQL_Generic{
     /** Retrieve the total number of parsed constraints */
     public int getCountParsedRestraints() {
         int result = -1;
-        try {
+        try (Connection conn = getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = null;
             String q =  "select sum(item_count) from `mrblock`\n"+
@@ -1608,7 +1608,7 @@ public class SQL_Episode_II extends SQL_Generic{
           "FROM " + mrblock_table + " \n"+
           "WHERE mrblock_id = "+mrblock_id + General.eol;
 
-        try {
+        try (Connection conn = getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery( q );
 
@@ -1762,7 +1762,7 @@ public class SQL_Episode_II extends SQL_Generic{
         String mrblock_table = SQL_table_prefix + "mrblock";
         String mrfile_table = SQL_table_prefix + "mrfile";
 
-        try {
+        try (Connection conn = getConnection()) {
             String query =
                   "SELECT f.pdb_id AS pdb_id\n"+
                      "FROM " + mrfile_table  + " f, \n"+
@@ -1939,7 +1939,7 @@ public class SQL_Episode_II extends SQL_Generic{
         sb.insert(stub_location, selection);
         General.showDebug("Complete selection statement: [\n"+sb+"\n]");
 
-        try {
+        try (Connection conn = getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery( sb.toString() );
 
@@ -2009,7 +2009,7 @@ public class SQL_Episode_II extends SQL_Generic{
         // New database table
         DbTable dbt = new DbTable();
 
-        try {
+        try (Connection conn = getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery( sb.toString() );
 
@@ -2282,7 +2282,7 @@ public class SQL_Episode_II extends SQL_Generic{
             // New database table
             DbTable dbt = new DbTable();
 
-            try {
+            try (Connection conn = getConnection()) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery( sb.toString() );
 
@@ -2371,7 +2371,7 @@ public class SQL_Episode_II extends SQL_Generic{
         query = query.replaceFirst(STUB_SQL_STRING_TRUE,selection);
 
         General.showDebug("Query is:\n" + query);
-        try {
+        try (Connection conn = getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery( query );
 
@@ -2412,24 +2412,25 @@ public class SQL_Episode_II extends SQL_Generic{
 
     /** Tries to reopen the database connection for cases where the database was
      *closed during the servlets' lifetime.
+     *In pooled (servlet) mode the pool handles broken-connection eviction and
+     *validates on borrow, so this just re-runs testConnection() and reports.
+     *Kept for CLI callers that may still want to rebuild the shared conn.
     */
     public boolean reconnect( Globals g ) {
-        // Try to close connection if it is still open.
+        if (dataSource != null) {
+            return testConnection();
+        }
+
+        // CLI mode: rebuild the single shared connection.
         if ( conn != null ) {
             closeConnection();
         }
-
-        // Reopen database connection
         General.showDebug("Trying to reconnect to DB");
         init( g );
-
-        // Testing for a good connection is only done by an actual sql statement
-        //if ( sql_epiII.conn != null ) { // Doesn't suffice
         if ( testConnection() ) {
             General.showDebug("Reconnected to DB");
             return true;
         }
-
         return false;
     }
 
