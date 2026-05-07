@@ -26,7 +26,7 @@ services:
       JAVA_OPTS: "-Duser.home=/"
     volumes:
       - ${RUNTIME_PROPS:-/projects/BMRB/public/wattos/wattos/wattos.runtime.properties.uchc}:/wattos.runtime.properties
-      - ${WAR_FILE:-/projects/BMRB/public/wattos/wattos/NRG.war}:/usr/local/tomcat/webapps/NRG.war
+      - ${NRG_DIR:-/projects/BMRB/public/wattos/wattos/wattos/NRG}:/usr/local/tomcat/webapps/NRG
       - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
       - ${PDB_DIR:-/projects/BMRB/public/ftp/pub/pdb}:/pdb
     depends_on:
