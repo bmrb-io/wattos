@@ -11,7 +11,15 @@ services:
       - ${INITDB_DIR:-/projects/BMRB/public/wattos/wattos/initdb}:/docker-entrypoint-initdb.d/
       - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
       - ${HTML_DIR:-/projects/BMRB/public/wattos/html}:/wattos/html
-    command: --secure-file-priv=/wattos/dbfs
+    # query cache helps a lot for this workload: the dataset is essentially
+    # read-only between wattos_load.sql runs, and the landing/grid pages fire
+    # several heavy GROUP-BY/aggregate queries that benefit from caching.
+    # query cache was removed in MySQL 8.0; revisit when migrating off 5.7.
+    command: >
+      --secure-file-priv=/wattos/dbfs
+      --query_cache_type=1
+      --query_cache_size=67108864
+      --query_cache_limit=4194304
     networks:
       - wattos-network
 
