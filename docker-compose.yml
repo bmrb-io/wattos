@@ -26,6 +26,11 @@ services:
     volumes:
       - ${RUNTIME_PROPS:-/projects/BMRB/public/wattos/wattos/wattos.runtime.properties.uchc}:/wattos.runtime.properties
       - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml:ro
+      # Empty tmpfs over webapps/ shadows the image's default ROOT/manager/
+      # host-manager/examples/docs webapps; the NRG bind-mount below nests
+      # inside this tmpfs as a sub-mount, so only NRG is deployed.
+      - type: tmpfs
+        target: /usr/local/tomcat/webapps
       - ${NRG_DIR:-/projects/BMRB/public/wattos/wattos/wattos/NRG}:/usr/local/tomcat/webapps/NRG
       - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
       - ${PDB_DIR:-/projects/BMRB/public/ftp/pub/pdb}:/pdb
