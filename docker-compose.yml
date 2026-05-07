@@ -3,13 +3,13 @@ services:
     image: mysql:5
     container_name: wattos-mysql
     restart: always
-    user: "17473:10144"
+    user: "${MYSQL_USER:-17473:10144}"
     environment:
       MYSQL_ROOT_PASSWORD: PASSWORD
     volumes:
-      - /projects/BMRB/public/wattos/wattos/initdb:/docker-entrypoint-initdb.d/
-      - /projects/BMRB/public/wattos/dbfs:/wattos/dbfs
-      - /projects/BMRB/public/wattos/html:/wattos/html
+      - ${INITDB_DIR:-/projects/BMRB/public/wattos/wattos/initdb}:/docker-entrypoint-initdb.d/
+      - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
+      - ${HTML_DIR:-/projects/BMRB/public/wattos/html}:/wattos/html
     command: --secure-file-priv=/wattos/dbfs
     networks:
       - wattos-network
@@ -24,10 +24,10 @@ services:
     environment:
       JAVA_OPTS: "-Duser.home=/"
     volumes:
-      - /projects/BMRB/public/wattos/wattos/wattos.runtime.properties.uchc:/wattos.runtime.properties
-      - /projects/BMRB/public/wattos/wattos/NRG.war:/usr/local/tomcat/webapps/NRG.war
-      - /projects/BMRB/public/wattos/dbfs:/wattos/dbfs
-      - /projects/BMRB/public/ftp/pub/pdb:/pdb
+      - ${RUNTIME_PROPS:-/projects/BMRB/public/wattos/wattos/wattos.runtime.properties.uchc}:/wattos.runtime.properties
+      - ${WAR_FILE:-/projects/BMRB/public/wattos/wattos/NRG.war}:/usr/local/tomcat/webapps/NRG.war
+      - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
+      - ${PDB_DIR:-/projects/BMRB/public/ftp/pub/pdb}:/pdb
     depends_on:
       - wattos-mysql
     networks:

@@ -1,5 +1,6 @@
 --
--- docker exec mysql -uroot -psupersecret wattos1 < this.file
+-- docker exec -e MYSQL_PWD=PASSWORD -it wattos-mysql mysql -u root -D wattos1
+--  THEN RUN THE COMMANDS BELOW
 --
 use wattos1;
 truncate table entry;
