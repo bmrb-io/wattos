@@ -16,16 +16,17 @@ services:
       - wattos-network
 
   wattos-tomcat:
-    image: tomcat:7-jre8-alpine
+    image: tomcat:9.0-jre11-temurin
     container_name: wattos-tomcat
     restart: always
     ports:
-      - "8009:8009"
-      - "8080:8080"
+      - "127.0.0.1:8009:8009"
+      - "127.0.0.1:8080:8080"
     environment:
       JAVA_OPTS: "-Duser.home=/"
     volumes:
       - ${RUNTIME_PROPS:-/projects/BMRB/public/wattos/wattos/wattos.runtime.properties.uchc}:/wattos.runtime.properties
+      - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml:ro
       - ${NRG_DIR:-/projects/BMRB/public/wattos/wattos/wattos/NRG}:/usr/local/tomcat/webapps/NRG
       - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
       - ${PDB_DIR:-/projects/BMRB/public/ftp/pub/pdb}:/pdb
