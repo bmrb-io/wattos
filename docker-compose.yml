@@ -7,6 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: PASSWORD
     volumes:
+      - mysql-data:/var/lib/mysql
       - ${INITDB_DIR:-/projects/BMRB/public/wattos/wattos/initdb}:/docker-entrypoint-initdb.d/
       - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
       - ${HTML_DIR:-/projects/BMRB/public/wattos/html}:/wattos/html
@@ -36,3 +37,6 @@ services:
 networks:
   wattos-network:
     driver: bridge
+
+volumes:
+  mysql-data:
