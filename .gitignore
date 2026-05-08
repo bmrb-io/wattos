@@ -25,6 +25,10 @@ hs_err_pid*
 # Local docker-compose env overrides
 .env
 
+# Ant build outputs
+wattos/build/
+wattos/tmp_dir/
+
 # Deployed exploded NRG webapp (served by Tomcat). The classes and bundled
 # jars under WEB-INF/ are tracked so dependency upgrades show up as diffs;
 # the *.class / *.jar rules above would otherwise hide them.

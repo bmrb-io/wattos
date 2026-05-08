@@ -5,15 +5,17 @@ plus a Docker Compose deployment of the NMR Restraints Grid (NRG)
 servlet that fronts it.
 
   * `wattos_orig.tar.gz` — original SVN checkout from Google Code
-  * `wattos/` — Java source tree (Ant-based, builds as of 2019), plus
-    the exploded webapp under `wattos/NRG/` that Tomcat serves directly
+  * `wattos/` — Java source tree (Ant-based), plus the exploded webapp
+    under `wattos/NRG/` that Tomcat serves directly. Compiled classes
+    and runtime jars under `NRG/WEB-INF/` are tracked in git, so a
+    fresh checkout starts up without a build step.
   * `initdb/` — SQL bootstrap scripts run on first MySQL startup
     (`01_createdb.sql` + `wattos_load.sql`)
   * `dbfs/` — block files and seed CSVs bind-mounted into the DB
   * `tomcat/` — Tomcat `server.xml` mounted into the Tomcat container
   * `mysql/` — legacy pre-compose deployment artefacts (no longer used)
-  * `scripts/rebuild.sh` — incremental Java rebuild used in place of
-    the full Ant build
+  * `scripts/rebuild.sh` — incremental single-file Java rebuild for
+    quick edits (Ant alternative for one-off changes)
 
 ## wattos
 
@@ -21,10 +23,36 @@ Wattos was originally on Google Code; its commit history was lost when
 Google Code shut down. It was imported into git from a local working
 copy in 2019, a decade after it was written.
 
+## Quick start (fresh checkout)
+
+You don't need a JDK or Ant locally — the deployed webapp ships with its
+compiled classes and runtime jars under `wattos/NRG/WEB-INF/`. Docker is
+the only prerequisite.
+
+```bash
+git clone <this repo>
+cd wattos                     # the deployment root (contains docker-compose.yml)
+docker compose up -d          # starts wattos-mysql and wattos-tomcat
+                              # initdb seeds the DB on first start (~30s)
+
+# Smoke test:
+curl -s -o /dev/null -w '%{http_code}\n' \
+    http://127.0.0.1:8080/NRG/MRGridServlet
+# → 200
+```
+
+That's it. The landing page is at
+`http://127.0.0.1:8080/NRG/MRGridServlet` and works straight out of git
+because `NRG/WEB-INF/classes/Wattos/**/*.class` and
+`NRG/WEB-INF/lib/*.jar` are checked in. For local-path dev (rather than
+the production paths the `docker-compose.yml` defaults point at), copy
+`.env.example` to `.env` and set the bind-mount vars — see
+[Configuration](#configuration) below.
+
 ## Running with Docker Compose
 
-`docker compose up -d` from this directory brings up two containers on
-a `wattos-network` bridge:
+`docker compose up -d` brings up two containers on a `wattos-network`
+bridge:
 
   * **`wattos-mysql`** — `mysql:8` (8.4 LTS). On first start it runs
     everything in `initdb/` (schema + data load); subsequent starts
@@ -73,25 +101,61 @@ The servlet's only mapping is `Wattos.Servlet.MRGridServlet` →
 
 ## Rebuilding after Java source changes
 
-The full Ant build (`wattos/buildEclipse.xml`) currently can't run
-cleanly — `wattos/lib/` is missing several historical compile-time
-jars. For day-to-day work, use the incremental rebuild script:
+You need a JDK (≥17) and Ant only when modifying `.java` sources. Two
+flows, both writing back into `wattos/NRG/WEB-INF/classes/` so a Tomcat
+restart picks up the new bytecode:
+
+**Ant (recommended for clean rebuilds of the servlet):** the build file
+lives one level down from the deployment root, in the Java project dir:
 
 ```bash
-# Rebuild one or more .java files into wattos/NRG/WEB-INF/classes/
-./scripts/rebuild.sh wattos/src/Wattos/Servlet/MRGridServlet.java
-./scripts/rebuild.sh wattos/src/Wattos/Episode_II/SQL_*.java
-
-# Pick up the new .class files
+cd wattos                        # the inner wattos/ — sibling to docker-compose.yml
+ant -f buildEclipse.xml          # default install-servlet — compile +
+                                 # copy classes into NRG/WEB-INF/classes/
+cd ..                            # back to deployment root
 docker compose restart wattos-tomcat
 ```
 
-The script compiles against the existing compiled tree, the jars in
-`wattos/NRG/WEB-INF/lib/`, and `servlet-api.jar` extracted from the
-running Tomcat container, and writes the resulting `.class` files back
-into `wattos/NRG/WEB-INF/classes/`. Both the jars and the compiled
-classes are tracked in git, so dependency or behaviour changes show up
-as ordinary diffs.
+`install-servlet` compiles the servlet closure
+(`Wattos/{Servlet,Episode_II,Database,Common,Utils,Star,Soup}/`) against
+the runtime jars already in `NRG/WEB-INF/lib/` and the `servlet-api.jar`
+inside the running Tomcat container (auto-cached at
+`/tmp/wattos-servlet-api.jar`). No internet access needed for this
+target. Other useful targets:
+
+  * `ant compile-servlet` — just `build/Wattos/`, no copy step
+  * `ant jar-servlet` — package `lib/Wattos.jar` from the closure
+  * `ant clean-servlet` — wipe `build/`
+
+**`scripts/rebuild.sh` (faster for one-file edits):** run from the
+deployment root,
+
+```bash
+./scripts/rebuild.sh wattos/src/Wattos/Servlet/MRGridServlet.java
+./scripts/rebuild.sh wattos/src/Wattos/Episode_II/SQL_*.java
+docker compose restart wattos-tomcat
+```
+
+Same classpath as `ant install-servlet`, but compiles only the named
+files instead of the whole closure. Skips the rest, which is faster for
+single-source iteration.
+
+**Full-tree build (CLI + servlet, including the Swing GUI bits):** from
+the inner `wattos/` (same as Ant above),
+
+```bash
+ant -f buildEclipse.xml jar      # auto-runs fetch-deps if lib/ is empty
+ant -f buildEclipse.xml test     # runs the JUnit suite
+```
+
+`fetch-deps` populates `wattos/lib/` by mirroring `NRG/WEB-INF/lib/*.jar`
+and pulling the build-time-only deps (itext, jfreechart, swing-layout,
+junit, hamcrest, …) from Maven Central; the downloads are gitignored.
+Currently 24/33 tests pass — the 9 failures are pre-existing data /
+network rot, not infrastructure.
+
+Both jar and class files under `NRG/WEB-INF/` are tracked in git, so any
+rebuild shows up as an ordinary diff.
 
 ## Reverse proxy
 

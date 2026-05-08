@@ -3,9 +3,21 @@
 <!-- added memory setting for Java and Junit testing -->
 
 
-<project name="wattos" default="jar" basedir=".">
+<project name="wattos" default="install-servlet" basedir=".">
     <description>Builds, tests, and runs the project Wattos.</description>
     <echo>Starting Ant with updated build file</echo>
+
+    <!-- Linux/Windows fallback for platform.java. wattos.properties hard-codes
+         the original developer's macOS path; pre-setting platform.java here
+         when that path doesn't exist on disk steers the legacy targets at
+         the JDK Ant is currently running under. Properties are first-set
+         wins, so on macOS where the file exists this is a no-op. -->
+    <condition property="platform.java" value="${java.home}/bin/java">
+        <not>
+            <available file="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Commands/java" />
+        </not>
+    </condition>
+
     <property file="wattos.properties" />
 
     <!-- Added for for functionality. Requires a ant-contrib.jar in classpath. -->
@@ -14,6 +26,51 @@
     <!-- systems where ant-contrib installs properly: -->
 
     <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+    <!-- Properties for the post-2024 servlet-closure build. The legacy
+         `compile`/`jar`/`javadoc` targets need wattos.properties:javac.classpath
+         which references jars (itext, jfreechart, swing-layout, JavaCC, etc.)
+         that haven't been in lib/ since the 2019 import. The targets below
+         use only the jars that actually live in NRG/WEB-INF/lib/ — the
+         exploded webapp's runtime classpath — and so build cleanly on
+         JDK 21 against the deployed Tomcat 11 runtime. -->
+    <property name="servlet.classes.dir" value="NRG/WEB-INF/classes" />
+    <property name="servlet.lib.dir.local" value="NRG/WEB-INF/lib" />
+    <property name="servlet.api.jar" value="/tmp/wattos-servlet-api.jar" />
+    <property name="servlet.api.container" value="wattos-tomcat" />
+    <property name="servlet.api.container.path" value="/usr/local/tomcat/lib/servlet-api.jar" />
+    <property name="servlet.javac.source" value="17" />
+    <property name="servlet.javac.target" value="17" />
+
+    <!-- ====================
+         DEPENDENCY POPULATION
+         ====================
+         Populates lib/ with every jar referenced by
+         wattos.properties:javac.classpath. Mirrors the jars already
+         shipped under NRG/WEB-INF/lib/ (the runtime deps), pulls the
+         servlet-api Tomcat ships from the running container, and
+         downloads the remaining build-time deps from Maven Central.
+         lib/*.jar is gitignored, so this target is what `compile` /
+         `jar` / `test` rely on to populate a fresh checkout. -->
+    <property name="maven.central" value="https://repo1.maven.org/maven2" />
+
+    <target name="fetch-deps" depends="-fetch-servlet-api"
+            description="Populate lib/ with build- and test-time deps (mirrors WEB-INF/lib + downloads from Maven Central).">
+        <mkdir dir="${lib.local.dir}" />
+        <copy todir="${lib.local.dir}">
+            <fileset dir="${servlet.lib.dir.local}" includes="*.jar" />
+        </copy>
+        <copy file="${servlet.api.jar}" tofile="${lib.local.dir}/servlet-api.jar" />
+        <get dest="${lib.local.dir}" usetimestamp="true" skipexisting="true" verbose="false">
+            <url url="${maven.central}/com/lowagie/itext/1.4/itext-1.4.jar" />
+            <url url="${maven.central}/jfree/jfreechart/1.0.1/jfreechart-1.0.1.jar" />
+            <url url="${maven.central}/jfree/jcommon/1.0.0/jcommon-1.0.0.jar" />
+            <url url="${maven.central}/org/swinglabs/swing-layout/1.0.3/swing-layout-1.0.3.jar" />
+            <url url="${maven.central}/concurrent/concurrent/1.3.4/concurrent-1.3.4.jar" />
+            <url url="${maven.central}/junit/junit/4.13.2/junit-4.13.2.jar" />
+            <url url="${maven.central}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" />
+        </get>
+    </target>
 
     <!-- Set the below to development 0 or production 1-->
     <property name="isProduction" value="0" />
@@ -73,8 +130,16 @@
     <!-- Is done automatically by ant build but can be used externally.
     NB the debug settings.
     -->
-    <target name="compile" description="compile" depends="init">
-        <javac srcdir="${src.dir}" destdir="${build.dir}" debug="on" debuglevel="lines,vars,source">
+    <target name="compile" description="compile" depends="init,fetch-deps">
+        <mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" sourcepath=""
+               source="${servlet.javac.source}" target="${servlet.javac.target}"
+               debug="on" debuglevel="lines,vars,source"
+               includeantruntime="false" encoding="UTF-8">
+            <!-- CSVutils.jar / starlibj_with_source.jar bundle their own
+                 .java sources alongside .class files; without -implicit:none
+                 javac would compile those into ${build.dir}/com/... -->
+            <compilerarg value="-implicit:none" />
             <classpath>
                 <path path="${javac.classpath}" />
             </classpath>
@@ -88,6 +153,55 @@
 
     <target name="clean" description="clean class files" depends="init">
         <delete dir="${build.dir}" />
+        <delete dir="${test.classes.dir}" />
+    </target>
+
+    <!--
+    ====================
+    JUNIT TEST EXECUTION
+    ====================
+    Compiles test/Wattos/ into ${test.classes.dir}/ then runs every
+    *Test.java via the junit macrodef defined below. Tests are JUnit 3
+    style (`extends TestCase`); junit-4.13.2.jar still ships
+    `junit.framework.*` for backwards compat.
+    -->
+    <property name="test.test.dir" value="test" />
+    <property name="test.classes.dir" value="${build.dir}/test-classes" />
+    <property name="run.test.classpath" value="${build.dir}:${test.classes.dir}:${javac.classpath}:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" />
+
+    <target name="compile-test" depends="compile">
+        <mkdir dir="${test.classes.dir}" />
+        <javac srcdir="${test.test.dir}" destdir="${test.classes.dir}" sourcepath=""
+               source="${servlet.javac.source}" target="${servlet.javac.target}"
+               debug="on" debuglevel="lines,vars,source"
+               includeantruntime="false" encoding="UTF-8">
+            <compilerarg value="-implicit:none" />
+            <classpath>
+                <path path="${build.dir}" />
+                <path path="${javac.classpath}" />
+                <pathelement location="lib/junit-4.13.2.jar" />
+                <pathelement location="lib/hamcrest-core-1.3.jar" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="test" depends="compile-test,-init-macrodef-junit"
+            description="Run every test/Wattos/**/*Test.java via JUnit 4 (still consumes JUnit 3 TestCase classes).">
+        <mkdir dir="${tmp.local.dir}" />
+        <junit showoutput="true" fork="true" maxmemory="512m"
+               dir="${tmp.local.dir}" jvm="${platform.java}"
+               failureproperty="tests.failed" errorproperty="tests.failed"
+               printsummary="withOutAndErr" haltonfailure="false">
+            <classpath>
+                <path path="${run.test.classpath}" />
+            </classpath>
+            <batchtest todir="${tmp.local.dir}">
+                <fileset dir="${test.test.dir}" includes="**/*Test.java" />
+            </batchtest>
+            <formatter type="brief" usefile="false" />
+            <formatter type="xml" />
+        </junit>
+        <fail if="tests.failed" message="One or more JUnit tests failed; see ${tmp.local.dir}/TEST-*.xml" />
     </target>
 
     <target name="-init-macrodef-junit">
@@ -142,7 +256,7 @@
     Use:
         for resigning all jars. They need to be the same for WebApps such as Sjors.
     -->
-    <target name="jar" depends="init" description="Build JAR.">
+    <target name="jar" depends="compile" description="Build JAR.">
         <jar destfile="${jar.name}" basedir="${build.dir}" />
         <!--
         <signjar
@@ -162,6 +276,108 @@
         </signjar>
     </target>
 
+    <!--
+    ====================================
+    SERVLET-CLOSURE BUILD (2024+, current)
+    ====================================
+    These targets compile the subset of src/Wattos/ that the deployed
+    NRG servlet actually uses, using only the jars in NRG/WEB-INF/lib/
+    plus the Tomcat-provided jakarta.servlet-api. Replaces what
+    scripts/rebuild.sh did file-by-file. The legacy `compile`/`jar`
+    targets above remain broken until lib/ is repopulated with the
+    pre-2010 dependencies enumerated by wattos.properties:javac.classpath
+    (Approach A in ANT_BUILD_FIX_PLAN.md).
+
+    Excluded from the closure (because they require missing jars and
+    are not reachable from MRGridServlet/TestServlet):
+
+      - Wattos/Soup/Constraint/DistConstr.java     (jfreechart, itext)
+      - Wattos/Soup/Constraint/Completeness.java   (jfreechart, itext)
+      - Wattos/Utils/PdfGeneration.java            (itext)
+      - Wattos/Utils/Charts/ResiduePlot.java       (jfreechart, swing-layout)
+      - Wattos/Episode_II/Sjors.java               (swing-layout; only
+                                                    importer is the
+                                                    Swing GUI)
+
+    The pre-built 2019 .class files for these five live in
+    NRG/WEB-INF/classes/ and are placed on javac's classpath so the
+    rest of the closure (File31, Entry, MRSTARFile, CIFCoord, ...)
+    resolves their references during compilation.
+    -->
+
+    <target name="-fetch-servlet-api">
+        <available file="${servlet.api.jar}" property="servlet.api.jar.present" />
+        <if>
+            <not><isset property="servlet.api.jar.present" /></not>
+            <then>
+                <echo message="Fetching ${servlet.api.container.path} from container ${servlet.api.container} into ${servlet.api.jar}" />
+                <exec executable="docker" failonerror="true">
+                    <arg value="cp" />
+                    <arg value="${servlet.api.container}:${servlet.api.container.path}" />
+                    <arg value="${servlet.api.jar}" />
+                </exec>
+            </then>
+        </if>
+    </target>
+
+    <target name="compile-servlet" depends="init,-fetch-servlet-api"
+            description="Compile the servlet closure into ${build.dir}/ (Java ${servlet.javac.target}).">
+        <mkdir dir="${build.dir}" />
+        <!-- sourcepath="" disables implicit on-demand compilation so the
+             excludes below actually take effect; references to those
+             excluded classes resolve against the pre-built .class files
+             in ${servlet.classes.dir} instead. -->
+        <javac srcdir="${src.dir}" destdir="${build.dir}" sourcepath=""
+               source="${servlet.javac.source}" target="${servlet.javac.target}"
+               debug="on" debuglevel="lines,vars,source"
+               includeantruntime="false" encoding="UTF-8">
+            <!-- CSVutils.jar and starlibj_with_source.jar bundle their
+                 own .java sources alongside .class files; javac would
+                 otherwise compile those into ${build.dir}/com/...,
+                 polluting the output tree. -->
+            <compilerarg value="-implicit:none" />
+            <include name="Wattos/Servlet/**/*.java" />
+            <include name="Wattos/Episode_II/**/*.java" />
+            <include name="Wattos/Database/**/*.java" />
+            <include name="Wattos/Common/**/*.java" />
+            <include name="Wattos/Utils/**/*.java" />
+            <include name="Wattos/Star/**/*.java" />
+            <include name="Wattos/Soup/**/*.java" />
+            <exclude name="Wattos/Soup/Constraint/DistConstr.java" />
+            <exclude name="Wattos/Soup/Constraint/Completeness.java" />
+            <exclude name="Wattos/Utils/PdfGeneration.java" />
+            <exclude name="Wattos/Utils/Charts/ResiduePlot.java" />
+            <exclude name="Wattos/Episode_II/Sjors.java" />
+            <classpath>
+                <pathelement location="${servlet.api.jar}" />
+                <pathelement location="${servlet.classes.dir}" />
+                <fileset dir="${servlet.lib.dir.local}" includes="*.jar" />
+            </classpath>
+        </javac>
+        <copy todir="${build.dir}">
+            <fileset dir="${src.dir}" includes="**/*.H" /> <!-- Wattos/Soup/Data/TOPOLOGY.H -->
+            <fileset dir="${src.dir}" includes="**/*.csv" />
+            <fileset dir="${src.dir}" includes="**/*.str" />
+        </copy>
+    </target>
+
+    <target name="install-servlet" depends="compile-servlet"
+            description="Copy compiled closure into ${servlet.classes.dir} (the live exploded webapp).">
+        <copy todir="${servlet.classes.dir}" overwrite="true">
+            <fileset dir="${build.dir}" />
+        </copy>
+        <echo message="To pick up changes: docker compose restart wattos-tomcat" />
+    </target>
+
+    <target name="jar-servlet" depends="compile-servlet"
+            description="Package the compiled closure as ${jar.name}.">
+        <jar destfile="${jar.name}" basedir="${build.dir}" />
+    </target>
+
+    <target name="clean-servlet"
+            description="Wipe ${build.dir}/ (does not touch ${servlet.classes.dir}).">
+        <delete dir="${build.dir}" />
+    </target>
 
     <!--
     ====================
@@ -417,9 +633,12 @@ For Mac OS, the default is "cr".
     </target>
 
     <!--Dimitri's STAR parser now with line by line processing instead of character at
-        a time for semi colon delimited values-->
-    <taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib.local.dir}/JFlex.jar" />
+        a time for semi colon delimited values.
+        JFlex.jar lives under NRG/WEB-INF/lib/ now that lib/ is empty;
+        the taskdef is scoped to the target so other targets don't fail
+        to load when the jar isn't on the lookup path. -->
     <target name="star_scanner" description="generate scanner class" depends="init">
+        <taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${servlet.lib.dir.local}/JFlex.jar" />
         <jflex file="${src.dir}/Wattos/Star/star.flex" verbose="on" />
     </target>
 

@@ -11,7 +11,7 @@ package Wattos.CloneWars.Gui;
 
 import Wattos.Utils.General;
 import Wattos.Utils.Strings;
-import edu.oswego.cs.dl.util.concurrent.misc.SwingWorker;
+import EDU.oswego.cs.dl.util.concurrent.misc.SwingWorker;
 import java.lang.reflect.Method;
 
 /**
