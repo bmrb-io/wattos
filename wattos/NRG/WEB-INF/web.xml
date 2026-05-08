@@ -11,11 +11,27 @@
       <servlet-class>
           Wattos.Servlet.MRGridServlet
       </servlet-class>
+      <!-- Initialise on startup so Globals is in the ServletContext (under
+           the "wattosGlobals" attribute) before any JSP, e.g. howto.jsp,
+           is hit. -->
+      <load-on-startup>1</load-on-startup>
    </servlet>
 
     <servlet-mapping>
       <servlet-name>MRGridServlet</servlet-name>
       <url-pattern>/MRGridServlet</url-pattern>
+   </servlet-mapping>
+
+   <!-- 301-redirect the legacy howto.html / readme.html URLs to their
+        .jsp replacements so external bookmarks / references keep working. -->
+   <servlet>
+      <servlet-name>HtmlToJspRedirect</servlet-name>
+      <servlet-class>Wattos.Servlet.HtmlToJspRedirect</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>HtmlToJspRedirect</servlet-name>
+      <url-pattern>/wattos/MRGridServlet/html/howto.html</url-pattern>
+      <url-pattern>/wattos/MRGridServlet/html/readme.html</url-pattern>
    </servlet-mapping>
 
 

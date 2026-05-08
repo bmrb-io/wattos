@@ -432,7 +432,7 @@ public class Globals {
         // Should be put just before the ending body tag.
         m.put("html_footer_text", "<div class=\"nrg-footer\">\n"
                 + "<p>Please acknowledge these <a href=\"/" + html_location
-                + "/howto.html#References\">references</a> "
+                + "/howto.jsp#References\">references</a> "
                 + "in publications where the data from this site have been utilized.</p>\n"
                 + "<p>Contact our <a href=\"mailto:<!-- INSERT WEBMASTER HERE -->\">support address</a> "
                 + "for help, if required. <!-- INSERT DATE HERE --> "

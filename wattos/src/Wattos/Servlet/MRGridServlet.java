@@ -81,10 +81,15 @@ public class MRGridServlet extends HttpServlet {
      * @param config
      * @throws ServletException
      */
+    /** ServletContext attribute name under which Globals is exposed for JSPs. */
+    public static final String GLOBALS_ATTR = "wattosGlobals";
+
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         // Get info like db connection
         g = new Globals();
+        // Expose Globals to JSPs in the same webapp (e.g. html/howto.jsp).
+        getServletContext().setAttribute(GLOBALS_ATTR, g);
         // Open Episode_II database connection
         initDb();
     }
@@ -162,18 +167,25 @@ public class MRGridServlet extends HttpServlet {
      * @throws IOException
      */
     public void showFooter(HttpServletResponse resp) throws ServletException, java.io.IOException {
+        renderFooterTo(g, resp.getWriter());
+    }
 
-        java.io.PrintWriter out = resp.getWriter();
-
+    /**
+     * Static counterpart of {@link #showFooter} for JSPs. Pulls the same
+     * `html_footer_text` template out of Globals and substitutes the date,
+     * db_username, and webmaster placeholders, so a JSP gets the identical
+     * footer (incl. support email from config) as the Java-rendered pages.
+     */
+    public static void renderFooterTo(Globals g, java.io.Writer out) throws java.io.IOException {
         String html_footer_text = g.getValueString("html_footer_text");
-
         Properties subs = new Properties();
         subs.setProperty("<!-- INSERT DATE HERE -->", java.text.DateFormat.getDateTimeInstance(
                 java.text.DateFormat.FULL, java.text.DateFormat.FULL).format(new java.util.Date()));
         subs.setProperty("<!-- INSERT DB_USERNAME HERE -->", Strings.htmlEscape(g.getValueString("db_username")));
         subs.setProperty("<!-- INSERT WEBMASTER HERE -->", Strings.htmlEscape(g.getValueString("servlet_webmaster")));
         html_footer_text = Strings.replaceMulti(html_footer_text, subs);
-        out.println(html_footer_text);
+        out.write(html_footer_text);
+        out.write("\n");
     }
 
     /**
@@ -184,20 +196,27 @@ public class MRGridServlet extends HttpServlet {
      * @throws IOException
      */
     public void showHeader(HttpServletResponse resp) throws ServletException, java.io.IOException {
+        renderHeaderTo(g, getServletContext().getContextPath(), resp.getWriter());
+    }
 
-        java.io.PrintWriter out = resp.getWriter();
+    /**
+     * Static counterpart of {@link #showHeader} for JSPs. {@code contextPath}
+     * comes from {@code request.getContextPath()} so links in the banner
+     * resolve correctly regardless of how the webapp is deployed (and from
+     * pages nested deeper than /MRGridServlet).
+     */
+    public static void renderHeaderTo(Globals g, String contextPath, java.io.Writer out) throws java.io.IOException {
         String html_header_text = g.getValueString("html_header_text");
         Properties subs = new Properties();
-        String title_html = "<H1><a href=\"" +
-        // g.getValueString("servlet_mrgrid_absolute_url") +
-                "MRGridServlet" + "\">NMR Restraints Grid</a></H1>";
+        String title_html = "<H1><a href=\"" + contextPath + "/MRGridServlet\">NMR Restraints Grid</a></H1>";
         String url_image = "/" + g.getValueString("servlet_image_dir") + "/NMRRestraintsGridFlow.gif";
-        String image_html = "<IMG SRC=\"" + url_image + "\" " + "border=0 "
+        String image_html = "<IMG SRC=\"" + url_image + "\" border=0 "
                 + "title=\"Data flows from the original raw data to parsed, to the databases DOCR and FRED\">";
         subs.setProperty("<!-- INSERT A TITLE HERE -->", title_html);
         subs.setProperty("<!-- INSERT AN IMAGE HERE -->", image_html);
         html_header_text = Wattos.Utils.Strings.replaceMulti(html_header_text, subs);
-        out.println(html_header_text);
+        out.write(html_header_text);
+        out.write("\n");
     }
 
     // In-process LRU response cache for read-only HTML pages. Replaces the
@@ -708,14 +727,16 @@ public class MRGridServlet extends HttpServlet {
             return false;
         }
 
-        // Buffer the README, main.css, and index.csv files
+        // Buffer the README and index.csv files. The README is rendered
+        // server-side from readme.jsp (which inherits the shared header /
+        // footer); we drop the legacy main.css since the new shared
+        // styling pulls bmrb.io's stylesheet, not a local file.
         HashMap optionsIndex = (HashMap) options.clone();
         optionsIndex.put("show_csv", new Boolean(true)); // override the default false
         optionsIndex.put("request_type", "block_set"); // override the current "archive" otherwise this cycles.
-        String[] url_list = new String[] { g.getValueString("servlet_html_absolute_url") + "/readme.html",
-                g.getValueString("servlet_html_absolute_url") + "/main.css",
+        String[] url_list = new String[] { g.getValueString("servlet_html_absolute_url") + "/readme.jsp",
                 g.getValueString("servlet_mrgrid_absolute_url") + "?" + getQueryUrl(optionsIndex) };
-        String[] new_file_name_list = new String[] { "readme.html", "main.css", "index.csv", };
+        String[] new_file_name_list = new String[] { "readme.html", "index.csv", };
         int MIN_BYTES_NEEDED = 50;
         String extraMsg = "<BR>Please contact us if you believe this could be an error.";
         byte[][] new_file_bytes_list = new byte[new_file_name_list.length][];
@@ -2027,13 +2048,13 @@ public class MRGridServlet extends HttpServlet {
                                 + "DOCR and FRED databases respectively as described in these\n"
                                 + "<A HREF=\"/"
                                 + html_location
-                                + "/howto.html#References\">references</A>.\n"
+                                + "/howto.jsp#References\">references</A>.\n"
                                 +
 
                                 "<P>For tips on using this interface and how to link to it, check the\n"
                                 + "<A HREF=\"/"
                                 + html_location
-                                + "/howto.html\">howto</A>.\n"
+                                + "/howto.jsp\">howto</A>.\n"
                                 + "A block is a section of data of similar type such as hydrogen bond distance restraints or RDCs.\n"
                                 + General.eol);
         htmltable.setCellAttribute(row_pdb_id, column_help, "rowspan", String.valueOf(htmltable.sizeRows()));
