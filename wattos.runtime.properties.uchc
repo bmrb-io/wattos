@@ -32,7 +32,7 @@ servlet_root_url = http://restraintsgrid.bmrb.io
 servlet_html_absolute_url = http://restraintsgrid.bmrb.io/NRG/wattos/MRGridServlet/html
 
 # edit to taste
-servlet_webmaster = dl-bmrb-sysadmin@uchc.edu
+servlet_webmaster = help@bmrb.io
 dbmatch = http://bmrb.io/search/pdbcode.php?pdbcode=
 bmrb_url = http://bmrb.io/data_library/generate_summary.php?bmrbId=
 recoord_url = http://www.ebi.ac.uk/pdbe/recalculated-nmr-data

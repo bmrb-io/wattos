@@ -168,6 +168,7 @@ public class MRGridServlet extends HttpServlet {
         subs.setProperty("<!-- INSERT DATE HERE -->", java.text.DateFormat.getDateTimeInstance(
                 java.text.DateFormat.FULL, java.text.DateFormat.FULL).format(new java.util.Date()));
         subs.setProperty("<!-- INSERT DB_USERNAME HERE -->", Strings.htmlEscape(g.getValueString("db_username")));
+        subs.setProperty("<!-- INSERT WEBMASTER HERE -->", Strings.htmlEscape(g.getValueString("servlet_webmaster")));
         html_footer_text = Strings.replaceMulti(html_footer_text, subs);
         out.println(html_footer_text);
     }

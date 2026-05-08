@@ -378,8 +378,8 @@ public class Globals {
         // Should be put just before the ending body tag.
         m.put("html_footer_text", "<p><hr>\n" + "Please acknowledge these <A HREF=\"/" + html_location
                 + "/howto.html#References\">references</A>\n"
-                + "in publications where the data from this site have been utilized.\n" + "<p>Contact the "
-                + "<A HREF=\"mailto:" + m.get("servlet_webmaster") + "\">webmaster</a> " + "for help, if required. "
+                + "in publications where the data from this site have been utilized.\n" + "<p>Contact our "
+                + "<A HREF=\"mailto:<!-- INSERT WEBMASTER HERE -->\">support address</a> " + "for help, if required. "
                 + "<!-- INSERT DATE HERE --> \n" + "(<!-- INSERT DB_USERNAME HERE -->)\n" + googleAnalytics
                 + "</body></html>");
     }
