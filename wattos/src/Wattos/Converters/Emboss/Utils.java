@@ -9,7 +9,6 @@
 package Wattos.Converters.Emboss;
 
 
-import org.apache.regexp.*;
 import Wattos.Utils.*;
 import Wattos.Converters.Common.*;
 import java.util.*;
@@ -21,10 +20,6 @@ import java.io.*;
  */
 public class Utils {
 
-    public static RE re_getTextInCommentToken_remark;
-    public static RE re_getTextInCommentToken_set;
-    public static RE re_getTextInCommentToken_end;
-    
     static final int SEMICOLONCOMMENT    = EmbossParserAllConstants.SEMICOLONCOMMENT;
     static final int EOF            = EmbossParserAllConstants.EOF;
 

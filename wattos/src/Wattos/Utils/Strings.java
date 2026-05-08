@@ -4,7 +4,6 @@
  */
 package Wattos.Utils;
 
-import org.apache.regexp.*;
 import java.util.regex.*;
 import java.text.NumberFormat;
 //import java.text.FieldPosition;
@@ -26,8 +25,8 @@ public class Strings {
 
     public static Parameters p = new Parameters(); // for printf
     public static NumberFormat nf = NumberFormat.getInstance();
-    public static RE re_parseDouble, re_getLines, re_areDigits;
-    public static RE re_is_pdb_code, re_stripHtml;
+    public static Pattern re_parseDouble, re_getLines, re_areDigits;
+    public static Pattern re_is_pdb_code, re_stripHtml;
     /** Defined here so it doesn't need to be initialized every time */
 //    private static FieldPosition fieldPositionDummy;
     private static DoubleToString doubleToString = new DoubleToString();
@@ -79,16 +78,15 @@ public class Strings {
         nf.setGroupingUsed(false);
         p.autoClear(true);
 
-        //Old style using apaches'
         try {
-            re_parseDouble  = new RE("[DF]", RE.MATCH_CASEINDEPENDENT);
-            re_getLines     = new RE("\r\n|\n|\r");
-            re_areDigits    = new RE("^[:digit:]+$");
-            re_is_pdb_code  = new RE("^[:digit:][:alnum:]{3}$");
-            re_stripHtml    = new RE("<.*?>");
+            re_parseDouble  = Pattern.compile("[DF]", Pattern.CASE_INSENSITIVE);
+            re_getLines     = Pattern.compile("\r\n|\n|\r");
+            re_areDigits    = Pattern.compile("^\\d+$");
+            re_is_pdb_code  = Pattern.compile("^\\d\\p{Alnum}{3}$");
+            re_stripHtml    = Pattern.compile("<.*?>");
 
-        } catch ( RESyntaxException e) {
-            General.showError("Code error: RESyntaxException in parseDouble etc.:" + e.toString() );
+        } catch ( PatternSyntaxException e) {
+            General.showError("Code error: PatternSyntaxException in parseDouble etc.:" + e.toString() );
         }
 //        fieldPositionDummy =  new FieldPosition(0);
         /** Using new regexp in standard java 1.4...
@@ -882,7 +880,7 @@ public class Strings {
 
     /** Looks to see if the string contains only digits.     */
     public static boolean areDigits( String chk_string  ) {
-        return re_areDigits.match( chk_string );
+        return re_areDigits.matcher( chk_string ).matches();
     }
 
 
@@ -892,11 +890,7 @@ public class Strings {
      * @return <CODE>true</CODE> if it is valid pdb code.
      */
     public static boolean is_pdb_code( String chk_string ) {
-        boolean matched = re_is_pdb_code.match( chk_string );
-        if ( matched )
-            return true;
-        else
-            return false;
+        return re_is_pdb_code.matcher( chk_string ).matches();
     }
 
     /** HTML-escape a string for safe inclusion in HTML body or attribute values.
@@ -1393,15 +1387,14 @@ public class Strings {
      *null is returned.
      */
     public static String replace( String input, String in, String out ) {
-        RE re=null;
+        Pattern re;
         try {
-            re = new RE(in);
-        } catch ( RESyntaxException e) {
-            General.showOutput("Code error: RESyntaxException" + e.toString() );
+            re = Pattern.compile(in);
+        } catch ( PatternSyntaxException e) {
+            General.showOutput("Code error: PatternSyntaxException" + e.toString() );
             return null;
         }
-        String result = re.subst(input,out);
-        return(result);
+        return re.matcher(input).replaceAll(out);
     }
 
     /** Replaces a match of a regular expression with a given string.
@@ -1434,7 +1427,7 @@ public class Strings {
      */
     public static String stripHtml( String input ) {
         // Do multiple substitutions if matches present
-        String result = Strings.re_stripHtml.subst(input, EMPTY_STRING);
+        String result = Strings.re_stripHtml.matcher(input).replaceAll(EMPTY_STRING);
         result = result.trim();
         return(result);
     }
@@ -1493,18 +1486,11 @@ public class Strings {
      */
     public static double parseDouble( String svalue ) throws NumberFormatException {
         String new_str = "E";
-        // Old style using Apache
-        if ( Strings.re_parseDouble.match(svalue) ) {
-            svalue = Strings.re_parseDouble.subst(svalue,new_str);
+        Matcher m = Strings.re_parseDouble.matcher(svalue);
+        if ( m.find() ) {
+            svalue = m.replaceAll(new_str);
         }
-        /** New style
-        if ( svalue.matches( Strings.p_parseDouble..match(svalue) ) {
-            svalue = Strings.re_parseDouble.subst(svalue,new_str);
-        }
-         */
-
-        double dvalue = Double.parseDouble(svalue);
-        return dvalue;
+        return Double.parseDouble(svalue);
     }
 
     /**

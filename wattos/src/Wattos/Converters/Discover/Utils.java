@@ -9,7 +9,7 @@
 package Wattos.Converters.Discover;
 
 
-import org.apache.regexp.*;
+import java.util.regex.*;
 import Wattos.Utils.*;
 import Wattos.Converters.Common.*;
 import java.util.*;
@@ -29,12 +29,12 @@ public class Utils {
      */
     static final int EOF            = DiscoverParserAllConstants.EOF;
 
-    public static RE re_getResidueIds;
+    public static Pattern re_getResidueIds;
 
     static {
         try {
-            re_getResidueIds = new RE("[:digit:]");
-        } catch ( RESyntaxException e) {
+            re_getResidueIds = Pattern.compile("\\d");
+        } catch ( PatternSyntaxException e) {
             General.showError("Code error: Wattos.Converters.Discover.Utils" + e.toString() );
         }
     }
@@ -191,11 +191,12 @@ public class Utils {
     public static String[] getResidueIds( String residue_id ) throws ParseException {
 
         /** Try to match any digit */
-        if ( residue_id.length() < 2 || ! re_getResidueIds.match(residue_id) ) {
+        Matcher m = re_getResidueIds.matcher(residue_id);
+        if ( residue_id.length() < 2 || ! m.find() ) {
             throw new ParseException();
         }
 
-        int position_to_cut = re_getResidueIds.getParenStart(0);
+        int position_to_cut = m.start();
         if ( position_to_cut < 1 ) {
             throw new ParseException();
         }

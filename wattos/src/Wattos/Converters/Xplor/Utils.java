@@ -9,7 +9,7 @@
 package Wattos.Converters.Xplor;
 
 
-import org.apache.regexp.*;
+import java.util.regex.*;
 import Wattos.Utils.*;
 import Wattos.Converters.Common.*;
 import java.util.jar.Attributes;
@@ -22,20 +22,17 @@ import java.io.*;
  */
 public class Utils {
 
-    public static RE re_getTextInCommentToken_remark;
-    public static RE re_getTextInCommentToken_set;
-    public static RE re_getTextInCommentToken_end;
-    
+    public static Pattern re_getTextInCommentToken_remark;
+    public static Pattern re_getTextInCommentToken_set;
+    public static Pattern re_getTextInCommentToken_end;
+
     static {
         try {
-            /* [:alpha:]            Alphabetic characters 
-             * [:space:]            Space characters (such as space, tab, and form feed, to name a few). 
-             */
-            re_getTextInCommentToken_remark = new RE("^REMA[:alpha:]*[:space:]*",   RE.MATCH_CASEINDEPENDENT );
-            re_getTextInCommentToken_set    = new RE("^SET[:space:]+",              RE.MATCH_CASEINDEPENDENT );
-            re_getTextInCommentToken_end    = new RE("[:space:]*END$",              RE.MATCH_CASEINDEPENDENT );
-            
-        } catch ( RESyntaxException e) {
+            re_getTextInCommentToken_remark = Pattern.compile("^REMA\\p{Alpha}*\\s*", Pattern.CASE_INSENSITIVE);
+            re_getTextInCommentToken_set    = Pattern.compile("^SET\\s+",              Pattern.CASE_INSENSITIVE);
+            re_getTextInCommentToken_end    = Pattern.compile("\\s*END$",              Pattern.CASE_INSENSITIVE);
+
+        } catch ( PatternSyntaxException e) {
             General.showError("Code error: Xplor.Utils" + e.toString() );
         }
     }
@@ -76,12 +73,12 @@ public class Utils {
             content = content.substring(1).trim();
         // Strip off "rema(rk)" by looking at first occurrence of a space or tab.
         } else if (token.kind == REMARKCOMMENT) {
-            content = re_getTextInCommentToken_remark.subst(content,"",RE.REPLACE_FIRSTONLY );
+            content = re_getTextInCommentToken_remark.matcher(content).replaceFirst("");
         } else if (token.kind == CURLYCOMMENT) {
             content = content.substring(1, content.length() -1 ).trim();
         } else if (token.kind == SETCOMMENT) {
-            content = re_getTextInCommentToken_set.subst(content,"",RE.REPLACE_FIRSTONLY );
-            content = re_getTextInCommentToken_end.subst(content,"",RE.REPLACE_FIRSTONLY );
+            content = re_getTextInCommentToken_set.matcher(content).replaceFirst("");
+            content = re_getTextInCommentToken_end.matcher(content).replaceFirst("");
         } else {
             // Might have been possible to get descriptive name but that takes
             // too much reflection.
