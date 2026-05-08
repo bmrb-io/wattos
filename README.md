@@ -1,76 +1,142 @@
 # wattos
 
-Archival copy of restraints grid servlet code by Jurgen Dorelejers
-plus containerized version of the NMR Restraints Grid servlet.
+Archival copy of the restraints-grid servlet code by Jurgen Doreleijers,
+plus a Docker Compose deployment of the NMR Restraints Grid (NRG)
+servlet that fronts it.
 
-  * `wattos_orig.tar.gz` : SVN checkout from Google Code
-  * `wattos/` : source tree that builds as of 2019
-  * `mysql/` : DB Docker container
-  * `tomcat/` : Tomcat Docker container
+  * `wattos_orig.tar.gz` — original SVN checkout from Google Code
+  * `wattos/` — Java source tree (Ant-based, builds as of 2019), plus
+    the exploded webapp under `wattos/NRG/` that Tomcat serves directly
+  * `initdb/` — SQL bootstrap scripts run on first MySQL startup
+    (`01_createdb.sql` + `wattos_load.sql`)
+  * `dbfs/` — block files and seed CSVs bind-mounted into the DB
+  * `tomcat/` — Tomcat `server.xml` mounted into the Tomcat container
+  * `mysql/` — legacy pre-compose deployment artefacts (no longer used)
+  * `scripts/rebuild.sh` — incremental Java rebuild used in place of
+    the full Ant build
 
 ## wattos
-------
 
-Wattos was originally on google code and its commit history went away with that.
-It was imported into git from out local working copy in 2019, a decade after it
-was written.
+Wattos was originally on Google Code; its commit history was lost when
+Google Code shut down. It was imported into git from a local working
+copy in 2019, a decade after it was written.
 
-## NRG containers:
--------------------------------
+## Running with Docker Compose
 
-Note: You can use `docker compose up -d` to start the containers using docker-compose.
+`docker compose up -d` from this directory brings up two containers on
+a `wattos-network` bridge:
 
-1. mysql
+  * **`wattos-mysql`** — `mysql:5` (5.7.44). On first start it runs
+    everything in `initdb/` (schema + data load); subsequent starts
+    reuse the named volume `wattos_mysql-data`. The query cache is
+    enabled (`--query_cache_type=1 --query_cache_size=64M`) — the
+    workload is essentially read-only, so identical queries return as
+    O(1) hash lookups.
+  * **`wattos-tomcat`** — `tomcat:9.0-jre11-temurin` (Tomcat 9 on
+    Temurin JRE 11; upgraded from the older standalone Tomcat
+    container that previously lived in `tomcat/`). The exploded
+    webapp at `wattos/NRG/` is bind-mounted into the container as
+    `/usr/local/tomcat/webapps/NRG/`, so jar and class changes show
+    up as ordinary git diffs. Only port 8080 is published, on
+    `127.0.0.1`.
 
-2. tomcat
+### Configuration
 
-Tomcat container needs to talk to mysql, the easiest way to do this is `--link` (where supported).
-Tomcat container also needs `mysql` server's (container's) name in `wattos.properties` file.
+Bind-mount sources and the mysql `user:` are parameterised via
+`${VAR:-default}` in `docker-compose.yml`. Defaults are the production
+absolute paths under `/projects/BMRB/public/wattos/...`, so the live
+server keeps working with no `.env` file.
 
-### Volumes:
---------
+For local development, copy `.env.example` to `.env` (gitignored) and
+set `INITDB_DIR`, `DBFS_DIR`, `HTML_DIR`, `RUNTIME_PROPS`, `NRG_DIR`,
+`PDB_DIR`, `MYSQL_USER` to match your checkout.
 
-DB filesystem (`/wattos` in the containers):
- - bfiles
- - wattos tables (need to be loaded on startup & update w/ docker exec)
+### Common operations
 
--- *NOTE* that the paths are hardcoded in SQL scripts and servlet's `wattos.properties`
- 
-DB init to create wattos DB on `mysql` startup. 
+```bash
+# Bring everything up (or apply compose changes after a git pull)
+docker compose up -d
 
-ftp/pub/wwpdb/images (/wattos/html/molgrap/images in the container)
-ftp/pub/wwpdb/imagesWhite - as above
-ftp/pub/pdb/data/structures (/pdb/data/structures in the container)
--- servlet container only
+# Restart just Tomcat (e.g. after rebuilding Java sources)
+docker compose restart wattos-tomcat
 
-## httpd config
+# Wipe the DB volume and re-run initdb (~30s on prod hardware)
+docker compose down -v && docker compose up -d
 
-apache 2.4, adjust to taste
+# Smoke test the servlet
+curl -s -o /dev/null -w '%{http_code}\n' \
+    http://127.0.0.1:8080/NRG/MRGridServlet
 ```
+
+The servlet's only mapping is `Wattos.Servlet.MRGridServlet` →
+`/MRGridServlet` (see `wattos/NRG/WEB-INF/web.xml`).
+
+## Rebuilding after Java source changes
+
+The full Ant build (`wattos/buildEclipse.xml`) currently can't run
+cleanly — `wattos/lib/` is missing several historical compile-time
+jars. For day-to-day work, use the incremental rebuild script:
+
+```bash
+# Rebuild one or more .java files into wattos/NRG/WEB-INF/classes/
+./scripts/rebuild.sh wattos/src/Wattos/Servlet/MRGridServlet.java
+./scripts/rebuild.sh wattos/src/Wattos/Episode_II/SQL_*.java
+
+# Pick up the new .class files
+docker compose restart wattos-tomcat
+```
+
+The script compiles against the existing compiled tree, the jars in
+`wattos/NRG/WEB-INF/lib/`, and `servlet-api.jar` extracted from the
+running Tomcat container, and writes the resulting `.class` files back
+into `wattos/NRG/WEB-INF/classes/`. Both the jars and the compiled
+classes are tracked in git, so dependency or behaviour changes show up
+as ordinary diffs.
+
+## Reverse proxy
+
+nginx fronts the container with stock `proxy_pass`:
+
+```
+location /NRG/ {
+    proxy_pass http://127.0.0.1:8080/NRG/;
+}
+```
+
+AJP is no longer used (the connector was removed when the unmaintained
+`nginx_ajp_module` was retired). If AJP ever needs to come back, add a
+`<Connector protocol="AJP/1.3" .../>` to `tomcat/server.xml` with a
+`secret="..."` attribute (Tomcat 9.0.31+ rejects AJP without one).
+
+For an Apache front-end, the equivalent is:
+
+```apache
 <Proxy *>
     Require all granted
 </Proxy>
 
-ProxyPass         /NRG/ ajp://127.0.0.1:8009/NRG/
-ProxyPassReverse  /NRG/ ajp://127.0.0.1:8009/NRG/
-AddOutputFilterByType SUBSTITUTE text/html
+ProxyPass        /NRG/ http://127.0.0.1:8080/NRG/
+ProxyPassReverse /NRG/ http://127.0.0.1:8080/NRG/
 
-RedirectMatch permanent ^/$ /NRG/MRGridServlet
+RedirectMatch permanent ^/$        /NRG/MRGridServlet
 RedirectMatch permanent ^/NRG(/*)$ /NRG/MRGridServlet
-
-<DirectoryMatch /CVS/>
-    Require all denied
-</DirectoryMatch>
-<DirectoryMatch /.svn/>
-    Require all denied
-</DirectoryMatch>
-<DirectoryMatch /.git/>
-    Require all denied
-</DirectoryMatch>
-
-DocumentRoot "/websites/wattos/html"
-<Directory "/websites/wattos/html">
-    AllowOverride None
-    Require all granted
-</Directory> 
 ```
+
+## Volumes / bind mounts
+
+DB filesystem (mounted at `/wattos/` in both containers):
+
+  * `dbfs/bfiles/` — block files served by the servlet
+  * `dbfs/entry.csv`, `mrblock.csv`, `mrfile.csv` — seed data loaded
+    by `initdb/wattos_load.sql` on first DB start
+  * `html/molgrap/` — molecular-graphics images
+
+Servlet-only:
+
+  * `/pdb/data/structures` — wwPDB structures archive (point at any
+    directory if you don't have a local mirror)
+
+Paths are still hardcoded in the SQL scripts and in
+`wattos.runtime.properties*` (`/wattos/dbfs`, `/pdb/data/structures`,
+`/wattos/html/molgrap/...`), so the bind-mount targets above are not
+freely renameable.
