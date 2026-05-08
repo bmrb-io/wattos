@@ -36,19 +36,21 @@ if [ ! -f "$SERVLET_API_CACHE" ]; then
     docker cp wattos-tomcat:/usr/local/tomcat/lib/servlet-api.jar "$SERVLET_API_CACHE"
 fi
 
-# Prefer JDK 11 if available — the deployed JRE is 11 and some
-# bundled jars (caffeine) are Java 11-targeted, so javac 8 can't read
-# them. We still emit 1.8 bytecode below to match the rest of the
-# tree.
+# Prefer JDK 21 (Tomcat 11 minimum is Java 17, and the bundled
+# jakarta.servlet 6.1 + caffeine jars are Java 17-targeted). Falls
+# back through 17 / 11 / 8 / PATH for environments that don't have
+# 21 yet.
 JAVAC="${JAVAC:-}"
 if [ -z "$JAVAC" ]; then
-    if [ -x /usr/lib/jvm/java-11-openjdk-amd64/bin/javac ]; then
-        JAVAC=/usr/lib/jvm/java-11-openjdk-amd64/bin/javac
-    elif [ -x /usr/lib/jvm/java-8-openjdk-amd64/bin/javac ]; then
-        JAVAC=/usr/lib/jvm/java-8-openjdk-amd64/bin/javac
-    else
-        JAVAC=javac
-    fi
+    for candidate in \
+        /usr/lib/jvm/java-21-openjdk-amd64/bin/javac \
+        /usr/lib/jvm/java-17-openjdk-amd64/bin/javac \
+        /usr/lib/jvm/java-11-openjdk-amd64/bin/javac \
+        /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+    do
+        if [ -x "$candidate" ]; then JAVAC="$candidate"; break; fi
+    done
+    JAVAC="${JAVAC:-javac}"
 fi
 
 CP="$CLASSES_DIR:$SERVLET_API_CACHE"
@@ -59,5 +61,8 @@ done
 echo "javac: $JAVAC"
 echo "files: $*"
 
-"$JAVAC" -source 1.8 -target 1.8 -d "$CLASSES_DIR" -cp "$CP" -Xlint:-options "$@"
+# -source/-target 17 matches Tomcat 11 / JDK 21. Existing pre-built
+# 1.5/1.8 classes in WEB-INF/classes/ still load fine alongside
+# 17-targeted output under JRE 21.
+"$JAVAC" -source 17 -target 17 -d "$CLASSES_DIR" -cp "$CP" -Xlint:-options "$@"
 echo "ok — compiled into $CLASSES_DIR"

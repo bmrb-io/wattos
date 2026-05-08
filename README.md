@@ -31,8 +31,8 @@ a `wattos-network` bridge:
     reuse the named volume `wattos_mysql-data`. The MySQL 5.7 query
     cache is gone in 8.0+, so warm-page caching now happens
     application-side (see Tomcat below).
-  * **`wattos-tomcat`** — `tomcat:9.0-jre11-temurin` (Tomcat 9 on
-    Temurin JRE 11). The exploded webapp at `wattos/NRG/` is
+  * **`wattos-tomcat`** — `tomcat:11-jdk21-temurin` (Tomcat 11 on
+    Temurin JDK 21). The exploded webapp at `wattos/NRG/` is
     bind-mounted into the container as `/usr/local/tomcat/webapps/NRG/`,
     so jar and class changes show up as ordinary git diffs. Only port
     8080 is published, on `127.0.0.1`. JVM heap is set to `-Xmx768m`

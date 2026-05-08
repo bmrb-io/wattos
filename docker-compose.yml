@@ -20,7 +20,7 @@ services:
       - wattos-network
 
   wattos-tomcat:
-    image: tomcat:9.0-jre11-temurin
+    image: tomcat:11-jdk21-temurin
     container_name: wattos-tomcat
     restart: always
     ports:
