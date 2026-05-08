@@ -349,22 +349,76 @@ public class Globals {
 
         /** No robots please. Current page is ok to index but not the links please. */
 
-//                                 + "<body text=\"#660000\" bgcolor=\"#FFFFF0\" link=\"#666633\" vlink=\"#999966\" alink=\"#999966\" REFRESH=\"10\">\n"
-
         m.put(
                         "html_header_text",
-                        "<html><head>\n"
-                                + "<META NAME=\"ROBOTS\" CONTENT=\"NOFOLLOW\">"
-                                + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n"
+                        "<!DOCTYPE html>\n"
+                                + "<html lang=\"en\"><head>\n"
+                                + "<meta charset=\"UTF-8\">\n"
+                                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+                                + "<meta name=\"ROBOTS\" content=\"NOFOLLOW\">\n"
                                 + "<meta name=\"Author\" content=\"Jurgen F. Doreleijers\">\n"
-                                + "<title>NMR Restraints Grid</title></head>\n"
-                                + "<body text=\"#660000\" bgcolor=\"#FFFFCC\" link=\"#666633\" vlink=\"#999966\" alink=\"#999966\" REFRESH=\"10\">\n"
-                                + "&nbsp;\n" + "<table CELLSPACING=10 CELLPADDING=10 >\n" + "<tr>\n"
-                                + "<td><A HREF=\"http://www.bmrb.wisc.edu\"> <img SRC=\"" + "/"
-                                + m.get("servlet_image_dir") + "/" + "bmrb_logo_brown_fg_cream_bg.gif\""
-                                + "TITLE=\"BMRB home\"" + "border=\"0\"" + "></A></td>\n"
-                                + "<td><!-- INSERT A TITLE HERE --></td>\n"
-                                + "<td><!-- INSERT AN IMAGE HERE --></td>\n" + "</table>");
+                                + "<title>NMR Restraints Grid</title>\n"
+                                + "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">\n"
+                                + "<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap\" rel=\"stylesheet\">\n"
+                                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://bmrb.io/stylesheets/bmrb.css\">\n"
+                                + "<style>\n"
+                                + "  body { padding: 1em 1.5em 2em 1.5em; max-width: 1400px; margin: 0 auto; color: #221e20; }\n"
+                                + "  h1, h2, h3, h4 { font-family: \"Roboto\", sans-serif; color: #221e20; font-weight: 500; }\n"
+                                + "  h1 { font-size: 1.6em; margin: 0; }\n"
+                                + "  h1 a, h1 a:visited { color: #221e20; }\n"
+                                + "  pre { background: #ededed; padding: 1em; border-radius: 3px; overflow-x: auto; font-size: 0.9em; }\n"
+                                + "  hr { border: 0; border-top: 1px dashed #99c457; margin: 1.5em 0; }\n"
+                                + "  /* The bmrb.css :hover rules apply a 1px border to inputs but the matching\n"
+                                + "     non-hover rule has a stray space (\"input [type=...]\"), so the default state\n"
+                                + "     falls back to the browser's ~2px inset border and the page shifts on hover.\n"
+                                + "     Pin the default state to match the hover dimensions to remove the shift. */\n"
+                                + "  input[type=\"text\"], input[type=\"submit\"], input[type=\"reset\"],\n"
+                                + "  input[type=\"button\"], input[type=\"file\"], input:not([type]),\n"
+                                + "  select, button, textarea {\n"
+                                + "    border: 1px solid #c8c8c8; border-radius: 3px; background: #ededed;\n"
+                                + "    color: #221e20; padding: 5px 8px; margin: 7px 5px 7px 0;\n"
+                                + "    font-family: \"Roboto\", sans-serif; font-size: 14px; box-sizing: border-box;\n"
+                                + "  }\n"
+                                + "  /* Small \"R\" / \"C\" badges next to each pdb_id (replaces the legacy r.gif/c.gif). */\n"
+                                + "  .nrg-badge { display: inline-block; min-width: 18px; height: 18px; line-height: 18px;\n"
+                                + "    padding: 0 5px; margin: 0 2px; border-radius: 3px; background-color: #99c457;\n"
+                                + "    color: #ffffff; font-weight: 700; font-size: 11px; text-align: center;\n"
+                                + "    text-decoration: none; vertical-align: middle; font-family: \"Roboto\", sans-serif; }\n"
+                                + "  a .nrg-badge, a:visited .nrg-badge { color: #ffffff; }\n"
+                                + "  .nrg-badge:hover { background-color: #475A28; }\n"
+                                + "  /* BMRB-style data tables (the bmrb.css table.alternating rules are commented out\n"
+                                + "     in the live stylesheet, so we restore them here using the BMRB palette). */\n"
+                                + "  table.alternating { width: 100%; border: none; border-collapse: collapse; border-spacing: 0; margin: 0.5em 0 1em 0; }\n"
+                                + "  table.alternating td { padding: 5px 10px; text-align: left; vertical-align: top; font-weight: 300; }\n"
+                                + "  /* HtmlTable.java emits the header row as <tr><td>...</td></tr>, so style the first row as the header. */\n"
+                                + "  table.alternating tr:first-child td, table.alternating th {\n"
+                                + "    background-color: #99c457; color: #ffffff; font-weight: 700;\n"
+                                + "    text-align: left; padding: 5px 10px; border: none;\n"
+                                + "  }\n"
+                                + "  table.alternating tr:first-child td a,\n"
+                                + "  table.alternating tr:first-child td a:visited { color: #ffffff; font-weight: 700; }\n"
+                                + "  table.alternating tr:nth-child(even):not(:first-child) { background-color: #e1ebc8; }\n"
+                                + "  table.alternating tr:nth-child(odd):not(:first-child)  { background-color: #ffffff; }\n"
+                                + "  table.alternating tr:hover:not(:first-child) { background: #ededed; }\n"
+                                + "  table.alternating td a, table.alternating td a:visited { color: #475A28; font-weight: 700; }\n"
+                                + "  /* Banner across the top of every page. */\n"
+                                + "  .nrg-banner { display: flex; align-items: center; gap: 1.5em; flex-wrap: wrap;\n"
+                                + "                padding: 0.5em 0 1em 0; border-bottom: 1px dashed #99c457; margin-bottom: 1em; }\n"
+                                + "  /* The BMRB SVG has width=\"100%\" height=\"100%\" so we must give it an\n"
+                                + "     explicit dimension or it collapses to 0x0 when loaded via <img>. */\n"
+                                + "  .nrg-banner img { height: 56px; width: auto; }\n"
+                                + "  .nrg-banner .nrg-title { flex: 1 1 auto; }\n"
+                                + "  .nrg-footer { margin-top: 2em; padding-top: 1em; border-top: 1px dashed #99c457;\n"
+                                + "                font-size: 0.9em; color: #555; }\n"
+                                + "</style>\n"
+                                + "</head>\n"
+                                + "<body>\n"
+                                + "<div class=\"nrg-banner\">\n"
+                                + "  <a href=\"https://bmrb.io\"><img src=\"/" + m.get("servlet_image_dir")
+                                + "/BMRB_ICON_SHORT_TEXT.svg\" alt=\"BMRB\" title=\"BMRB home\"></a>\n"
+                                + "  <div class=\"nrg-title\"><!-- INSERT A TITLE HERE --></div>\n"
+                                + "  <div class=\"nrg-image\"><!-- INSERT AN IMAGE HERE --></div>\n"
+                                + "</div>\n");
 
         // Formatting of all pages derived from this footer
         String html_location = getValueString("servlet_html_dir");
@@ -376,12 +430,14 @@ public class Globals {
                 + "</script>\n";
 
         // Should be put just before the ending body tag.
-        m.put("html_footer_text", "<p><hr>\n" + "Please acknowledge these <A HREF=\"/" + html_location
-                + "/howto.html#References\">references</A>\n"
-                + "in publications where the data from this site have been utilized.\n" + "<p>Contact our "
-                + "<A HREF=\"mailto:<!-- INSERT WEBMASTER HERE -->\">support address</a> " + "for help, if required. "
-                + "<!-- INSERT DATE HERE --> \n" + "(<!-- INSERT DB_USERNAME HERE -->)\n" + googleAnalytics
-                + "</body></html>");
+        m.put("html_footer_text", "<div class=\"nrg-footer\">\n"
+                + "<p>Please acknowledge these <a href=\"/" + html_location
+                + "/howto.html#References\">references</a> "
+                + "in publications where the data from this site have been utilized.</p>\n"
+                + "<p>Contact our <a href=\"mailto:<!-- INSERT WEBMASTER HERE -->\">support address</a> "
+                + "for help, if required. <!-- INSERT DATE HERE --> "
+                + "(<!-- INSERT DB_USERNAME HERE -->)</p>\n"
+                + "</div>\n" + googleAnalytics + "</body></html>");
     }
 
     /** Call whenever db user name changes */

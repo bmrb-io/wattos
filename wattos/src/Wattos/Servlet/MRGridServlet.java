@@ -190,7 +190,7 @@ public class MRGridServlet extends HttpServlet {
                 "MRGridServlet" + "\">NMR Restraints Grid</a></H1>";
         String url_image = "/" + g.getValueString("servlet_image_dir") + "/NMRRestraintsGridFlow.gif";
         String image_html = "<IMG SRC=\"" + url_image + "\" " + "border=0 "
-                + "title=\"Data flows from the original raw data to parsed, to the databases DOCR and FRED\"";
+                + "title=\"Data flows from the original raw data to parsed, to the databases DOCR and FRED\">";
         subs.setProperty("<!-- INSERT A TITLE HERE -->", title_html);
         subs.setProperty("<!-- INSERT AN IMAGE HERE -->", image_html);
         html_header_text = Wattos.Utils.Strings.replaceMulti(html_header_text, subs);
@@ -796,6 +796,11 @@ public class MRGridServlet extends HttpServlet {
 
         HtmlTable htmltable = new HtmlTable(table);
         htmltable.setCommonDefaults();
+        // BMRB stylesheet handles borders/spacing via CSS on table.alternating
+        htmltable.table_attributes.setProperty("class", "\"alternating sortable\"");
+        htmltable.table_attributes.setProperty("border", "0");
+        htmltable.table_attributes.setProperty("cellpadding", "0");
+        htmltable.table_attributes.setProperty("cellspacing", "0");
         int row_max = htmltable.sizeRows();
         int column_max = htmltable.sizeColumns();
 //        General.showDebug("Working on table of size: " + row_max + " rows and columns: " + column_max);
@@ -923,11 +928,10 @@ public class MRGridServlet extends HttpServlet {
             String full_url_1 = base_url + "?" + getQueryUrl(tmp_options);
             tmp_options.put("request_type", "org_pdb_file"); // changes value set before.
             String full_url_2 = base_url + "?" + getQueryUrl(tmp_options);
-            String imageHtml = " " + "<A rel=\"nofollow\" HREF=\"" + full_url_1 + "\">" + "<img SRC=\"" + "/"
-                    + g.getValueString("servlet_image_dir") + "/" + "r.gif\" " + "title=\"PDB restraint file\" "
-                    + "width=\"20\" height=\"20\" border=\"0\"></A>" + "<A rel=\"nofollow\" HREF=\"" + full_url_2
-                    + "\">" + "<img SRC=\"" + "/" + g.getValueString("servlet_image_dir") + "/" + "c.gif\" "
-                    + "title=\"PDB coordinate file\" " + "width=\"20\" height=\"20\" border=\"0\"></A> ";
+            String imageHtml = " <a rel=\"nofollow\" href=\"" + full_url_1
+                    + "\" title=\"PDB restraint file\"><span class=\"nrg-badge\">R</span></a>"
+                    + "<a rel=\"nofollow\" href=\"" + full_url_2
+                    + "\" title=\"PDB coordinate file\"><span class=\"nrg-badge\">C</span></a> ";
             htmltable.apendToValue(r, column_pdb_id, imageHtml);
         }
 
@@ -1141,8 +1145,11 @@ public class MRGridServlet extends HttpServlet {
 
         HtmlTable htmltable = new HtmlTable(row_max, column_max);
         htmltable.setCommonDefaults();
-        // Reset border though
-        htmltable.table_attributes.setProperty("border", "1");
+        // BMRB stylesheet handles borders/spacing via CSS on table.alternating
+        htmltable.table_attributes.setProperty("class", "\"alternating sortable\"");
+        htmltable.table_attributes.setProperty("border", "0");
+        htmltable.table_attributes.setProperty("cellpadding", "0");
+        htmltable.table_attributes.setProperty("cellspacing", "0");
 
         // StringBuffer cell_value = new StringBuffer();
 
