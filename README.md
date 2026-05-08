@@ -26,19 +26,19 @@ copy in 2019, a decade after it was written.
 `docker compose up -d` from this directory brings up two containers on
 a `wattos-network` bridge:
 
-  * **`wattos-mysql`** — `mysql:5` (5.7.44). On first start it runs
+  * **`wattos-mysql`** — `mysql:8` (8.4 LTS). On first start it runs
     everything in `initdb/` (schema + data load); subsequent starts
-    reuse the named volume `wattos_mysql-data`. The query cache is
-    enabled (`--query_cache_type=1 --query_cache_size=64M`) — the
-    workload is essentially read-only, so identical queries return as
-    O(1) hash lookups.
+    reuse the named volume `wattos_mysql-data`. The MySQL 5.7 query
+    cache is gone in 8.0+, so warm-page caching now happens
+    application-side (see Tomcat below).
   * **`wattos-tomcat`** — `tomcat:9.0-jre11-temurin` (Tomcat 9 on
-    Temurin JRE 11; upgraded from the older standalone Tomcat
-    container that previously lived in `tomcat/`). The exploded
-    webapp at `wattos/NRG/` is bind-mounted into the container as
-    `/usr/local/tomcat/webapps/NRG/`, so jar and class changes show
-    up as ordinary git diffs. Only port 8080 is published, on
-    `127.0.0.1`.
+    Temurin JRE 11). The exploded webapp at `wattos/NRG/` is
+    bind-mounted into the container as `/usr/local/tomcat/webapps/NRG/`,
+    so jar and class changes show up as ordinary git diffs. Only port
+    8080 is published, on `127.0.0.1`. JVM heap is set to `-Xmx768m`
+    to leave room for the in-process response cache (256 MB Caffeine
+    LRU in `MRGridServlet`, replacing the old MySQL query cache —
+    landing page goes from ~2.5s cold to ~2 ms warm).
 
 ### Configuration
 

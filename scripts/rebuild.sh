@@ -36,10 +36,15 @@ if [ ! -f "$SERVLET_API_CACHE" ]; then
     docker cp wattos-tomcat:/usr/local/tomcat/lib/servlet-api.jar "$SERVLET_API_CACHE"
 fi
 
-# Prefer JDK 8 if available (matches the era of the rest of the bytecode).
+# Prefer JDK 11 if available — the deployed JRE is 11 and some
+# bundled jars (caffeine) are Java 11-targeted, so javac 8 can't read
+# them. We still emit 1.8 bytecode below to match the rest of the
+# tree.
 JAVAC="${JAVAC:-}"
 if [ -z "$JAVAC" ]; then
-    if [ -x /usr/lib/jvm/java-8-openjdk-amd64/bin/javac ]; then
+    if [ -x /usr/lib/jvm/java-11-openjdk-amd64/bin/javac ]; then
+        JAVAC=/usr/lib/jvm/java-11-openjdk-amd64/bin/javac
+    elif [ -x /usr/lib/jvm/java-8-openjdk-amd64/bin/javac ]; then
         JAVAC=/usr/lib/jvm/java-8-openjdk-amd64/bin/javac
     else
         JAVAC=javac

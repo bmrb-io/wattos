@@ -20,6 +20,9 @@ import Wattos.CloneWars.UserInterface;
 import Wattos.Database.*;
 import java.text.DecimalFormat;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+
 /**
  * Serves blocks of text from the DB of MR files. This will return html pages with user input deciding on the display.
  * Basically an overview of the files and part of files (blocks) that are of a certain type.
@@ -197,6 +200,120 @@ public class MRGridServlet extends HttpServlet {
         out.println(html_header_text);
     }
 
+    // In-process LRU response cache for read-only HTML pages. Replaces the
+    // MySQL 5.7 query cache (removed in 8.0). Survives Tomcat-internal
+    // restarts only — flushed when the JVM restarts, which is also when
+    // wattos_load.sql gets re-run, so cached entries can't outlive the
+    // data they were derived from.
+    private static final long CACHE_MAX_BYTES = 256L * 1024 * 1024;
+    private static final Cache<String, CachedResponse> RESPONSE_CACHE = Caffeine.newBuilder()
+            .maximumWeight(CACHE_MAX_BYTES)
+            .weigher((String k, CachedResponse v) -> v.weight())
+            .recordStats()
+            .build();
+
+    private static final class CachedResponse {
+        final String contentType;
+        final String body;
+        CachedResponse(String contentType, String body) {
+            this.contentType = contentType;
+            this.body = body;
+        }
+        int weight() {
+            // 2 bytes per char for the body, plus ~64 bytes of fixed overhead.
+            long w = ((long) body.length()) * 2L + 64L;
+            if (contentType != null) w += ((long) contentType.length()) * 2L;
+            return (int) Math.min(w, (long) Integer.MAX_VALUE);
+        }
+    }
+
+    /**
+     * Wraps the real response so showGrid/showBlockSet write into a buffer
+     * we can both serve to the client and stash in the response cache.
+     * Only used for cacheable request types (grid, block_set non-csv) — the
+     * binary download paths (archive, org_mr_file, org_pdb_file) bypass it
+     * and write straight to the underlying response.
+     */
+    private static final class CapturingResponseWrapper extends HttpServletResponseWrapper {
+        private final java.io.StringWriter sw = new java.io.StringWriter();
+        private java.io.PrintWriter pw;
+        private String capturedContentType;
+        private int capturedStatus = HttpServletResponse.SC_OK;
+        private boolean errorSent = false;
+
+        CapturingResponseWrapper(HttpServletResponse resp) { super(resp); }
+
+        @Override
+        public void setContentType(String type) {
+            this.capturedContentType = type;
+        }
+
+        @Override
+        public String getContentType() {
+            return capturedContentType;
+        }
+
+        @Override
+        public void setStatus(int sc) {
+            this.capturedStatus = sc;
+        }
+
+        @Override
+        public void sendError(int sc) throws java.io.IOException {
+            this.capturedStatus = sc;
+            this.errorSent = true;
+        }
+
+        @Override
+        public void sendError(int sc, String msg) throws java.io.IOException {
+            this.capturedStatus = sc;
+            this.errorSent = true;
+        }
+
+        @Override
+        public java.io.PrintWriter getWriter() {
+            if (pw == null) pw = new java.io.PrintWriter(sw);
+            return pw;
+        }
+
+        boolean isCacheable() {
+            return !errorSent && capturedStatus == HttpServletResponse.SC_OK;
+        }
+
+        String body() {
+            if (pw != null) pw.flush();
+            return sw.toString();
+        }
+
+        int status() { return capturedStatus; }
+        String contentType() { return capturedContentType; }
+    }
+
+    private static boolean isCacheableRequest(HashMap options) {
+        String rt = (String) options.get("request_type");
+        if (!"grid".equals(rt) && !"block_set".equals(rt)) return false;
+        Boolean showCsv = (Boolean) options.get("show_csv");
+        // CSV variants are cheap to recompute and rarely re-fetched; skip them.
+        return !Boolean.TRUE.equals(showCsv);
+    }
+
+    private static String buildCacheKey(HttpServletRequest req) {
+        String qs = req.getQueryString();
+        if (qs == null || qs.isEmpty()) return "";
+        // Sort &-separated tokens so equivalent URLs with different parameter
+        // ordering collapse to the same key.
+        String[] parts = qs.split("&");
+        java.util.Arrays.sort(parts);
+        return String.join("&", parts);
+    }
+
+    private void writeCached(HttpServletResponse resp, CachedResponse cached) throws java.io.IOException {
+        if (cached.contentType != null) resp.setContentType(cached.contentType);
+        java.io.PrintWriter out = resp.getWriter();
+        out.write(cached.body);
+        out.flush();
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *<OL>
@@ -269,8 +386,28 @@ public class MRGridServlet extends HttpServlet {
         // will surface it through their normal error paths.
 
         String request_type = (String) options.get("request_type");
+
+        // Response-cache lookup for cacheable GET-style read-only HTML pages.
+        // On a hit we write straight to the real response and return; on a
+        // miss we wrap the response, run the handler, then both serve and
+        // cache the captured body.
+        boolean cacheable = isCacheableRequest(options);
+        String cacheKey = null;
+        CapturingResponseWrapper wrapper = null;
+        HttpServletResponse target = resp;
+        if (cacheable) {
+            cacheKey = buildCacheKey(req);
+            CachedResponse cached = RESPONSE_CACHE.getIfPresent(cacheKey);
+            if (cached != null) {
+                writeCached(resp, cached);
+                return;
+            }
+            wrapper = new CapturingResponseWrapper(resp);
+            target = wrapper;
+        }
+
         if (request_type.equals("grid")) {
-            showGrid(resp, options);
+            showGrid(target, options);
             // } else if (request_type.equals("file_set") ) {
             // showFileSet(resp, options);
             // A file view is implemented as a block_set view.
@@ -281,7 +418,7 @@ public class MRGridServlet extends HttpServlet {
         } else if (request_type.equals("org_pdb_file")) {
             showOrgPdbFile(resp, options);
         } else if (request_type.equals("block_set")) {
-            showBlockSet(resp, options);
+            showBlockSet(target, options);
         } else if (request_type.equals("block")) {
             ArrayList mrblock_ids = (ArrayList) options.get("mrblock_ids");
             if (mrblock_ids == null || mrblock_ids.size() != 1) {
@@ -321,6 +458,21 @@ public class MRGridServlet extends HttpServlet {
             showArchive(resp, options);
         } else {
             showCompleteError(resp, "Invalid request_type parameter value:" + Strings.htmlEscape(request_type));
+        }
+
+        // Cacheable path: copy the captured body to the real response and
+        // store it in the cache iff the handler produced a 200 with output.
+        if (wrapper != null) {
+            String body = wrapper.body();
+            String ct = wrapper.contentType();
+            if (ct != null) resp.setContentType(ct);
+            if (wrapper.status() != HttpServletResponse.SC_OK) resp.setStatus(wrapper.status());
+            java.io.PrintWriter out = resp.getWriter();
+            out.write(body);
+            out.flush();
+            if (wrapper.isCacheable() && body.length() > 0) {
+                RESPONSE_CACHE.put(cacheKey, new CachedResponse(ct, body));
+            }
         }
     }
 

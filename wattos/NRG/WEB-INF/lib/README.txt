@@ -5,6 +5,7 @@ File                              Description
 CSVutils.jar                      CSV parsing
 JFlex.jar                         Lexer generator runtime (used by STAR parser)
 Jmol.jar                          Molecular imagery
+caffeine-3.1.8.jar                In-process LRU cache for MRGridServlet responses
 colt.jar                          Primitive-array / hash-table collections
 jakarta-regexp.jar                Pre-Java-1.4 regex library (very old)
 mysql-connector-j-8.4.0.jar       MySQL JDBC driver (LTS, 2024)
