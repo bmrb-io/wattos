@@ -29,7 +29,7 @@
               maxActive="10"
               maxIdle="5"
               minIdle="1"
-              initialSize="1"
+              initialSize="0"
               maxWait="10000"
               testOnBorrow="true"
               validationQuery="SELECT 1"

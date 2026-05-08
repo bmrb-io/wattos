@@ -16,6 +16,17 @@ services:
     # the in-process Caffeine cache in MRGridServlet.
     command: >
       --secure-file-priv=/wattos/dbfs
+    healthcheck:
+      # Used by tomcat's depends_on below so the JDBC pool doesn't try
+      # to connect before mysqld is accepting clients (the race
+      # produced a SEVERE pool-init stack on every restart). mysqladmin
+      # ping is shipped in the mysql image and exits 0 once the
+      # server is up.
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pPASSWORD", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 30s
     networks:
       - wattos-network
 
@@ -41,7 +52,8 @@ services:
       - ${DBFS_DIR:-/projects/BMRB/public/wattos/dbfs}:/wattos/dbfs
       - ${PDB_DIR:-/projects/BMRB/public/ftp/pub/pdb}:/pdb
     depends_on:
-      - wattos-mysql
+      wattos-mysql:
+        condition: service_healthy
     networks:
       - wattos-network
 
