@@ -2099,11 +2099,16 @@ public class SQL_Episode_II extends SQL_Generic{
     }
 
     /** Stream the BlockSet result set straight to a CSV writer without
-     * ever materializing a DbTable. The output is byte-identical to what
+     * ever materializing a DbTable. The 15-column layout matches what
      * getMRBlockSetTable + MRGridServlet's column transforms + Table.toCsv
-     * used to produce: a 15-column layout with empty "image" and "cing"
-     * columns, "n/a" replaced with "" on program/subtype/subsubtype, and
-     * the "format" label renamed to "subsubtype".
+     * used to produce, with "n/a" replaced by "" on
+     * program/subtype/subsubtype and the "format" label renamed to
+     * "subsubtype".
+     *
+     * The image and cing columns (which used to be empty in CSV) are now
+     * populated by substituting "%s" with pdb_id and "%t" with the
+     * 2nd+3rd characters of pdb_id in the supplied URL templates. Either
+     * template may be null or empty to keep that column blank.
      *
      * setFetchSize(Integer.MIN_VALUE) is the mysql-connector-j hint that
      * disables the driver's default "buffer everything" behaviour; without
@@ -2111,7 +2116,8 @@ public class SQL_Episode_II extends SQL_Generic{
      *
      * Returns false on error.
      */
-    public boolean streamMRBlockSetCsv ( HashMap options, String selection, PrintWriter out ) {
+    public boolean streamMRBlockSetCsv ( HashMap options, String selection, PrintWriter out,
+                                         String imageUrlTemplate, String cingUrlTemplate ) {
 
         General.showDebug("Streaming BlockSetCsv from DB");
 
@@ -2155,9 +2161,8 @@ public class SQL_Episode_II extends SQL_Generic{
             String[] row = new String[15];
             int rows_emitted = 0;
             while (rs.next()) {
-                // 0: image (synthetic, empty)
-                row[0] = "";
-                // 1: mrblock_id (int, required non-null)
+                // 1: mrblock_id (int, required non-null) — read first because
+                //    rows 0/2/4 derive from pdb_id below.
                 int mrblock_id = rs.getInt(1);
                 if (rs.wasNull()) {
                     General.showError("in SQL_Episode_II.streamMRBlockSetCsv retrieved a null value for b.mrblock_id");
@@ -2166,12 +2171,15 @@ public class SQL_Episode_II extends SQL_Generic{
                 }
                 row[1] = Integer.toString(mrblock_id);
                 // 2: pdb_id
-                row[2] = nullToEmptyCsv(rs.getString(2));
+                String pdb_id = rs.getString(2);
+                row[2] = nullToEmptyCsv(pdb_id);
+                // 0: image (URL built from pdb_id via template)
+                row[0] = expandPdbTemplate(imageUrlTemplate, pdb_id);
                 // 3: bmrb_id (int, nullable)
                 int bmrb_id = rs.getInt(3);
                 row[3] = rs.wasNull() ? "" : Integer.toString(bmrb_id);
-                // 4: cing (synthetic, empty)
-                row[4] = "";
+                // 4: cing (URL built from pdb_id via template)
+                row[4] = expandPdbTemplate(cingUrlTemplate, pdb_id);
                 // 5: in_recoord (bool, nullable)
                 boolean in_recoord = rs.getBoolean(4);
                 row[5] = rs.wasNull() ? "" : Boolean.toString(in_recoord);
@@ -2227,6 +2235,19 @@ public class SQL_Episode_II extends SQL_Generic{
     private static String naToEmpty(String s) {
         if (s == null) return "";
         return "n/a".equals(s) ? "" : s;
+    }
+
+    /** Substitute %s with pdb_id and %t with the 2nd+3rd characters of
+     * pdb_id, matching the existing nrg_cing_url template scheme. Returns
+     * "" if the template is empty or pdb_id is unusable.
+     */
+    private static String expandPdbTemplate(String template, String pdb_id) {
+        if (template == null || template.isEmpty()) return "";
+        if (pdb_id == null || pdb_id.length() < 3) return "";
+        String pdb_subid = pdb_id.substring(1, 3);
+        // Plain String.replace (not replaceAll) — no regex semantics, no
+        // per-call Pattern compilation.
+        return template.replace("%s", pdb_id).replace("%t", pdb_subid);
     }
 
     /** Count rows matching the same filter that getMRBlockSetTable would

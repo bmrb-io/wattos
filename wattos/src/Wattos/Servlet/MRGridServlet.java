@@ -327,6 +327,15 @@ public class MRGridServlet extends HttpServlet {
         return String.join("&", parts);
     }
 
+    /** Build the %s/%t template URL for the large per-entry molecular
+     * graphic, matching the HTML path's URL composition in
+     * showBlockSetTable. Consumed by streamMRBlockSetCsv to populate
+     * the image column in CSV output.
+     */
+    private String buildImageUrlTemplate() {
+        return g.getValueString("servlet_molgrap_dir") + "/pic/%t/%s" + id_image_large + ".gif";
+    }
+
     private void writeCached(HttpServletResponse resp, CachedResponse cached) throws java.io.IOException {
         if (cached.contentType != null) resp.setContentType(cached.contentType);
         java.io.PrintWriter out = resp.getWriter();
@@ -778,7 +787,8 @@ public class MRGridServlet extends HttpServlet {
         // close the underlying ZipOutputStream.
         zout.putNextEntry(new ZipEntry("index.csv"));
         PrintWriter csvWriter = new PrintWriter(new OutputStreamWriter(zout, StandardCharsets.UTF_8));
-        if (!sql_epiII.streamMRBlockSetCsv(options, selection, csvWriter)) {
+        if (!sql_epiII.streamMRBlockSetCsv(options, selection, csvWriter,
+                buildImageUrlTemplate(), g.getValueString("nrg_cing_url"))) {
             General.showError("index.csv streaming failed mid-archive; user will see a truncated index.csv");
         }
         csvWriter.flush();
@@ -850,7 +860,8 @@ public class MRGridServlet extends HttpServlet {
         // without building a DbTable, so the full ~270K-row unfiltered
         // dump fits in O(1 row) of heap instead of O(N rows).
         if (show_csv) {
-            return sql_epiII.streamMRBlockSetCsv(options, selection, out);
+            return sql_epiII.streamMRBlockSetCsv(options, selection, out,
+                    buildImageUrlTemplate(), g.getValueString("nrg_cing_url"));
         }
 
         // HTML path: paginate at the SQL level so we don't pull the entire
