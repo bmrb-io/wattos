@@ -435,8 +435,7 @@ public class Globals {
                 + "/howto.jsp#References\">references</a> "
                 + "in publications where the data from this site have been utilized.</p>\n"
                 + "<p>Contact our <a href=\"mailto:<!-- INSERT WEBMASTER HERE -->\">support address</a> "
-                + "for help, if required. <!-- INSERT DATE HERE --> "
-                + "(<!-- INSERT DB_USERNAME HERE -->)</p>\n"
+                + "for help, if required. <!-- INSERT DATE HERE --></p>\n"
                 + "</div>\n" + googleAnalytics + "</body></html>");
     }
 

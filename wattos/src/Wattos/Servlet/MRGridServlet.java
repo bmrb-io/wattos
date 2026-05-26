@@ -67,8 +67,6 @@ public class MRGridServlet extends HttpServlet {
     static final String id_image_small = "_pin";
     static final String id_image_medium = "";
     static final String id_image_large = "_xl";
-    static final String DEFAULT_DB_USERNAME = "wattos1"; // was 2
-    // static final String DEFAULT_DB_USERNAME = "jfdplay"; // use for local testing
 
     // Just a couple of larger and easy to find ones.
     static final String[] robotsForbiddenToArchive = new String[] { "Googlebot",
@@ -173,16 +171,15 @@ public class MRGridServlet extends HttpServlet {
 
     /**
      * Static counterpart of {@link #showFooter} for JSPs. Pulls the same
-     * `html_footer_text` template out of Globals and substitutes the date,
-     * db_username, and webmaster placeholders, so a JSP gets the identical
-     * footer (incl. support email from config) as the Java-rendered pages.
+     * `html_footer_text` template out of Globals and substitutes the date
+     * and webmaster placeholders, so a JSP gets the identical footer
+     * (incl. support email from config) as the Java-rendered pages.
      */
     public static void renderFooterTo(Globals g, java.io.Writer out) throws java.io.IOException {
         String html_footer_text = g.getValueString("html_footer_text");
         Properties subs = new Properties();
         subs.setProperty("<!-- INSERT DATE HERE -->", java.text.DateFormat.getDateTimeInstance(
                 java.text.DateFormat.FULL, java.text.DateFormat.FULL).format(new java.util.Date()));
-        subs.setProperty("<!-- INSERT DB_USERNAME HERE -->", Strings.htmlEscape(g.getValueString("db_username")));
         subs.setProperty("<!-- INSERT WEBMASTER HERE -->", Strings.htmlEscape(g.getValueString("servlet_webmaster")));
         html_footer_text = Strings.replaceMulti(html_footer_text, subs);
         out.write(html_footer_text);
@@ -378,35 +375,14 @@ public class MRGridServlet extends HttpServlet {
             return;
         }
 
-        String db_username = (String) options.get("db_username");
-        if (db_username != null) {
-            if (!(db_username.equals(DEFAULT_DB_USERNAME) || db_username.equals("wattos1"))) {
-                // db_username.equals("jurgen")
-                // )) {
-                General.showDebug("Will not serve db_username: " + db_username);
-                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                // showCompleteError( resp, "The db_username given: [" + db_username + "] " + "is not valid.\n" );
-                return;
-            }
-        }
-        if (db_username == null) {
-            db_username = DEFAULT_DB_USERNAME;
-        }
-
-        if (!db_username.equals(g.getValueString("db_username"))) {
-            g.m.put("db_username", db_username);
-            if (db_username.equals("wattos1")) {
-                g.m.put("db_password", "4I4KMS");
-            }
-            if (db_username.equals("wattos2")) {
-                g.m.put("db_password", "4I4KMU");
-            }
-            if (db_username.equals("jurgen")) {
-                g.m.put("db_password", "password");
-            }
-            General.showDebug("Changing DB Episode_II to db_username: [" + db_username + "]");
-            initDb();
-        }
+        // Per-request DB-user switching (the wattos1/wattos2/jurgen block
+        // that used to live here) was a fossil of an earlier multi-tenant
+        // mode. It was already dead: the JNDI connection pool ignores
+        // in-process credential mutation, the input validation only
+        // accepted wattos1 anyway, and the hardcoded passwords in the
+        // servlet duplicated those in context.xml and the runtime
+        // properties. DB credentials are now owned by context.xml as the
+        // single source of truth.
 
         // The pooled DataSource (META-INF/context.xml) validates each
         // connection on borrow (testOnBorrow + validationQuery=SELECT 1)
@@ -1733,7 +1709,6 @@ public class MRGridServlet extends HttpServlet {
         Object tmp = null;
 
         String request_type = (String) options.get("request_type");
-        String db_username = (String) options.get("db_username");
         boolean show_csv = false;
         // boolean show_blocks = false;
         int verbosity = 2;
@@ -1771,9 +1746,6 @@ public class MRGridServlet extends HttpServlet {
 
         if (request_type != null)
             sel.add("request_type=" + encodeStringForUrl(request_type));
-
-        if (db_username != null)
-            sel.add("db_username=" + encodeStringForUrl(db_username));
 
         // if ( show_blocks )
         // sel.add("show_blocks=true");
@@ -1926,7 +1898,6 @@ public class MRGridServlet extends HttpServlet {
         Object tmp = null;
 
         // String request_type = (String) options.get("request_type");
-        String db_username = (String) options.get("db_username");
         // boolean show_csv = false;
         // boolean show_blocks = false;
         // int verbosity = 2;
@@ -2092,9 +2063,6 @@ public class MRGridServlet extends HttpServlet {
 
         htmltable.setValue(row_form_buttons, column_input, "<INPUT TYPE=\"submit\" VALUE=\"Submit\">");
         out.println(htmltable.toHtml(false));
-        if (db_username != null) {
-            out.println("<INPUT type=hidden name=db_username value=" + encodeStringForUrl(db_username));
-        }
         out.println("</FORM>");
         return true;
     }
@@ -2141,7 +2109,6 @@ public class MRGridServlet extends HttpServlet {
         // options.put("query_string", req.getQueryString());
 
         options.put("request_type", "grid");
-        options.put("db_username", DEFAULT_DB_USERNAME);
         // options.put("show_blocks", new Boolean(false));
         options.put("show_csv", new Boolean(false));
         options.put("verbosity", new Integer(2));
@@ -2167,7 +2134,6 @@ public class MRGridServlet extends HttpServlet {
         // function was temporarily put on the depreciated list by Sun
         // and gave compilatin warnings.
         String[] request_type = req.getParameterValues("request_type");
-        String[] db_username = req.getParameterValues("db_username");
         // String[] show_blocks_str = req.getParameterValues("show_blocks");
         String[] show_csv_str = req.getParameterValues("show_csv");
         String[] verbosity_str = req.getParameterValues("verbosity");
@@ -2202,9 +2168,9 @@ public class MRGridServlet extends HttpServlet {
         if (request_type != null && (request_type.length > 0))
             options.put("request_type", request_type[0]);
 
-        // Show the default database by default (duh)
-        if (db_username != null && (db_username.length > 0))
-            options.put("db_username", db_username[0]);
+        // Inbound db_username is silently ignored. Per-request DB-user
+        // switching was removed; the JNDI pool credentials in
+        // META-INF/context.xml are authoritative.
 
         // Display files(default) or blocks?
         // if (show_blocks_str != null && (show_blocks_str.length > 0) &&
