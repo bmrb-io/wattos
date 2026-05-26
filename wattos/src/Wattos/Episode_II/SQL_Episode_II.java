@@ -1972,9 +1972,13 @@ public class SQL_Episode_II extends SQL_Generic{
 
 
     /** Get a set of MRBlock objects from db.
+     *
+     * If limit &gt;= 0 a LIMIT/OFFSET clause is appended so only that slice
+     * of the result set ever materializes in the JVM. Pass limit = -1 to
+     * fetch every matching row (used by the CSV export path).
      */
 
-    public DbTable getMRBlockSetTable ( HashMap options, String selection ) {
+    public DbTable getMRBlockSetTable ( HashMap options, String selection, int offset, int limit ) {
 
         General.showDebug("Getting BlockSetTable from DB");
 
@@ -2004,6 +2008,10 @@ public class SQL_Episode_II extends SQL_Generic{
         StringBuffer sb = new StringBuffer(query);
         sb.delete(stub_location, stub_location + STUB_SQL_STRING_TRUE.length());
         sb.insert(stub_location, selection);
+        if (limit >= 0) {
+            sb.append(" LIMIT ").append(limit)
+              .append(" OFFSET ").append(Math.max(0, offset));
+        }
         General.showDebug("Complete selection statement: [\n"+sb+"\n]");
 
         // New database table
@@ -2087,6 +2095,48 @@ public class SQL_Episode_II extends SQL_Generic{
         //General.showDebug("Time for getMRBlockSetTable: " + time);
 
         return dbt;
+    }
+
+    /** Count rows matching the same filter that getMRBlockSetTable would
+     * return. Used by the servlet to compute pagination bounds without
+     * pulling every matching row into the JVM. Returns -1 on error.
+     */
+    public int getMRBlockSetCount ( HashMap options, String selection ) {
+
+        General.showDebug("Getting BlockSetCount from DB");
+
+        String mrblock_table = SQL_table_prefix + "mrblock";
+        String mrfile_table  = SQL_table_prefix + "mrfile";
+        String entry_table = "entry";
+
+        String query =
+            "SELECT COUNT(*)\n" +
+            "FROM " + mrfile_table  + " f, \n"+
+                      mrblock_table + " b, \n"+
+                      entry_table   + " e \n"+
+            "WHERE e.entry_id=f.entry_id AND f.mrfile_id=b.mrfile_id AND\n"+
+            "   " + STUB_SQL_STRING_TRUE + General.eol;
+        int stub_location = query.indexOf(STUB_SQL_STRING_TRUE);
+        StringBuffer sb = new StringBuffer(query);
+        sb.delete(stub_location, stub_location + STUB_SQL_STRING_TRUE.length());
+        sb.insert(stub_location, selection);
+        General.showDebug("Complete count statement: [\n"+sb+"\n]");
+
+        try (Connection conn = getConnection()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery( sb.toString() );
+            int count = 0;
+            if ( rs.next() ) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            stmt.close();
+            checkForWarning(conn.getWarnings());
+            return count;
+        } catch (SQLException e) {
+            General.showError("in SQL_Episode_II.getMRBlockSetCount found Database access failed " + e);
+            return -1;
+        }
     }
 
     /** Gets DBMRFile object from DB using it's id.

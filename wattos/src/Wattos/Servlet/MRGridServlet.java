@@ -841,8 +841,40 @@ public class MRGridServlet extends HttpServlet {
     protected boolean showBlockSetTable(PrintWriter out, HashMap options) {
 
         String selection = getQuerySql(options);
-        DbTable table = sql_epiII.getMRBlockSetTable(options, selection);
+        boolean show_csv = ((Boolean) options.get("show_csv")).booleanValue();
 
+        // Paginate at the SQL level for the HTML path so we don't pull the
+        // entire filtered result set (~270K rows for an unfiltered query)
+        // into the JVM just to slice it down to MAX_ROWS_TO_SHOW. CSV exports
+        // still fetch every row by design.
+        int page_id = ((Integer) options.get("page_id")).intValue();
+        int number_of_blocks = 0;
+        int number_of_pages_total = 1;
+        int begin_block_number = 1;
+        int end_block_number = 0;
+        int sql_offset = 0;
+        int sql_limit = -1;
+
+        if (!show_csv) {
+            number_of_blocks = sql_epiII.getMRBlockSetCount(options, selection);
+            if (number_of_blocks < 0) {
+                return false;
+            }
+            number_of_pages_total = (number_of_blocks <= 0)
+                    ? 1 : (number_of_blocks - 1) / MAX_ROWS_TO_SHOW + 1;
+            if (page_id < 1 || page_id > number_of_pages_total) {
+                out.println("Parameter: page id given: " + page_id
+                        + " isn't in range: [1," + number_of_pages_total + "]");
+                return false;
+            }
+            begin_block_number = (page_id - 1) * MAX_ROWS_TO_SHOW + 1;
+            end_block_number = Math.min(number_of_blocks,
+                    begin_block_number + MAX_ROWS_TO_SHOW - 1);
+            sql_offset = begin_block_number - 1;
+            sql_limit = end_block_number - begin_block_number + 1;
+        }
+
+        DbTable table = sql_epiII.getMRBlockSetTable(options, selection, sql_offset, sql_limit);
         if (table == null) {
             return false;
         }
@@ -870,8 +902,6 @@ public class MRGridServlet extends HttpServlet {
         table.replaceStringByColumn(column_format, "n/a", "");
         table.setLabel(column_format, "subsubtype");
 
-        // Decide on the print
-        boolean show_csv = ((Boolean) options.get("show_csv")).booleanValue();
         if (show_csv) { // save a lot of memory by not using a complex property object per value.
             out.println(table.toCsv(true));
             return true;
@@ -892,43 +922,13 @@ public class MRGridServlet extends HttpServlet {
         // General.showOutput( "jump_fields :\n" + jump_fields);
         // General.showOutput("jump_url: " + jump_url);
 
-        int page_id = ((Integer) options.get("page_id")).intValue();
-        int number_of_blocks = table.sizeRows();
-        // For 2 blocks per page (MAX_ROWS_TO_SHOW==2)
-        // 0 blocks -> 1 page
-        // 1 -> 1
-        // 2 -> 1
-        // 3 -> 2 pages etc.
-        int number_of_pages_total = (number_of_blocks - 1) / MAX_ROWS_TO_SHOW + 1;
-        if (page_id < 1 || page_id > number_of_pages_total) {
-            out.println("Parameter: page id given: " + page_id + " isn't in range: [1," + number_of_pages_total + "]");
-            return false;
-        }
-        // page 1 -> begin block 1
-        // page 2 -> begin block 3
-        // page 1 -> end block 2
-        // page 2 -> end block 4
-        int begin_block_number = (page_id - 1) * MAX_ROWS_TO_SHOW + 1;
-        int end_block_number = Math.min(number_of_blocks, begin_block_number + MAX_ROWS_TO_SHOW - 1);
-        /**
-         * General.showOutput( "page_id                : " + page_id); General.showOutput( "number_of_blocks       : " +
-         * number_of_blocks); General.showOutput( "begin_block_number     : " + begin_block_number); General.showOutput(
-         * "end_block_number       : " + end_block_number); General.showOutput( "number_of_pages_total  : " +
-         * number_of_pages_total); General.showOutput( General.eol);
-         */
-        int begin_row = begin_block_number - 1;
-        int end_row = end_block_number - 1;
-
+        // Pagination bounds were computed (and the page slice fetched) above.
+        // table already contains exactly the rows for this page.
         jump_string += "<B>" + begin_block_number + "-" + end_block_number + "</B> of " + number_of_blocks
                 + ". &nbsp;&nbsp;&nbsp;&nbsp;\n" + "Jump to page number: " + jump_fields
                 + "&nbsp; (should be in range: 1 and " + number_of_pages_total + ")\n" + "</FORM>\n";
 
-        if (number_of_pages_total > 1 && (!show_csv)) {
-            if (!table.keepRowsFromTo(begin_row, end_row + 1)) {
-                General.showOutput("Failed to do table.keepRowsFromTo with begin_row, end_row+1" + begin_row + ", "
-                        + end_row + 1);
-                return false;
-            }
+        if (number_of_pages_total > 1) {
             links_string = jump_form + "Result page: ";
             String prev_string = "";
             String next_string = "";
