@@ -298,10 +298,6 @@ public class Globals {
         m.put("servlet_image_dir", getValueString("servlet_servlet_dir") + "/images"); // note it is plural
 
         m.put("servlet_top_absolute_url", getValueString("servlet_root_url") + "/" + getValueString("servlet_top_url"));
-        m.put("servlet_mrgrid_absolute_url", getValueString("servlet_root_url") + "/"
-                + getValueString("servlet_mrgrid_url"));
-        m.put("servlet_html_absolute_url", getValueString("servlet_root_url") + "/"
-                + getValueString("servlet_html_dir"));
         m.put("servlet_image_absolute_url", getValueString("servlet_root_url") + "/"
                 + getValueString("servlet_image_dir"));
 
