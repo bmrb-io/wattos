@@ -64,5 +64,8 @@ echo "files: $*"
 # -source/-target 17 matches Tomcat 11 / JDK 21. Existing pre-built
 # 1.5/1.8 classes in WEB-INF/classes/ still load fine alongside
 # 17-targeted output under JRE 21.
-"$JAVAC" -source 17 -target 17 -d "$CLASSES_DIR" -cp "$CP" -Xlint:-options "$@"
+# -implicit:none + empty -sourcepath stops javac from compiling .java
+# files bundled inside CSVutils.jar / starlibj_with_source.jar into the
+# output dir (which would shadow the jar copies at runtime).
+"$JAVAC" -source 17 -target 17 -d "$CLASSES_DIR" -cp "$CP" -sourcepath "" -implicit:none -Xlint:-options "$@"
 echo "ok — compiled into $CLASSES_DIR"
