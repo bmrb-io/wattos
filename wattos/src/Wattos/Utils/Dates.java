@@ -52,25 +52,19 @@ public class Dates {
     }
 
 
-    /** Returns a string without html tags and trimmed for white space chars.
+    /** Returns the current date formatted for use in filenames / HTTP
+     * headers: any character outside [A-Za-z0-9_-] is replaced with '_'
+     * and runs of '_' are collapsed. This catches the regular spaces,
+     * commas and colons the LONG locale format emits, plus the
+     * U+202F NARROW NO-BREAK SPACE that Java 20+ CLDR inserts before
+     * AM/PM in en-US — which isn't ISO-8859-1 and crashes
+     * Content-Disposition header encoding.
      */
     public static String getDateWithoutFunnyChars() {
         String date_str = getDate( new java.util.Date() );
-
-        // Remove funny chars.
-        Properties s = new Properties();
-        s.put(" ", "_");
-        s.put(",", "_");
-        s.put(":", "_");
-        date_str = Strings.replaceMulti( date_str, s );
-
-        // Avoid repetition
-        s = new Properties();
-        s.put("_+", "_");
-        date_str = Strings.replaceMulti( date_str, s );
-        //General.showOutput("date :["+date_str+"]");
-
-        return(date_str);
+        date_str = date_str.replaceAll("[^A-Za-z0-9_-]", "_");
+        date_str = date_str.replaceAll("_+", "_");
+        return date_str;
     }
 
     /** Normal formatted time stamp.
