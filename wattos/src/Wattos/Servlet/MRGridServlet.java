@@ -843,36 +843,33 @@ public class MRGridServlet extends HttpServlet {
         String selection = getQuerySql(options);
         boolean show_csv = ((Boolean) options.get("show_csv")).booleanValue();
 
-        // Paginate at the SQL level for the HTML path so we don't pull the
-        // entire filtered result set (~270K rows for an unfiltered query)
-        // into the JVM just to slice it down to MAX_ROWS_TO_SHOW. CSV exports
-        // still fetch every row by design.
-        int page_id = ((Integer) options.get("page_id")).intValue();
-        int number_of_blocks = 0;
-        int number_of_pages_total = 1;
-        int begin_block_number = 1;
-        int end_block_number = 0;
-        int sql_offset = 0;
-        int sql_limit = -1;
-
-        if (!show_csv) {
-            number_of_blocks = sql_epiII.getMRBlockSetCount(options, selection);
-            if (number_of_blocks < 0) {
-                return false;
-            }
-            number_of_pages_total = (number_of_blocks <= 0)
-                    ? 1 : (number_of_blocks - 1) / MAX_ROWS_TO_SHOW + 1;
-            if (page_id < 1 || page_id > number_of_pages_total) {
-                out.println("Parameter: page id given: " + page_id
-                        + " isn't in range: [1," + number_of_pages_total + "]");
-                return false;
-            }
-            begin_block_number = (page_id - 1) * MAX_ROWS_TO_SHOW + 1;
-            end_block_number = Math.min(number_of_blocks,
-                    begin_block_number + MAX_ROWS_TO_SHOW - 1);
-            sql_offset = begin_block_number - 1;
-            sql_limit = end_block_number - begin_block_number + 1;
+        // CSV export streams every matching row straight to the response
+        // without building a DbTable, so the full ~270K-row unfiltered
+        // dump fits in O(1 row) of heap instead of O(N rows).
+        if (show_csv) {
+            return sql_epiII.streamMRBlockSetCsv(options, selection, out);
         }
+
+        // HTML path: paginate at the SQL level so we don't pull the entire
+        // filtered result set into the JVM just to slice it down to
+        // MAX_ROWS_TO_SHOW.
+        int page_id = ((Integer) options.get("page_id")).intValue();
+        int number_of_blocks = sql_epiII.getMRBlockSetCount(options, selection);
+        if (number_of_blocks < 0) {
+            return false;
+        }
+        int number_of_pages_total = (number_of_blocks <= 0)
+                ? 1 : (number_of_blocks - 1) / MAX_ROWS_TO_SHOW + 1;
+        if (page_id < 1 || page_id > number_of_pages_total) {
+            out.println("Parameter: page id given: " + page_id
+                    + " isn't in range: [1," + number_of_pages_total + "]");
+            return false;
+        }
+        int begin_block_number = (page_id - 1) * MAX_ROWS_TO_SHOW + 1;
+        int end_block_number = Math.min(number_of_blocks,
+                begin_block_number + MAX_ROWS_TO_SHOW - 1);
+        int sql_offset = begin_block_number - 1;
+        int sql_limit = end_block_number - begin_block_number + 1;
 
         DbTable table = sql_epiII.getMRBlockSetTable(options, selection, sql_offset, sql_limit);
         if (table == null) {
@@ -901,11 +898,6 @@ public class MRGridServlet extends HttpServlet {
         table.replaceStringByColumn(column_subtype, "n/a", "");
         table.replaceStringByColumn(column_format, "n/a", "");
         table.setLabel(column_format, "subsubtype");
-
-        if (show_csv) { // save a lot of memory by not using a complex property object per value.
-            out.println(table.toCsv(true));
-            return true;
-        }
 
         HashMap tmp_options = new HashMap(options);
         String base_url = g.getValueString("MRGridServlet");

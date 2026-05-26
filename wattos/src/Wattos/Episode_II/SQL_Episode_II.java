@@ -15,6 +15,7 @@ import java.util.zip.*;
 import cern.colt.list.*;
 // Wattos utils
 import Wattos.Utils.*;
+import com.Ostermiller.util.CSVPrinter;
 // Wattos utils
 import Wattos.Database.*;
 
@@ -2095,6 +2096,137 @@ public class SQL_Episode_II extends SQL_Generic{
         //General.showDebug("Time for getMRBlockSetTable: " + time);
 
         return dbt;
+    }
+
+    /** Stream the BlockSet result set straight to a CSV writer without
+     * ever materializing a DbTable. The output is byte-identical to what
+     * getMRBlockSetTable + MRGridServlet's column transforms + Table.toCsv
+     * used to produce: a 15-column layout with empty "image" and "cing"
+     * columns, "n/a" replaced with "" on program/subtype/subsubtype, and
+     * the "format" label renamed to "subsubtype".
+     *
+     * setFetchSize(Integer.MIN_VALUE) is the mysql-connector-j hint that
+     * disables the driver's default "buffer everything" behaviour; without
+     * it the OOM just moves from our heap into the JDBC driver's heap.
+     *
+     * Returns false on error.
+     */
+    public boolean streamMRBlockSetCsv ( HashMap options, String selection, PrintWriter out ) {
+
+        General.showDebug("Streaming BlockSetCsv from DB");
+
+        String mrblock_table = SQL_table_prefix + "mrblock";
+        String mrfile_table  = SQL_table_prefix + "mrfile";
+        String entry_table = "entry";
+
+        String query =
+            "SELECT b.mrblock_id, e.pdb_id, e.bmrb_id,\n" +
+            "       e.in_recoord, e.in_dress,\n" +
+            "       f.detail AS stage,\n"+
+            "       b.position, b.program, b.type,\n"+
+            "       b.subtype, b.format,\n" +
+            "       b.item_count, b.other_prop\n"+
+            "FROM " + mrfile_table  + " f, \n"+
+                      mrblock_table + " b, \n"+
+                      entry_table   + " e \n"+
+            "WHERE e.entry_id=f.entry_id AND f.mrfile_id=b.mrfile_id AND\n"+
+            "   " + STUB_SQL_STRING_TRUE + General.eol+
+            "ORDER BY e.pdb_id ASC, f.detail ASC, f.mrfile_id ASC, b.position ASC";
+        int stub_location = query.indexOf(STUB_SQL_STRING_TRUE);
+        StringBuffer sb = new StringBuffer(query);
+        sb.delete(stub_location, stub_location + STUB_SQL_STRING_TRUE.length());
+        sb.insert(stub_location, selection);
+        General.showDebug("Complete stream statement: [\n"+sb+"\n]");
+
+        CSVPrinter csv = new CSVPrinter(out);
+        csv.println(new String[] {
+            "image", "mrblock_id", "pdb_id", "bmrb_id",
+            "cing", "in_recoord", "in_dress",
+            "stage", "position", "program", "type",
+            "subtype", "subsubtype", "item_count", "other_prop"
+        });
+
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement(
+                 ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)) {
+            stmt.setFetchSize(Integer.MIN_VALUE); // mysql-connector-j row-by-row streaming
+            ResultSet rs = stmt.executeQuery(sb.toString());
+
+            String[] row = new String[15];
+            int rows_emitted = 0;
+            while (rs.next()) {
+                // 0: image (synthetic, empty)
+                row[0] = "";
+                // 1: mrblock_id (int, required non-null)
+                int mrblock_id = rs.getInt(1);
+                if (rs.wasNull()) {
+                    General.showError("in SQL_Episode_II.streamMRBlockSetCsv retrieved a null value for b.mrblock_id");
+                    rs.close();
+                    return false;
+                }
+                row[1] = Integer.toString(mrblock_id);
+                // 2: pdb_id
+                row[2] = nullToEmptyCsv(rs.getString(2));
+                // 3: bmrb_id (int, nullable)
+                int bmrb_id = rs.getInt(3);
+                row[3] = rs.wasNull() ? "" : Integer.toString(bmrb_id);
+                // 4: cing (synthetic, empty)
+                row[4] = "";
+                // 5: in_recoord (bool, nullable)
+                boolean in_recoord = rs.getBoolean(4);
+                row[5] = rs.wasNull() ? "" : Boolean.toString(in_recoord);
+                // 6: in_dress (bool, nullable)
+                boolean in_dress = rs.getBoolean(5);
+                row[6] = rs.wasNull() ? "" : Boolean.toString(in_dress);
+                // 7: stage
+                row[7] = nullToEmptyCsv(rs.getString(6));
+                // 8: position (int, nullable)
+                int position = rs.getInt(7);
+                row[8] = rs.wasNull() ? "" : Integer.toString(position);
+                // 9: program (with n/a -> "")
+                row[9] = naToEmpty(rs.getString(8));
+                // 10: type
+                row[10] = nullToEmptyCsv(rs.getString(9));
+                // 11: subtype (with n/a -> "")
+                row[11] = naToEmpty(rs.getString(10));
+                // 12: subsubtype (was "format", with n/a -> "")
+                row[12] = naToEmpty(rs.getString(11));
+                // 13: item_count (int, nullable)
+                int item_count = rs.getInt(12);
+                row[13] = rs.wasNull() ? "" : Integer.toString(item_count);
+                // 14: other_prop (Properties round-trip for format compatibility)
+                String other_prop_str = rs.getString(13);
+                if (rs.wasNull() || other_prop_str == null) {
+                    row[14] = "";
+                } else {
+                    Properties p = Strings.setProperties(other_prop_str);
+                    row[14] = Strings.getPropertiesNoBrackets(p);
+                }
+
+                csv.println(row);
+                rows_emitted++;
+                if ((rows_emitted % 10000) == 0) {
+                    General.showDebug("CSV Streamed rows: " + rows_emitted);
+                }
+            }
+            General.showDebug("CSV streamed total rows: " + rows_emitted);
+
+            rs.close();
+            checkForWarning(conn.getWarnings());
+            return true;
+        } catch (SQLException e) {
+            General.showError("in SQL_Episode_II.streamMRBlockSetCsv found Database access failed " + e);
+            return false;
+        }
+    }
+
+    private static String nullToEmptyCsv(String s) {
+        return s == null ? "" : s;
+    }
+
+    private static String naToEmpty(String s) {
+        if (s == null) return "";
+        return "n/a".equals(s) ? "" : s;
     }
 
     /** Count rows matching the same filter that getMRBlockSetTable would
