@@ -9,6 +9,7 @@ package Wattos.Servlet;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.zip.*;
 import jakarta.servlet.*;
@@ -474,7 +475,7 @@ public class MRGridServlet extends HttpServlet {
                     }
                 }
             }
-            showArchive(resp, options);
+            showArchive(req, resp, options);
         } else {
             showCompleteError(resp, "Invalid request_type parameter value:" + Strings.htmlEscape(request_type));
         }
@@ -709,8 +710,8 @@ public class MRGridServlet extends HttpServlet {
      * @throws IOException
      * @return <CODE>true</CODE> for success.
      */
-    protected boolean showArchive(HttpServletResponse resp, HashMap options) throws ServletException,
-            java.io.IOException {
+    protected boolean showArchive(HttpServletRequest req, HttpServletResponse resp, HashMap options)
+            throws ServletException, java.io.IOException {
         // see: http://www.javaworld.com/javaworld/javatips/jw-javatip94.html and
         // http://www.inside-java.com/articles/servlets/zipservlet.htm
         int compressionLevel = Deflater.BEST_SPEED; // Perhaps NO_COMPRESSION? Such a joke but should be faster than:
@@ -727,38 +728,31 @@ public class MRGridServlet extends HttpServlet {
             return false;
         }
 
-        // Buffer the README and index.csv files. The README is rendered
-        // server-side from readme.jsp (which inherits the shared header /
-        // footer); we drop the legacy main.css since the new shared
-        // styling pulls bmrb.io's stylesheet, not a local file.
-        HashMap optionsIndex = (HashMap) options.clone();
-        optionsIndex.put("show_csv", new Boolean(true)); // override the default false
-        optionsIndex.put("request_type", "block_set"); // override the current "archive" otherwise this cycles.
-        String[] url_list = new String[] { g.getValueString("servlet_html_absolute_url") + "/readme.jsp",
-                g.getValueString("servlet_mrgrid_absolute_url") + "?" + getQueryUrl(optionsIndex) };
-        String[] new_file_name_list = new String[] { "readme.html", "index.csv", };
+        // Render readme.jsp in-process via RequestDispatcher.include() and
+        // capture the body. Previously we self-fetched it over HTTP, which
+        // nginx now 301-redirects to HTTPS — and InOut.readTextFromUrl
+        // doesn't follow protocol-changing redirects, so the redirect HTML
+        // ended up inside the zip in place of the README. Going through the
+        // request dispatcher skips the proxy entirely.
         int MIN_BYTES_NEEDED = 50;
-        String extraMsg = "<BR>Please contact us if you believe this could be an error.";
-        byte[][] new_file_bytes_list = new byte[new_file_name_list.length][];
-        for (int f = 0; f < url_list.length; f++) {
-            String urlStr = url_list[f];
-            URL url = InOut.getUrlFileFromName(urlStr);
-            // General.showOutput("url to retrieve: [" + url.toString()+ "]");
-            String text = InOut.readTextFromUrl(url);
-            if (text == null) {
-                showCompleteError(resp, "Unavailable text from url: " + url + extraMsg);
+        byte[] readmeBytes;
+        try {
+            CapturingResponseWrapper readmeCapture = new CapturingResponseWrapper(resp);
+            RequestDispatcher rd = req.getRequestDispatcher("/wattos/MRGridServlet/html/readme.jsp");
+            if (rd == null) {
+                showCompleteError(resp, "readme.jsp dispatcher unavailable; please contact admin.");
                 return false;
             }
-            byte[] ba = Strings.toByteArray(text);
-            if (ba == null) {
-                showCompleteError(resp, "Unable to translate text from url: " + url + extraMsg);
-                return false;
-            }
-            if (ba.length < MIN_BYTES_NEEDED) {
-                showCompleteError(resp, "Text less than " + MIN_BYTES_NEEDED + " chars from url: " + url + extraMsg);
-                return false;
-            }
-            new_file_bytes_list[f] = ba;
+            rd.include(req, readmeCapture);
+            readmeBytes = readmeCapture.body().getBytes(StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            General.showError("Failed to render readme.jsp for archive: " + e);
+            showCompleteError(resp, "Failed to render readme.jsp; please contact admin.");
+            return false;
+        }
+        if (readmeBytes.length < MIN_BYTES_NEEDED) {
+            showCompleteError(resp, "readme.jsp rendered fewer than " + MIN_BYTES_NEEDED + " bytes");
+            return false;
         }
 
         resp.setContentType("application/zip");
@@ -773,13 +767,22 @@ public class MRGridServlet extends HttpServlet {
         zout.setMethod(ZipOutputStream.DEFLATED);
         zout.setLevel(compressionLevel);
 
-        // Write the buffered files
-        for (int f = 0; f < url_list.length; f++) {
-            zout.putNextEntry(new ZipEntry(new_file_name_list[f]));
-            zout.write(new_file_bytes_list[f]);
-            new_file_bytes_list[f] = null; // for gc.
-            zout.closeEntry();
+        // readme.html — captured above.
+        zout.putNextEntry(new ZipEntry("readme.html"));
+        zout.write(readmeBytes);
+        zout.closeEntry();
+        readmeBytes = null; // for gc
+
+        // index.csv — stream rows directly into the zip entry. The Writer
+        // is intentionally NOT closed (only flushed) since closing it would
+        // close the underlying ZipOutputStream.
+        zout.putNextEntry(new ZipEntry("index.csv"));
+        PrintWriter csvWriter = new PrintWriter(new OutputStreamWriter(zout, StandardCharsets.UTF_8));
+        if (!sql_epiII.streamMRBlockSetCsv(options, selection, csvWriter)) {
+            General.showError("index.csv streaming failed mid-archive; user will see a truncated index.csv");
         }
+        csvWriter.flush();
+        zout.closeEntry();
 
         StringBuffer errors = new StringBuffer();
         for (Iterator i = al.iterator(); i.hasNext();) {
