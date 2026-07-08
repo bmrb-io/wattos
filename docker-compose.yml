@@ -37,18 +37,16 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
-      # -Xmx768m leaves ~256 MB headroom for the in-process response
-      # cache (CACHE_MAX_BYTES in MRGridServlet) plus the JVM baseline.
+      # Peak heap under max load: 256 MB response cache (CACHE_MAX_BYTES)
+      # + ~150 MB JVM/Tomcat baseline + transient per-request buffers
+      # (bounded by the maxActive=10 JDBC pool) — under ~1 GB. -Xmx4g is
+      # set well above that so a request burst has ample headroom.
       #
-      # On OutOfMemoryError: dump the heap to /tmp/wattos-oom.hprof for
-      # post-mortem analysis, then exit so Docker's `restart: always`
-      # brings the JVM back cleanly instead of leaving it wedged and
-      # serving OOMs on every request. The dump lives on the container
-      # filesystem and survives a restart (but not a `compose down`/
-      # recreate) — copy it out with
+      # On OutOfMemoryError: dump to /tmp/wattos-oom.hprof, then exit so
+      # `restart: always` recreates the JVM cleanly. Copy the dump out with
       #   docker cp wattos-tomcat:/tmp/wattos-oom.hprof .
       JAVA_OPTS: >-
-        -Duser.home=/ -Xmx768m
+        -Duser.home=/ -Xmx4g
         -XX:+HeapDumpOnOutOfMemoryError
         -XX:HeapDumpPath=/tmp/wattos-oom.hprof
         -XX:+ExitOnOutOfMemoryError
